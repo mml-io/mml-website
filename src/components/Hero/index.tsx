@@ -21,13 +21,6 @@ const Hero = () => {
         className="relative z-10 overflow-hidden pt-[120px] md:pt-[150px] xl:pt-[180px] 2xl:pt-[146px]"
       >
         <div className="container">
-          <img
-            className="absolute left-0 top-[315px] z-[-1] aspect-auto w-full"
-            src={`/images/hero/heroBG${theme === "dark" ? "Dark" : ""}.png`}
-            alt="background"
-            width={1440}
-            height={311}
-          />
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4">
               <div className="wow fadeInUp mx-auto max-w-[800px] text-center" data-wow-delay=".2s">
