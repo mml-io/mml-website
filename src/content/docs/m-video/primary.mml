@@ -1,3 +1,4 @@
+<m-video y="13" width="25" start-time="0" loop="true" src="https://public.mml.io/big-buck-bunny-10s-1mb.mp4">
 
 
 
@@ -15,8 +16,7 @@
 
 
 
-
-
+      attributesLabel.setAttribute("content", attributes.join(" "));
 
 
 

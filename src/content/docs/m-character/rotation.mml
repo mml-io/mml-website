@@ -1,3 +1,3 @@
-
-
+<m-character y="7" rx="70" ry="56" rz="145" sx="5" sy="5" sz="5" anim-enabled="true" anim-loop="true" id="my-character" src="https://public.mml.io/character-body.glb">
+  <m-model src="https://public.mml.io/character-head.glb"></m-model>
 

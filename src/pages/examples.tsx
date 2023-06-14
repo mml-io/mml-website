@@ -1,12 +1,16 @@
+"use client";
 
 
 
+import * as React from "react";
 
 
+import Breadcrumb from "@/src/components/Common/Breadcrumb";
 
 
 
 
+const ExamplesPage = () => {
 
 
 
@@ -49,6 +53,9 @@
 
 
 
+  return (
+    <>
+      <Breadcrumb pageName="Examples" />
 
 
 
@@ -115,15 +122,8 @@
 
 
 
+    </>
+  );
+};
 
-
-
-
-
-
-
-
-
-
-
-
+export default ExamplesPage;

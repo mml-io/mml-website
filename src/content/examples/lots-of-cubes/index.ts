@@ -1,8 +1,8 @@
 
 
-
-
-
+export const lotsOfCubesExample: Example = {
+  name: "lots-of-cubes",
+  description: "Lots of cubes!",
 
 
 

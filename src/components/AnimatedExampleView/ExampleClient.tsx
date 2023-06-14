@@ -1,3 +1,9 @@
+import { MMLWebRunnerClient } from "mml-web-runner";
+import { EditableNetworkedDOM, NetworkedDOM } from "@mml-io/networked-dom-document";
+
+
+
+import { getIframeTargetWindow } from "@/src/util/iframe-target";
 
 
 
@@ -22,13 +28,7 @@
 
 
 
-
-
-
-
-
-
-
+    const windowTarget = getIframeTargetWindow();
 
 
 
