@@ -7,23 +7,23 @@ import scale from "./scale.mml";
 
 export const examples: DocsExamples = {
   primary: {
-    title: "Basic M-Group",
-    description: "This is a basic M-Group.",
+    title: "Basic m-group",
+    description: "This is a basic m-group.",
     code: primary,
   },
   "position-example": {
-    title: "M-Group Position",
-    description: "This is a basic M-Group with position properties.",
+    title: "Position",
+    description: "This is a basic m-group with position properties.",
     code: position,
   },
   "rotation-example": {
-    title: "M-Group Rotation",
-    description: "This is a basic M-Group with rotation properties.",
+    title: "Rotation",
+    description: "This is a basic m-group with rotation properties.",
     code: rotation,
   },
   "scale-example": {
-    title: "M-Group Scale",
-    description: "This is a basic M-Group with scale properties.",
+    title: "Scale",
+    description: "This is a basic m-group with scale properties.",
     code: scale,
   },
 };

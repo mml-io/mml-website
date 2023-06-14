@@ -8,23 +8,23 @@ import singleDimension from "./single-dimension.mml";
 
 export const examples: DocsExamples = {
   primary: {
-    title: "Basic M-Image",
-    description: "This is a basic M-Image.",
+    title: "Basic m-image",
+    description: "This is a basic m-image.",
     code: primary,
   },
   "dimensions-example": {
-    title: "Size",
-    description: "This is a M-Image example with dimension.",
+    title: "Dimensions",
+    description: "This is a m-image example with dimension properties.",
     code: dimension,
   },
   "transform-example": {
-    title: "Transform",
-    description: "This is a M-Image example with position.",
+    title: "Position",
+    description: "This is a m-image example with position properties.",
     code: position,
   },
   "rotation-example": {
     title: "Rotation",
-    description: "This is a M-Image example with rotation.",
+    description: "This is a m-image example with rotation properties.",
     code: rotation,
   },
   "single-dimension-example": {

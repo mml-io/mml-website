@@ -7,23 +7,23 @@ import scale from "./scale.mml";
 
 export const examples: DocsExamples = {
   primary: {
-    title: "Basic M-Model",
-    description: "This is a basic M-Model.",
+    title: "Basic m-model",
+    description: "This is a basic m-model.",
     code: primary,
   },
   "scale-example": {
     title: "Scale",
-    description: "This is a M-Model with scale.",
+    description: "This is an m-model with scale properties.",
     code: scale,
   },
   "position-example": {
     title: "Position",
-    description: "This is a M-Model with position.",
+    description: "This is an m-model with position properties.",
     code: position,
   },
   "rotation-example": {
     title: "Rotation",
-    description: "This is a M-Model with rotation.",
+    description: "This is an m-model with rotation properties.",
     code: rotation,
   },
 };

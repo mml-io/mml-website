@@ -8,28 +8,28 @@ import scale from "./scale.mml";
 
 export const examples: DocsExamples = {
   primary: {
-    title: "Basic M-Plane",
-    description: "This is a basic M-Plane.",
+    title: "Basic m-plane",
+    description: "This is a basic m-plane.",
     code: primary,
   },
   "dimension-example": {
     title: "Dimension",
-    description: "This is a basic M-Plane with a dimension.",
+    description: "This is a basic m-plane with dimension properties.",
     code: dimension,
   },
   "position-example": {
     title: "Position",
-    description: "This is a basic M-Plane with a position.",
+    description: "This is a basic m-plane with position properties.",
     code: position,
   },
   "rotation-example": {
     title: "Rotation",
-    description: "This is a basic M-Plane with a rotation.",
+    description: "This is a basic m-plane with rotation properties.",
     code: rotation,
   },
   "scale-example": {
     title: "Scale",
-    description: "This is a basic M-Plane with a scale.",
+    description: "This is a basic m-plane with scale properties.",
     code: scale,
   },
 };

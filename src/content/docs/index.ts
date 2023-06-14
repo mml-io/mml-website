@@ -3,6 +3,7 @@ import { DocsExamplesByTag } from "@/types/docs-reference";
 import * as mAudio from "./m-audio";
 import * as mCharacter from "./m-character";
 import * as mCube from "./m-cube";
+import * as mCylinder from "./m-cylinder";
 import * as mFrame from "./m-frame";
 import * as mGroup from "./m-group";
 import * as mImage from "./m-image";
@@ -16,6 +17,7 @@ import * as mVideo from "./m-video";
 
 export const examples: DocsExamplesByTag = {
   "m-cube": mCube,
+  "m-cylinder": mCylinder,
   "m-sphere": mSphere,
   "m-audio": mAudio,
   "m-video": mVideo,

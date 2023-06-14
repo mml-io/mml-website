@@ -1,2 +1,7 @@
-<m-video y="5" width="15" height="4" loop="true" src="https://public.mml.io/big-buck-bunny-10s-1mb.mp4">
-</m-video>
+<m-video
+  src="https://public.mml.io/big-buck-bunny-10s-1mb.mp4"
+  width="15"
+  height="4"
+  y="5"
+  loop="true"
+></m-video>

@@ -1,1 +1,7 @@
-<m-image x="4" y="2" z="5" src="https://storage.googleapis.com/mml-assets/test-image.jpeg"></m-image>
+<m-image
+    src="https://public.mml.io/test-image.jpg"
+    x="4"
+    y="2"
+    z="5"
+    width="5"
+></m-image>

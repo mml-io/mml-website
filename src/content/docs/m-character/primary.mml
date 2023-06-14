@@ -1,3 +1,10 @@
-<m-character sx="10" sy="10" sz="10" anim-enabled="true" anim-loop="true" id="my-character" src="https://public.mml.io/character-body.glb">
-  <m-model src="https://public.mml.io/character-head.glb"></m-model>
+<m-character
+    sx="10"
+    sy="10"
+    sz="10"
+    src="https://public.mml.io/character-body.glb"
+>
+  <m-model
+    src="https://public.mml.io/character-head.glb"
+  ></m-model>
 </m-character>

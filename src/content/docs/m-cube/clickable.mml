@@ -1,9 +1,0 @@
-<m-cube color="blue" y="2" onclick="myFunction(this)"></m-cube>
-
-<script>
-function myFunction(cube) {
-  const nextColor = cube.getAttribute("color") === "blue" ? "red" : "blue";
-
-  cube.setAttribute("color", nextColor);
-}
-</script>
