@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   main:
-    name: Pull Request Test
+    name: Main
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
