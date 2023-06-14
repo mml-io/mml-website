@@ -1,7 +1,7 @@
 import Head from "next/head";
+import Link from "next/link";
 import * as React from "react";
 
-import Breadcrumb from "@/src/components/Common/Breadcrumb";
 import { posts } from "@/src/content/blogPosts";
 
 export function getStaticPaths() {
@@ -33,13 +33,20 @@ const GuidePage = ({ postId }: { postId: string }) => {
 
   return (
     <>
-      <Breadcrumb pageName={`${postId}`} parents={[{ name: "Blog", path: "blog" }]} />
       <Head>
         <title>{title} - MML</title>
       </Head>
-      <div className="container">
+      <div className="mt-32">
         <div className="flex justify-center">
           <div className="w-full max-w-[800px] flex-1">
+            <Link href="/blog" className="mb-6 flex items-center">
+              <img
+                src="/images/blog/backArrow.svg"
+                alt="back"
+                className="mr-[10px] brightness-0 filter dark:invert"
+              />
+              <span>Back</span>
+            </Link>
             <img src={image} alt={title} className="w-full" width="1024" height="530" />
             <div className="mt-4">
               <Body />

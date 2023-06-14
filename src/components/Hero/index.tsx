@@ -42,7 +42,7 @@ const Hero = () => {
                   <Link
                     href="https://github.com/mml-io/mml"
                     className="w-48 bg-white px-8 py-4 text-base font-semibold text-black duration-300 ease-in-out
-hover:bg-white/30 dark:bg-[#1E1E1E] dark:text-white dark:hover:bg-[#1E1E1E]/30"
+hover:bg-white/30 dark:bg-[#1F2931] dark:text-white dark:hover:bg-[#1F2931]/30"
                   >
                     View on GitHub
                   </Link>

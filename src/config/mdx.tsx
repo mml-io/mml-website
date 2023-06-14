@@ -5,11 +5,11 @@ import { ReactMarkdownOptions } from "react-markdown/lib/react-markdown";
 import SyntaxHighlighter from "@/src/components/Common/SyntaxHighlighter";
 
 const sharedTextStyle = "text-[#1B1B1B] dark:text-white";
-export const sharedBodyStyle = `my-4 text-[16px] leading-[20.8px] ${sharedTextStyle}`;
+export const sharedBodyStyle = `my-4 text-[24px] leading-[40px] ${sharedTextStyle}`;
 const sharedHeadingStyle = `font-medium ${sharedTextStyle}`;
 
 export const components = {
-  p: (props) => <p className={sharedBodyStyle} {...props} />,
+  p: (props) => <p className={`${sharedBodyStyle}`} {...props} />,
   h1: (props) => (
     <h1 className={`my-[.67em] text-[32px] leading-[41.6px] ${sharedHeadingStyle}`} {...props} />
   ),
