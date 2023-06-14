@@ -1,1 +1,6 @@
-<m-plane y="5" width="5" height="7" color="blue"></m-plane>
+<m-plane
+    y="5"
+    width="5"
+    height="7"
+    color="blue"
+></m-plane>

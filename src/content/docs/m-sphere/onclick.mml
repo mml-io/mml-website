@@ -1,9 +1,12 @@
-<m-sphere color="blue" y="2" onclick="myFunction(this)"></m-sphere>
+<m-sphere
+    color="blue"
+    y="2"
+    onclick="myFunction(this)"
+></m-sphere>
 
 <script>
 function myFunction(sphere) {
   const nextColor = sphere.getAttribute("color") === "blue" ? "red" : "blue";
-
   sphere.setAttribute("color", nextColor);
 }
 </script>

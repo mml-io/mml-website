@@ -8,8 +8,8 @@ import spotlight from "./spotlight.mml";
 
 export const examples: DocsExamples = {
   primary: {
-    title: "Basic M-Light",
-    description: "This is a basic M-Light.",
+    title: "Basic m-light",
+    description: "This is a basic m-light.",
     code: primary,
     baseSceneOn: false,
   },

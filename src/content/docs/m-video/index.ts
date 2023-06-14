@@ -9,32 +9,32 @@ import singleDimension from "./single-dimension.mml";
 
 export const examples: DocsExamples = {
   primary: {
-    title: "Basic M-Video",
-    description: "This is a basic M-Video.",
+    title: "Basic m-video",
+    description: "This is a basic m-video.",
     code: primary,
   },
   "dimension-example": {
-    title: "M-Video Dimensions",
-    description: "This is a basic M-video with dimension properties.",
+    title: "Dimensions",
+    description: "This is a basic m-video with dimension properties.",
     code: dimensions,
   },
   "position-example": {
-    title: "M-Video Position",
-    description: "This is a basic M-video with position properties.",
+    title: "Position",
+    description: "This is a basic m-video with position properties.",
     code: position,
   },
   "rotation-example": {
-    title: "M-Video Rotation",
-    description: "This is a basic M-video with rotation properties.",
+    title: "Rotation",
+    description: "This is a basic m-video with rotation properties.",
     code: rotation,
   },
   "scale-example": {
-    title: "M-Video Scale",
-    description: "This is a basic M-video with scale properties.",
+    title: "Scale",
+    description: "This is a basic m-video with scale properties.",
     code: scale,
   },
   "single-dimension-example": {
-    title: "M-Video Single Dimension",
+    title: "Single Dimension",
     description:
       "Specifying only one dimension will resize the element keeping the original aspect ratio.",
     code: singleDimension,

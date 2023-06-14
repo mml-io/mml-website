@@ -1,5 +1,7 @@
-<m-frame>
-    <m-cube x="-5" y="3" color="green" width="4" height="4" depth="4"></m-cube>
-    <m-cube y="3" color="yellow" width="4" height="4" depth="4"></m-cube>
-    <m-cube x="5" y="3" color="blue" width="4" height="4" depth="4"></m-cube>
-</m-frame>
+<!--
+  The referenced external document
+  is shown within the m-frame
+-->
+<m-frame
+    src="https://public.mml.io/rgb-cubes.html"
+></m-frame>

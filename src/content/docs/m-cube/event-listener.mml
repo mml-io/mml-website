@@ -1,0 +1,15 @@
+<m-cube
+    id="clickable-cube"
+    color="green"
+    y="2"
+></m-cube>
+
+<script>
+  const clickableCube = document.getElementById("clickable-cube");
+  clickableCube.addEventListener("click", () => {
+    const nextColor = clickableCube.getAttribute("color") === "green" ? "orange" : "green";
+    clickableCube.setAttribute("color", nextColor);
+  });
+</script>
+
+

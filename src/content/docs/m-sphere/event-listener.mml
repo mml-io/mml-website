@@ -1,0 +1,15 @@
+<m-sphere
+    id="clickable-sphere"
+    color="green"
+    y="2"
+></m-sphere>
+
+<script>
+  const clickableSphere = document.getElementById("clickable-sphere");
+  clickableSphere.addEventListener("click", () => {
+    const nextColor = clickableSphere.getAttribute("color") === "green" ? "orange" : "green";
+    clickableSphere.setAttribute("color", nextColor);
+  });
+</script>
+
+
