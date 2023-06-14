@@ -26,7 +26,7 @@ export const components = {
   h6: (props) => (
     <h6 className={`my-[1.67em] text-[16px] leading-[20.8px] ${sharedHeadingStyle}`} {...props} />
   ),
-  a: (props) => <a className="font-normal text-[#0069C2] underline" {...props} />,
+  a: (props) => <a target="_blank" className="font-normal text-[#0069C2] underline" {...props} />,
   blockquote: (props) => (
     <blockquote
       className={`my-[1.12em] rounded-md bg-[#F2F1F1] px-4 py-2 text-[14px] leading-[18.2px] text-[#0069C2] ${sharedTextStyle}`}
