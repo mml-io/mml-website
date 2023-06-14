@@ -1,7 +1,4 @@
-import {
-  IframeWrapper,
-  registerCustomElementsToWindow,
-} from "mml-web";
+import { IframeWrapper, registerCustomElementsToWindow } from "mml-web";
 
 let windowTarget: Window | null = null;
 
