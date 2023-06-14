@@ -1,63 +1,63 @@
 <m-audio y="13" ry="0" start-time="0" loop="true" src="https://public.mml.io/A_Piano_WellTemperedClavier_40.mp3">
+  <m-label onclick="restart(event.currentTarget.parentNode)" content="restart" x="10" y="7.75" font-size="100" width="4.5" alignment="center" height="1.5" color="green"></m-label>
+  <m-label onclick="pause(event.currentTarget.parentNode)" content="pause" x="-10" y="7.75" font-size="100" width="4.5" alignment="center" height="1.5" color="green"></m-label>
+  <m-label onclick="unpause(event.currentTarget.parentNode)" content="unpause" x="-5" y="7.75" font-size="100" width="4.5" alignment="center" height="1.5" color="green"></m-label>
+  <m-label onclick="resume(event.currentTarget.parentNode)" content="resume" x="5" y="7.75" font-size="100" width="4.5" alignment="center" height="1.5" color="green"></m-label>
+  <m-label onclick="toggleEnabled(event.currentTarget.parentNode)" content="enable" x="0" y="7.75" font-size="100" width="4.5" alignment="center" height="1.5" color="green"></m-label>
+  <m-label class="attributes-label" content="attrs:" x="0" y="-9.25" font-size="100" width="25" alignment="center" height="4.5" color="green"></m-label>
+</m-audio>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<script>
+  function updateAttributesLabel(audioTag) {
+    const attributes = [];
+    for (const attr of audioTag.getAttributeNames()) {
+      const val = audioTag.getAttribute(attr);
+      attributes.push(`${attr}="${val}"`);
+    }
+    const attributesLabel = audioTag.querySelector(".attributes-label");
+    if (attributesLabel) {
       attributesLabel.setAttribute("content", attributes.join(" "));
+    }
+  }
 
+  function restart(audioTag) {
+    console.log("restart", audioTag);
+    audioTag.setAttribute("start-time", document.timeline.currentTime);
+    audioTag.removeAttribute("pause-time");
+    updateAttributesLabel(audioTag);
+  }
+  function toggleEnabled(audioTag) {
+    console.log("toggleEnabled", audioTag);
+    const enabled = audioTag.getAttribute("enabled") !== "false";
+    audioTag.setAttribute("enabled", (!enabled).toString());
+    updateAttributesLabel(audioTag);
+  }
+  function pause(audioTag) {
+    console.log("pause", audioTag);
+    audioTag.setAttribute("pause-time", document.timeline.currentTime);
+    updateAttributesLabel(audioTag);
+  }
+  function unpause(audioTag) {
+    console.log("unpause", audioTag);
+    audioTag.removeAttribute("pause-time");
+    updateAttributesLabel(audioTag);
+  }
 
+  function resume(audioTag) {
+    console.log("resume", audioTag);
+    if (!audioTag.hasAttribute("pause-time")) {
+      return
+    }
+    const startTime = parseFloat(audioTag.getAttribute("start-time")) || 0;
+    const pauseTime = parseFloat(audioTag.getAttribute("pause-time")) || 0;
+    const playedDuration = pauseTime - startTime;
+    const newStartTime = document.timeline.currentTime - playedDuration;
+    audioTag.removeAttribute("pause-time");
+    audioTag.setAttribute("start-time", newStartTime);
+    updateAttributesLabel(audioTag);
+  }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  for (const audio of document.querySelectorAll("m-audio")) {
+    updateAttributesLabel(audio);
+  }
+</script>

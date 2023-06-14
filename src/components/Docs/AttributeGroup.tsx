@@ -1,7 +1,7 @@
 import { createSchemaDefinition, schemaJSON } from "@mml-io/mml-schema";
 import * as React from "react";
 
-
+import { MarkDown } from "@/src/config/mdx";
 
 import { Attribute } from "./Attribute";
 
@@ -11,7 +11,7 @@ export function AttributeGroup(props: { attributeGroupName: string }) {
   const attributeGroup = schemaDefinition.attributeGroups[props.attributeGroupName];
   return (
     <div>
-
+      <MarkDown>{`### AttributeGroup: ${attributeGroup.name}`}</MarkDown>
       <ul>
         {Object.values(attributeGroup.attributes).map((attribute) => (
           <li key={attribute.name}>

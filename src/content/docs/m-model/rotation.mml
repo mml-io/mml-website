@@ -1,7 +1,7 @@
-
+<m-model
   src="https://public.mml.io/Ub6mLA2hfu3QyryuqPHac"
-
-
-
-
-
+  rx="45"
+  ry="-90"
+  rz="45"
+>
+</m-model>

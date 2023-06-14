@@ -11,11 +11,11 @@
   const mLabel = document.getElementById("my-label");
   const mCube = document.getElementById("color-cube");
 
-
+  function handlePrompt(e) {
     const color = e.detail.value;
     mLabel.setAttribute("content", color);
     mCube.setAttribute("color", color);
+  }
 
-
-
-
+  mPrompt.addEventListener("prompt", handlePrompt);
+</script>

@@ -9,9 +9,9 @@
     font-family: "Inter", sans-serif;
   }
 
-
-
-
+  * {
+    box-sizing: border-box;
+  }
 }
 
 @layer components {
@@ -36,61 +36,61 @@
   }
 }
 
+.CodeMirror {
+  width: 100%;
+  flex: 1;
+  height: 100% !important;
+  font-size: 14px;
+  background: #FFFFFF !important;
+}
 
+.dark .CodeMirror {
+  background: #262626 !important;
+}
 
+.CodeMirror .CodeMirror-gutter {
+  background-color: #FFFFFF !important;
+  border-right: 1px solid #CDCDCD !important;
+}
 
+.dark .CodeMirror .CodeMirror-gutter {
+  background-color: #262626 !important;
+  border-right: 1px solid #455969 !important;
+}
 
+.CodeMirror .CodeMirror-gutter-elt {
+  color: #4E4E4E !important;
+  font-family: var(--font-ibm-plex-mono) !important;
+}
 
+.dark .CodeMirror .CodeMirror-gutter-elt {
+  color: #ADADAD !important;
+}
 
+.CodeMirror span.other-client {
+  @apply absolute;
+}
 
+.myCustomTag{
+    color: #47B1FF;
+}
 
+.CodeMirror .cm-tag {
+  /* CSS rules for the custom tag */
+  color: #47B1FF !important;
+}
 
+.CodeMirror .cm-attribute {
+  /* CSS rules for the custom attribute */
+  color: #EE0543 !important;
+}
 
+.CodeMirror .cm-string {
+  /* CSS rules for the custom string */
+  color: #00DC62 !important;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.ClientContainer * {
+  border: none !important;
+  width: 100% !important;
+}

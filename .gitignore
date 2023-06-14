@@ -1,11 +1,11 @@
-
-
-
-
-
-
-
-
-
-
+node_modules
+.idea
+build/
+.DS_Store
+./lerna-debug.log
+.vscode/
+coverage/
+# Local Netlify folder
+.netlify/*
+.netlify/state.json
 .next/

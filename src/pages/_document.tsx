@@ -11,11 +11,11 @@ export default function Document() {
         head.js. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <Head />
-
-
-
-
-
+      <body className="bg-light-theme dark:bg-dark-theme">
+        <Main />
+        <NextScript />
+        <Footer />
+        <ScrollToTop />
       </body>
     </Html>
   );

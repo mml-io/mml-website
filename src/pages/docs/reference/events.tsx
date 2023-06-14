@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import Breadcrumb from "@/src/components/Common/Breadcrumb";
-
+import EventsTable from "@/src/components/EventsTable";
 
 const DocsPage = () => {
   return (
@@ -13,8 +13,8 @@ const DocsPage = () => {
           { name: "Reference", path: "reference" },
         ]}
       />
-
-
+      <main className="mx-auto max-w-screen-xl px-5 xl:p-0">
+        <EventsTable />
       </main>
     </>
   );

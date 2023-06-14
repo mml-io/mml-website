@@ -1,4 +1,4 @@
-
+# Introducing MML: An Open Source Metaverse Markup Language for Immersive 3D Experiences
 
 **Content work in progress. Please check back soon!**
 
@@ -6,12 +6,12 @@
 
 MML is a markup language based atop HTML and JavaScript, designed specifically for describing 3D interactive objects and experiences in Metaverse virtual worlds. With MML, creators can develop and share their ideas using a familiar and approachable syntax, taking advantage of the vast ecosystem of libraries, learning resources, and frameworks available for HTML.
 
-
-
-
-
-
-
-
-
+```html
+<m-cube id="my-cube" color="red"></m-cube>
+<script>
+    const cube = document.getElementById('my-cube');
+    cube.addEventListener('click', () => {
+        cube.setAttribute('color', 'blue');
+    });
+</script>
 ```

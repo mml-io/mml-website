@@ -3,11 +3,11 @@
   functions = "netlify/functions"
   publish = ".next"
 
-
-
-
-
-
+[[redirects]]
+  from = "/_next/image*"
+  to = "/_next/image*"
+  status = 200
+  force = true
 
 [[redirects]]
   from = "/_next/*"

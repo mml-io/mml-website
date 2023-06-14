@@ -1,5 +1,5 @@
 import { EventsClassSchemaType, eventsSchemaJSON, EventType } from "@mml-io/mml-schema";
-
+import Head from "next/head";
 import * as React from "react";
 import ReactMarkdown from "react-markdown";
 import { ReferenceType, ReflectionType } from "typedoc";
@@ -67,66 +67,66 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
           { name: "Events", path: "events" },
         ]}
       />
-
-
-
-
-
-
-
-
-
-
-
-
+      <Head>
+        <title>{eventClassDefinition.name} - MML</title>
+      </Head>
+      <div className="flex w-full">
+        <div className="flex w-full justify-center">
+          <Navigation />
+          <main className="w-full flex-1 p-5 lg:flex-[0_0_766px] xl:mx-[33px]">
+            <h1 className="mb-4 text-2xl uppercase">{eventClassDefinition.name}</h1>
+            {extendedTypes.length > 0 && (
+              <div className="mb-4">
+                <h2 className="mb-2 text-xl uppercase">Extends</h2>
+                <h2>{extendedTypes.join(", ")}</h2>
               </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            )}
+            {eventClassDefinition.comment && (
+              <TypeDocComment comment={eventClassDefinition.comment} />
+            )}
+            <h2 className="mb-4 text-xl uppercase">Properties</h2>
+            {eventClassDefinition.children
+              .filter((property) => {
+                if (!showExternalProperties && property.flags.isExternal) {
+                  return false;
+                }
+                if (!showInheritedProperties && property.inheritedFrom) {
+                  return false;
+                }
+                return true;
+              })
+              .map((property) => (
+                <div key={property.name} style={{ border: "1px solid black" }}>
+                  <h3 className="mb-2 text-lg uppercase">Property name: {property.name}</h3>
+                  {property.comment &&
+                    property.comment.summary.map((descriptionText, index) => (
+                      <ReactMarkdown key={index}>{descriptionText.text}</ReactMarkdown>
+                    ))}
+                  <h2 className="mb-4 text-xl uppercase">Property Flags</h2>
+                  {Object.entries(property.flags).map(([flag]) => {
+                    return (
+                      <div key={flag}>
+                        <h3 className="mb-2 text-lg uppercase">{flag}</h3>
+                      </div>
+                    );
+                  })}
+                  <h2 className="mb-4 text-xl uppercase">Property Type</h2>
+                  <TypeDocType type={property.type as EventType} />
                 </div>
               ))}
-
-
-
-
-
-
-
-
-
-
-
-
-
+            {eventClassDefinition.extendedBy && (
+              <>
+                <h2 className="mb-4 text-xl uppercase">Subclasses</h2>
+                {eventClassDefinition.extendedBy.map((eventClass) => (
+                  <div key={eventClass.name}>
+                    <h3 className="mb-2 text-lg uppercase">{eventClass.name}</h3>
+                  </div>
+                ))}
+              </>
+            )}
+          </main>
+          <LinkList />
+        </div>
       </div>
     </>
   );
