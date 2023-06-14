@@ -13,7 +13,10 @@ const Examples = () => {
 
           <div className="grid grid-cols-1 gap-x-4 gap-y-4 md:grid-cols-2 lg:grid-cols-4">
             {Object.entries(examples).map(([id, { image, name }], index) => (
-              <Link href={`/examples/?example=${id}`} key={index}>
+              <Link href={`/examples/?example=${id}`} key={index} className="relative">
+                <div className="hover absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-black bg-transparent text-2xl font-medium text-white text-opacity-0 hover:bg-[#00000080] hover:text-opacity-100">
+                  See example
+                </div>
                 <img className="w-full" src={image} key={index} alt={name} />
               </Link>
             ))}

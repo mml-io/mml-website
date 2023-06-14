@@ -1,19 +1,11 @@
 import * as React from "react";
 
-import Breadcrumb from "@/src/components/Common/Breadcrumb";
 import EventsTable from "@/src/components/EventsTable";
 
 const DocsPage = () => {
   return (
     <>
-      <Breadcrumb
-        pageName="Events"
-        parents={[
-          { name: "Docs", path: "docs" },
-          { name: "Reference", path: "reference" },
-        ]}
-      />
-      <main className="mx-auto max-w-screen-xl px-5 xl:p-0">
+      <main className="mx-auto mt-32 px-4 sm:max-w-[575px] md:max-w-[768px] lg:max-w-[1281px] lg:max-w-[992px] xl:max-w-[1200px] 2xl:max-w-[1300px]">
         <EventsTable />
       </main>
     </>

@@ -1,18 +1,16 @@
 import Head from "next/head";
 import * as React from "react";
 
-import Breadcrumb from "@/src/components/Common/Breadcrumb";
 import { DocsElement, DocsListContainer } from "@/src/components/DocsList";
 import { guides } from "@/src/content/guides";
 
 const DocsPage = () => {
   return (
     <>
-      <Breadcrumb pageName="Guides" parents={[{ name: "Docs", path: "docs" }]} />
       <Head>
         <title>Guide - MML</title>
       </Head>
-      <main className="mx-auto max-w-screen-xl px-5 xl:p-0">
+      <main className="mx-auto mt-32 px-4 sm:max-w-[575px] md:max-w-[768px] lg:max-w-[1281px] lg:max-w-[992px] xl:max-w-[1200px] 2xl:max-w-[1300px]">
         <DocsListContainer
           title="Guides"
           description="Guides to help you get started with MML"

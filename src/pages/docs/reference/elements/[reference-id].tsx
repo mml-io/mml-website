@@ -77,10 +77,10 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
       <Head>
         <title>{elementDefinition.name} - MML</title>
       </Head>
-      <div className="flex w-full">
-        <div className="flex w-full justify-center">
+      <div className="mx-auto sm:max-w-[575px] md:max-w-[768px] lg:max-w-[1281px] lg:max-w-[992px] xl:max-w-[1200px] 2xl:max-w-[1300px]">
+        <div className="flex w-full">
           <Navigation />
-          <main className="w-full flex-1 p-5 lg:flex-[0_0_766px] xl:mx-[33px]">
+          <main className="w-full flex-1 p-5 lg:flex-[1_0_766px]">
             <h1 className="mb-8 text-[40px] font-semibold uppercase">{elementDefinition.name}</h1>
             {elementDefinition.description &&
               elementDefinition.description.map((descriptionText, index) => (
@@ -88,7 +88,9 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
                   {descriptionText}
                 </MarkDown>
               ))}
-            <h2 className="mb-4 mt-8 text-[32px] font-medium">Try it</h2>
+            <h2 className="mb-4 mt-8 text-[32px] font-medium" id="try it">
+              Try it
+            </h2>
             {primaryExample && (
               <ExampleView
                 description="Demo"
@@ -118,7 +120,9 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
             )}
             {attributeGroups && (
               <>
-                <h2 className="mb-4 mt-8 text-[32px] font-medium">Attribute Groups</h2>
+                <h2 className="mb-4 mt-8 text-[32px] font-medium" id="attribute groups">
+                  Attribute Groups
+                </h2>
                 <code>
                   <ul className="bg-gray-200 text-red-800 rounded p-1 font-mono">
                     {attributeGroups.map((attributeGroup) => (
@@ -132,7 +136,7 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
             )}
             {filteredExamples.length > 0 && (
               <>
-                <h2 id="attributes" className="mb-4 mt-8 text-[32px] font-medium">
+                <h2 id="examples" className="mb-4 mt-8 text-[32px] font-medium">
                   Examples
                 </h2>
                 {filteredExamples.map((exampleKey) => {
@@ -145,7 +149,7 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
                         description={example.title}
                         baseScene={example.baseSceneOn !== undefined ? example.baseSceneOn : true}
                         code={example.code}
-                        initialClientCount={2}
+                        initialClientCount={1}
                       />
                     </div>
                   );
@@ -153,7 +157,7 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
               </>
             )}
           </main>
-          <LinkList />
+          <LinkList elementList={["try it", "attributes", "attribute groups", "examples"]} />
         </div>
       </div>
     </>

@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import * as React from "react";
 import { ChangeEvent, useEffect } from "react";
 
-import Breadcrumb from "@/src/components/Common/Breadcrumb";
 import ExampleView from "@/src/components/ExampleView/ExamplePageExampleViewDynamic";
 import { examples } from "@/src/content/examples";
 import { Example, ExamplesByName } from "@/types/example";
@@ -55,13 +54,12 @@ const ExamplesPage = () => {
 
   return (
     <>
-      <Breadcrumb pageName="Examples" />
       <Head>
         <title>Examples - MML</title>
       </Head>
       <main
         id="about"
-        className="mx-auto flex h-[752px] border-[1px] border-editor-border bg-white dark:border-editor-border-dark dark:bg-editor-bg lg:max-w-[1281px]"
+        className="mx-auto mt-28 flex h-[752px] max-w-[418px] border-[1px] border-editor-border bg-white dark:border-editor-border-dark dark:bg-editor-bg sm:max-w-[575px] md:max-w-[768px] lg:max-w-[1281px] lg:max-w-[992px] xl:max-w-[1200px] 2xl:max-w-[1300px]"
       >
         <div className="flex-[0_1_350px]">
           <div className="h-[50px] border-b-[1px] border-editor-border bg-white px-[17px] pt-[14px] leading-[19px] text-black dark:border-editor-border-dark dark:bg-editor-bg dark:text-white">
