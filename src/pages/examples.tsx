@@ -94,13 +94,13 @@ const ExamplesPage = () => {
                   }}`}
                   onClick={() => handleClick(key)}
                 >
-                  <img
-                    className="aspect-auto w-full xl:h-[181px]"
-                    src={image}
-                    alt={name}
-                    width={301}
-                    height={181}
-                  />
+                  <div className="relative aspect-[1.60738255] h-[181px] w-full overflow-hidden">
+                    <img
+                      className="absolute top-1/2 w-full -translate-y-1/2"
+                      src={image}
+                      alt={name}
+                    />
+                  </div>
                   <p className="mt-3 px-4 text-sm">{description}</p>
                 </div>
               );
