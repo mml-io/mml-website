@@ -3,6 +3,8 @@ import Link from "next/link";
 import { useTheme } from "next-themes";
 import * as React from "react";
 
+import HeroBackground from "./hero-background";
+
 const AnimatedExampleView = dynamic(
   () =>
     import("@/src/components/AnimatedExampleView/AnimatedExampleView").then(
@@ -12,6 +14,7 @@ const AnimatedExampleView = dynamic(
 );
 
 const Hero = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { theme } = useTheme();
 
   return (
@@ -21,6 +24,7 @@ const Hero = () => {
         className="relative z-10 overflow-hidden pt-[120px] md:pt-[150px] xl:pt-[180px] 2xl:pt-[146px]"
       >
         <div className="container">
+          <HeroBackground />
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4">
               <div className="wow fadeInUp mx-auto max-w-[800px] text-center" data-wow-delay=".2s">
