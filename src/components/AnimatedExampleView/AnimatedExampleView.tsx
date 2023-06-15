@@ -15,12 +15,11 @@ function createDocumentCode(code: string): string {
   return `${'<m-plane color="white" width="20" height="20" rx="-90"></m-plane><m-light type="spotlight" ry="45" rx="65" rz="-45" x="10" y="10" z="10"></m-light>'}${code}`;
 }
 
-const initialCode = `<m-cube height="3" width="3" depth="3" y="4" color="blue" id="my-cube"></m-cube>
-<m-cube x="-5" height="3" width="3" depth="3" y="7" color="blue"></m-cube>
-<m-cube x="5" height="3" width="3" depth="3" y="2" color="blue"></m-cube>
+const initialCode = `<m-cube x="-3" height="2" width="2" depth="2" y="2" color="#FF6666" id="my-cube"></m-cube>
+<m-sphere x="3" radius="1" y="2" color="#66FF66" id="my-cube"></m-sphere>
 
-<script>  
-</script>`;
+
+`;
 
 export function AnimatedExampleView(props) {
   const [code, setCode] = useState<string>(initialCode);
@@ -80,7 +79,7 @@ export function AnimatedExampleView(props) {
       key={resetKey}
     >
       <div className="relative h-[50px] border-[1px] border-b-0 border-editor-border bg-white px-[17px] pt-[14px] leading-[19px] text-black dark:border-editor-border-dark dark:bg-editor-bg dark:text-white">
-        Create a unique scene with HTML
+        Create an interactive, multi-user 3D scene with HTML and JavaScript
         <button
           onClick={handleResetClick}
           className="top-[17px absolute right-[17px] h-[16px] w-[17px]"
@@ -94,14 +93,14 @@ export function AnimatedExampleView(props) {
           />
         </button>
       </div>
-      <div className="flex h-[369px] border-[1px] border-editor-border dark:border-editor-border-dark">
+      <div className="flex h-[529px] border-[1px] border-editor-border dark:border-editor-border-dark">
         <div className="mb-16 h-full w-[44%]">
           <div className="flex h-[35px] border-b-[1px] border-editor-border bg-white dark:border-editor-border-dark dark:bg-editor-bg">
             <span className="inline-block h-full w-[83px] border-b-[3px] bg-transparent pt-2 text-center text-[13px] text-editor-title">
               CODE
             </span>
           </div>
-          <CodemirrorEditor className="h-[332px] w-full" />
+          <CodemirrorEditor className="h-[492px] w-full" />
         </div>
         <div className=" relative flex w-[56%] flex-wrap content-between items-start">
           {networkedDOMDocument && (
