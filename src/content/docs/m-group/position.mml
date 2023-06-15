@@ -1,5 +1,5 @@
-<m-group y="3" z="7" x="2">
-  <m-cube x="-2" color="red"></m-cube>
+<m-group y="4" z="5" x="1">
+  <m-cube x="-1.5" color="red"></m-cube>
   <m-cube color="green"></m-cube>
-  <m-cube x="2" color="blue"></m-cube>
+  <m-cube x="1.5" color="blue"></m-cube>
 </m-group>

@@ -1,8 +1,8 @@
 <m-video
-  src="https://public.mml.io/big-buck-bunny-10s-1mb.mp4"
-  x="5"
-  y="2"
-  z="6"
-  width="5"
-  loop="true"
+    src="https://public.mml.io/big-buck-bunny-10s-1mb.mp4"
+    x="3"
+    y="5"
+    z="3"
+    width="5"
+    loop="true"
 ></m-video>

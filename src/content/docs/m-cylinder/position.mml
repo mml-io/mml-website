@@ -1,6 +1,6 @@
 <m-cylinder
     color="purple"
-    x="4"
+    x="3"
     y="2"
-    z="5"
+    z="3"
 ></m-cylinder>
