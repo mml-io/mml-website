@@ -197,7 +197,6 @@ export const AnimatedEditorContainer = ({
     codeMirror.on("change", function (cm) {
       // Get the full content of the editor
       const content = cm.getValue();
-      console.log("Full content of the editor:", content);
       setCode(content);
     });
 
