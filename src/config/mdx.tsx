@@ -5,37 +5,37 @@ import { ReactMarkdownOptions } from "react-markdown/lib/react-markdown";
 import SyntaxHighlighter from "@/src/components/Common/SyntaxHighlighter";
 
 const sharedTextStyle = "text-[#1B1B1B] dark:text-white";
-export const sharedBodyStyle = `my-4 text-[24px] leading-[40px] ${sharedTextStyle}`;
+export const sharedBodyStyle = `mt-8 text-xl leading-[32px] ${sharedTextStyle}`;
 const sharedHeadingStyle = `font-medium ${sharedTextStyle}`;
 
 export const components = {
   p: (props) => <p className={`${sharedBodyStyle}`} {...props} />,
   h1: (props) => (
-    <h1 className={`my-[.67em] text-[32px] leading-[41.6px] ${sharedHeadingStyle}`} {...props} />
+    <h1 className={`mt-[1.95em] text-[32px] leading-[41.6px] ${sharedHeadingStyle}`} {...props} />
   ),
   h2: (props) => (
-    <h2 className={`my-[.75em] text-[24px] leading-[31.2px] ${sharedHeadingStyle}`} {...props} />
+    <h2 className={`mt-[1.72em] text-[26px] leading-[31.2px] ${sharedHeadingStyle}`} {...props} />
   ),
   h3: (props) => (
-    <h3 className={`my-[.75em] text-[24px] leading-[31.2px] ${sharedHeadingStyle}`} {...props} />
+    <h3 className={`mt-[.75em] text-[24px] leading-[31.2px] ${sharedHeadingStyle}`} {...props} />
   ),
   h4: (props) => <h4 className={`my-[1.12em] ${sharedBodyStyle}`} {...props} />,
   h5: (props) => (
-    <h5 className={`my-[1.5em] text-[16px] leading-[20.8px] ${sharedHeadingStyle}`} {...props} />
+    <h5 className={`mt-[1.5em] text-[16px] leading-[20.8px] ${sharedHeadingStyle}`} {...props} />
   ),
   h6: (props) => (
-    <h6 className={`my-[1.67em] text-[16px] leading-[20.8px] ${sharedHeadingStyle}`} {...props} />
+    <h6 className={`mt-[1.67em] text-[16px] leading-[20.8px] ${sharedHeadingStyle}`} {...props} />
   ),
   a: (props) => <a target="_blank" className="font-normal text-[#0069C2] underline" {...props} />,
   blockquote: (props) => (
     <blockquote
-      className={`my-[1.12em] rounded-md bg-[#F2F1F1] px-4 py-2 text-[14px] leading-[18.2px] text-[#0069C2] ${sharedTextStyle}`}
+      className={`mt-[1.12em] rounded-md bg-[#F2F1F1] px-4 py-2 text-[14px] leading-[18.2px] text-[#0069C2] ${sharedTextStyle}`}
       {...props}
     />
   ),
-  li: (props) => <li className={`my-2 ${sharedBodyStyle}`} {...props} />,
-  ul: (props) => <ul className={`my-2 ${sharedBodyStyle}`} {...props} />,
-  ol: (props) => <ol className={`my-2 ${sharedBodyStyle}`} {...props} />,
+  li: (props) => <li className={`mt-2 ${sharedBodyStyle}`} {...props} />,
+  ul: (props) => <ul className={`mt-2 ${sharedBodyStyle}`} {...props} />,
+  ol: (props) => <ol className={`mt-2 ${sharedBodyStyle}`} {...props} />,
   code: (props) => (
     <code
       className={`my-[1.12em] bg-[#F2F1F1] px-1 py-0.5 text-[14px] leading-[18.2px] !text-[#0069C2] dark:bg-[#262626] ${sharedTextStyle}`}
