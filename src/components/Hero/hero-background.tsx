@@ -42,7 +42,7 @@ function HeroBackground() {
       for(int j = -1; j <= 1; j ++)
       for(int i = -1; i <= 1; i ++) {
         vec2 b = vec2(i, j);
-        vec2 rand = 0.5 + 0.5 * sin(time * 3.0 + 12.0 * rand2(p + b));
+        vec2 rand = 0.5 + 0.5 * sin(time * 1.5 + 12.0 * rand2(p + b));
         vec2 r = vec2(b) - f + rand;
         minDistance = min(minDistance, length(r));
       }
@@ -53,7 +53,7 @@ function HeroBackground() {
       vec2 uv = gl_FragCoord.xy / resolution.xy;
       vec2 suv = (uv - 0.5) * 2.0;
       uv.x *= resolution.x / resolution.y;
-      uv.y += time * 0.03;
+      uv.y += time * 0.015;
       float val = pow(voronoi(uv * 8.0) * 1.1, 7.0);
       float thickness = 1.0 / min(resolution.x, resolution.y);
       vec2 grid = step(mod(uv, ${randomPattern}), vec2(thickness));
@@ -95,7 +95,6 @@ function HeroBackground() {
       gl.uniform2f(resolutionUniformLocation, canvas.width, canvas.height);
     };
     window.addEventListener("resize", resize);
-    resize();
 
     const render = () => {
       gl.uniform1f(timeUniformLocation, (Date.now() - startTime.current) / 1000.0);
@@ -103,6 +102,7 @@ function HeroBackground() {
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       requestRef.current = requestAnimationFrame(render);
     };
+    resize();
     render();
 
     return () => {
