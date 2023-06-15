@@ -7,7 +7,7 @@ const EventsTable = () => {
   return (
     <DocsTableContainer
       title="Events"
-      description="All the available MML Events"
+      description="All of the MML Event types and their properties."
       type="Events"
       className="mt-8"
     >
