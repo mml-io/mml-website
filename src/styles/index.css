@@ -42,10 +42,12 @@
   height: 100% !important;
   font-size: 14px;
   background: #FFFFFF !important;
+  color: #383838 !important;
 }
 
 .dark .CodeMirror {
-  background: #262626 !important;
+  background: #202B36 !important;
+  color: #808080 !important;
 }
 
 .CodeMirror .CodeMirror-gutter {
@@ -54,7 +56,7 @@
 }
 
 .dark .CodeMirror .CodeMirror-gutter {
-  background-color: #262626 !important;
+  background-color: #202B36 !important;
   border-right: 1px solid #455969 !important;
 }
 
@@ -71,23 +73,65 @@
   @apply absolute;
 }
 
-.myCustomTag{
-    color: #47B1FF;
-}
-
 .CodeMirror .cm-tag {
   /* CSS rules for the custom tag */
-  color: #47B1FF !important;
+  color: #800000 !important;
+}
+
+.CodeMirror .cm-property,
+.CodeMirror .cm-def, .CodeMirror .cm-operator {  /* CSS rules for the custom tag */
+  color: #000000 !important;
 }
 
 .CodeMirror .cm-attribute {
   /* CSS rules for the custom attribute */
-  color: #EE0543 !important;
+  color: #ff0000 !important;
 }
 
-.CodeMirror .cm-string {
+.CodeMirror .cm-string, .CodeMirror .cm-string-2, .CodeMirror .cm-keyword {
   /* CSS rules for the custom string */
-  color: #00DC62 !important;
+  color: #0000ff !important;
+}
+
+.CodeMirror .cm-number {
+  /* CSS rules for the custom string */
+  color: #098658 !important;
+}
+
+.CodeMirror .cm-variable, .CodeMirror .cm-comment {
+  /* CSS rules for the custom string */
+  color: #008000 !important;
+}
+
+.dark .CodeMirror .cm-tag, .dark .CodeMirror .cm-keyword {
+  /* CSS rules for the custom tag */
+  color: #569cd6 !important;
+}
+
+.dark .CodeMirror .cm-variable, .dark .CodeMirror .cm-property,
+.dark .CodeMirror .cm-def, .dark .CodeMirror .cm-operator{
+  /* CSS rules for the custom tag */
+  color: #d4d4d4 !important;
+}
+
+.dark .CodeMirror .cm-attribute {
+  /* CSS rules for the custom attribute */
+  color: #9cdcfe !important;
+}
+
+.dark .CodeMirror .cm-string, .dark .CodeMirror .cm-string-2 {
+  /* CSS rules for the custom string */
+  color: #ce9178 !important;
+}
+
+.dark .CodeMirror .cm-number {
+  /* CSS rules for the custom string */
+  color: #b5cea8 !important;
+}
+
+.dark .CodeMirror .cm-comment {
+  /* CSS rules for the custom string */
+  color: #608b4e !important;
 }
 
 .ClientContainer * {
