@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function HeroBackground() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const requestRef = useRef<number>();
   const startTime = useRef<number>(Date.now());
+  const [firstResize, setFirstResize] = useState<boolean>(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -97,12 +98,15 @@ function HeroBackground() {
     window.addEventListener("resize", resize);
 
     const render = () => {
+      if (firstResize === false) {
+        setFirstResize(true);
+        resize();
+      }
       gl.uniform1f(timeUniformLocation, (Date.now() - startTime.current) / 1000.0);
       gl.clear(gl.COLOR_BUFFER_BIT);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       requestRef.current = requestAnimationFrame(render);
     };
-    resize();
     render();
 
     return () => {
