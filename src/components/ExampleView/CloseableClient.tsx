@@ -11,7 +11,7 @@ function Container(props: { refProp: React.Ref<HTMLDivElement> }) {
       style={{
         height: "calc(100% - 35px)",
       }}
-      className="w-full"
+      className="ClientContainer w-full overflow-hidden"
       ref={props.refProp}
     />
   );
