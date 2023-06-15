@@ -30,16 +30,17 @@ to <marcus@mml.io>.
 
 > If you want to ask a question, we assume that you have read the available [Documentation](https://mml.io).
 
-Before you ask a question, it is best to search for existing [Issues](https://github.com/mml-io/mml-website/issues) and [Discussions](https://github.com/mml-io/mml-website/discussions) that might help you. In case you have found a suitable issue and still need clarification, you can write your question in this issue. It is also advisable to search the internet for answers first.
+Before you ask a question, it is best to search for existing [Issues](https://github.com/mml-io/mml-website/issues) that might help you. In case you have found a suitable issue and still need clarification, you can write your question in this issue. It is also advisable to search the internet for answers first.
 
-If you then still feel the need to ask a question and need clarification, we recommend the following:
+If you then still feel the need to ask a question specific to MML Website and need clarification, we recommend the following:
 
-- Start a new [Discussion](https://github.com/mml-io/mml-website/discussions) to ask a question.
-- Create a new [Issue](https://github.com/mml-io/mml-website/issues/new) if you believe you've found something broken.
+- Create a new [Issue](https://github.com/mml-io/mml-website/issues/new) in this repository.
 - Provide as much context as you can about what you're running into.
 - Provide project and platform versions (nodejs, npm, etc), depending on what seems relevant.
 
-We will then take care of it as soon as possible.
+If you believe your question relates to the overall MML project, please start a new [discussion](https://github.com/mml-io/mml/discussions/new) in the [MML repository](https://github.com/mml-io/mml).
+
+In case you found something broken related to the core MML libraries, please create a new [issue](https://github.com/mml-io/mml/issues/new) in the [MML repository](https://github.com/mml-io/mml).
 
 ## I Want To Contribute
 
@@ -85,12 +86,12 @@ This section guides you through submitting an enhancement suggestion for MML, **
 
 - Make sure that you are using the latest version.
 - Read the [documentation](https://mml.io) carefully and find out if the functionality is already covered, maybe by an individual configuration.
-- Look through the existing [discussions](https://github.com/mml-io/mml-website/discussions) and [issues](https://github.com/mml-io/mml-website/issues) to see if the enhancement has already been suggested. If it has, add a comment to the existing discussion or issue instead of opening a new one.
+- Look through the existing [issues](https://github.com/mml-io/mml-website/issues) to see if the enhancement has already been suggested. If it has, add a comment to the existing issue instead of opening a new one.
 - Find out whether your idea fits with the scope and aims of the project. It's up to you to make a strong case to convince the project's developers of the merits of this feature. Keep in mind that we want features that will be useful to the majority of our users and not just a small subset. If you're just targeting a minority of users, consider writing an add-on/plugin library.
 
 #### How Do I Submit a Good Enhancement Suggestion?
 
-Enhancement suggestions are tracked as [GitHub Discussions](https://github.com/mml-io/mml-website/discussions).
+Enhancement suggestions for this project are tracked as [GitHub Issues](https://github.com/mml-io/mml-website/issues) in this repository. If your suggestion relates to the overall MML project, please start a new [discussion](https://github.com/mml-io/mml/discussions/new) in the [MML repository](https://github.com/mml-io/mml).
 
 - Use a **clear and descriptive title** for the discussion to identify the suggestion.
 - Provide a **step-by-step description of the suggested enhancement** in as many details as possible.
