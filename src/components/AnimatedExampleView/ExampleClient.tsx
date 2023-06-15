@@ -14,7 +14,6 @@ function Container(props: { refProp: React.Ref<HTMLDivElement> }) {
         width: "100%",
         overflow: "hidden",
       }}
-      className="ClientContainer"
       ref={props.refProp}
     />
   );
