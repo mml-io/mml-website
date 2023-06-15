@@ -1,6 +1,6 @@
 <m-label
     y="5"
-    width="5"
+    width="4"
     height="7"
     content="Hello World!"
     font-size="80"
