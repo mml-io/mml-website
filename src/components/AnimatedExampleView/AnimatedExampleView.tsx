@@ -12,7 +12,7 @@ import { ExampleClient } from "./ExampleClient";
 const CLIENTS = 4;
 
 function createDocumentCode(code: string): string {
-  return `${'<m-plane color="white" width="20" height="20" rx="-90"></m-plane><m-light type="directional" ry="45" rx="45" x="5" y="5" z="5"></m-light>'}${code}`;
+  return `${'<m-plane color="white" width="20" height="20" rx="-90"></m-plane><m-light type="spotlight" ry="45" rx="65" rz="-45" x="10" y="10" z="10"></m-light>'}${code}`;
 }
 
 const initialCode = `<m-cube height="3" width="3" depth="3" y="4" color="blue" id="my-cube"></m-cube>

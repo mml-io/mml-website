@@ -12,7 +12,7 @@ import { CloseableClient } from "./CloseableClient";
 function createDocumentCode(code: string, lightOn: boolean): string {
   return `${
     lightOn &&
-    '<m-plane color="white" width="20" height="20" rx="-90"></m-plane><m-light type="directional" ry="45" rx="45" x="5" y="5" z="5"></m-light>'
+    '<m-plane color="white" width="20" height="20" rx="-90"></m-plane><m-light type="spotlight" ry="45" rx="65" rz="-45" x="10" y="10" z="10"></m-light>'
   }${code}`;
 }
 
