@@ -1,17 +1,106 @@
-# Introducing MML: An Open Source Metaverse Markup Language for Immersive 3D Experiences
+import * as React from "react";
+import DocsExampleView from "@/src/components/ExampleView/DocsExampleViewDynamic";
 
-**Content work in progress. Please check back soon!**
+# Introducing MML: An Open Source Metaverse Markup Language for Multi-User Interactive 3D Experiences
 
-**Metaverse Markup Language (MML)** is an [open-source](https://github.com/mml-io/mml) project that aims to enable the creation and sharing of 3D multi-user experiences in virtual worlds.
+*Explore the potential of MML in a multi-user 3D web experience today!*
 
-MML is a markup language based atop HTML and JavaScript, designed specifically for describing 3D interactive objects and experiences in Metaverse virtual worlds. With MML, creators can develop and share their ideas using a familiar and approachable syntax, taking advantage of the vast ecosystem of libraries, learning resources, and frameworks available for HTML.
+----
 
-```html
-<m-cube id="my-cube" color="red"></m-cube>
-<script>
-    const cube = document.getElementById('my-cube');
-    cube.addEventListener('click', () => {
-        cube.setAttribute('color', 'blue');
+## Introduction
+
+The v0.1 release of Metaverse Markup Language is now available, offering a novel approach to creating interactive 3D multi-user experiences using familiar HTML and JavaScript.
+
+MML was developed to enable multi-user, interactive Metaverse experiences that can be dynamically composed from diverse creations made by diverse creators.
+
+**The MML project is v0.1 and it’s expected that both the format and network protocols undergo backwards-incompatible changes between now and an eventual v1.** Nonetheless, the MML project invites you to experiment with MML v0.1 and contribute your insights to help shape its future!
+
+----
+
+## What is MML?
+
+MML is a markup language designed to facilitate the creation of interactive 3D multi-user experiences. Building on top of the proven foundations of HTML and JavaScript, MML provides a recognizable environment for creators while extending the capabilities of these technologies for use in shared virtual worlds.
+
+The key points of MML are:
+  * **Familiarity and Ecosystem**: MML is based on HTML, making it approachable for a wide range of creators already familiar with web development.
+  * **Portability**: MML documents can run in any modern web browser, and game engine support can be achieved using MML integrations.
+  * **Composability**: Virtual worlds can be composed of multiple documents running on different servers, simplifying the creation of complex virtual spaces.
+
+----
+
+## What is Networked DOM?
+
+Central to MML's applicability for multi-user virtual world applications is the Networked DOM networking model. By running the logic for a document in one place, separate from the "world" server, MML enables documents to interact with web service APIs (such as generative AI), be portable across many worlds and engines, and also to be more computationally complex whilst avoiding a lot of challenging race conditions.
+
+This works by using a WebSocket connection between the document and the client, with the document sending Document Object Model (DOM) updates to the client to update the state the client sees, and the client sending DOM events to the document to interact with it.
+
+![Diagram of how Networked DOM connects users, worlds, and content](/images/blog/introducing-mml/how-mml-works-image.svg)
+
+This approach also enables multi-document compositions and flexible deployment options, ranging from peer-to-peer to massive scale experiences that can run on diverse infrastructure.
+
+We can also simulate this effect running just in your browser; below is an **interactive editor** demonstrating one document seen by multiple clients complete with live editing. Go ahead and change some attributes:
+
+<DocsExampleView initialClientCount={2} code={`<m-plane color="green" width="20" height="20" rx="-90"></m-plane>
+  <m-light type="directional" ry="45" rx="45" debug="true" x="3" y="3" z="3"></m-light>
+  <m-cube y="2" id="my-cube" color="red"></m-cube>
+  <m-cube x="2" y="2" color="orange" visible-to="1"></m-cube>
+
+    <script>
+      let toggle = false;
+      const myCube = document.getElementById("my-cube");
+      if (window.params.color) {
+      myCube.setAttribute("color", window.params.color);
+    }
+      myCube.addEventListener("click", () => {
+      toggle = !toggle;
+      myCube.setAttribute("color", toggle ? "blue" : "red");
     });
-</script>
-```
+      setInterval(() => {
+      myCube.setAttribute("ry", new Date().getTime() / 50);
+    }, 500);
+    </script>
+  `} />
+
+This live editing experience works in the WebSocket-networked environments too, so you can be live updating a document whilst others are seeing it and interacting with it.
+
+----
+
+## Getting Started with MML
+
+To start exploring MML and to create your own live MML document that others can access, head over to the [MML Starter Project repository](https://github.com/mml-io/mml-starter-project) which includes a link to run a simple MML document on Codesandbox, providing a hands-on introduction to MML's features and capabilities.
+
+[![Screenshot of MML Starter Project](/images/blog/introducing-mml/mml-starter-project.png "Screenshot of MML Starter Project")](https://github.com/mml-io/mml-starter-project)
+
+You can also browse the [MML Examples](https://mml.io/examples/) to see a few examples of creations and head over to the [MML Documentation](https://mml.io/docs/) to learn more about the MML HTML elements and how to use them.
+
+----
+
+## Integrating MML into a 3D Web Experience
+
+To see how MML documents can be brought into a 3D web experience, check out the [MML Playground Repository](https://github.com/mml-io/mml-playground). The README includes a link to run a 3D multi-user web experience on Codesandbox that demonstrates MML documents running on one server being brought into 3D web experience running on another.
+
+[![Screenshot of MML Playground](/images/blog/introducing-mml/mml-playground.jpg "Screenshot of MML Playground")](https://github.com/mml-io/mml-playground)
+
+----
+
+## The Future of MML
+
+The vision for MML includes far more than its current capabilities. The existing elements and functionality represent the core concept, but there are already plans for much more including animated attributes, the ability for documents to *sense* the world, identity/authentication, and much more.
+
+There is potential for MML to be used across many different virtual world experiences, and also in augmented reality.
+
+The project aims to enable an even broader range of creators to participate in the development of interactive, multi-user experiences by making engaging content creation even more accessible, whilst also adding more powerful capabilities.
+
+By fostering diverse creators and creations, MML can help expand the scope and variety of virtual content and provide flexible deployment options for a wide range of experiences, from close-proximity peer-to-peer settings to massive-scale environments with thousands of participants.
+
+----
+
+## Resources and Support
+
+For more information about MML and to access its source code, visit the [MML GitHub Repository](https://github.com/mml-io/mml). Please use [GitHub discussions](https://github.com/mml-io/mml/discussions) to share your ideas, showcase your creations, and provide feedback on MML to help refine and enhance its features.
+
+----
+
+## Conclusion
+
+MML hopes to offer a versatile yet familiar way for creators to develop interactive, multi-user 3D experiences. The MML project encourages you to experiment with MML v0.1, prototype incorporating it into your virtual worlds, and share your experiences with the community!
