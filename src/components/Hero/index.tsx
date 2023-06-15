@@ -32,8 +32,8 @@ const Hero = () => {
                   Metaverse Markup Language
                 </h1>
                 <p className="mb-12 whitespace-pre-line text-base font-normal !leading-relaxed text-black dark:text-white dark:opacity-90 sm:text-lg md:text-xl">
-                  {`Create interactive, multi-user 3D experiences
-                  with powerful and familiar HTML and JavaScript.`}
+                  {`Create interactive, portable, multi-user 3D experiences and objects
+                  with powerful and familiar HTML and JavaScript`}
                 </p>
                 <div className="flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
                   <Link
