@@ -1,6 +1,9 @@
-import { DocsGuide } from "@/types/docs-guides";
+import { MDXProps } from "mdx/types";
 
-export type BlogPost = DocsGuide & {
+export type BlogPost = {
+  title: string;
+  description: string;
+  body: (props: MDXProps) => JSX.Element;
   image: string;
 };
 

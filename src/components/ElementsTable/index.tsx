@@ -11,7 +11,7 @@ const ElementsTable = () => {
   return (
     <DocsTableContainer
       title="Elements"
-      description="All the available MML Elements"
+      description="All of the MML Elements with available attributes and examples."
       type="Elements"
       className="mt-8"
     >
