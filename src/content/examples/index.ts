@@ -1,11 +1,13 @@
 import { basicExample } from "@/src/content/examples/basic";
+import { diceExample } from "@/src/content/examples/dice";
+import { videoPlayerExample } from "@/src/content/examples/videoplayer";
+import { weatherExample } from "@/src/content/examples/weather";
 import { clockExample } from "@/src/content/examples/clock";
-import { lotsOfCubesExample } from "@/src/content/examples/lots-of-cubes";
-import { lotsOfSpheresExample } from "@/src/content/examples/lots-of-spheres";
 
 export const examples = {
   [basicExample.name]: basicExample,
-  [lotsOfCubesExample.name]: lotsOfCubesExample,
-  [lotsOfSpheresExample.name]: lotsOfSpheresExample,
+  [diceExample.name]: diceExample,
+  [videoPlayerExample.name]: videoPlayerExample,
+  [weatherExample.name]: weatherExample,
   [clockExample.name]: clockExample,
 };
