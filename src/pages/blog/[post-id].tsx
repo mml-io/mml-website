@@ -38,7 +38,7 @@ const GuidePage = ({ postId }: { postId: string }) => {
       </Head>
       <div className="mt-32">
         <div className="flex justify-center">
-          <div className="w-full max-w-[800px] flex-1">
+          <div className="mx-4 w-full max-w-[800px] flex-1">
             <Link href="/blog" className="mb-6 flex items-center">
               <img
                 src="/images/blog/backArrow.svg"

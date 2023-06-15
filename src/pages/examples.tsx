@@ -59,7 +59,7 @@ const ExamplesPage = () => {
       </Head>
       <main
         id="about"
-        className="mx-auto mt-28 flex h-[752px] max-w-[418px] flex-col border-[1px] border-editor-border bg-white dark:border-editor-border-dark dark:bg-editor-bg sm:max-w-[575px] md:max-w-[768px] lg:max-w-[1281px] lg:max-w-[992px] xl:max-w-[1200px] xl:flex-row 2xl:max-w-[1300px]"
+        className="mx-4 mt-28 flex h-[752px] max-w-[450px] flex-col border-[1px] border-editor-border bg-white dark:border-editor-border-dark dark:bg-editor-bg sm:mx-auto sm:max-w-[575px] md:max-w-[768px] lg:max-w-[992px] xl:max-w-[1200px] xl:flex-row 2xl:max-w-[1300px]"
       >
         <div className="order-1 flex-1 xl:order-first xl:flex-[0_1_350px]">
           <div className="h-[50px] border-b-[1px] border-editor-border bg-white px-[17px] pt-[14px] leading-[19px] text-black dark:border-editor-border-dark dark:bg-editor-bg dark:text-white">

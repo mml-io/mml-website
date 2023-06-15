@@ -70,10 +70,10 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
       <Head>
         <title>{eventClassDefinition.name} - MML</title>
       </Head>
-      <div className="mx-auto sm:max-w-[575px] md:max-w-[768px] lg:max-w-[1281px] lg:max-w-[992px] xl:max-w-[1200px] 2xl:max-w-[1300px]">
+      <div className="mx-auto max-w-[450px] sm:max-w-[575px] sm:px-0 md:max-w-[768px] lg:max-w-[992px] xl:max-w-[1200px] 2xl:max-w-[1300px]">
         <div className="flex w-full">
           <Navigation />
-          <main className="w-full flex-1 p-5 lg:flex-[1_0_766px]">
+          <main className="w-full flex-1 p-4 sm:px-0 lg:flex-[1_0_766px]">
             <h1 className="mb-4 text-2xl uppercase">{eventClassDefinition.name}</h1>
             {extendedTypes.length > 0 && (
               <div className="mb-4">
