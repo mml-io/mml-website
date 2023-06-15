@@ -3,8 +3,7 @@ import { Example } from "@/types/example";
 export const clockExample: Example = {
   name: "clock",
   description: "A simple clock",
-  code: `
-<m-group y="4">
+  code: `<m-group y="4">
   <m-cylinder color="lightgrey" radius="4" height="0.1" rx="90"></m-cylinder>
   <m-group id="hour" rz="0" z="0.1">
     <m-cube sx="0.14" sy="1.2" sz="0.08" z="0.04" color="#000000" y="0.2"></m-cube>
@@ -28,7 +27,6 @@ export const clockExample: Example = {
   setTime();
 
   setInterval(setTime, 1000); // update every second
-</script>
-`,
+</script>`,
   image: "/images/examples/clock.png",
 };
