@@ -1,10 +1,11 @@
 <m-light
-    type="directional"
-    rx="45"
+    type="spotlight"
     ry="45"
-    x="5"
-    y="5"
-    z="5"
+    rx="65"
+    rz="-45"
+    x="10"
+    y="10"
+    z="10"
 ></m-light>
 
 <m-cube x="-5" y="3" color="white" width="4" height="4" depth="4"></m-cube>

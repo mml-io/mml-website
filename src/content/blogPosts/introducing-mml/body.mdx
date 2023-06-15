@@ -41,7 +41,7 @@ This approach also enables multi-document compositions and flexible deployment o
 We can also simulate this effect running just in your browser; below is an **interactive editor** demonstrating one document seen by multiple clients complete with live editing. Go ahead and change some attributes:
 
 <DocsExampleView initialClientCount={2} code={`<m-plane color="green" width="20" height="20" rx="-90"></m-plane>
-  <m-light type="directional" ry="45" rx="45" debug="true" x="3" y="3" z="3"></m-light>
+  <m-light type="spotlight" ry="45" rx="65" rz="-45" x="10" y="10" z="10"></m-light>
   <m-cube y="2" id="my-cube" color="red"></m-cube>
   <m-cube x="2" y="2" color="orange" visible-to="1"></m-cube>
 
