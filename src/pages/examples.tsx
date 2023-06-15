@@ -59,13 +59,13 @@ const ExamplesPage = () => {
       </Head>
       <main
         id="about"
-        className="mx-auto mt-28 flex h-[752px] max-w-[418px] border-[1px] border-editor-border bg-white dark:border-editor-border-dark dark:bg-editor-bg sm:max-w-[575px] md:max-w-[768px] lg:max-w-[1281px] lg:max-w-[992px] xl:max-w-[1200px] 2xl:max-w-[1300px]"
+        className="mx-auto mt-28 flex h-[752px] max-w-[418px] flex-col border-[1px] border-editor-border bg-white dark:border-editor-border-dark dark:bg-editor-bg sm:max-w-[575px] md:max-w-[768px] lg:max-w-[1281px] lg:max-w-[992px] xl:max-w-[1200px] xl:flex-row 2xl:max-w-[1300px]"
       >
-        <div className="flex-[0_1_350px]">
+        <div className="order-1 flex-1 xl:order-first xl:flex-[0_1_350px]">
           <div className="h-[50px] border-b-[1px] border-editor-border bg-white px-[17px] pt-[14px] leading-[19px] text-black dark:border-editor-border-dark dark:bg-editor-bg dark:text-white">
             Examples
           </div>
-          <div className="flex h-[35px] border-b-[1px] border-editor-border bg-white dark:border-editor-border-dark dark:bg-editor-bg">
+          <div className="order-first flex h-[35px] border-b-[1px] border-editor-border bg-white dark:border-editor-border-dark dark:bg-editor-bg xl:order-1">
             <img
               className="relative left-[15px] filter-none dark:invert"
               src="/images/examples/search.svg"
@@ -80,7 +80,7 @@ const ExamplesPage = () => {
               onChange={handleSearch}
             />
           </div>
-          <div className=" h-[664px] overflow-y-scroll p-6 pt-2">
+          <div className=" overflow-y-scroll p-6 pt-2 xl:h-[664px]">
             {Object.keys(exampleList).map((key) => {
               const currentExample = exampleList[key];
               const { name, description, image } = currentExample;
@@ -89,13 +89,13 @@ const ExamplesPage = () => {
               return (
                 <div
                   key={key}
-                  className={`border-box mt-4 h-[225px] cursor-pointer bg-[#F5F5F5] dark:bg-[#424242] ${
+                  className={`border-box mt-4 cursor-pointer bg-[#F5F5F5] dark:bg-[#424242] xl:h-[225px] ${
                     isSelected ? "border-[2px] border-primary" : ""
                   }}`}
                   onClick={() => handleClick(key)}
                 >
                   <img
-                    className="aspect-auto h-[181px] w-full"
+                    className="aspect-auto w-full xl:h-[181px]"
                     src={image}
                     alt={name}
                     width={301}
