@@ -148,6 +148,8 @@ export const AnimatedEditorContainer = ({
     stepIndexRef.current++;
 
     if (stepIndexRef.current >= editorState.length) {
+      editorContainerRef.current.style.display = "none";
+
       clearTimeout(timerRef.current);
       stepIndexRef.current = 0;
       deleteAll();
@@ -161,6 +163,7 @@ export const AnimatedEditorContainer = ({
       });
 
       timerRef.current = setTimeout(() => timeoutSequence(), 2000);
+      editorContainerRef.current.style.display = "block";
       return;
     }
 
