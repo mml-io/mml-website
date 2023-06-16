@@ -1,1 +1,4 @@
-<m-cube color="red" y="2"></m-cube>
+<m-cube
+    color="red"
+    y="2"
+></m-cube>

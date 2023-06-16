@@ -1,10 +1,14 @@
-<m-label id="my-label" y="5" width="10" content="Hello World!" font-size="80" alignment="center" color="#BBB" font-color="#000"></m-label>
-
-<m-prompt id="my-prompt" y="2" message="What is your favourite color?" placeholder="Write a color" prefill="orange">
-
+<m-prompt
+    message="What is your favourite color?"
+    placeholder="Write a color"
+    prefill="orange"
+    id="my-prompt"
+    y="2"
+>
   <m-cube id="color-cube" color="blue"></m-cube>
-
 </m-prompt>
+
+<m-label id="my-label" y="5" width="10" content="Hello World!" font-size="80" alignment="center" color="#BBB" font-color="#000"></m-label>
 
 <script>
   const mPrompt = document.getElementById("my-prompt");

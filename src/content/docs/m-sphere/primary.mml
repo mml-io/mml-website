@@ -1,1 +1,4 @@
-<m-sphere color="red" y="2"></m-sphere>
+<m-sphere
+    color="red"
+    y="2"
+></m-sphere>

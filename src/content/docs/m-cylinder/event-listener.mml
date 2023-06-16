@@ -1,0 +1,15 @@
+<m-cylinder
+    id="clickable-cylinder"
+    color="green"
+    y="2"
+></m-cylinder>
+
+<script>
+  const clickableCylinder = document.getElementById("clickable-cylinder");
+  clickableCylinder.addEventListener("click", () => {
+    const nextColor = clickableCylinder.getAttribute("color") === "green" ? "orange" : "green";
+    clickableCylinder.setAttribute("color", nextColor);
+  });
+</script>
+
+

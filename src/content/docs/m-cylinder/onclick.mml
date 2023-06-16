@@ -1,0 +1,12 @@
+<m-cylinder
+    color="blue"
+    y="2"
+    onclick="myFunction(this)"
+></m-cylinder>
+
+<script>
+function myFunction(cylinder) {
+  const nextColor = cylinder.getAttribute("color") === "blue" ? "red" : "blue";
+  cylinder.setAttribute("color", nextColor);
+}
+</script>

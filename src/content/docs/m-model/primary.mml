@@ -1,2 +1,4 @@
-<m-model src="https://public.mml.io/Ub6mLA2hfu3QyryuqPHac" ry="-90">
-</m-model>
+<m-model
+  src="https://public.mml.io/duck.glb"
+  ry="-90"
+></m-model>

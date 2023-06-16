@@ -1,24 +1,23 @@
-import SectionTitle from "@/src/components/Common/SectionTitle";
 import { Brand } from "@/types/brand";
 
 const brandsData: Brand[] = [
   {
     id: 1,
-    name: "Improbable",
-    href: "https://improbable.io/",
-    image: "/images/brands/improbable.svg",
+    name: "MSquared",
+    href: "https://www.msquared.io/",
+    image: "/images/brands/msquared.svg",
   },
 ];
 
 const Brands = () => {
   return (
-    <section className="pb-32 pt-16">
+    <section className="pb-32">
       <div className="container">
-        <SectionTitle title="Used by" paragraph="" center mb="40px" />
+        <h2 className="text-center text-xl font-medium">Founded by</h2>
         <div className="-mx-4 flex flex-wrap content-start">
           <div className="w-full px-4">
             <div
-              className="wow fadeInUp flex flex-wrap items-center justify-center rounded-md bg-white dark:bg-secondary"
+              className="wow fadeInUp flex flex-wrap items-center justify-center rounded-md bg-transparent"
               data-wow-delay=".1s
               "
             >
@@ -44,7 +43,7 @@ const SingleBrand = ({ brand }: { brand: Brand }) => {
         href={href}
         target="_blank"
         rel="nofollow noreferrer"
-        className="relative h-10 w-full grayscale transition hover:opacity-70 hover:grayscale-0 dark:hover:opacity-70"
+        className="relative h-10 w-full bg-transparent grayscale transition hover:opacity-70 hover:grayscale-0 dark:hover:opacity-70"
       >
         <img src={image} alt={name} className="brightness-0 filter dark:invert" />
       </a>

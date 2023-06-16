@@ -1,1 +1,10 @@
-<m-label id="label" x="2" y="2" z="5" width="10" content="Hello World!" font-size="80" alignment="center" color="pink"></m-label>
+<m-label
+    x="2"
+    y="3"
+    z="2"
+    width="10"
+    content="Hello World!"
+    font-size="80"
+    alignment="center"
+    color="pink"
+></m-label>

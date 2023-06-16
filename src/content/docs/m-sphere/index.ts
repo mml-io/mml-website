@@ -1,6 +1,7 @@
 import { DocsExamples } from "@/types/docs-reference";
 
-import clickable from "./clickable.mml";
+import eventListener from "./event-listener.mml";
+import onclick from "./onclick.mml";
 import position from "./position.mml";
 import primary from "./primary.mml";
 import rotation from "./rotation.mml";
@@ -8,28 +9,34 @@ import scale from "./scale.mml";
 
 export const examples: DocsExamples = {
   primary: {
-    title: "Basic M-Audio",
-    description: "This is a basic M-Audio.",
+    title: "Basic m-sphere",
+    description: "This is a basic m-sphere.",
     code: primary,
   },
-  "click-example": {
-    title: "Clickable M-Sphere",
-    description: "Click the cube to change its color.",
-    code: clickable,
+  "onclick-example": {
+    title: "onclick",
+    description: "Click the sphere to change its color via the script in `onclick`.",
+    code: onclick,
+  },
+  "event-listener-example": {
+    title: "event-listener",
+    description:
+      "Click the sphere to change its color via the function added by `addEventListener`.",
+    code: eventListener,
   },
   "scale-example": {
-    title: "M-Sphere Scale",
-    description: "This is a basic M-Sphere with scale properties.",
+    title: "scale",
+    description: "This is a basic m-sphere with scale properties.",
     code: scale,
   },
   "position-example": {
-    title: "M-Sphere Transform",
-    description: "This is a basic M-Sphere with position properties.",
+    title: "position",
+    description: "This is a basic m-sphere with position properties.",
     code: position,
   },
   "rotation-example": {
-    title: "M-Sphere Rotation",
-    description: "This is a basic M-Sphere with rotation properties.",
+    title: "rotation",
+    description: "This is a basic m-sphere with rotation properties.",
     code: rotation,
   },
 };

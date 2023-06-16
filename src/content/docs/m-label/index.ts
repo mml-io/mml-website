@@ -1,29 +1,35 @@
 import { DocsExamples } from "@/types/docs-reference";
 
 import dimension from "./dimension.mml";
+import fontColor from "./font-color.mml";
 import position from "./position.mml";
 import primary from "./primary.mml";
 import rotation from "./rotation.mml";
 
 export const examples: DocsExamples = {
   primary: {
-    title: "Basic M-Label",
-    description: "This is a basic M-Label example.",
+    title: "Basic m-label",
+    description: "This is a basic m-label example.",
     code: primary,
   },
+  "color-example": {
+    title: "Font Color",
+    description: "This is an m-label example with color properties.",
+    code: fontColor,
+  },
   "dimension-example": {
-    title: "M-Label Dimension",
-    description: "This is an M-Label example with different dimensions.",
+    title: "Dimensions",
+    description: "This is an m-label example with dimension properties.",
     code: dimension,
   },
-  "transform-example": {
-    title: "M-Label Transform",
-    description: "This is an M-Label example with a position.",
+  "position-example": {
+    title: "Position",
+    description: "This is an m-label example with position properties.",
     code: position,
   },
   "rotation-example": {
-    title: "M-Label Rotation",
-    description: "This is an M-Label example with a rotation.",
+    title: "Rotation",
+    description: "This is an m-label example with rotation properties.",
     code: rotation,
   },
 };

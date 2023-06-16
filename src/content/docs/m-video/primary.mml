@@ -1,50 +1,54 @@
-<m-video y="13" width="25" start-time="0" loop="true" src="https://public.mml.io/big-buck-bunny-10s-1mb.mp4">
-  <m-label onclick="restart(event.currentTarget.parentNode)" content="restart" x="10" y="7.75" font-size="100" width="4.5" alignment="center" height="1.5" color="green"></m-label>
-  <m-label onclick="pause(event.currentTarget.parentNode)" content="pause" x="-10" y="7.75" font-size="100" width="4.5" alignment="center" height="1.5" color="green"></m-label>
-  <m-label onclick="unpause(event.currentTarget.parentNode)" content="unpause" x="-5" y="7.75" font-size="100" width="4.5" alignment="center" height="1.5" color="green"></m-label>
-  <m-label onclick="resume(event.currentTarget.parentNode)" content="resume" x="5" y="7.75" font-size="100" width="4.5" alignment="center" height="1.5" color="green"></m-label>
-  <m-label onclick="toggleEnabled(event.currentTarget.parentNode)" content="enable" x="0" y="7.75" font-size="100" width="4.5" alignment="center" height="1.5" color="green"></m-label>
-  <m-label class="attributes-label" content="attrs:" x="0" y="-9.25" font-size="100" width="25" alignment="center" height="4.5" color="green"></m-label>
+<m-video
+    src="https://public.mml.io/big-buck-bunny-10s-1mb.mp4"
+    y="6"
+    z="-1"
+    width="15"
+    start-time="0"
+    loop="true"
+>
+  <m-label onclick="restart(this.parentNode)" content="restart" x="6.125" y="5" font-size="60" width="2.75"
+           alignment="center" height="1" color="#99DD99" font-color="black"></m-label>
+
+  <m-label onclick="pause(this.parentNode)" content="pause" x="-6.125" y="5" font-size="60" width="2.75"
+           alignment="center" height="1" color="#99DD99" font-color="black"></m-label>
+
+  <m-label onclick="unpause(this.parentNode)" content="unpause" x="-3" y="5" font-size="60" width="2.75"
+           alignment="center" height="1" color="#99DD99" font-color="black"></m-label>
+
+  <m-label onclick="resume(this.parentNode)" content="resume" x="3" y="5" font-size="60" width="2.75" alignment="center"
+           height="1" color="#99DD99" font-color="black"></m-label>
+
+  <m-label onclick="toggleEnabled(this.parentNode)" content="enable" x="0" y="5" font-size="60" width="2.75"
+           alignment="center" height="1" color="#99DD99" font-color="black"></m-label>
+
+  <m-label class="attributes-label" content="attrs:" x="0" y="-6.5" font-size="50" width="15" alignment="center"
+           height="4.5" color="#99DD99" font-color="black"></m-label>
 </m-video>
 
 <script>
-  function updateAttributesLabel(videoTag) {
-    const attributes = [];
-    for (const attr of videoTag.getAttributeNames()) {
-      const val = videoTag.getAttribute(attr);
-      attributes.push(`${attr}="${val}"`);
-    }
-    const attributesLabel = videoTag.querySelector(".attributes-label");
-    if (attributesLabel) {
-      attributesLabel.setAttribute("content", attributes.join(" "));
-    }
-  }
-
   function restart(videoTag) {
-    console.log("restart", videoTag);
     videoTag.setAttribute("start-time", document.timeline.currentTime);
     videoTag.removeAttribute("pause-time");
     updateAttributesLabel(videoTag);
   }
+
   function toggleEnabled(videoTag) {
-    console.log("toggleEnabled", videoTag);
     const enabled = videoTag.getAttribute("enabled") !== "false";
     videoTag.setAttribute("enabled", (!enabled).toString());
     updateAttributesLabel(videoTag);
   }
+
   function pause(videoTag) {
-    console.log("pause", videoTag);
     videoTag.setAttribute("pause-time", document.timeline.currentTime);
     updateAttributesLabel(videoTag);
   }
+
   function unpause(videoTag) {
-    console.log("unpause", videoTag);
     videoTag.removeAttribute("pause-time");
     updateAttributesLabel(videoTag);
   }
 
   function resume(videoTag) {
-    console.log("resume", videoTag);
     if (!videoTag.hasAttribute("pause-time")) {
       return
     }
@@ -55,6 +59,18 @@
     videoTag.removeAttribute("pause-time");
     videoTag.setAttribute("start-time", newStartTime);
     updateAttributesLabel(videoTag);
+  }
+
+  function updateAttributesLabel(videoTag) {
+    const attributes = [];
+    for (const attr of videoTag.getAttributeNames()) {
+      const val = videoTag.getAttribute(attr);
+      attributes.push(`${attr}="${val}"`);
+    }
+    const attributesLabel = videoTag.querySelector(".attributes-label");
+    if (attributesLabel) {
+      attributesLabel.setAttribute("content", attributes.join(" "));
+    }
   }
 
   for (const video of document.querySelectorAll("m-video")) {

@@ -1,2 +1,10 @@
-<m-video volume="0" y="13" width="10" rx="30" ry="30" rz="30"  loop="true" src="https://public.mml.io/big-buck-bunny-10s-1mb.mp4">
-</m-video>
+<m-video
+    src="https://public.mml.io/big-buck-bunny-10s-1mb.mp4"
+    rx="30"
+    ry="30"
+    rz="30"
+    volume="0"
+    y="5"
+    width="10"
+    loop="true"
+></m-video>

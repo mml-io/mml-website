@@ -1,1 +1,7 @@
-<m-label y="2" width="10" content="Hello World!" font-size="80" alignment="center"></m-label>
+<m-label
+    content="Hello World!"
+    font-size="80"
+    alignment="center"
+    y="2"
+    width="10"
+></m-label>

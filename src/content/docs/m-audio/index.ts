@@ -4,8 +4,8 @@ import primary from "./primary.mml";
 
 export const examples: DocsExamples = {
   primary: {
-    title: "Basic M-Audio",
-    description: "This is a basic M-Audio.",
+    title: "Basic m-audio",
+    description: "This is a basic m-audio.",
     code: primary,
   },
 };

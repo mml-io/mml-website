@@ -1,1 +1,6 @@
-<m-plane x="5" y="5" z="7" color="pink"></m-plane>
+<m-plane
+    x="3"
+    y="2"
+    z="3"
+    color="orange"
+></m-plane>

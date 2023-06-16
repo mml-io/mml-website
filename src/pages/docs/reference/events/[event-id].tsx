@@ -70,10 +70,10 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
       <Head>
         <title>{eventClassDefinition.name} - MML</title>
       </Head>
-      <div className="flex w-full">
-        <div className="flex w-full justify-center">
+      <div className="mx-auto max-w-[450px] sm:max-w-[575px] sm:px-0 md:max-w-[768px] lg:max-w-[992px] xl:max-w-[1200px] 2xl:max-w-[1300px]">
+        <div className="flex w-full">
           <Navigation />
-          <main className="w-full flex-1 p-5 lg:flex-[0_0_766px] xl:mx-[33px]">
+          <main className="w-full flex-1 p-4 sm:px-0 lg:flex-[1_0_766px]">
             <h1 className="mb-4 text-2xl uppercase">{eventClassDefinition.name}</h1>
             {extendedTypes.length > 0 && (
               <div className="mb-4">
@@ -84,7 +84,9 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
             {eventClassDefinition.comment && (
               <TypeDocComment comment={eventClassDefinition.comment} />
             )}
-            <h2 className="mb-4 text-xl uppercase">Properties</h2>
+            <h2 className="mb-4 text-xl uppercase" id="properties">
+              Properties
+            </h2>
             {eventClassDefinition.children
               .filter((property) => {
                 if (!showExternalProperties && property.flags.isExternal) {
@@ -125,7 +127,7 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
               </>
             )}
           </main>
-          <LinkList />
+          <LinkList elementList={["properties"]} />
         </div>
       </div>
     </>

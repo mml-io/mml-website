@@ -10,11 +10,10 @@ function Container(props: { refProp: React.Ref<HTMLDivElement> }) {
     <div
       style={{
         position: "absolute",
-        height: 148,
+        height: 228,
         width: "100%",
         overflow: "hidden",
       }}
-      className="ClientContainer"
       ref={props.refProp}
     />
   );

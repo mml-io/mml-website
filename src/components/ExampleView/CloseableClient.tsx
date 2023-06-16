@@ -9,13 +9,9 @@ function Container(props: { refProp: React.Ref<HTMLDivElement> }) {
   return (
     <div
       style={{
-        position: "absolute",
         height: "calc(100% - 35px)",
-        top: 35,
-        width: "100%",
-        overflow: "hidden",
       }}
-      className="ClientContainer"
+      className="ClientContainer w-full overflow-hidden"
       ref={props.refProp}
     />
   );
@@ -51,13 +47,13 @@ export function CloseableClient(props: { document: NetworkedDOM | EditableNetwor
   }
 
   return (
-    <>
+    <div className="flex-1">
       <div className="h-[35px] w-full border-b-[1px] border-editor-border bg-white dark:border-editor-border-dark dark:bg-editor-bg">
         <span className="inline-block h-full w-[83px] border-b-[3px] bg-transparent pt-2 text-center text-[13px] text-editor-title">
           DEMO
         </span>{" "}
       </div>
       <Container refProp={elementRef} />
-    </>
+    </div>
   );
 }

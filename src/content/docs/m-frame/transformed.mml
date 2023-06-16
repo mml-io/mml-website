@@ -1,0 +1,7 @@
+<m-frame
+    src="https://public.mml.io/rgb-cubes.html"
+    sx="2"
+    sy="3"
+    rx="-45"
+    ry="45"
+></m-frame>

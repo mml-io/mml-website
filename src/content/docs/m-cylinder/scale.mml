@@ -1,0 +1,7 @@
+<m-cylinder
+    color="yellow"
+    y="3"
+    sx="3"
+    sy="2"
+    sz="3"
+></m-cylinder>
