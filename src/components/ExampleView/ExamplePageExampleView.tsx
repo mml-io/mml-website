@@ -72,14 +72,18 @@ export function ExamplePageExampleView(props: {
           />
         </button>
       </div>
-      <div className="relative flex h-[701px] flex-row border-[1px] border-r-0 border-t-0 border-editor-border dark:border-editor-border-dark">
+      <div className="relative flex h-[701px] flex-row border-[1px] border-r-0 border-t-0 border-editor-border dark:border-editor-border-dark xl:h-[calc(100vh-184px)]">
         <div className="h-full w-0 flex-[0_1_60%] border-r-[1px] border-editor-border dark:border-editor-border-dark">
           <div className="flex h-[35px] border-b-[1px] border-editor-border bg-white dark:border-editor-border-dark dark:bg-editor-bg">
             <span className="inline-block h-full w-[83px] border-b-[3px] bg-transparent pt-2 text-center text-[13px] text-editor-title">
               CODE
             </span>
           </div>
-          <HTMLEditor className="h-[663px]" code={code} setCode={setCode} />
+          <HTMLEditor
+            className="h-[663px] xl:h-[calc(100vh-219px)]"
+            code={code}
+            setCode={setCode}
+          />
         </div>
         <div className="relative flex h-full flex-[0_1_40%] flex-row">
           {networkedDOMDocument && (
