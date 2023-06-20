@@ -14,6 +14,16 @@
   to = "/:splat"
   status = 200
 
+[[redirects]]
+  from = "/redirects/mml-starter-project-codesandbox"
+  to = "https://codesandbox.io/p/sandbox/ppy3xr"
+  status = 302
+
+[[redirects]]
+  from = "/redirects/mml-playground-codesandbox"
+  to = "https://codesandbox.io/p/sandbox/df546f"
+  status = 302
+
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
