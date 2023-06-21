@@ -1,15 +1,14 @@
-import { IframeWrapper, registerCustomElementsToWindow } from "mml-web";
+import { IframeWrapper, IframeWrapperResult, registerCustomElementsToWindow } from "mml-web";
 
-let windowTarget: Window | null = null;
+let iframeRemoteSceneWrapperPromise: Promise<IframeWrapperResult> = null;
 
-export function getIframeTargetWindow() {
-  if (windowTarget !== null) {
-    return windowTarget;
+export function getIframeTargetWindow(): Promise<IframeWrapperResult> {
+  if (iframeRemoteSceneWrapperPromise !== null) {
+    return iframeRemoteSceneWrapperPromise;
   }
-  const iframeRemoteSceneWrapper = new IframeWrapper();
-  document.body.append(iframeRemoteSceneWrapper.iframe);
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  windowTarget = iframeRemoteSceneWrapper.iframe.contentWindow!;
-  registerCustomElementsToWindow(windowTarget);
-  return windowTarget;
+  iframeRemoteSceneWrapperPromise = IframeWrapper.create().then((wrapper) => {
+    registerCustomElementsToWindow(wrapper.iframeWindow);
+    return wrapper;
+  });
+  return iframeRemoteSceneWrapperPromise;
 }
