@@ -22,13 +22,22 @@ export function CloseableClient(props: { document: NetworkedDOM | EditableNetwor
   const elementRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const windowTarget = getIframeTargetWindow();
-    const remoteHolderElement = windowTarget.document.body;
-    const runnerClient = new MMLWebRunnerClient(windowTarget, remoteHolderElement);
-    runnerClient.connect(props.document);
-    setClient(runnerClient);
+    let disposed = false;
+    let runnerClient: MMLWebRunnerClient | null = null;
+    getIframeTargetWindow().then((wrapper) => {
+      if (disposed) {
+        return;
+      }
+      runnerClient = new MMLWebRunnerClient(wrapper.iframeWindow, wrapper.iframeBody);
+      runnerClient.connect(props.document);
+      setClient(runnerClient);
+    });
+
     return () => {
-      runnerClient.dispose();
+      disposed = true;
+      if (runnerClient) {
+        runnerClient.dispose();
+      }
     };
   }, []);
 
