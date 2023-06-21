@@ -18,7 +18,7 @@ rz="-10"
 debug="true"
   ></m-light>
 
-  <m-group id="board" z="-20" y="3">
+  <m-group id="board" z="-20" y="10">
   <m-label id="winner" width="22" y="-5" height="5" content="" font-size="200" alignment="center"></m-label>
 
   <!--  horizontal lines -->
@@ -35,24 +35,25 @@ debug="true"
 
   <!--  interactive cubes -->
   <!--  first row -->
-  <m-cube id="cell-1" width="6" height="6" x="-7" y="18" z="0.5" visible="false"></m-cube>
-  <m-cube id="cell-2" width="6" height="6" x="0" y="18" z="0.5" visible="false"></m-cube>
-  <m-cube id="cell-3" width="6" height="6" x="7" y="18" z="0.5" visible="false"></m-cube>
+  <m-label id="cell-1" width="6" height="6" x="-7" y="18" z="1" font-size="450" color="#ffffff" alignment="center"></m-label>
+  <m-label id="cell-2" width="6" height="6" x="0" y="18" z="1" font-size="450" color="#ffffff" alignment="center"></m-label>
+  <m-label id="cell-3" width="6" height="6" x="7" y="18" z="1" font-size="450" color="#ffffff" alignment="center"></m-label>
 
   <!--  second row -->
-  <m-cube id="cell-4" width="6" height="6" x="-7" y="11" z="0.5" visible="false"></m-cube>
-  <m-cube id="cell-5" width="6" height="6" x="0" y="11" z="0.5" visible="false"></m-cube>
-  <m-cube id="cell-6" width="6" height="6" x="7" y="11" z="0.5" visible="false"></m-cube>
+  <m-label id="cell-4" width="6" height="6" x="-7" y="11" z="1" font-size="450" color="#ffffff" alignment="center"></m-label>
+  <m-label id="cell-5" width="6" height="6" x="0" y="11" z="1" font-size="450" color="#ffffff" alignment="center"></m-label>
+  <m-label id="cell-6" width="6" height="6" x="7" y="11" z="1" font-size="450" color="#ffffff" alignment="center"></m-label>
 
   <!--  third row -->
-  <m-cube id="cell-7" width="6" height="6" x="-7" y="4" z="0.5" visible="false"></m-cube>
-  <m-cube id="cell-8" width="6" height="6" x="0" y="4" z="0.5" visible="false"></m-cube>
-  <m-cube id="cell-9" width="6" height="6" x="7" y="4" z="0.5" visible="false"></m-cube>
+  <m-label id="cell-7" width="6" height="6" x="-7" y="4" z="1" font-size="450" color="#ffffff" alignment="center"></m-label>
+  <m-label id="cell-8" width="6" height="6" x="0" y="4" z="1" font-size="450" color="#ffffff" alignment="center"></m-label>
+  <m-label id="cell-9" width="6" height="6" x="7" y="4" z="1" font-size="450" color="#ffffff" alignment="center"></m-label>
   </m-group>
 
   <script>
+let isGameOver = false;
 // Create tic-tac-toe board status
-const board = [
+let board = [
   ["", "", ""],
   ["", "", ""],
   ["", "", ""],
@@ -64,22 +65,7 @@ const label = document.querySelector("#winner");
 let currentPlayer = "X";
 
 const setMove = (selectedCell) => {
-  const { attributes } = selectedCell;
-
-  // create html element
-  const label = document.createElement("m-label");
-  label.setAttribute("content", currentPlayer);
-  label.setAttribute("width", "6");
-  label.setAttribute("y", attributes.y.value);
-  label.setAttribute("x", attributes.x.value);
-  label.setAttribute("z", "1");
-  label.setAttribute("font-size", "450");
-  label.setAttribute("height", "6");
-  label.setAttribute("color", "#ffffff");
-  label.setAttribute("alignment", "center");
-
-  // add to scene
-  document.querySelector("#board").appendChild(label);
+  selectedCell.setAttribute("content", currentPlayer);
 }
 
 // Function to update board status
@@ -105,12 +91,27 @@ function checkForWin() {
   );
 }
 
+function resetBoard() {
+  isGameOver = false;
+  board = [
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""],
+  ];
+  const boardNode = document.getElementById("board");
+  const labels = boardNode.querySelectorAll("m-label");
+  labels.forEach((child) => {
+      child.setAttribute("content", "");
+  });
+}
+
 // Add click event listeners to cubes
 for (let y = 0; y < 3; y++) {
   for (let x = 0; x < 3; x++) {
     const cell = document.getElementById(\`cell-\${y * 3 + x + 1}\`);
     cell.addEventListener("click", () => {
-      console.log(cell.attributes.id.value)
+      if (isGameOver) return;
+      
       if (board[y][x] === "") {
         // Update board status
         updateBoard(x, y, currentPlayer);
@@ -121,8 +122,13 @@ for (let y = 0; y < 3; y++) {
 
         // Check for win
         if (checkForWin()) {
-          label.setAttribute("content", \`\${currentPlayer} wins!\`);
+          isGameOver = true;          
+          label.setAttribute("content", \`\${currentPlayer} wins!\nClick to restart!\`);
+          label.addEventListener("click", () => {
+            resetBoard();
+          });
           return;
+       
         }
 
         // Switch players
