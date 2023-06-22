@@ -21,8 +21,13 @@ const Hero = () => {
     <>
       <section
         id="home"
-        className="relative z-10 overflow-hidden pt-[120px] md:pt-[150px] xl:pt-[180px] 2xl:pt-[146px]"
+        className="relative z-10 overflow-hidden pt-[120px] md:pt-[150px] xl:pt-[180px]"
       >
+        <div className="absolute top-[80px] flex h-10 w-full items-center justify-center bg-primary text-xl md:top-[90px] md:h-12 xl:h-20 xl:text-2xl">
+          <Link href="/blog/[post-id]" as="/blog/introducing-mml">
+            MML 0.1 IS OUT: READ THE BLOG POST
+          </Link>
+        </div>
         <div className="container">
           <HeroBackground />
           <div className="-mx-4 flex flex-wrap">
