@@ -19,7 +19,7 @@ const Hero = () => {
         id="home"
         className="relative z-10 overflow-hidden pt-[120px] md:pt-[150px] xl:pt-[180px]"
       >
-        <div className="absolute top-[80px] flex h-10 w-full items-center justify-center bg-primary text-xl md:top-[90px] md:h-12 xl:h-20 xl:text-2xl">
+        <div className="absolute top-[80px] flex h-10 w-full items-center justify-center bg-primary text-xl md:top-[90px] md:h-12 xl:text-2xl">
           <Link href="/blog/[post-id]" as="/blog/introducing-mml">
             MML 0.1 IS OUT: READ THE BLOG POST
           </Link>
@@ -29,7 +29,7 @@ const Hero = () => {
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4">
               <div className="wow fadeInUp mx-auto max-w-[800px] text-center" data-wow-delay=".2s">
-                <h1 className="mb-5 text-[40px] font-medium leading-[52px] text-black dark:text-white sm:text-4xl sm:leading-tight md:text-5xl md:leading-tight">
+                <h1 className="mb-5 mt-10 text-[40px] font-medium leading-[52px] text-black dark:text-white sm:text-4xl sm:leading-tight md:text-5xl md:leading-tight xl:mt-0">
                   Metaverse Markup Language
                 </h1>
                 <p className="mb-12 whitespace-pre-line text-base font-normal !leading-relaxed text-black dark:text-white dark:opacity-90 sm:text-lg md:text-xl">
