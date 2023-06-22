@@ -1,5 +1,6 @@
 import { EventsClassSchemaType, eventsSchemaJSON, EventType } from "@mml-io/mml-schema";
 import Head from "next/head";
+import Link from "next/link";
 import * as React from "react";
 import ReactMarkdown from "react-markdown";
 import { ReferenceType, ReflectionType } from "typedoc";
@@ -11,8 +12,6 @@ import Navigation from "@/src/components/Common/Navigation";
 // This function gets called at build time to generate all the files
 export function getStaticPaths() {
   // Call an external API endpoint to get posts
-
-  // Filter the element to only those that start with "m-" for now
   const elements = eventsSchemaJSON.children.map((element) => element.name);
 
   // Get the paths we want to pre-render based on elements
@@ -38,12 +37,14 @@ function isReference(type: { type: string }): type is ReferenceType {
   return type.type === "reference";
 }
 
+function getEventClass(name: string) {
+  return eventsSchemaJSON.children.find((eventClass) => eventClass.name === name);
+}
+
 const DocsPage = ({ eventId }: { eventId: string }) => {
-  const eventClassDefinition: EventsClassSchemaType = eventsSchemaJSON.children.find(
-    (eventClass) => {
-      return eventClass.name === eventId;
-    },
-  );
+  const eventClassDefinition: EventsClassSchemaType = getEventClass(eventId);
+
+  console.log(eventClassDefinition);
 
   const showInheritedProperties = true;
   const showExternalProperties = false;
@@ -56,6 +57,18 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
       }
     }
   }
+
+  const createTypeLink = (type: string) => {
+    if (getEventClass(type)) {
+      return (
+        <Link className="text-xl text-primary" href={`/docs/reference/events/${type}`}>
+          {type}
+        </Link>
+      );
+    }
+
+    return type;
+  };
 
   return (
     <>
@@ -74,17 +87,16 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
         <div className="flex w-full">
           <Navigation />
           <main className="w-full flex-1 p-4 sm:px-0 lg:flex-[1_0_766px]">
-            <h1 className="mb-4 text-2xl uppercase">{eventClassDefinition.name}</h1>
-            {extendedTypes.length > 0 && (
-              <div className="mb-4">
-                <h2 className="mb-2 text-xl uppercase">Extends</h2>
-                <h2>{extendedTypes.join(", ")}</h2>
-              </div>
-            )}
+            <h1 className="mb-8 text-[40px] font-semibold uppercase">
+              {eventClassDefinition.name}
+              {extendedTypes.length > 0 && (
+                <span className="text-sm"> extends {extendedTypes.map(createTypeLink)}</span>
+              )}
+            </h1>
             {eventClassDefinition.comment && (
               <TypeDocComment comment={eventClassDefinition.comment} />
             )}
-            <h2 className="mb-4 text-xl uppercase" id="properties">
+            <h2 className="mb-4 mt-8 text-[32px] font-medium" id="properties">
               Properties
             </h2>
             {eventClassDefinition.children
@@ -98,22 +110,25 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
                 return true;
               })
               .map((property) => (
-                <div key={property.name} style={{ border: "1px solid black" }}>
-                  <h3 className="mb-2 text-lg uppercase">Property name: {property.name}</h3>
+                <div key={property.name}>
+                  <h3 className="mb-2 flex items-center text-lg">
+                    {property.name}
+                    {Object.entries(property.flags).map(([flag]) => {
+                      return (
+                        <span
+                          key={flag}
+                          className="ml-2 inline-block rounded-3xl px-2 text-sm text-black dark:bg-white"
+                        >
+                          {flag}
+                        </span>
+                      );
+                    })}
+                  </h3>
                   {property.comment &&
                     property.comment.summary.map((descriptionText, index) => (
                       <ReactMarkdown key={index}>{descriptionText.text}</ReactMarkdown>
                     ))}
-                  <h2 className="mb-4 text-xl uppercase">Property Flags</h2>
-                  {Object.entries(property.flags).map(([flag]) => {
-                    return (
-                      <div key={flag}>
-                        <h3 className="mb-2 text-lg uppercase">{flag}</h3>
-                      </div>
-                    );
-                  })}
-                  <h2 className="mb-4 text-xl uppercase">Property Type</h2>
-                  <TypeDocType type={property.type as EventType} />
+                  <TypeDocType name={property.name} type={property.type as EventType} />
                 </div>
               ))}
             {eventClassDefinition.extendedBy && (
@@ -134,21 +149,44 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
   );
 };
 
-function TypeDocType(props: { type: EventType | ReflectionType | ReferenceType }) {
-  const { type } = props;
+function TypeDocType(props: { type: EventType | ReflectionType | ReferenceType; name?: string }) {
+  const { type, name } = props;
   if (type.type === "intersection") {
     return (
       <div>
-        <h2>Intersection</h2>
-        <ul>
-          {type.types.map((type) => {
+        <div className="whitespace-pre border-[1px] border-editor-border-dark p-4">
+          <span className="text-primary">{`${name}:  `}</span>
+          {"{"}
+          <span>
+            {`\n         `}
+            {type.types.map((type: any, index) => (
+              <>
+                <span className="text-primary">{`${index ? "\n         " : ""}${
+                  type.declaration.children[0].name
+                }`}</span>
+                {`: ${type.declaration.children[0].type.name}`}
+              </>
+            ))}
+            {"\n}"}
+          </span>
+        </div>
+        <div className="mt-4">
+          <h2 className="mb-2 text-lg font-medium">Type declaration</h2>
+          {type.types.map((type: any) => {
+            const dec = type.declaration.children[0];
             return (
-              <li className={"mb-4 ml-3"}>
-                <TypeDocType type={type} />
-              </li>
+              <>
+                <ul className="mb-4 ml-12 flex ">
+                  <li className="list-disc text-primary">{dec.name}: &nbsp;</li>
+                  <TypeDocType type={dec.type} />
+                </ul>
+                <div className="mb-4 ml-8">
+                  {dec.comment && <TypeDocComment comment={dec.comment} />}
+                </div>
+              </>
             );
           })}
-        </ul>
+        </div>
       </div>
     );
   } else if (type.type === "union") {
@@ -169,16 +207,25 @@ function TypeDocType(props: { type: EventType | ReflectionType | ReferenceType }
   } else if (type.type === "reflection") {
     return (
       <div>
-        <h2>Reflection</h2>
         <ul>
           {type.declaration.children.map((dec) => {
             return (
-              <li className={"mb-4 ml-3"}>
-                <h2>{dec.name}</h2>
-                <>{dec.comment && <TypeDocComment comment={dec.comment} />}</>
-                <>
+              <li className={"mb-4"}>
+                <div className="flex border-[1px] border-editor-border-dark p-4">
+                  <h3 className="text-primary">{dec.name}: &nbsp;</h3>
                   <TypeDocType type={dec.type} />
-                </>
+                </div>
+                <div className="mt-4">
+                  <h2 className="mb-2 text-lg font-medium">Type declaration</h2>
+                  <ul className="mb-4 ml-12 flex ">
+                    <li className="list-disc text-primary">{dec.name}: &nbsp;</li>
+                    <TypeDocType type={dec.type} />
+                  </ul>
+                  <div className="mb-4 ml-8">
+                    {dec.comment && <TypeDocComment comment={dec.comment} />}
+                  </div>
+                </div>
+                <></>
               </li>
             );
           })}
