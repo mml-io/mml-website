@@ -1,6 +1,5 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { useTheme } from "next-themes";
 import * as React from "react";
 
 import HeroBackground from "./hero-background";
@@ -14,9 +13,6 @@ const AnimatedExampleView = dynamic(
 );
 
 const Hero = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { theme } = useTheme();
-
   return (
     <>
       <section
