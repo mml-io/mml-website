@@ -128,11 +128,21 @@ for (let y = 0; y < 3; y++) {
             resetBoard();
           });
           return;
-       
+        }
+        
+        // Check for tie
+        if (board.every(row => row.every(cell => cell !== ""))) {
+          isGameOver = true;
+          label.setAttribute("content", "It's a tie!\\nClick to restart!");
+          label.addEventListener("click", () => {
+            resetBoard();
+          });
+          return;
         }
 
         // Switch players
         currentPlayer = currentPlayer === "X" ? "O" : "X";
+       
       }
     });
   }
