@@ -4,21 +4,9 @@ export const ticTacToe: Example = {
   name: "Tic Tac Toe",
   description: "A simple game of tic tac toe",
   image: "/images/examples/tic-tac-toe.png",
-  code: `<html>
-  <body>
-    <!-- Scene -->
-<m-light
-type="point"
-intensity="1"
-x="0"
-y="12"
-z="30"
-rx="10"
-rz="-10"
-debug="true"
-  ></m-light>
-
-  <m-group id="board" z="-20" y="10">
+  baseScene: false,
+  code: `
+  <m-group id="board" z="-20" y="0">
   <m-label id="winner" width="22" y="-5" height="5" content="" font-size="200" alignment="center"></m-label>
 
   <!--  horizontal lines -->
@@ -148,7 +136,5 @@ for (let y = 0; y < 3; y++) {
   }
 }
 </script>
-</body>
-</html>
 `,
 };
