@@ -112,7 +112,9 @@ const ExamplesPage = () => {
             key={selectedExample?.name || "default"}
             initialClientCount={1}
             code={selectedExample?.code || ""}
-            baseScene={true}
+            baseScene={
+              typeof selectedExample?.baseScene === "boolean" ? selectedExample?.baseScene : true
+            }
             description={
               selectedExample?.description ||
               "Select one of the examples on the left to see it here"

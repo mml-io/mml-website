@@ -3,6 +3,7 @@ export type Example = {
   image: string;
   description: string;
   code: string;
+  baseScene?: boolean;
 };
 
 export type ExamplesByName = {
