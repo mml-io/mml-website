@@ -19,12 +19,20 @@ export const components = {
   h3: (props) => (
     <h3 className={`mt-[.75em] text-[24px] leading-[31.2px] ${sharedHeadingStyle}`} {...props} />
   ),
-  h4: (props) => <h4 className={`my-[1.12em] ${sharedBodyStyle}`} {...props} />,
+  h4: (props) => (
+    <h4 className={`mt-[.67em] text-[22px] ${sharedBodyStyle} font-medium`} {...props} />
+  ),
   h5: (props) => (
-    <h5 className={`mt-[1.5em] text-[16px] leading-[20.8px] ${sharedHeadingStyle}`} {...props} />
+    <h5
+      className={`mt-[.5em] text-[20px] font-medium leading-[20.8px] ${sharedHeadingStyle}`}
+      {...props}
+    />
   ),
   h6: (props) => (
-    <h6 className={`mt-[1.67em] text-[16px] leading-[20.8px] ${sharedHeadingStyle}`} {...props} />
+    <h6
+      className={`mt-[.5em] text-[18px] font-medium leading-[20.8px] ${sharedHeadingStyle}`}
+      {...props}
+    />
   ),
   a: (props) => <a target="_blank" className="font-normal text-[#0069C2] underline" {...props} />,
   blockquote: (props) => (
@@ -33,12 +41,12 @@ export const components = {
       {...props}
     />
   ),
-  li: (props) => <li className={`mt-2 ${sharedBodyStyle}`} {...props} />,
-  ul: (props) => <ul className={`mt-2 ${sharedBodyStyle}`} {...props} />,
+  li: (props) => <li className={`${sharedBodyStyle} mt-0`} {...props} />,
+  ul: (props) => <ul className={`${sharedBodyStyle} ml-6 mt-1 list-disc`} {...props} />,
   ol: (props) => <ol className={`mt-2 ${sharedBodyStyle}`} {...props} />,
   code: (props) => (
     <code
-      className={`my-[1.12em] bg-[#F2F1F1] px-1 py-0.5 text-[14px] leading-[18.2px] !text-[#0069C2] dark:bg-[#262626] ${sharedTextStyle}`}
+      className={`my-[1.12em] bg-[#F2F1F1] px-1 py-0.5 text-[14px] leading-[18.2px] !text-[#e8912d] dark:bg-[#262626] ${sharedTextStyle}`}
       {...props}
     />
   ),

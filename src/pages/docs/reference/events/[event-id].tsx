@@ -44,8 +44,6 @@ function getEventClass(name: string) {
 const DocsPage = ({ eventId }: { eventId: string }) => {
   const eventClassDefinition: EventsClassSchemaType = getEventClass(eventId);
 
-  console.log(eventClassDefinition);
-
   const showInheritedProperties = true;
   const showExternalProperties = false;
 
