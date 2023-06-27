@@ -9,7 +9,7 @@ export const sharedBodyStyle = `mt-8 text-xl leading-[32px] ${sharedTextStyle}`;
 const sharedHeadingStyle = `font-medium ${sharedTextStyle}`;
 
 export const components = {
-  p: (props) => <p className={`${sharedBodyStyle}`} {...props} />,
+  p: (props) => <p className={`${sharedBodyStyle} `} {...props} />,
   h1: (props) => (
     <h1
       className={`pt-[2em] text-[32px] leading-[41.6px] ${sharedHeadingStyle}`}
@@ -17,9 +17,7 @@ export const components = {
       id={props.children}
     />
   ),
-  h2: (props) => (
-    <h2 className={`mt-[1.72em] text-[26px] leading-[31.2px] ${sharedHeadingStyle}`} {...props} />
-  ),
+  h2: (props) => <h2 className={`pt-[1.72em] text-[26px] leading-[31.2px]`} {...props} />,
   h3: (props) => (
     <h3 className={`mt-[.75em] text-[24px] leading-[31.2px] ${sharedHeadingStyle}`} {...props} />
   ),
@@ -50,7 +48,7 @@ export const components = {
   ol: (props) => <ol className={`!mt-2 ${sharedBodyStyle}`} {...props} />,
   code: (props) => (
     <code
-      className={`!m-0 my-[1.12em] bg-[#F2F1F1] px-1 py-0.5 text-[14px] leading-[18.2px] !text-[#e8912d] dark:bg-[#262626] ${sharedTextStyle}`}
+      className={`!m-0 my-[1.12em] bg-[#F2F1F1] px-1 py-0.5 text-[20px] !text-[#e8912d] dark:bg-[#262626] ${sharedTextStyle}`}
       {...props}
     />
   ),

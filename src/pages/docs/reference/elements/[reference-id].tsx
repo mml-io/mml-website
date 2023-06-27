@@ -88,7 +88,7 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
                   {descriptionText}
                 </MarkDown>
               ))}
-            <h2 className="mb-4 mt-8 text-[32px] font-medium" id="try it">
+            <h2 className="mb-4 pt-16 text-[32px] font-medium" id="try it">
               Try it
             </h2>
             {primaryExample && (
@@ -102,9 +102,9 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
                 initialClientCount={1}
               />
             )}
-            {attributes && (
+            {!!attributes.length && (
               <>
-                <h2 id="attributes" className="mb-4 mt-8 text-[32px] font-medium">
+                <h2 id="attributes" className="mb-4 pt-16 text-[32px] font-medium">
                   Attributes
                 </h2>
                 <code className="bg-gray-200 text-red-800 rounded p-1 font-mono">
@@ -118,9 +118,9 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
                 </code>
               </>
             )}
-            {attributeGroups && (
+            {!!attributeGroups.length && (
               <>
-                <h2 className="mb-4 mt-8 text-[32px] font-medium" id="attribute groups">
+                <h2 className="mb-4 pt-16 text-[32px] font-medium" id="attribute groups">
                   Attribute Groups
                 </h2>
                 <code>
@@ -136,14 +136,14 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
             )}
             {filteredExamples.length > 0 && (
               <>
-                <h2 id="examples" className="mb-4 mt-8 text-[32px] font-medium">
+                <h2 id="examples" className="pt-16 text-[32px] font-medium">
                   Examples
                 </h2>
                 {filteredExamples.map((exampleKey) => {
                   const example = examplesForElement.examples[exampleKey];
                   return (
                     <div key={`${referenceId}-${example.title}`}>
-                      <h3 className="mb-4 mt-8 text-[24px] font-medium">{example.title}</h3>
+                      <h3 className="mt-8 text-[24px] font-medium">{example.title}</h3>
                       <MarkDown>{`${example.description}`}</MarkDown>
                       <ExampleView
                         description={example.title}
@@ -157,7 +157,14 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
               </>
             )}
           </main>
-          <LinkList elementList={["try it", "attributes", "attribute groups", "examples"]} />
+          <LinkList
+            elementList={[
+              "try it",
+              attributes.length ? "attributes" : "",
+              "attribute groups",
+              "examples",
+            ]}
+          />
         </div>
       </div>
     </>
