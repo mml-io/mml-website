@@ -11,7 +11,11 @@ const sharedHeadingStyle = `font-medium ${sharedTextStyle}`;
 export const components = {
   p: (props) => <p className={`${sharedBodyStyle}`} {...props} />,
   h1: (props) => (
-    <h1 className={`mt-[1.95em] text-[32px] leading-[41.6px] ${sharedHeadingStyle}`} {...props} />
+    <h1
+      className={`pt-[2em] text-[32px] leading-[41.6px] ${sharedHeadingStyle}`}
+      {...props}
+      id={props.children}
+    />
   ),
   h2: (props) => (
     <h2 className={`mt-[1.72em] text-[26px] leading-[31.2px] ${sharedHeadingStyle}`} {...props} />
@@ -41,12 +45,12 @@ export const components = {
       {...props}
     />
   ),
-  li: (props) => <li className={`${sharedBodyStyle} mt-0`} {...props} />,
-  ul: (props) => <ul className={`${sharedBodyStyle} ml-6 mt-1 list-disc`} {...props} />,
-  ol: (props) => <ol className={`mt-2 ${sharedBodyStyle}`} {...props} />,
+  li: (props) => <li className={`${sharedBodyStyle} !mt-0`} {...props} />,
+  ul: (props) => <ul className={`${sharedBodyStyle} !mt-1 ml-6 list-disc`} {...props} />,
+  ol: (props) => <ol className={`!mt-2 ${sharedBodyStyle}`} {...props} />,
   code: (props) => (
     <code
-      className={`my-[1.12em] bg-[#F2F1F1] px-1 py-0.5 text-[14px] leading-[18.2px] !text-[#e8912d] dark:bg-[#262626] ${sharedTextStyle}`}
+      className={`!m-0 my-[1.12em] bg-[#F2F1F1] px-1 py-0.5 text-[14px] leading-[18.2px] !text-[#e8912d] dark:bg-[#262626] ${sharedTextStyle}`}
       {...props}
     />
   ),
