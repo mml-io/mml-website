@@ -1,0 +1,114 @@
+There are several ways to deploy the [MML starter project](https://github.com/mml-io/mml-starter-project).
+
+The project provides a single MML Document running on a NodeJS server. Whichever method you pick to deploy it you should see an interactive dice model that rolls whenever one of the connected users clicks on it.
+
+![mml starter project image](/images/guides/starter-project.png)
+
+This is a non-exhaustive list of a few methods that MML contributors have verified to work, with some things to consider and look out for with each solution.
+
+This is intended to demonstrate how MML can be served using these methods and from this starting point you can fork the project to create your own hosted MML content.
+
+# CodeSandbox
+CodeSandbox allows you to easily fork an existing sandbox of the MML Starter Project and start building with MML.
+
+### How-to
+* Make sure you’re signed in on [https://codesandbox.io](https://codesandbox.io) before continuing.
+* Click the following button: [![Edit mml-starter-project on CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://mml.io/redirects/mml-starter-project-codesandbox)
+* Click the “Fork” button in the very top right of the page and then wait for your forked Sandbox to start up. It might take a few seconds. You will know the project is running when you see “Listening on port 8080” in the terminal on the right.
+* Select the `start: 8080` tab above the terminal pane to switch the view to the running document.
+* You can now interact with the live MML document.
+* Open the `src/mml-document.html` file from the file explorer on the left to open the document’s source. You can now make changes to the HTML and see them reflected live in the preview window to the right.
+* The “Share” button in the top right of the preview pane allows you to find and copy the address of the running document.
+
+### Summary
++ Very fast setup
++ Sign in with GitHub/Google
++ Easy to share live document and source code
++ Free to get started
+- CodeSandbox’s free usage has limited performance and may not be ideal for complex documents
+
+# Glitch
+Similarly to CodeSandbox, Glitch allows you to “remix” the MML Starter Project straight from the GitHub repository.
+
+### How-to
+* Click the following button: [![Remix on Glitch](https://cdn.glitch.me/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button-v2.svg)](https://glitch.com/edit/#!/import/github/mml-io/mml-starter-project)
+* It may take a few minutes for the project to fully load and install the dependencies, but click on the “Logs” tab at the bottom of the page when it becomes available and wait for the output “Listening on port 3000” to know that it’s ready.
+* Click the “Preview” tab and then “Open preview pane” and a pane should show on the right that shows you the live MML document that you can interact with.
+* Open the `src/mml-document.html` file from the file explorer on the left to open the document’s source. You can now make changes to the HTML and see them reflected live in the preview window to the right.
+* The “Share” button in the top right of the preview pane allows you to find and copy the address of the running document.
+
+### Summary
++ Very fast setup
++ Sign in with GitHub
++ Easy to share live document and source code
++ Free to get started
+- Glitch’s free usage has limited performance and may not be ideal for complex documents
+
+# Digital Ocean
+
+### How-to
+* Create a [Digital Ocean](https://www.digitalocean.com/) account if you don't have one and log in.
+* Click the following [link](https://cloud.digitalocean.com/apps/new?repo=https://github.com/mml-io/mml-starter-project/tree/main) to deploy directly from the MML Starter Project repository.
+* On the create app page, you should be able to keep the default options and click “Next” until the Review page.
+* Click on “Create Resources”
+* Click on “Go to Build Logs” to follow the progress as the app deploys and wait for the output “build complete”.
+* Click on “Deploy logs” and wait for the output “Listening on port 8080” to know that it’s ready.
+* Click on the “Live App” button near the top of the page or any of the links that show your app’s address in the format `https://xxxxx.ondigitalocean.app`.
+* In the new tab that opens you should see the live MML document that you can interact with.
+* Although doing the above deploys the starter project, if you plan to modify the MML document it is recommended to fork the [starter project on github](https://github.com/mml-io/mml-starter-project) and deploy it as a new app to enable automatic re-deployments of your content.
+
+### Summary
++ Relatively fast setup direct from the GitHub repository
++ Provides more compute resources than free options and should be more stable
++ Automatic re-deployments from GitHub (if you fork the starter project)
+- No free tier (although at the time of writing there is the offer of free credit for a limited period)
+- You can't share the code with others
+- You can’t easily modify the MML document live
+
+# Heroku
+
+### How-to
+* Fork the [MML starter project](https://github.com/mml-io/mml-starter-project).
+* Make sure you’re signed in on [Heroku](https://www.heroku.com/) before continuing.
+* Click on the “New” button and select the `Create new app` option.
+* Give your app a name, select a region of your choice and click “Create app”. You will be presented with the “Deploy” page of your new Heroku app.
+* Next to the “Deployment method” section, click “GitHub” and then “Connect to GitHub”. Click on “Authorize heroku” to connect your account.
+* After connecting your GitHub account, search for the mml-starter-project repository fork.
+* Click “Connect” next to the forked repository.
+* You could set up automatic deploys, but for now, click on the “Deploy Branch” in the “Manual deploy” section.
+* Wait until you see the “Your app was successfully deployed.” message.
+* Click on the “View” button.
+* In the new tab that opens you should see the live MML document that you can interact with.
+* The “Share” button in the top right of the preview pane allows you to find and copy the address of the running document.
+
+### Summary
++ Relatively fast setup
++ Provides more compute resources than free options and should be more stable
++ Automatic re-deployments from GitHub can be configured
+- You need to fork the repository before deploying
+- No free tier
+- You can't share the code with others
+- You can’t easily modify the MML document live
+
+# Railway
+
+### How-to
+* Fork the [MML starter project](https://github.com/mml-io/mml-starter-project).
+* Make sure you’re signed in on [Railway](https://railway.app/) using your GitHub account.
+* Click on the New Project button and select the `Deploy from GitHub repo` option.
+* If you have never used Railway before, you need to select the “Configure GitHub App” option and select your account. You can choose to allow all the repositories or only the fork you want to deploy. Select the `Deploy from GitHub repo` option when you return having authorized the GitHub app.
+* Search for and select the mml-starter-project repository fork. You may need to refresh the page if you don’t see the repositories immediately available.
+* Click “Deploy Now”
+* Wait until you see “Success” on the deployment row.
+* Click the “Settings” tab and find the “Environment > Domains” section.
+* Click “Generate Domain” and your app will be available on the link that is displayed. It will be in the format `https://xxxxxx.up.railway.app`.
+* Click the link and in the new tab that opens you should see the live MML document that you can interact with.
+* The “Share” button in the top right of the preview pane allows you to find and copy the address of the running document.
+
+### Summary
++ Fast setup
++ Provides more compute resources than the sandbox options and should be more stable
++ Free basic plan
++ Automatic re-deployments from GitHub
+- You can't share the code with others
+- You can’t easily modify the MML document live

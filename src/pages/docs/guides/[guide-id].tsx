@@ -37,7 +37,7 @@ const GuidePage = ({ guideId }: { guideId: string }) => {
   return (
     <>
       <Breadcrumb
-        pageName={`${guideId}`}
+        pageName={title}
         parents={[
           { name: "Docs", path: "docs" },
           { name: "Guides", path: "guides" },
@@ -54,7 +54,7 @@ const GuidePage = ({ guideId }: { guideId: string }) => {
               <Body />
             </div>
           </main>
-          <LinkList elementList={["CodeSandBox", "Glitch", "Digital Ocean", "Railway"]} />
+          <LinkList elementList={["CodeSandBox", "Glitch", "Digital Ocean", "Heroku", "Railway"]} />
         </div>
       </div>
     </>
