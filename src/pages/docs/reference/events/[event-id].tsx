@@ -44,8 +44,6 @@ function getEventClass(name: string) {
 const DocsPage = ({ eventId }: { eventId: string }) => {
   const eventClassDefinition: EventsClassSchemaType = getEventClass(eventId);
 
-  console.log(eventClassDefinition);
-
   const showInheritedProperties = true;
   const showExternalProperties = false;
 
@@ -86,7 +84,7 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
       <div className="mx-auto max-w-[450px] sm:max-w-[575px] sm:px-0 md:max-w-[768px] lg:max-w-[992px] xl:max-w-[1200px] 2xl:max-w-[1300px]">
         <div className="flex w-full">
           <Navigation />
-          <main className="w-full flex-1 p-4 sm:px-0 lg:flex-[1_0_766px]">
+          <main className="w-full flex-1 px-4 sm:px-0 lg:mr-5 lg:flex-[1_0_766px]">
             <h1 className="mb-8 text-[40px] font-semibold uppercase">
               {eventClassDefinition.name}
               {extendedTypes.length > 0 && (
@@ -96,7 +94,7 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
             {eventClassDefinition.comment && (
               <TypeDocComment comment={eventClassDefinition.comment} />
             )}
-            <h2 className="mb-4 mt-8 text-[32px] font-medium" id="properties">
+            <h2 className="mb-4 pt-16 text-[32px] font-medium" id="properties">
               Properties
             </h2>
             {eventClassDefinition.children
@@ -111,7 +109,7 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
               })
               .map((property) => (
                 <div key={property.name}>
-                  <h3 className="mb-2 flex items-center text-lg">
+                  <h3 className="mb-4 flex items-center pt-8 text-lg">
                     {property.name}
                     {Object.entries(property.flags).map(([flag]) => {
                       return (

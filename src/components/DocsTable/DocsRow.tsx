@@ -31,7 +31,7 @@ export function DocsRow({
         </Link>
       </StyledTD>
       <StyledTD>
-        <MarkDown className="[&>p]:overflow-hidden [&>p]:text-ellipsis">{`${description}`}</MarkDown>
+        <MarkDown className="[&>p]:mt-0 [&>p]:overflow-hidden [&>p]:text-ellipsis">{`${description}`}</MarkDown>
       </StyledTD>
     </tr>
   );
