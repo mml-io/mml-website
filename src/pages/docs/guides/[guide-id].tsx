@@ -54,7 +54,16 @@ const GuidePage = ({ guideId }: { guideId: string }) => {
               <Body />
             </div>
           </main>
-          <LinkList elementList={["CodeSandbox", "Glitch", "Digital Ocean", "Heroku", "Railway"]} />
+          <LinkList
+            elementList={[
+              "CodeSandbox",
+              "Glitch",
+              "Digital Ocean",
+              "Heroku",
+              "Railway",
+              "AWS Lightsail",
+            ]}
+          />
         </div>
       </div>
     </>
