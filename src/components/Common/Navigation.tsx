@@ -1,7 +1,9 @@
-import { createSchemaDefinition, eventsSchemaJSON, schemaJSON } from "@mml-io/mml-schema";
+import { createSchemaDefinition, schemaJSON } from "@mml-io/mml-schema";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import * as React from "react";
+
+import { eventClasses } from "@/src/util/event-classes";
 
 const schemaDefinition = createSchemaDefinition(schemaJSON);
 
@@ -35,7 +37,7 @@ export default function Navigation() {
           })}
         <p className="mt-8 font-semibold">Events</p>
 
-        {eventsSchemaJSON.children.map((element) => {
+        {eventClasses.map((element) => {
           const isSelected = element.name === eventId;
 
           return (

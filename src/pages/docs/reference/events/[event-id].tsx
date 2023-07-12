@@ -1,4 +1,4 @@
-import { EventsClassSchemaType, eventsSchemaJSON, EventType } from "@mml-io/mml-schema";
+import { EventsClassSchemaType, EventType } from "@mml-io/mml-schema";
 import Head from "next/head";
 import Link from "next/link";
 import * as React from "react";
@@ -8,11 +8,13 @@ import { ReferenceType, ReflectionType } from "typedoc";
 import Breadcrumb from "@/src/components/Common/Breadcrumb";
 import LinkList from "@/src/components/Common/LinkList";
 import Navigation from "@/src/components/Common/Navigation";
+import TypeDocComment from "@/src/components/TypeDocComment";
+import { eventClasses } from "@/src/util/event-classes";
 
 // This function gets called at build time to generate all the files
 export function getStaticPaths() {
   // Call an external API endpoint to get posts
-  const elements = eventsSchemaJSON.children.map((element) => element.name);
+  const elements = eventClasses.map((element) => element.name);
 
   // Get the paths we want to pre-render based on elements
   const paths = elements.map((element) => ({
@@ -38,7 +40,7 @@ function isReference(type: { type: string }): type is ReferenceType {
 }
 
 function getEventClass(name: string) {
-  return eventsSchemaJSON.children.find((eventClass) => eventClass.name === name);
+  return eventClasses.find((eventClass) => eventClass.name === name);
 }
 
 const DocsPage = ({ eventId }: { eventId: string }) => {
@@ -236,16 +238,6 @@ function TypeDocType(props: { type: EventType | ReflectionType | ReferenceType; 
     return <div>Literal: {type.value.toString()}</div>;
   }
   return <div>Unknown type</div>;
-}
-
-function TypeDocComment(props: { comment: { summary: { text: string }[] } }) {
-  return (
-    <>
-      {props.comment.summary.map((descriptionText, index) => (
-        <ReactMarkdown key={index}>{descriptionText.text}</ReactMarkdown>
-      ))}
-    </>
-  );
 }
 
 export default DocsPage;

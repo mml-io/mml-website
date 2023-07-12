@@ -1,7 +1,7 @@
-import { eventsSchemaJSON } from "@mml-io/mml-schema";
 import * as React from "react";
 
 import { DocsRow, DocsTableContainer } from "@/src/components/DocsTable";
+import { eventClasses } from "@/src/util/event-classes";
 
 const EventsTable = () => {
   return (
@@ -11,10 +11,10 @@ const EventsTable = () => {
       type="Events"
       className="mt-8"
     >
-      {eventsSchemaJSON.children.map((eventClass) => (
+      {eventClasses.map((eventClass) => (
         <DocsRow
           key={eventClass.name}
-          description={eventClass.name}
+          description={eventClass.comment}
           name={eventClass.name}
           link={`/docs/reference/events/${eventClass.name}`}
         />

@@ -88,19 +88,21 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
                   {descriptionText}
                 </MarkDown>
               ))}
-            <h2 className="mb-4 pt-16 text-[32px] font-medium" id="try it">
-              Try it
-            </h2>
             {primaryExample && (
-              <ExampleView
-                description="Demo"
-                key={`${referenceId}-primary`}
-                baseScene={
-                  primaryExample.baseSceneOn !== undefined ? primaryExample.baseSceneOn : true
-                }
-                code={primaryExample.code}
-                initialClientCount={1}
-              />
+              <>
+                <h2 className="mb-4 pt-16 text-[32px] font-medium" id="try it">
+                  Try it
+                </h2>
+                <ExampleView
+                  description="Demo"
+                  key={`${referenceId}-primary`}
+                  baseScene={
+                    primaryExample.baseSceneOn !== undefined ? primaryExample.baseSceneOn : true
+                  }
+                  code={primaryExample.code}
+                  initialClientCount={1}
+                />
+              </>
             )}
             {!!attributes.length && (
               <>

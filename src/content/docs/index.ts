@@ -11,6 +11,7 @@ import * as mLabel from "./m-label";
 import * as mLight from "./m-light";
 import * as mModel from "./m-model";
 import * as mPlane from "./m-plane";
+import * as mPositionProbe from "./m-position-probe";
 import * as mPrompt from "./m-prompt";
 import * as mSphere from "./m-sphere";
 import * as mVideo from "./m-video";
@@ -29,5 +30,6 @@ export const examples: DocsExamplesByTag = {
   "m-label": mLabel,
   "m-frame": mFrame,
   "m-prompt": mPrompt,
+  "m-position-probe": mPositionProbe,
   "m-image": mImage,
 };
