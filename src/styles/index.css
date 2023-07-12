@@ -134,7 +134,8 @@
   color: #608b4e !important;
 }
 
-.ClientContainer * {
+.ClientContainer {
   border: none !important;
   width: 100% !important;
+  color: black;
 }

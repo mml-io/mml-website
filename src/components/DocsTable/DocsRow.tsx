@@ -2,6 +2,7 @@ import Link from "next/link";
 import * as React from "react";
 
 import { tableBorder } from "@/src/components/DocsTable/DocsTableContainer";
+import TypeDocComment from "@/src/components/TypeDocComment";
 import { MarkDown } from "@/src/config/mdx";
 
 const StyledTD = ({ children, className }: { children: React.ReactNode; className?: string }) => {
@@ -12,13 +13,19 @@ const StyledTD = ({ children, className }: { children: React.ReactNode; classNam
   );
 };
 
+function isComment(
+  arg: string | string[] | { summary: { text: string }[] },
+): arg is { summary: { text: string }[] } {
+  return (arg as { summary: { text: string }[] }).summary !== undefined;
+}
+
 export function DocsRow({
   name,
   description,
   link,
 }: {
   name: string;
-  description: string | string[];
+  description?: string | string[] | { summary: { text: string }[] };
   link: string;
 }) {
   return (
@@ -31,7 +38,11 @@ export function DocsRow({
         </Link>
       </StyledTD>
       <StyledTD>
-        <MarkDown className="[&>p]:mt-0 [&>p]:overflow-hidden [&>p]:text-ellipsis">{`${description}`}</MarkDown>
+        {description && isComment(description) ? (
+          <TypeDocComment comment={description} />
+        ) : (
+          <MarkDown className="[&>p]:mt-0 [&>p]:overflow-hidden [&>p]:text-ellipsis">{`${description}`}</MarkDown>
+        )}
       </StyledTD>
     </tr>
   );
