@@ -115,7 +115,7 @@ Similarly to CodeSandbox, Glitch allows you to “remix” the MML Starter Proje
 
 # AWS Lightsail
 
-* *Disclaimer: Deploying the MML starter project in AWS Lightsail or any other self-managed VPS service has a lot of complexity involved, so please keep in mind this is **not** one of the Fast setup options, but a more permanent solution for those who may see usage for such permanency and full controll of the deployment environment.*
+* *Disclaimer: Deploying the MML starter project in AWS Lightsail or any other self-managed VPS service has a lot of complexity involved, so please keep in mind this is **not** one of the Fast setup options, but a more permanent solution for those who may see usage for such permanency and full control of the deployment environment.*
 ### How-to
 * If you don't have an AWS account, create one at: [https://aws.amazon.com](https://aws.amazon.com/)
 * Create a new Lightsail instance at [https://lightsail.aws.amazon.com](https://lightsail.aws.amazon.com). by clicking the `Create instance` button. Then you can select your instance plan (at the moment this guide was written, any plans to the $10 plan will allow you to use them for free for the first 3 months, and their specs are good enough to host the project). We recommend `Ubuntu Server 22.04 LTS` as the choice for the operating system, as will certainly offer everything you'll need, and due to its popularity, you'll have an easier time finding answers on how to manage it or installing further things you may want to use it for.
@@ -126,7 +126,7 @@ Similarly to CodeSandbox, Glitch allows you to “remix” the MML Starter Proje
 
 * Update your Linux distribution through the following command:
 ```bash
-sudo apt udate && sudo apt upgrade
+sudo apt update && sudo apt upgrade
 ```
 
 
@@ -158,7 +158,7 @@ npm run iterate
 
 * There are a few extra steps so you can access your Starter Project. The first one is getting a static IP address for your LightSail Instance, which you can do by clicking a `Create static IP` button at the [Networking](https://lightsail.aws.amazon.com/ls/webapp/home/networking) tab.
 
-* The second one is to allow the connections to port 8080 (which is the port the Starter Project uses to receive incoming connections). To do so, you can do to your Instances tab, click on the three dots of your instance, click on Manage, go to the Networking tab, and add a new Custom Firewall rule to allow TCP connections to port `8080` *(please see the screenshots below)*.
+* The second one is to allow the connections to port `8080` (which is the port the Starter Project uses to receive incoming connections). To do so, you can do to your Instances tab, click on the three dots of your instance, click on Manage, go to the Networking tab, and add a new Custom Firewall rule to allow TCP connections to port `8080` *(please see the screenshots below)*.
 
 ![Manage your Instance - 01](/images/guides/aws-lightsail/manage-instance_1.png)
 
@@ -176,7 +176,7 @@ npm run iterate
 sudo apt install nginx
 ```
 
-* Prepare Nginx to proxy your default income connection at port 80 to port 8080 (the port the MML starter project listens to), by creating a configuration file at `/etc/nginx/sites-available/<YOUR_ROOT_DOMAIN>` with your favorite text editor. The content the configuration file should look like this:
+* Prepare Nginx to proxy your default income connection at port `80` to port `8080` (the port the MML starter project listens to), by creating a configuration file at `/etc/nginx/sites-available/<YOUR_ROOT_DOMAIN>` with your favorite text editor. The content the configuration file should look like this:
 ```nginx
 server {
     server_name <root_domain>;
@@ -234,6 +234,6 @@ At this point, you may access your app through: `https://<YOUR_ROOT_DOMAIN>/`
 ### Summary
 + Provides more compute resources than the sandbox options and should be more stable
 + More flexible and robust infrastructure that will allow you to securely host multiple applications with subdomains and SSL certificates
-+ You have full management controll over your VPS
++ You have full management control over your VPS
 - More complexity and efforts to setup
 - Requires more knowledge and experience in SysAdmin, managing servers, and Linux distributions
