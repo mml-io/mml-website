@@ -14,10 +14,10 @@
   "dependencies": {
     "@mdx-js/loader": "^2.3.0",
     "@mdx-js/react": "^2.3.0",
-    "mml-web": "^0.2.0",
-    "mml-web-runner": "^0.2.0",
-    "@mml-io/mml-schema": "^0.2.0",
-    "@mml-io/networked-dom-document": "^0.2.0",
+    "mml-web": "^0.3.0",
+    "mml-web-runner": "^0.3.0",
+    "@mml-io/mml-schema": "^0.3.0",
+    "@mml-io/networked-dom-document": "^0.3.0",
     "@next/mdx": "^13.4.2",
     "codemirror": "^5.65.13",
     "eslint": "8.39.0",
@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "canvas": "^2.11.2",
-    "@mml-io/mml-schema-validator": "^0.2.0",
+    "@mml-io/mml-schema-validator": "^0.3.0",
     "@monaco-editor/react": "^4.5.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
