@@ -2,6 +2,7 @@ import { EventsClassSchemaType, EventType } from "@mml-io/mml-schema";
 import Head from "next/head";
 import Link from "next/link";
 import * as React from "react";
+import { Fragment } from "react";
 import ReactMarkdown from "react-markdown";
 import { ReferenceType, ReflectionType } from "typedoc";
 
@@ -9,6 +10,7 @@ import Breadcrumb from "@/src/components/Common/Breadcrumb";
 import LinkList from "@/src/components/Common/LinkList";
 import Navigation from "@/src/components/Common/Navigation";
 import TypeDocComment from "@/src/components/TypeDocComment";
+import { getPageTitle } from "@/src/util";
 import { eventClasses } from "@/src/util/event-classes";
 
 // This function gets called at build time to generate all the files
@@ -58,10 +60,10 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
     }
   }
 
-  const createTypeLink = (type: string) => {
+  const createTypeLink = (type: string, index: number) => {
     if (getEventClass(type)) {
       return (
-        <Link className="text-xl text-primary" href={`/docs/reference/events/${type}`}>
+        <Link key={index} className="text-xl text-primary" href={`/docs/reference/events/${type}`}>
           {type}
         </Link>
       );
@@ -80,9 +82,7 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
           { name: "Events", path: "events" },
         ]}
       />
-      <Head>
-        <title>{eventClassDefinition.name} - MML</title>
-      </Head>
+      <Head>{getPageTitle(eventClassDefinition.name)}</Head>
       <div className="mx-auto max-w-[450px] sm:max-w-[575px] sm:px-0 md:max-w-[768px] lg:max-w-[992px] xl:max-w-[1200px] 2xl:max-w-[1300px]">
         <div className="flex w-full">
           <Navigation />
@@ -160,22 +160,22 @@ function TypeDocType(props: { type: EventType | ReflectionType | ReferenceType; 
           <span>
             {`\n         `}
             {type.types.map((type: any, index) => (
-              <>
+              <Fragment key={index}>
                 <span className="text-primary">{`${index ? "\n         " : ""}${
                   type.declaration.children[0].name
                 }`}</span>
                 {`: ${type.declaration.children[0].type.name}`}
-              </>
+              </Fragment>
             ))}
             {"\n}"}
           </span>
         </div>
         <div className="mt-4">
           <h2 className="mb-2 text-lg font-medium">Type declaration</h2>
-          {type.types.map((type: any) => {
+          {type.types.map((type: any, index: number) => {
             const dec = type.declaration.children[0];
             return (
-              <>
+              <Fragment key={index}>
                 <ul className="mb-4 ml-12 flex ">
                   <li className="list-disc text-primary">{dec.name}: &nbsp;</li>
                   <TypeDocType type={dec.type} />
@@ -183,7 +183,7 @@ function TypeDocType(props: { type: EventType | ReflectionType | ReferenceType; 
                 <div className="mb-4 ml-8">
                   {dec.comment && <TypeDocComment comment={dec.comment} />}
                 </div>
-              </>
+              </Fragment>
             );
           })}
         </div>
@@ -194,9 +194,9 @@ function TypeDocType(props: { type: EventType | ReflectionType | ReferenceType; 
       <div>
         <h2>Union</h2>
         <ul>
-          {type.types.map((type) => {
+          {type.types.map((type, index) => {
             return (
-              <li className={"mb-4 ml-3"}>
+              <li className={"mb-4 ml-3"} key={index}>
                 <TypeDocType type={type} />
               </li>
             );
@@ -208,9 +208,9 @@ function TypeDocType(props: { type: EventType | ReflectionType | ReferenceType; 
     return (
       <div>
         <ul>
-          {type.declaration.children.map((dec) => {
+          {type.declaration.children.map((dec, index) => {
             return (
-              <li className={"mb-4"}>
+              <li className={"mb-4"} key={index}>
                 <div className="flex border-[1px] border-editor-border-dark p-4">
                   <h3 className="text-primary">{dec.name}: &nbsp;</h3>
                   <TypeDocType type={dec.type} />

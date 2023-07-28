@@ -27,7 +27,7 @@ export function ExamplePageExampleView(props: {
     null,
   );
   const clients = [...Array(props.initialClientCount || 1).keys()];
-  const [baseScene, setBaseScene] = useState<boolean>(props.baseScene);
+  const { baseScene } = props;
 
   useEffect(() => {
     const document = new EditableNetworkedDOM(
@@ -46,10 +46,6 @@ export function ExamplePageExampleView(props: {
   useEffect(() => {
     networkedDOMDocument?.load(createDocumentCode(code, baseScene));
   }, [code, baseScene]);
-
-  const toggleBaseScene = () => {
-    setBaseScene((lightOn) => !lightOn);
-  };
 
   const handleResetClick = useCallback(() => {
     setCode(props.code);
