@@ -66,10 +66,6 @@ export function AnimatedExampleView(props) {
     setResetKey((key) => key + 1);
   }, []);
 
-  const handleSphereClick = useCallback(() => {
-    setAppendCode(`<m-sphere color="red" radius="2" y="5" z="5"></m-sphere>`);
-  }, []);
-
   return (
     <AnimatedEditorContainer
       code={code}

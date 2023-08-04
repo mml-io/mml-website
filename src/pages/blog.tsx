@@ -3,12 +3,11 @@ import Link from "next/link";
 import * as React from "react";
 
 import { posts } from "@/src/content/blogPosts";
+import { getPageTitle } from "@/src/util";
 const DocsPage = () => {
   return (
     <>
-      <Head>
-        <title>Blog - MML</title>
-      </Head>
+      <Head>{getPageTitle("Blog")}</Head>
       <main className="mx-auto mt-32 max-w-[450px] px-4 sm:max-w-[575px] sm:px-0 md:max-w-[768px] lg:max-w-[992px] lg:max-w-[992px] xl:max-w-[1200px] 2xl:max-w-[1300px]">
         <h1 className="text-4xl font-semibold">Blog</h1>
         <div className="flex flex-wrap justify-center xl:justify-between">

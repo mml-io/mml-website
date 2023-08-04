@@ -10,6 +10,7 @@ import { Attribute } from "@/src/components/Docs/Attribute";
 import { AttributeGroup } from "@/src/components/Docs/AttributeGroup";
 import { MarkDown } from "@/src/config/mdx";
 import * as docsExamples from "@/src/content/docs";
+import { getPageTitle } from "@/src/util";
 
 // This function gets called at build time to generate all the files
 export function getStaticPaths() {
@@ -74,9 +75,7 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
           { name: "Elements", path: "elements" },
         ]}
       />
-      <Head>
-        <title>{elementDefinition.name} - MML</title>
-      </Head>
+      <Head>{getPageTitle(elementDefinition.name)}</Head>
       <div className="mx-auto max-w-[450px] sm:max-w-[575px] sm:px-0 md:max-w-[768px] lg:max-w-[992px] xl:max-w-[1200px] 2xl:max-w-[1300px]">
         <div className="flex w-full">
           <Navigation />

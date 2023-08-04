@@ -11,14 +11,12 @@ const LinkList = ({ elementList }: { elementList: string[] }) => {
           {elementList
             .filter((item) => !!item)
             .map((item) => (
-              <div>
-                <li
-                  key={item}
-                  className="flex h-10 items-center text-sm capitalize text-[#4E4E4E] dark:text-white"
-                >
-                  <a href={`#${item}`}>{item}</a>
-                </li>
-              </div>
+              <li
+                key={item}
+                className="flex h-10 items-center text-sm capitalize text-[#4E4E4E] dark:text-white"
+              >
+                <a href={`#${item}`}>{item}</a>
+              </li>
             ))}
         </ul>
       </nav>

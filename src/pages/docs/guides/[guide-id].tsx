@@ -4,6 +4,7 @@ import * as React from "react";
 import Breadcrumb from "@/src/components/Common/Breadcrumb";
 import LinkList from "@/src/components/Common/LinkList";
 import { guides } from "@/src/content/guides";
+import { getPageTitle } from "@/src/util";
 
 export function getStaticPaths() {
   // Call an external API endpoint to get posts
@@ -43,9 +44,7 @@ const GuidePage = ({ guideId }: { guideId: string }) => {
           { name: "Guides", path: "guides" },
         ]}
       />
-      <Head>
-        <title>{title} - MML</title>
-      </Head>
+      <Head>{getPageTitle(title)}</Head>
       <div className="mx-auto max-w-[450px] sm:max-w-[575px] sm:px-0 md:max-w-[768px] lg:max-w-[992px] xl:max-w-[1200px] 2xl:max-w-[1300px]">
         <div className="mr-4 flex w-full">
           <main className="w-full flex-1 px-4 sm:px-0 lg:mr-5 lg:flex-[1_0_766px]">

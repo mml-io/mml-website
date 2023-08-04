@@ -2,12 +2,12 @@ import Head from "next/head";
 import Link from "next/link";
 import * as React from "react";
 
+import { getPageTitle } from "@/src/util";
+
 const ErrorPage = () => {
   return (
     <>
-      <Head>
-        <title>Error - MML</title>
-      </Head>
+      <Head>{getPageTitle("Error")}</Head>
       <section className="relative z-10 pb-16 pt-36 md:pb-20 lg:pb-28 lg:pt-[180px]">
         <div className="container">
           <div className="-mx-4 flex flex-wrap">
