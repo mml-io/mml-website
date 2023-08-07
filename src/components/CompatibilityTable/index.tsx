@@ -72,12 +72,12 @@ export default function CompatibilityTable({ element }: { element: string }) {
     <table className="mt-10 w-full border-collapse border border-editor-border dark:border-editor-border-dark">
       <thead>
         <tr>
-          <th className="w-[10%] border-editor-border p-2 dark:border-editor-border-dark" />
+          <th className="border-editor-border p-2 dark:border-editor-border-dark" />
           {PLATFORMS.map((platform) => {
             return (
               <th
                 key={platform}
-                className="w-[45%] border-editor-border p-2 text-center dark:border-editor-border-dark"
+                className="w-[20%] border-editor-border p-2 text-center dark:border-editor-border-dark"
               >
                 {platform.toUpperCase()}
               </th>
@@ -106,6 +106,7 @@ export default function CompatibilityTable({ element }: { element: string }) {
                       style={{
                         borderBottomColor: isSelected ? "white" : undefined,
                         borderBottomWidth: isSelected ? "3px" : undefined,
+                        color: supported === undefined ? "gray" : supported ? "green" : "red",
                       }}
                       key={`${index}-${platform}-${name}`}
                       onClick={() => handleCellClick(lineIndex, index, description)}

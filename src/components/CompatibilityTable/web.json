@@ -1,5 +1,9 @@
 {
   "m-group": {
+    "m-group": {
+      "supported": true,
+      "description": "This element is currently supported"
+    },
     "debug": {
       "supported": true,
       "description": "This element is currently supported"
@@ -58,6 +62,10 @@
     }
   },
   "m-cube": {
+    "m-cube": {
+      "supported": true,
+      "description": "This element is currently supported"
+    },
     "width": {
       "supported": true,
       "description": "This element is currently supported"
@@ -160,6 +168,10 @@
     }
   },
   "m-sphere": {
+    "m-sphere": {
+      "supported": true,
+      "description": "This element is currently supported"
+    },
     "radius": {
       "supported": true,
       "description": "This element is currently supported"
@@ -254,6 +266,10 @@
     }
   },
   "m-cylinder": {
+    "m-cylinder": {
+      "supported": true,
+      "description": "This element is currently supported"
+    },
     "radius": {
       "supported": true,
       "description": "This element is currently supported"
@@ -344,6 +360,10 @@
     }
   },
   "m-light": {
+    "m-light": {
+      "supported": true,
+      "description": "This element is currently supported"
+    },
     "intensity": {
       "supported": true,
       "description": "This element is currently supported"
@@ -426,6 +446,10 @@
     }
   },
   "m-plane": {
+    "m-plane": {
+      "supported": true,
+      "description": "This element is currently supported"
+    },
     "width": {
       "supported": true,
       "description": "This element is currently supported"
@@ -520,6 +544,10 @@
     }
   },
   "m-model": {
+    "m-model": {
+      "supported": true,
+      "description": "This element is currently supported"
+    },
     "src": {
       "supported": true,
       "description": "This element is currently supported"
@@ -626,6 +654,10 @@
     }
   },
   "m-character": {
+    "m-character": {
+      "supported": true,
+      "description": "This element is currently supported"
+    },
     "src": {
       "supported": true,
       "description": "This element is currently supported"
@@ -732,6 +764,10 @@
     }
   },
   "m-frame": {
+    "m-frame": {
+      "supported": true,
+      "description": "This element is currently supported"
+    },
     "src": {
       "supported": true,
       "description": "This element is currently supported"
@@ -794,6 +830,10 @@
     }
   },
   "m-audio": {
+    "m-audio": {
+      "supported": true,
+      "description": "This element is currently supported"
+    },
     "src": {
       "supported": true,
       "description": "This element is currently supported"
@@ -872,6 +912,10 @@
     }
   },
   "m-image": {
+    "m-image": {
+      "supported": true,
+      "description": "This element is currently supported"
+    },
     "src": {
       "supported": true,
       "description": "This element is currently supported"
@@ -962,6 +1006,10 @@
     }
   },
   "m-video": {
+    "m-video": {
+      "supported": true,
+      "description": "This element is currently supported"
+    },
     "src": {
       "supported": true,
       "description": "This element is currently supported"
@@ -1072,6 +1120,10 @@
     }
   },
   "m-label": {
+    "m-label": {
+      "supported": true,
+      "description": "This element is currently supported"
+    },
     "content": {
       "supported": true,
       "description": "This element is currently supported"
@@ -1166,6 +1218,10 @@
     }
   },
   "m-position-probe": {
+    "m-position-probe": {
+      "supported": true,
+      "description": "This element is currently supported"
+    },
     "range": {
       "supported": true,
       "description": "This element is currently supported"
@@ -1240,6 +1296,10 @@
     }
   },
   "m-prompt": {
+    "m-prompt": {
+      "supported": true,
+      "description": "This element is currently supported"
+    },
     "message": {
       "supported": true,
       "description": "This element is currently supported"
@@ -1310,6 +1370,10 @@
     }
   },
   "m-interaction": {
+    "m-interaction": {
+      "supported": true,
+      "description": "This element is currently supported"
+    },
     "range": {
       "supported": true,
       "description": "This element is currently supported"
@@ -1388,68 +1452,73 @@
     }
   },
   "m-chat-probe": {
+    "m-chat-probe": {
+      "supported": false,
+      "description": "This element is currently unsupported"
+    },
     "radius": {
       "supported": false,
-      "description": "This element is currently not supported"
+      "description": "This element is currently unsupported"
     },
     "enabled": {
       "supported": false,
-      "description": "This element is currently not supported"
+      "description": "This element is currently unsupported"
     },
     "onchat": {
       "supported": false,
-      "description": "This element is currently not supported"
+      "description": "This element is currently unsupported"
     },
     "debug": {
-      "description": "This element may or may not be supported"
+      "supported": false,
+      "description": "This element is currently unsupported"
     },
     "x": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": "This element is currently unsupported"
     },
     "y": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": "This element is currently unsupported"
     },
     "z": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": "This element is currently unsupported"
     },
     "rx": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": "This element is currently unsupported"
     },
     "ry": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": "This element is currently unsupported"
     },
     "rz": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": "This element is currently unsupported"
     },
     "sx": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": "This element is currently unsupported"
     },
     "sy": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": "This element is currently unsupported"
     },
     "sz": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": "This element is currently unsupported"
     },
     "visible": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": "This element is currently unsupported"
     },
     "id": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": "This element is currently unsupported"
     },
     "class": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": "This element is currently unsupported"
     }
   }
 }
