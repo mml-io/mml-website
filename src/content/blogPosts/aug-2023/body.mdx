@@ -43,34 +43,34 @@ With the addition of collision events, an element can indicate that it should be
 ![MML Position Probe](/images/blog/aug-2023/position-probe.gif)
 The MML code for the position probe usage in this gif can be found [here](https://github.com/mml-io/mml-playground/blob/782c5078bbce4575c59c2ef8711920b0b35d6bfc/packages/server/examples/position-probe.html#L2).
 
-These capabilities are particularly interesting when considering that multiple users are affecting this state. With just a few lines of HTML and JavaScript you can create a *multi-user* 3D experience that responds to users’ walking on surfaces or moving near a point.
+These capabilities are particularly interesting when considering that multiple users are affecting this state. With just a few lines of HTML and JavaScript you can create a *multi-user* 3D experience that responds to users walking on surfaces or moving near a point.
 
 # React + MML
 
-Writing HTML and JavaScript for stateful content in an ergonomic way is the well-explored challenge of modern web development, and as MML is valid HTML, those tools can be used in much the same way to describe 3D interactive, multi-user, content.
+Writing HTML and JavaScript for stateful content in an ergonomic way is the well-explored challenge of modern web development, and as MML is valid HTML, those tools can be used in much the same way to describe 3D interactive, multi-user content.
 
 [React](https://react.dev/) is designed to make it easier to build complex, interactive UIs by breaking them down into smaller, reusable components. React can be used to describe the HTML/MML document that runs inside a NetworkedDOM server, and by running this document on a server that accepts WebSockets, you can have multiple users connect to the same single instance of the React document which can use all of the familiar React capabilities, but now with NetworkedDOM it can be synchronized to multiple users and have them all interact at once.
 
-You can use React hooks, add event listeners, create reusable components, and also include external libraries (as `react` itself is just a dependency) to build multi-user, interactive 3D experiences in a way that feels as familiar and as effective as building web pages with modern tooling.
+You can use React hooks, add event listeners, create reusable components, and also include external libraries (`react` itself is just a dependency) to build multi-user, interactive 3D experiences in a way that feels as familiar and as effective as building web pages with modern tooling.
 
-This React-based workflow was initially made available as part of the [MML React Starter project](https://github.com/mml-io/mml-react-starter-project). This project is a starting point for making an MML creation using React that is served on a WebSocket.
+This React-based workflow was initially made available as part of the [MML React Starter project](https://github.com/mml-io/mml-react-starter-project), which is a good starting point for making an MML creation using React that is served on a WebSocket.
 
 # React-based Multi-user 3D Web Experience
 
-MML is designed to enable the dynamic composition of interactive content into virtual worlds. This vision therefore benefits from virtual worlds that support MML being easier to make, and therefore the MML project included a web playground that allows users that join to see other users and dynamically add MML creations to the world.
+MML is designed to enable the dynamic composition of interactive content into virtual worlds. This vision therefore benefits from virtual worlds that support MML being easier to make, and therefore the MML project included a [web playground](https://github.com/mml-io/mml-playground) that allows users that join to see other users and dynamically add MML creations to the world.
 
 This web playground included the core of a 3D web experience that has now been extracted to packages that are open sourced at [github.com/mml-io/3d-web-experience](https://github.com/mml-io/3d-web-experience).
 
-As a result, the packages can be used as dependencies in other projects. The first project that uses these dependencies is [github.com/mml-io/mml-react-space](https://github.com/mml-io/mml-react-space). This project combines the React-based workflow for creating interactive MML content with the 3D web experience, and a multi-level modular building as a starting point.
+As a result, the packages can be used as dependencies in other projects. The first project that uses these dependencies is [github.com/mml-io/mml-react-space](https://github.com/mml-io/mml-react-space). This project combines the React-based workflow described above for creating interactive MML content with the 3D web experience, and a multi-level modular building with some interactive scenes to build on top of.
 
 Below is a video walkthrough of [github.com/mml-io/mml-react-space](https://github.com/mml-io/mml-react-space):
 <video controls={true} src="https://storage.googleapis.com/mml-public-content/mml-react-space.mp4"></video>
 
-This project is a great starting point to explore how a platform-independent web-based virtual world can work for an experience you may already have in mind. It can be run locally and self-hosted, and using MML you can easily add more content that can be interacted with in real-time by multiple users.
+This project is a great starting point to explore how a platform-independent web-based virtual world can work for an experience you may already have in mind. It can be run locally and be self-hosted, and using MML you can easily add more content that can be interacted with in real-time by multiple users.
 
 # What’s next?
 
-MML as a project represents a novel approach to interactive virtual objects and their composition into both virtual worlds and augmented reality. To further this exploration and expand usability the project is aiming to add more core capabilities, usage modes, and work with others to expand the venues in which creators and users can use MML.
+MML as a project represents a novel approach to interactive virtual objects and their composition into both virtual worlds and augmented reality. To further this exploration and expand usability, the project is aiming to add more core capabilities, usage modes, and work with others to expand the venues in which creators and users can use MML.
 There is a public backlog and project view [available on GitHub here](https://github.com/orgs/mml-io/projects/1).
 
 Here are some specific items that you might be interested in following:
