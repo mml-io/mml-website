@@ -7,7 +7,7 @@ const introducingMml: BlogPost = {
   description:
     "Check out what's been added since MML's initial release up to August 2023.",
   body,
-  image: "/images/blog/introducing-mml.jpeg",
+  image: "/images/blog/aug-2023.jpeg",
 };
 
 export default introducingMml;
