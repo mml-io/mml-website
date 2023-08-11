@@ -2,1523 +2,1523 @@
   "m-group": {
     "m-group": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "debug": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "x": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "y": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "z": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "rx": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "ry": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "rz": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sx": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sy": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sz": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "visible": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "id": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "class": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "onclick": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     }
   },
   "m-cube": {
     "m-cube": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "width": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "height": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "depth": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "opacity": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "debug": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "x": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "y": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "z": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "rx": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "ry": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "rz": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sx": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sy": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sz": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "visible": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "collide": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "collision-interval": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": "WIP, should be supported in the near future"
     },
     "oncollisionstart": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "oncollisionmove": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "oncollisionend": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "color": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "id": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "class": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported":  true,
+      "description": ""
     },
     "onclick": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "cast-shadows": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     }
   },
   "m-sphere": {
     "m-sphere": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "radius": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "opacity": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "debug": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "x": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "y": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "z": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "rx": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "ry": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "rz": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sx": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sy": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sz": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "visible": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "collide": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "collision-interval": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "oncollisionstart": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "oncollisionmove": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "oncollisionend": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "color": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "id": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "class": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported":  true,
+      "description": ""
     },
     "onclick": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "cast-shadows": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     }
   },
   "m-cylinder": {
     "m-cylinder": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "radius": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "height": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "debug": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "x": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "y": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "z": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "rx": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "ry": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "rz": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sx": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sy": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sz": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "visible": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "collide": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "collision-interval": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "oncollisionstart": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "oncollisionmove": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "oncollisionend": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "color": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "id": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "class": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported":  true,
+      "description": ""
     },
     "onclick": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     }
   },
   "m-light": {
     "m-light": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "intensity": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "distance": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "angle": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "enabled": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "type": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "debug": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "x": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "y": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "z": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "rx": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "ry": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "rz": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sx": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sy": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sz": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "visible": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "color": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "id": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "class": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported":  true,
+      "description": ""
     },
     "onclick": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     }
   },
   "m-plane": {
     "m-plane": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "width": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "height": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "debug": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "x": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "y": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "z": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "rx": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "ry": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "rz": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sx": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sy": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sz": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "visible": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "collide": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "collision-interval": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "oncollisionstart": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "oncollisionmove": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "oncollisionend": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "color": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "id": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "class": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported":  true,
+      "description": ""
     },
     "onclick": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "cast-shadows": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     }
   },
   "m-model": {
     "m-model": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "src": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "anim": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "anim-loop": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "anim-enabled": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "anim-start-time": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "anim-pause-time": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "debug": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "x": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "y": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "z": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "rx": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "ry": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "rz": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sx": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sy": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sz": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "visible": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "collide": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "collision-interval": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "oncollisionstart": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "oncollisionmove": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "oncollisionend": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "id": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "class": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported":  true,
+      "description": ""
     },
     "onclick": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "cast-shadows": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     }
   },
   "m-character": {
     "m-character": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": ""
     },
     "src": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": ""
     },
     "anim": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": ""
     },
     "anim-loop": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": ""
     },
     "anim-enabled": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": ""
     },
     "anim-start-time": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": ""
     },
     "anim-pause-time": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": ""
     },
     "debug": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": ""
     },
     "x": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": ""
     },
     "y": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": ""
     },
     "z": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": ""
     },
     "rx": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": ""
     },
     "ry": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": ""
     },
     "rz": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": ""
     },
     "sx": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": ""
     },
     "sy": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": ""
     },
     "sz": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": ""
     },
     "visible": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": ""
     },
     "collide": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": ""
     },
     "collision-interval": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": ""
     },
     "oncollisionstart": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": ""
     },
     "oncollisionmove": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": ""
     },
     "oncollisionend": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": ""
     },
     "id": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": ""
     },
     "class": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported":  true,
+      "description": ""
     },
     "onclick": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": ""
     },
     "cast-shadows": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": ""
     }
   },
   "m-frame": {
     "m-frame": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "src": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "debug": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "x": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "y": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "z": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "rx": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "ry": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "rz": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sx": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sy": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sz": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "visible": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "id": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "class": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported":  true,
+      "description": ""
     },
     "onclick": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": ""
     }
   },
   "m-audio": {
     "m-audio": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "src": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "loop": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "enabled": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "volume": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "start-time": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "pause-time": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "debug": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "x": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "y": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "z": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "rx": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "ry": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "rz": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sx": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sy": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sz": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "visible": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "id": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "class": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported":  true,
+      "description": ""
     }
   },
   "m-image": {
     "m-image": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "src": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "width": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "height": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "debug": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "x": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "y": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "z": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "rx": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "ry": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "rz": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sx": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sy": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sz": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "visible": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "collide": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "collision-interval": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "oncollisionstart": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "oncollisionmove": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "oncollisionend": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "id": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "class": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported":  true,
+      "description": ""
     },
     "cast-shadows": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     }
   },
   "m-video": {
     "m-video": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "src": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "width": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "height": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "loop": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "enabled": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "volume": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "start-time": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "pause-time": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "debug": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "x": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "y": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "z": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "rx": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "ry": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "rz": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sx": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sy": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sz": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "visible": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "collide": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "collision-interval": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "oncollisionstart": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "oncollisionmove": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "oncollisionend": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "id": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "class": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported":  true,
+      "description": ""
     },
     "cast-shadows": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     }
   },
   "m-label": {
     "m-label": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "content": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "width": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "height": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "font-size": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "font-color": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "padding": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "alignment": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "debug": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "x": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "y": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "z": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "rx": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "ry": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "rz": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sx": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sy": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sz": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "visible": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "color": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "id": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "class": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported":  true,
+      "description": ""
     },
     "onclick": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "cast-shadows": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     }
   },
   "m-position-probe": {
     "m-position-probe": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "range": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "interval": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "onpositionenter": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "onpositionmove": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "onpositionleave": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "debug": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "x": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "y": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "z": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "rx": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "ry": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "rz": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sx": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sy": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sz": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "visible": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "id": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "class": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported":  true,
+      "description": ""
     }
   },
   "m-prompt": {
     "m-prompt": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "message": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "placeholder": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "prefill": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "onprompt": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "debug": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "x": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "y": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "z": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "rx": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "ry": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "rz": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sx": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sy": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sz": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "visible": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "id": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "class": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported":  true,
+      "description": ""
     }
   },
   "m-interaction": {
     "m-interaction": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "range": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "in-focus": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": ""
     },
     "line-of-sight": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported": false,
+      "description": ""
     },
     "priority": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "prompt": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "oninteract": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "debug": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "x": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "y": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "z": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "rx": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "ry": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "rz": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sx": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sy": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sz": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "visible": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "id": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "class": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported":  true,
+      "description": ""
     }
   },
   "m-chat-probe": {
     "m-chat-probe": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "radius": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "enabled": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "onchat": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "debug": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "x": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "y": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "z": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "rx": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "ry": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "rz": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sx": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sy": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "sz": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "visible": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "id": {
       "supported": true,
-      "description": "This element is currently supported"
+      "description": ""
     },
     "class": {
-      "supported": true,
-      "description": "This element is currently supported"
+      "supported":  true,
+      "description": ""
     }
   }
 }

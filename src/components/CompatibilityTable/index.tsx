@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import * as React from "react";
+import { twMerge } from "tailwind-merge";
 
 import unrealJSON from "./unreal.json";
 import webJSON from "./web.json";
@@ -44,6 +45,12 @@ function getItemsLists(element: string): {
   });
 }
 
+const ICON_COLORS = {
+  true: "green",
+  false: "red",
+  undefined: "gray",
+};
+
 export default function CompatibilityTable({ element }: { element: string }) {
   const [itemsList, setItemsList] = useState(getItemsLists(element));
   const [openRowNumber, setOpenRowNumber] = useState(null);
@@ -59,7 +66,7 @@ export default function CompatibilityTable({ element }: { element: string }) {
   }, [element]);
 
   function handleCellClick(lineIndex: number, index: number, description) {
-    if (selected[0] === lineIndex && selected[1] === index) {
+    if ((selected[0] === lineIndex && selected[1] === index) || !description) {
       return;
     }
 
@@ -77,7 +84,7 @@ export default function CompatibilityTable({ element }: { element: string }) {
             return (
               <th
                 key={platform}
-                className="w-[20%] border-editor-border p-2 text-center dark:border-editor-border-dark"
+                className="w-[40%] border-editor-border p-2 text-center dark:border-editor-border-dark"
               >
                 {platform.toUpperCase()}
               </th>
@@ -102,16 +109,20 @@ export default function CompatibilityTable({ element }: { element: string }) {
 
                   return (
                     <td
-                      className={`box-border cursor-pointer border border-editor-border p-2 text-center hover:border-b-4 hover:border-b-white dark:border-editor-border-dark`}
+                      className={twMerge(
+                        "box-border border border-editor-border p-2 text-center dark:border-editor-border-dark",
+                        description && "cursor-pointer hover:border-b-4 hover:border-b-white",
+                        isSelected && "border-b-[3px] text-white",
+                        `text-${ICON_COLORS[supported]}`,
+                      )}
                       style={{
-                        borderBottomColor: isSelected ? "white" : undefined,
-                        borderBottomWidth: isSelected ? "3px" : undefined,
                         color: supported === undefined ? "gray" : supported ? "green" : "red",
                       }}
                       key={`${index}-${platform}-${name}`}
                       onClick={() => handleCellClick(lineIndex, index, description)}
                     >
                       {supported === undefined ? "?" : supported ? "✓" : "✗"}
+                      {description && "*"}
                     </td>
                   );
                 })}
