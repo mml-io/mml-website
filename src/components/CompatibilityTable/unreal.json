@@ -135,16 +135,16 @@
       "description": "WIP, should be supported in the near future"
     },
     "oncollisionstart": {
-      "supported": true,
-      "description": ""
+      "supported": false,
+      "description": "WIP, should be supported in the near future"
     },
     "oncollisionmove": {
-      "supported": true,
-      "description": ""
+      "supported": false,
+      "description": "WIP, should be supported in the near future"
     },
     "oncollisionend": {
-      "supported": true,
-      "description": ""
+      "supported": false,
+      "description": "WIP, should be supported in the near future`"
     },
     "color": {
       "supported": true,
@@ -155,7 +155,7 @@
       "description": ""
     },
     "class": {
-      "supported":  true,
+      "supported": true,
       "description": ""
     },
     "onclick": {
@@ -229,20 +229,20 @@
       "description": ""
     },
     "collision-interval": {
-      "supported": true,
-      "description": ""
+      "supported": false,
+      "description": "WIP, should be supported in the near future"
     },
     "oncollisionstart": {
-      "supported": true,
-      "description": ""
+      "supported": false,
+      "description": "WIP, should be supported in the near future"
     },
     "oncollisionmove": {
-      "supported": true,
-      "description": ""
+      "supported": false,
+      "description": "WIP, should be supported in the near future"
     },
     "oncollisionend": {
-      "supported": true,
-      "description": ""
+      "supported": false,
+      "description": "WIP, should be supported in the near future`"
     },
     "color": {
       "supported": true,
@@ -253,7 +253,7 @@
       "description": ""
     },
     "class": {
-      "supported":  true,
+      "supported": true,
       "description": ""
     },
     "onclick": {
@@ -327,20 +327,20 @@
       "description": ""
     },
     "collision-interval": {
-      "supported": true,
-      "description": ""
+      "supported": false,
+      "description": "WIP, should be supported in the near future"
     },
     "oncollisionstart": {
-      "supported": true,
-      "description": ""
+      "supported": false,
+      "description": "WIP, should be supported in the near future"
     },
     "oncollisionmove": {
-      "supported": true,
-      "description": ""
+      "supported": false,
+      "description": "WIP, should be supported in the near future"
     },
     "oncollisionend": {
-      "supported": true,
-      "description": ""
+      "supported": false,
+      "description": "WIP, should be supported in the near future`"
     },
     "color": {
       "supported": true,
@@ -351,7 +351,7 @@
       "description": ""
     },
     "class": {
-      "supported":  true,
+      "supported": true,
       "description": ""
     },
     "onclick": {
@@ -437,7 +437,7 @@
       "description": ""
     },
     "class": {
-      "supported":  true,
+      "supported": true,
       "description": ""
     },
     "onclick": {
@@ -507,20 +507,20 @@
       "description": ""
     },
     "collision-interval": {
-      "supported": true,
-      "description": ""
+      "supported": false,
+      "description": "WIP, should be supported in the near future"
     },
     "oncollisionstart": {
-      "supported": true,
-      "description": ""
+      "supported": false,
+      "description": "WIP, should be supported in the near future"
     },
     "oncollisionmove": {
-      "supported": true,
-      "description": ""
+      "supported": false,
+      "description": "WIP, should be supported in the near future"
     },
     "oncollisionend": {
-      "supported": true,
-      "description": ""
+      "supported": false,
+      "description": "WIP, should be supported in the near future`"
     },
     "color": {
       "supported": true,
@@ -531,7 +531,7 @@
       "description": ""
     },
     "class": {
-      "supported":  true,
+      "supported": true,
       "description": ""
     },
     "onclick": {
@@ -621,27 +621,27 @@
       "description": ""
     },
     "collision-interval": {
-      "supported": true,
-      "description": ""
+      "supported": false,
+      "description": "WIP, should be supported in the near future"
     },
     "oncollisionstart": {
-      "supported": true,
-      "description": ""
+      "supported": false,
+      "description": "WIP, should be supported in the near future"
     },
     "oncollisionmove": {
-      "supported": true,
-      "description": ""
+      "supported": false,
+      "description": "WIP, should be supported in the near future"
     },
     "oncollisionend": {
-      "supported": true,
-      "description": ""
+      "supported": false,
+      "description": "WIP, should be supported in the near future`"
     },
     "id": {
       "supported": true,
       "description": ""
     },
     "class": {
-      "supported":  true,
+      "supported": true,
       "description": ""
     },
     "onclick": {
@@ -732,26 +732,26 @@
     },
     "collision-interval": {
       "supported": false,
-      "description": ""
+      "description": "WIP, should be supported in the near future"
     },
     "oncollisionstart": {
       "supported": false,
-      "description": ""
+      "description": "WIP, should be supported in the near future"
     },
     "oncollisionmove": {
       "supported": false,
-      "description": ""
+      "description": "WIP, should be supported in the near future"
     },
     "oncollisionend": {
       "supported": false,
-      "description": ""
+      "description": "WIP, should be supported in the near future`"
     },
     "id": {
       "supported": false,
       "description": ""
     },
     "class": {
-      "supported":  true,
+      "supported": true,
       "description": ""
     },
     "onclick": {
@@ -821,7 +821,7 @@
       "description": ""
     },
     "class": {
-      "supported":  true,
+      "supported": true,
       "description": ""
     },
     "onclick": {
@@ -907,7 +907,7 @@
       "description": ""
     },
     "class": {
-      "supported":  true,
+      "supported": true,
       "description": ""
     }
   },
@@ -977,27 +977,27 @@
       "description": ""
     },
     "collision-interval": {
-      "supported": true,
-      "description": ""
+      "supported": false,
+      "description": "WIP, should be supported in the near future"
     },
     "oncollisionstart": {
-      "supported": true,
-      "description": ""
+      "supported": false,
+      "description": "WIP, should be supported in the near future"
     },
     "oncollisionmove": {
-      "supported": true,
-      "description": ""
+      "supported": false,
+      "description": "WIP, should be supported in the near future"
     },
     "oncollisionend": {
-      "supported": true,
-      "description": ""
+      "supported": false,
+      "description": "WIP, should be supported in the near future`"
     },
     "id": {
       "supported": true,
       "description": ""
     },
     "class": {
-      "supported":  true,
+      "supported": true,
       "description": ""
     },
     "cast-shadows": {
@@ -1091,27 +1091,27 @@
       "description": ""
     },
     "collision-interval": {
-      "supported": true,
-      "description": ""
+      "supported": false,
+      "description": "WIP, should be supported in the near future"
     },
     "oncollisionstart": {
-      "supported": true,
-      "description": ""
+      "supported": false,
+      "description": "WIP, should be supported in the near future"
     },
     "oncollisionmove": {
-      "supported": true,
-      "description": ""
+      "supported": false,
+      "description": "WIP, should be supported in the near future"
     },
     "oncollisionend": {
-      "supported": true,
-      "description": ""
+      "supported": false,
+      "description": "WIP, should be supported in the near future`"
     },
     "id": {
       "supported": true,
       "description": ""
     },
     "class": {
-      "supported":  true,
+      "supported": true,
       "description": ""
     },
     "cast-shadows": {
@@ -1205,7 +1205,7 @@
       "description": ""
     },
     "class": {
-      "supported":  true,
+      "supported": true,
       "description": ""
     },
     "onclick": {
@@ -1291,7 +1291,7 @@
       "description": ""
     },
     "class": {
-      "supported":  true,
+      "supported": true,
       "description": ""
     }
   },
@@ -1365,7 +1365,7 @@
       "description": ""
     },
     "class": {
-      "supported":  true,
+      "supported": true,
       "description": ""
     }
   },
@@ -1447,7 +1447,7 @@
       "description": ""
     },
     "class": {
-      "supported":  true,
+      "supported": true,
       "description": ""
     }
   },
@@ -1517,7 +1517,7 @@
       "description": ""
     },
     "class": {
-      "supported":  true,
+      "supported": true,
       "description": ""
     }
   }

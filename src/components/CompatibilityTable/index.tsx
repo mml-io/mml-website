@@ -76,7 +76,7 @@ export default function CompatibilityTable({ element }: { element: string }) {
   }
 
   return (
-    <table className="mt-10 w-full border-collapse border border-editor-border dark:border-editor-border-dark">
+    <table className="mt-10 box-border w-full border-collapse border border-editor-border dark:border-editor-border-dark">
       <thead>
         <tr>
           <th className="border-editor-border p-2 dark:border-editor-border-dark" />
@@ -111,7 +111,8 @@ export default function CompatibilityTable({ element }: { element: string }) {
                     <td
                       className={twMerge(
                         "box-border border border-editor-border p-2 text-center dark:border-editor-border-dark",
-                        description && "cursor-pointer hover:border-b-4 hover:border-b-white",
+                        description &&
+                          "hover:border-b-gray cursor-pointer hover:border-b-4 dark:hover:border-b-white",
                         isSelected && "border-b-[3px] text-white",
                         `text-${ICON_COLORS[supported]}`,
                       )}
