@@ -6,6 +6,7 @@ import * as React from "react";
 import Breadcrumb from "@/src/components/Common/Breadcrumb";
 import LinkList from "@/src/components/Common/LinkList";
 import Navigation from "@/src/components/Common/Navigation";
+import CompatibilityTable from "@/src/components/CompatibilityTable";
 import { Attribute } from "@/src/components/Docs/Attribute";
 import { AttributeGroup } from "@/src/components/Docs/AttributeGroup";
 import { MarkDown } from "@/src/config/mdx";
@@ -157,6 +158,10 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
                 })}
               </>
             )}
+            <h2 id="compatibility" className="pt-16 text-[32px] font-medium">
+              Compatibility Table
+            </h2>
+            <CompatibilityTable element={elementDefinition.name} />
           </main>
           <LinkList
             elementList={[
@@ -164,6 +169,7 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
               attributes.length ? "attributes" : "",
               "attribute groups",
               "examples",
+              "compatibility",
             ]}
           />
         </div>

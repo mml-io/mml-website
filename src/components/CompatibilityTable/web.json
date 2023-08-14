@@ -1,0 +1,1524 @@
+{
+  "m-group": {
+    "m-group": {
+      "supported": true,
+      "description": ""
+    },
+    "debug": {
+      "supported": true,
+      "description": ""
+    },
+    "x": {
+      "supported": true,
+      "description": ""
+    },
+    "y": {
+      "supported": true,
+      "description": ""
+    },
+    "z": {
+      "supported": true,
+      "description": ""
+    },
+    "rx": {
+      "supported": true,
+      "description": ""
+    },
+    "ry": {
+      "supported": true,
+      "description": ""
+    },
+    "rz": {
+      "supported": true,
+      "description": ""
+    },
+    "sx": {
+      "supported": true,
+      "description": ""
+    },
+    "sy": {
+      "supported": true,
+      "description": ""
+    },
+    "sz": {
+      "supported": true,
+      "description": ""
+    },
+    "visible": {
+      "supported": true,
+      "description": ""
+    },
+    "id": {
+      "supported": true,
+      "description": ""
+    },
+    "class": {
+      "supported": true,
+      "description": ""
+    },
+    "onclick": {
+      "supported": true,
+      "description": ""
+    }
+  },
+  "m-cube": {
+    "m-cube": {
+      "supported": true,
+      "description": ""
+    },
+    "width": {
+      "supported": true,
+      "description": ""
+    },
+    "height": {
+      "supported": true,
+      "description": ""
+    },
+    "depth": {
+      "supported": true,
+      "description": ""
+    },
+    "opacity": {
+      "supported": true,
+      "description": ""
+    },
+    "debug": {
+      "supported": true,
+      "description": ""
+    },
+    "x": {
+      "supported": true,
+      "description": ""
+    },
+    "y": {
+      "supported": true,
+      "description": ""
+    },
+    "z": {
+      "supported": true,
+      "description": ""
+    },
+    "rx": {
+      "supported": true,
+      "description": ""
+    },
+    "ry": {
+      "supported": true,
+      "description": ""
+    },
+    "rz": {
+      "supported": true,
+      "description": ""
+    },
+    "sx": {
+      "supported": true,
+      "description": ""
+    },
+    "sy": {
+      "supported": true,
+      "description": ""
+    },
+    "sz": {
+      "supported": true,
+      "description": ""
+    },
+    "visible": {
+      "supported": true,
+      "description": ""
+    },
+    "collide": {
+      "supported": true,
+      "description": ""
+    },
+    "collision-interval": {
+      "supported": true,
+      "description": ""
+    },
+    "oncollisionstart": {
+      "supported": true,
+      "description": ""
+    },
+    "oncollisionmove": {
+      "supported": true,
+      "description": ""
+    },
+    "oncollisionend": {
+      "supported": true,
+      "description": ""
+    },
+    "color": {
+      "supported": true,
+      "description": ""
+    },
+    "id": {
+      "supported": true,
+      "description": ""
+    },
+    "class": {
+      "supported": true,
+      "description": ""
+    },
+    "onclick": {
+      "supported": true,
+      "description": ""
+    },
+    "cast-shadows": {
+      "supported": true,
+      "description": ""
+    }
+  },
+  "m-sphere": {
+    "m-sphere": {
+      "supported": true,
+      "description": ""
+    },
+    "radius": {
+      "supported": true,
+      "description": ""
+    },
+    "opacity": {
+      "supported": true,
+      "description": ""
+    },
+    "debug": {
+      "supported": true,
+      "description": ""
+    },
+    "x": {
+      "supported": true,
+      "description": ""
+    },
+    "y": {
+      "supported": true,
+      "description": ""
+    },
+    "z": {
+      "supported": true,
+      "description": ""
+    },
+    "rx": {
+      "supported": true,
+      "description": ""
+    },
+    "ry": {
+      "supported": true,
+      "description": ""
+    },
+    "rz": {
+      "supported": true,
+      "description": ""
+    },
+    "sx": {
+      "supported": true,
+      "description": ""
+    },
+    "sy": {
+      "supported": true,
+      "description": ""
+    },
+    "sz": {
+      "supported": true,
+      "description": ""
+    },
+    "visible": {
+      "supported": true,
+      "description": ""
+    },
+    "collide": {
+      "supported": true,
+      "description": ""
+    },
+    "collision-interval": {
+      "supported": true,
+      "description": ""
+    },
+    "oncollisionstart": {
+      "supported": true,
+      "description": ""
+    },
+    "oncollisionmove": {
+      "supported": true,
+      "description": ""
+    },
+    "oncollisionend": {
+      "supported": true,
+      "description": ""
+    },
+    "color": {
+      "supported": true,
+      "description": ""
+    },
+    "id": {
+      "supported": true,
+      "description": ""
+    },
+    "class": {
+      "supported": true,
+      "description": ""
+    },
+    "onclick": {
+      "supported": true,
+      "description": ""
+    },
+    "cast-shadows": {
+      "supported": true,
+      "description": ""
+    }
+  },
+  "m-cylinder": {
+    "m-cylinder": {
+      "supported": true,
+      "description": ""
+    },
+    "radius": {
+      "supported": true,
+      "description": ""
+    },
+    "height": {
+      "supported": true,
+      "description": ""
+    },
+    "debug": {
+      "supported": true,
+      "description": ""
+    },
+    "x": {
+      "supported": true,
+      "description": ""
+    },
+    "y": {
+      "supported": true,
+      "description": ""
+    },
+    "z": {
+      "supported": true,
+      "description": ""
+    },
+    "rx": {
+      "supported": true,
+      "description": ""
+    },
+    "ry": {
+      "supported": true,
+      "description": ""
+    },
+    "rz": {
+      "supported": true,
+      "description": ""
+    },
+    "sx": {
+      "supported": true,
+      "description": ""
+    },
+    "sy": {
+      "supported": true,
+      "description": ""
+    },
+    "sz": {
+      "supported": true,
+      "description": ""
+    },
+    "visible": {
+      "supported": true,
+      "description": ""
+    },
+    "collide": {
+      "supported": true,
+      "description": ""
+    },
+    "collision-interval": {
+      "supported": true,
+      "description": ""
+    },
+    "oncollisionstart": {
+      "supported": true,
+      "description": ""
+    },
+    "oncollisionmove": {
+      "supported": true,
+      "description": ""
+    },
+    "oncollisionend": {
+      "supported": true,
+      "description": ""
+    },
+    "color": {
+      "supported": true,
+      "description": ""
+    },
+    "id": {
+      "supported": true,
+      "description": ""
+    },
+    "class": {
+      "supported": true,
+      "description": ""
+    },
+    "onclick": {
+      "supported": true,
+      "description": ""
+    }
+  },
+  "m-light": {
+    "m-light": {
+      "supported": true,
+      "description": ""
+    },
+    "intensity": {
+      "supported": true,
+      "description": ""
+    },
+    "distance": {
+      "supported": true,
+      "description": ""
+    },
+    "angle": {
+      "supported": true,
+      "description": ""
+    },
+    "enabled": {
+      "supported": true,
+      "description": ""
+    },
+    "type": {
+      "supported": true,
+      "description": ""
+    },
+    "debug": {
+      "supported": true,
+      "description": ""
+    },
+    "x": {
+      "supported": true,
+      "description": ""
+    },
+    "y": {
+      "supported": true,
+      "description": ""
+    },
+    "z": {
+      "supported": true,
+      "description": ""
+    },
+    "rx": {
+      "supported": true,
+      "description": ""
+    },
+    "ry": {
+      "supported": true,
+      "description": ""
+    },
+    "rz": {
+      "supported": true,
+      "description": ""
+    },
+    "sx": {
+      "supported": true,
+      "description": ""
+    },
+    "sy": {
+      "supported": true,
+      "description": ""
+    },
+    "sz": {
+      "supported": true,
+      "description": ""
+    },
+    "visible": {
+      "supported": true,
+      "description": ""
+    },
+    "color": {
+      "supported": true,
+      "description": ""
+    },
+    "id": {
+      "supported": true,
+      "description": ""
+    },
+    "class": {
+      "supported": true,
+      "description": ""
+    },
+    "onclick": {
+      "supported": true,
+      "description": ""
+    }
+  },
+  "m-plane": {
+    "m-plane": {
+      "supported": true,
+      "description": ""
+    },
+    "width": {
+      "supported": true,
+      "description": ""
+    },
+    "height": {
+      "supported": true,
+      "description": ""
+    },
+    "debug": {
+      "supported": true,
+      "description": ""
+    },
+    "x": {
+      "supported": true,
+      "description": ""
+    },
+    "y": {
+      "supported": true,
+      "description": ""
+    },
+    "z": {
+      "supported": true,
+      "description": ""
+    },
+    "rx": {
+      "supported": true,
+      "description": ""
+    },
+    "ry": {
+      "supported": true,
+      "description": ""
+    },
+    "rz": {
+      "supported": true,
+      "description": ""
+    },
+    "sx": {
+      "supported": true,
+      "description": ""
+    },
+    "sy": {
+      "supported": true,
+      "description": ""
+    },
+    "sz": {
+      "supported": true,
+      "description": ""
+    },
+    "visible": {
+      "supported": true,
+      "description": ""
+    },
+    "collide": {
+      "supported": true,
+      "description": ""
+    },
+    "collision-interval": {
+      "supported": true,
+      "description": ""
+    },
+    "oncollisionstart": {
+      "supported": true,
+      "description": ""
+    },
+    "oncollisionmove": {
+      "supported": true,
+      "description": ""
+    },
+    "oncollisionend": {
+      "supported": true,
+      "description": ""
+    },
+    "color": {
+      "supported": true,
+      "description": ""
+    },
+    "id": {
+      "supported": true,
+      "description": ""
+    },
+    "class": {
+      "supported": true,
+      "description": ""
+    },
+    "onclick": {
+      "supported": true,
+      "description": ""
+    },
+    "cast-shadows": {
+      "supported": true,
+      "description": ""
+    }
+  },
+  "m-model": {
+    "m-model": {
+      "supported": true,
+      "description": ""
+    },
+    "src": {
+      "supported": true,
+      "description": ""
+    },
+    "anim": {
+      "supported": true,
+      "description": ""
+    },
+    "anim-loop": {
+      "supported": true,
+      "description": ""
+    },
+    "anim-enabled": {
+      "supported": true,
+      "description": ""
+    },
+    "anim-start-time": {
+      "supported": true,
+      "description": ""
+    },
+    "anim-pause-time": {
+      "supported": true,
+      "description": ""
+    },
+    "debug": {
+      "supported": true,
+      "description": ""
+    },
+    "x": {
+      "supported": true,
+      "description": ""
+    },
+    "y": {
+      "supported": true,
+      "description": ""
+    },
+    "z": {
+      "supported": true,
+      "description": ""
+    },
+    "rx": {
+      "supported": true,
+      "description": ""
+    },
+    "ry": {
+      "supported": true,
+      "description": ""
+    },
+    "rz": {
+      "supported": true,
+      "description": ""
+    },
+    "sx": {
+      "supported": true,
+      "description": ""
+    },
+    "sy": {
+      "supported": true,
+      "description": ""
+    },
+    "sz": {
+      "supported": true,
+      "description": ""
+    },
+    "visible": {
+      "supported": true,
+      "description": ""
+    },
+    "collide": {
+      "supported": true,
+      "description": ""
+    },
+    "collision-interval": {
+      "supported": true,
+      "description": ""
+    },
+    "oncollisionstart": {
+      "supported": true,
+      "description": ""
+    },
+    "oncollisionmove": {
+      "supported": true,
+      "description": ""
+    },
+    "oncollisionend": {
+      "supported": true,
+      "description": ""
+    },
+    "id": {
+      "supported": true,
+      "description": ""
+    },
+    "class": {
+      "supported": true,
+      "description": ""
+    },
+    "onclick": {
+      "supported": true,
+      "description": ""
+    },
+    "cast-shadows": {
+      "supported": true,
+      "description": ""
+    }
+  },
+  "m-character": {
+    "m-character": {
+      "supported": true,
+      "description": ""
+    },
+    "src": {
+      "supported": true,
+      "description": ""
+    },
+    "anim": {
+      "supported": true,
+      "description": ""
+    },
+    "anim-loop": {
+      "supported": true,
+      "description": ""
+    },
+    "anim-enabled": {
+      "supported": true,
+      "description": ""
+    },
+    "anim-start-time": {
+      "supported": true,
+      "description": ""
+    },
+    "anim-pause-time": {
+      "supported": true,
+      "description": ""
+    },
+    "debug": {
+      "supported": true,
+      "description": ""
+    },
+    "x": {
+      "supported": true,
+      "description": ""
+    },
+    "y": {
+      "supported": true,
+      "description": ""
+    },
+    "z": {
+      "supported": true,
+      "description": ""
+    },
+    "rx": {
+      "supported": true,
+      "description": ""
+    },
+    "ry": {
+      "supported": true,
+      "description": ""
+    },
+    "rz": {
+      "supported": true,
+      "description": ""
+    },
+    "sx": {
+      "supported": true,
+      "description": ""
+    },
+    "sy": {
+      "supported": true,
+      "description": ""
+    },
+    "sz": {
+      "supported": true,
+      "description": ""
+    },
+    "visible": {
+      "supported": true,
+      "description": ""
+    },
+    "collide": {
+      "supported": true,
+      "description": ""
+    },
+    "collision-interval": {
+      "supported": true,
+      "description": ""
+    },
+    "oncollisionstart": {
+      "supported": true,
+      "description": ""
+    },
+    "oncollisionmove": {
+      "supported": true,
+      "description": ""
+    },
+    "oncollisionend": {
+      "supported": true,
+      "description": ""
+    },
+    "id": {
+      "supported": true,
+      "description": ""
+    },
+    "class": {
+      "supported": true,
+      "description": ""
+    },
+    "onclick": {
+      "supported": true,
+      "description": ""
+    },
+    "cast-shadows": {
+      "supported": true,
+      "description": ""
+    }
+  },
+  "m-frame": {
+    "m-frame": {
+      "supported": true,
+      "description": ""
+    },
+    "src": {
+      "supported": true,
+      "description": ""
+    },
+    "debug": {
+      "supported": true,
+      "description": ""
+    },
+    "x": {
+      "supported": true,
+      "description": ""
+    },
+    "y": {
+      "supported": true,
+      "description": ""
+    },
+    "z": {
+      "supported": true,
+      "description": ""
+    },
+    "rx": {
+      "supported": true,
+      "description": ""
+    },
+    "ry": {
+      "supported": true,
+      "description": ""
+    },
+    "rz": {
+      "supported": true,
+      "description": ""
+    },
+    "sx": {
+      "supported": true,
+      "description": ""
+    },
+    "sy": {
+      "supported": true,
+      "description": ""
+    },
+    "sz": {
+      "supported": true,
+      "description": ""
+    },
+    "visible": {
+      "supported": true,
+      "description": ""
+    },
+    "id": {
+      "supported": true,
+      "description": ""
+    },
+    "class": {
+      "supported": true,
+      "description": ""
+    },
+    "onclick": {
+      "supported": true,
+      "description": ""
+    }
+  },
+  "m-audio": {
+    "m-audio": {
+      "supported": true,
+      "description": ""
+    },
+    "src": {
+      "supported": true,
+      "description": ""
+    },
+    "loop": {
+      "supported": true,
+      "description": ""
+    },
+    "enabled": {
+      "supported": true,
+      "description": ""
+    },
+    "volume": {
+      "supported": true,
+      "description": ""
+    },
+    "start-time": {
+      "supported": true,
+      "description": ""
+    },
+    "pause-time": {
+      "supported": true,
+      "description": ""
+    },
+    "debug": {
+      "supported": true,
+      "description": ""
+    },
+    "x": {
+      "supported": true,
+      "description": ""
+    },
+    "y": {
+      "supported": true,
+      "description": ""
+    },
+    "z": {
+      "supported": true,
+      "description": ""
+    },
+    "rx": {
+      "supported": true,
+      "description": ""
+    },
+    "ry": {
+      "supported": true,
+      "description": ""
+    },
+    "rz": {
+      "supported": true,
+      "description": ""
+    },
+    "sx": {
+      "supported": true,
+      "description": ""
+    },
+    "sy": {
+      "supported": true,
+      "description": ""
+    },
+    "sz": {
+      "supported": true,
+      "description": ""
+    },
+    "visible": {
+      "supported": true,
+      "description": ""
+    },
+    "id": {
+      "supported": true,
+      "description": ""
+    },
+    "class": {
+      "supported": true,
+      "description": ""
+    }
+  },
+  "m-image": {
+    "m-image": {
+      "supported": true,
+      "description": ""
+    },
+    "src": {
+      "supported": true,
+      "description": ""
+    },
+    "width": {
+      "supported": true,
+      "description": ""
+    },
+    "height": {
+      "supported": true,
+      "description": ""
+    },
+    "debug": {
+      "supported": true,
+      "description": ""
+    },
+    "x": {
+      "supported": true,
+      "description": ""
+    },
+    "y": {
+      "supported": true,
+      "description": ""
+    },
+    "z": {
+      "supported": true,
+      "description": ""
+    },
+    "rx": {
+      "supported": true,
+      "description": ""
+    },
+    "ry": {
+      "supported": true,
+      "description": ""
+    },
+    "rz": {
+      "supported": true,
+      "description": ""
+    },
+    "sx": {
+      "supported": true,
+      "description": ""
+    },
+    "sy": {
+      "supported": true,
+      "description": ""
+    },
+    "sz": {
+      "supported": true,
+      "description": ""
+    },
+    "visible": {
+      "supported": true,
+      "description": ""
+    },
+    "collide": {
+      "supported": true,
+      "description": ""
+    },
+    "collision-interval": {
+      "supported": true,
+      "description": ""
+    },
+    "oncollisionstart": {
+      "supported": true,
+      "description": ""
+    },
+    "oncollisionmove": {
+      "supported": true,
+      "description": ""
+    },
+    "oncollisionend": {
+      "supported": true,
+      "description": ""
+    },
+    "id": {
+      "supported": true,
+      "description": ""
+    },
+    "class": {
+      "supported": true,
+      "description": ""
+    },
+    "cast-shadows": {
+      "supported": true,
+      "description": ""
+    }
+  },
+  "m-video": {
+    "m-video": {
+      "supported": true,
+      "description": ""
+    },
+    "src": {
+      "supported": true,
+      "description": ""
+    },
+    "width": {
+      "supported": true,
+      "description": ""
+    },
+    "height": {
+      "supported": true,
+      "description": ""
+    },
+    "loop": {
+      "supported": true,
+      "description": ""
+    },
+    "enabled": {
+      "supported": true,
+      "description": ""
+    },
+    "volume": {
+      "supported": true,
+      "description": ""
+    },
+    "start-time": {
+      "supported": true,
+      "description": ""
+    },
+    "pause-time": {
+      "supported": true,
+      "description": ""
+    },
+    "debug": {
+      "supported": true,
+      "description": ""
+    },
+    "x": {
+      "supported": true,
+      "description": ""
+    },
+    "y": {
+      "supported": true,
+      "description": ""
+    },
+    "z": {
+      "supported": true,
+      "description": ""
+    },
+    "rx": {
+      "supported": true,
+      "description": ""
+    },
+    "ry": {
+      "supported": true,
+      "description": ""
+    },
+    "rz": {
+      "supported": true,
+      "description": ""
+    },
+    "sx": {
+      "supported": true,
+      "description": ""
+    },
+    "sy": {
+      "supported": true,
+      "description": ""
+    },
+    "sz": {
+      "supported": true,
+      "description": ""
+    },
+    "visible": {
+      "supported": true,
+      "description": ""
+    },
+    "collide": {
+      "supported": true,
+      "description": ""
+    },
+    "collision-interval": {
+      "supported": true,
+      "description": ""
+    },
+    "oncollisionstart": {
+      "supported": true,
+      "description": ""
+    },
+    "oncollisionmove": {
+      "supported": true,
+      "description": ""
+    },
+    "oncollisionend": {
+      "supported": true,
+      "description": ""
+    },
+    "id": {
+      "supported": true,
+      "description": ""
+    },
+    "class": {
+      "supported": true,
+      "description": ""
+    },
+    "cast-shadows": {
+      "supported": true,
+      "description": ""
+    }
+  },
+  "m-label": {
+    "m-label": {
+      "supported": true,
+      "description": ""
+    },
+    "content": {
+      "supported": true,
+      "description": ""
+    },
+    "width": {
+      "supported": true,
+      "description": ""
+    },
+    "height": {
+      "supported": true,
+      "description": ""
+    },
+    "font-size": {
+      "supported": true,
+      "description": ""
+    },
+    "font-color": {
+      "supported": true,
+      "description": ""
+    },
+    "padding": {
+      "supported": true,
+      "description": ""
+    },
+    "alignment": {
+      "supported": true,
+      "description": ""
+    },
+    "debug": {
+      "supported": true,
+      "description": ""
+    },
+    "x": {
+      "supported": true,
+      "description": ""
+    },
+    "y": {
+      "supported": true,
+      "description": ""
+    },
+    "z": {
+      "supported": true,
+      "description": ""
+    },
+    "rx": {
+      "supported": true,
+      "description": ""
+    },
+    "ry": {
+      "supported": true,
+      "description": ""
+    },
+    "rz": {
+      "supported": true,
+      "description": ""
+    },
+    "sx": {
+      "supported": true,
+      "description": ""
+    },
+    "sy": {
+      "supported": true,
+      "description": ""
+    },
+    "sz": {
+      "supported": true,
+      "description": ""
+    },
+    "visible": {
+      "supported": true,
+      "description": ""
+    },
+    "color": {
+      "supported": true,
+      "description": ""
+    },
+    "id": {
+      "supported": true,
+      "description": ""
+    },
+    "class": {
+      "supported": true,
+      "description": ""
+    },
+    "onclick": {
+      "supported": true,
+      "description": ""
+    },
+    "cast-shadows": {
+      "supported": true,
+      "description": ""
+    }
+  },
+  "m-position-probe": {
+    "m-position-probe": {
+      "supported": true,
+      "description": ""
+    },
+    "range": {
+      "supported": true,
+      "description": ""
+    },
+    "interval": {
+      "supported": true,
+      "description": ""
+    },
+    "onpositionenter": {
+      "supported": true,
+      "description": ""
+    },
+    "onpositionmove": {
+      "supported": true,
+      "description": ""
+    },
+    "onpositionleave": {
+      "supported": true,
+      "description": ""
+    },
+    "debug": {
+      "supported": true,
+      "description": ""
+    },
+    "x": {
+      "supported": true,
+      "description": ""
+    },
+    "y": {
+      "supported": true,
+      "description": ""
+    },
+    "z": {
+      "supported": true,
+      "description": ""
+    },
+    "rx": {
+      "supported": true,
+      "description": ""
+    },
+    "ry": {
+      "supported": true,
+      "description": ""
+    },
+    "rz": {
+      "supported": true,
+      "description": ""
+    },
+    "sx": {
+      "supported": true,
+      "description": ""
+    },
+    "sy": {
+      "supported": true,
+      "description": ""
+    },
+    "sz": {
+      "supported": true,
+      "description": ""
+    },
+    "visible": {
+      "supported": true,
+      "description": ""
+    },
+    "id": {
+      "supported": true,
+      "description": ""
+    },
+    "class": {
+      "supported": true,
+      "description": ""
+    }
+  },
+  "m-prompt": {
+    "m-prompt": {
+      "supported": true,
+      "description": ""
+    },
+    "message": {
+      "supported": true,
+      "description": ""
+    },
+    "placeholder": {
+      "supported": true,
+      "description": ""
+    },
+    "prefill": {
+      "supported": true,
+      "description": ""
+    },
+    "onprompt": {
+      "supported": true,
+      "description": ""
+    },
+    "debug": {
+      "supported": true,
+      "description": ""
+    },
+    "x": {
+      "supported": true,
+      "description": ""
+    },
+    "y": {
+      "supported": true,
+      "description": ""
+    },
+    "z": {
+      "supported": true,
+      "description": ""
+    },
+    "rx": {
+      "supported": true,
+      "description": ""
+    },
+    "ry": {
+      "supported": true,
+      "description": ""
+    },
+    "rz": {
+      "supported": true,
+      "description": ""
+    },
+    "sx": {
+      "supported": true,
+      "description": ""
+    },
+    "sy": {
+      "supported": true,
+      "description": ""
+    },
+    "sz": {
+      "supported": true,
+      "description": ""
+    },
+    "visible": {
+      "supported": true,
+      "description": ""
+    },
+    "id": {
+      "supported": true,
+      "description": ""
+    },
+    "class": {
+      "supported": true,
+      "description": ""
+    }
+  },
+  "m-interaction": {
+    "m-interaction": {
+      "supported": true,
+      "description": ""
+    },
+    "range": {
+      "supported": true,
+      "description": ""
+    },
+    "in-focus": {
+      "supported": true,
+      "description": ""
+    },
+    "line-of-sight": {
+      "supported": true,
+      "description": ""
+    },
+    "priority": {
+      "supported": true,
+      "description": ""
+    },
+    "prompt": {
+      "supported": true,
+      "description": ""
+    },
+    "oninteract": {
+      "supported": true,
+      "description": ""
+    },
+    "debug": {
+      "supported": true,
+      "description": ""
+    },
+    "x": {
+      "supported": true,
+      "description": ""
+    },
+    "y": {
+      "supported": true,
+      "description": ""
+    },
+    "z": {
+      "supported": true,
+      "description": ""
+    },
+    "rx": {
+      "supported": true,
+      "description": ""
+    },
+    "ry": {
+      "supported": true,
+      "description": ""
+    },
+    "rz": {
+      "supported": true,
+      "description": ""
+    },
+    "sx": {
+      "supported": true,
+      "description": ""
+    },
+    "sy": {
+      "supported": true,
+      "description": ""
+    },
+    "sz": {
+      "supported": true,
+      "description": ""
+    },
+    "visible": {
+      "supported": true,
+      "description": ""
+    },
+    "id": {
+      "supported": true,
+      "description": ""
+    },
+    "class": {
+      "supported": true,
+      "description": ""
+    }
+  },
+  "m-chat-probe": {
+    "m-chat-probe": {
+      "supported": false,
+      "description": "The m-chat-probe element is not yet supported in the web client."
+    },
+    "radius": {
+      "supported": false,
+      "description": "The m-chat-probe element is not yet supported in the web client."
+    },
+    "enabled": {
+      "supported": false,
+      "description": "The m-chat-probe element is not yet supported in the web client."
+    },
+    "onchat": {
+      "supported": false,
+      "description": "The m-chat-probe element is not yet supported in the web client."
+    },
+    "debug": {
+      "supported": false,
+      "description": "The m-chat-probe element is not yet supported in the web client."
+    },
+    "x": {
+      "supported": false,
+      "description": "The m-chat-probe element is not yet supported in the web client."
+    },
+    "y": {
+      "supported": false,
+      "description": "The m-chat-probe element is not yet supported in the web client."
+    },
+    "z": {
+      "supported": false,
+      "description": "The m-chat-probe element is not yet supported in the web client."
+    },
+    "rx": {
+      "supported": false,
+      "description": "The m-chat-probe element is not yet supported in the web client."
+    },
+    "ry": {
+      "supported": false,
+      "description": "The m-chat-probe element is not yet supported in the web client."
+    },
+    "rz": {
+      "supported": false,
+      "description": "The m-chat-probe element is not yet supported in the web client."
+    },
+    "sx": {
+      "supported": false,
+      "description": "The m-chat-probe element is not yet supported in the web client."
+    },
+    "sy": {
+      "supported": false,
+      "description": "The m-chat-probe element is not yet supported in the web client."
+    },
+    "sz": {
+      "supported": false,
+      "description": "The m-chat-probe element is not yet supported in the web client."
+    },
+    "visible": {
+      "supported": false,
+      "description": "The m-chat-probe element is not yet supported in the web client."
+    },
+    "id": {
+      "supported": false,
+      "description": "The m-chat-probe element is not yet supported in the web client."
+    },
+    "class": {
+      "supported": false,
+      "description": "The m-chat-probe element is not yet supported in the web client."
+    }
+  }
+}
