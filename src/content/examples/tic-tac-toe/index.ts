@@ -134,5 +134,6 @@ export const ticTacToe: Example = {
       });
     }
   }
-</script>`,
+</script>
+<m-light type="point" x="10" y="10" z="10"></m-light>`,
 };
