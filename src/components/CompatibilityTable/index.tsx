@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import * as React from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -96,8 +96,8 @@ export default function CompatibilityTable({ element }: { element: string }) {
         {itemsList.map((item, lineIndex) => {
           const name = Object.keys(item)[0];
           return (
-            <>
-              <tr key={name} className="border border-editor-border dark:border-editor-border-dark">
+            <Fragment key={name}>
+              <tr className="border border-editor-border dark:border-editor-border-dark">
                 <td className="border border-editor-border p-3 dark:border-editor-border-dark">
                   <code className="bg-[#F2F1F1] p-0.5 font-mono !text-[#0069C2] dark:bg-[#262626]">
                     {name}
@@ -139,7 +139,7 @@ export default function CompatibilityTable({ element }: { element: string }) {
                   </td>
                 </tr>
               )}
-            </>
+            </Fragment>
           );
         })}
       </tbody>
