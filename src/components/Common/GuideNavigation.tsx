@@ -12,7 +12,7 @@ export default function GuideNavigation() {
     "bg-[#0581DC19] border-l-[#0581DC] border-l-2 text-black dark:text-white pl-4";
 
   return (
-    <nav className="fixed left-10 hidden xl:block xl:w-[150px] 2xl:w-[300px]">
+    <nav className="fixed left-10 hidden xl:top-[220px] xl:block xl:h-[calc(100%-270px)] xl:w-[170px] xl:overflow-x-visible xl:overflow-y-scroll">
       <p className="mb-2 font-semibold">Guides</p>
       <ul>
         {Object.entries(guides).map((guide) => {

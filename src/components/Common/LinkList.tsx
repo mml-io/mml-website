@@ -4,7 +4,7 @@ const LinkList = ({ elementList }: { elementList: string[] }) => {
   if (!elementList?.length) return null;
 
   return (
-    <nav className="none right-2 top-60 xl:fixed xl:w-40 2xl:w-60">
+    <nav className="right-2 top-[220px] hidden xl:fixed xl:block xl:w-44 2xl:w-60">
       <p className="letter mb-3 tracking-[1.5px]">On this page</p>
       <ul className="border-l-2 border-l-[#CDCDCD] pl-[18px]">
         {elementList

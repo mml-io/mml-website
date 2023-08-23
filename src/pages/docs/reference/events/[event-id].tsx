@@ -83,7 +83,7 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
         ]}
       />
       <Head>{getPageTitle(eventClassDefinition.name)}</Head>
-      <div className="mx-auto max-w-[450px] sm:max-w-[575px] sm:px-0 md:max-w-[768px] lg:max-w-[992px] xl:max-w-[1200px] 2xl:max-w-[1300px]">
+      <main className="mx-auto w-full px-4 sm:px-0 lg:max-w-[800px]">
         <div className="flex w-full">
           <ReferenceNavigation />
           <main className="w-full flex-1 px-4 sm:px-0 lg:mr-5 lg:flex-[1_0_766px]">
@@ -144,7 +144,7 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
           </main>
           <LinkList elementList={["properties"]} />
         </div>
-      </div>
+      </main>
     </>
   );
 };

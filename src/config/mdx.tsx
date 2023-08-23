@@ -57,7 +57,7 @@ export const components = {
   ol: (props) => <ol className={`!mt-2 ${sharedBodyStyle}`} {...props} />,
   code: (props) => (
     <code
-      className={`!m-0 my-[1.12em] bg-[#F2F1F1] px-1 py-0.5 !text-[#e8912d] dark:bg-[#262626] ${sharedTextStyle}`}
+      className={`!m-0 my-[1.12em] bg-[#F2F1F1] px-1 py-0.5 text-base !text-[#e8912d] dark:bg-[#262626] ${sharedTextStyle}`}
       {...props}
     />
   ),
@@ -72,7 +72,7 @@ export const components = {
       <SyntaxHighlighter {...children.props} />
     </pre>
   ),
-  img: (props) => <img className="w-full" {...props} />,
+  img: (props) => <img className="mx-auto my-4" {...props} />,
 };
 
 export const MarkDown = (props: ReactMarkdownOptions) => (

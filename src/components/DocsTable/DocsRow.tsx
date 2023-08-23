@@ -41,7 +41,7 @@ export function DocsRow({
         {description && isComment(description) ? (
           <TypeDocComment comment={description} />
         ) : (
-          <MarkDown className="[&>p]:mt-0 [&>p]:overflow-hidden [&>p]:text-ellipsis">{`${description}`}</MarkDown>
+          <MarkDown className="text-base [&>*]:text-ellipsis [&>p]:mt-0 [&>p]:overflow-hidden [&>p]:font-mono">{`${description}`}</MarkDown>
         )}
       </StyledTD>
     </tr>

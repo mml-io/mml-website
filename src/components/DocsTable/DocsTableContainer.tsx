@@ -20,8 +20,8 @@ export function DocsTableContainer({
       <table className={`mt-6 ${tableBorder} w-full table-fixed border-collapse`}>
         <thead className={`h-10 ${tableBorder}`}>
           <tr>
-            <th className={`${tableBorder} w-[30%] pl-6 text-left md:w-[20%]`}>{type}</th>
-            <th className={`${tableBorder} pl-6 text-left`}>Description</th>
+            <th className={`${tableBorder} w-[40%] pl-6 text-left text-xs`}>{type}</th>
+            <th className={`${tableBorder} pl-6 text-left text-xs`}>Description</th>
           </tr>
         </thead>
         <tbody>{children}</tbody>
