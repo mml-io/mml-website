@@ -1,0 +1,113 @@
+// Why React // How to // Simple components // Reusability // Collisions // Position probe //
+Animations? // Typescript // What about other frameworks?
+
+## Why React?
+
+While the MML web client functions effectively with HTML and JavaScript, integrating it with React
+offers distinct advantages for dynamic and complex applications. React's component-based
+architecture promotes modular design and reusability, aligning well with MML's modular nature. It
+offers efficient state management, allowing for responsive UIs with real-time updates and smooth
+user experiences. The thriving React community provides a wealth of resources and solutions, while
+its testability and team collaboration benefits contribute to maintainable code. While both
+approaches are valid, using React enhances development efficiency, UI consistency, and application
+performance when working with MML.
+
+## How to
+
+To start working with react, we recommend using our
+[React starter project](https://github.com/mml-io/mml-react-starter-project) as a start. We will
+provide a more detailed guide in the future on how to use MML with any other frontend framework.
+Clone the repository and checkout the `empty-project-js` branch to follow along with this guide. Run
+`npm install` to install the dependencies and `npm run dev` to start the development server. You can
+then open the project in your browser at `http://localhost:20205`. The entry point for the
+application is `mml-document/src/index.js`.
+
+## Your first React component
+
+In `index.js` there is a simple React component that renders an empty scene with a `m-light` shining
+from the top. Let's try adding a few elements:
+
+```jsx
+function App() {
+  return (
+    <>
+      <Light />
+      <m-cube x={-4} y={5} z={3} width={1} height={2} depth={1} ry={10} color="red" />
+      <m-sphere x={0} y={5} z={3} radius={1} color="green" />
+      <m-cylinder x="4" y="5" z="3" radius="0.5" height="2" color="blue" />
+    </>
+  );
+}
+```
+
+As you can see from the code above, using MML with React is very simple. You can use any MML element
+and pass its attributes as props. There is no need to use camelCase for the attributes names and you
+can use strings for all values like on `m-cylinder`.
+
+We can use React hooks to add some interactivity to our scene. Let's add some logic to change the
+color of the cube when clicking on it
+
+```jsx
+function App() {
+  const [cubeColor, setCubeColor] = React.useState("red");
+
+  function handleCubeClick() {
+    setCubeColor(cubeColor === "red" ? "yellow" : "red");
+  }
+
+  return (
+    <>
+      <Light />
+      <m-cube
+        onClick={handleCubeClick}
+        x={-4}
+        y={5}
+        z={3}
+        width={1}
+        height={2}
+        depth={1}
+        ry={10}
+        color={cubeColor}
+      />
+      <m-sphere x={0} y={5} z={3} radius={1} color="green" />
+      <m-cylinder x="4" y="5" z="3" radius="0.5" height="2" color="blue" />
+    </>
+  );
+}
+```
+
+And there it is. Click on the cube and it will change its color. You can also use the `useEffect`
+hook to add some animation to the scene.
+
+```jsx
+function App() {
+  const [cubeColor, setCubeColor] = React.useState("red");
+  const [cylinderRy, setCylinderRy] = React.useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCylinderRy((Date.now() / 100) % 360);
+    }, 50);
+    return () => clearInterval(interval);
+  }, []);
+
+  function handleCubeClick() {
+    setCubeColor(cubeColor === "red" ? "yellow" : "red");
+  }
+
+  return (
+    <>
+      ...
+      <m-cylinder
+        x="4"
+        y="5"
+        z="3"
+        rx={cylinderRy}
+        radius="0.5"
+        height="2"
+        color="blue"
+      />
+    </>
+  );
+}
+```
