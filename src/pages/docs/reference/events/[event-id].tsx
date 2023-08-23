@@ -83,7 +83,7 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
         ]}
       />
       <Head>{getPageTitle(eventClassDefinition.name)}</Head>
-      <main className="mx-auto w-full px-4 sm:px-0 lg:max-w-[800px]">
+      <main className="mx-auto w-full px-4 lg:max-w-[800px] xl:px-0">
         <div className="flex w-full">
           <ReferenceNavigation />
           <main className="w-full flex-1 px-4 sm:px-0 lg:mr-5 lg:flex-[1_0_766px]">

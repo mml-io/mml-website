@@ -7,7 +7,7 @@ import { MarkDown } from "@/src/config/mdx";
 
 const StyledTD = ({ children, className }: { children: React.ReactNode; className?: string }) => {
   return (
-    <td className={`h-10 p-2 pl-6 ${tableBorder} ${className} overflow-hidden text-ellipsis`}>
+    <td className={`h-10 p-2 px-6 ${tableBorder} ${className} overflow-hidden text-ellipsis`}>
       {children}
     </td>
   );

@@ -6,15 +6,15 @@ import { twMerge } from "tailwind-merge";
 import SyntaxHighlighter from "@/src/components/Common/SyntaxHighlighter";
 
 const sharedTextStyle = "text-[#1B1B1B] dark:text-white";
-export const sharedBodyStyle = `text-base leading-[32px] font-mono ${sharedTextStyle}`;
+export const sharedBodyStyle = `text-base text-justify leading-[32px] font-mono ${sharedTextStyle}`;
 const sharedHeadingStyle = `font-medium font-mono ${sharedTextStyle}`;
 
 export const components = {
-  p: (props) => <p className={`${sharedBodyStyle} my-4 whitespace-pre-wrap`} {...props} />,
+  p: (props) => <p className={`${sharedBodyStyle} my-4`} {...props} />,
   h1: (props) => (
     <h1
       id={props.children.toLowerCase()}
-      className={`${sharedHeadingStyle} scroll-m-2 pt-[1em] text-4xl`}
+      className={`${sharedHeadingStyle} scroll-m-2 pt-[1em] text-4xl leading-normal`}
       {...props}
     />
   ),

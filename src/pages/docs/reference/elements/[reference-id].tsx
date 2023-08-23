@@ -79,7 +79,7 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
       <Head>{getPageTitle(elementDefinition.name)}</Head>
       <div>
         <ReferenceNavigation />
-        <main className="mx-auto w-full px-4 sm:px-0 lg:max-w-[800px]">
+        <main className="mx-auto w-full px-4 md:max-w-[800px] lg:px-0">
           <h1 className="text-4xl font-semibold uppercase">{elementDefinition.name}</h1>
           {elementDefinition.description &&
             elementDefinition.description.map((descriptionText, index) => (
