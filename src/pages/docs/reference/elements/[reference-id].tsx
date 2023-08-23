@@ -5,7 +5,7 @@ import * as React from "react";
 
 import Breadcrumb from "@/src/components/Common/Breadcrumb";
 import LinkList from "@/src/components/Common/LinkList";
-import Navigation from "@/src/components/Common/Navigation";
+import ReferenceNavigation from "@/src/components/Common/ReferenceNavigation";
 import CompatibilityTable from "@/src/components/CompatibilityTable";
 import { Attribute } from "@/src/components/Docs/Attribute";
 import { AttributeGroup } from "@/src/components/Docs/AttributeGroup";
@@ -77,102 +77,98 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
         ]}
       />
       <Head>{getPageTitle(elementDefinition.name)}</Head>
-      <div className="mx-auto max-w-[450px] sm:max-w-[575px] sm:px-0 md:max-w-[768px] lg:max-w-[992px] xl:max-w-[1200px] 2xl:max-w-[1300px]">
-        <div className="flex w-full">
-          <Navigation />
-          <main className="w-full flex-1 px-4 sm:px-0 lg:mr-5 lg:flex-[1_0_766px]">
-            <h1 className="mb-8 text-[40px] font-semibold uppercase">{elementDefinition.name}</h1>
-            {elementDefinition.description &&
-              elementDefinition.description.map((descriptionText, index) => (
-                <MarkDown className="mb-4" key={index}>
-                  {descriptionText}
-                </MarkDown>
-              ))}
-            {primaryExample && (
-              <>
-                <h2 className="mb-4 pt-16 text-[32px] font-medium" id="try it">
-                  Try it
-                </h2>
-                <ExampleView
-                  description="Demo"
-                  key={`${referenceId}-primary`}
-                  baseScene={
-                    primaryExample.baseSceneOn !== undefined ? primaryExample.baseSceneOn : true
-                  }
-                  code={primaryExample.code}
-                  initialClientCount={1}
-                />
-              </>
-            )}
-            {!!attributes.length && (
-              <>
-                <h2 id="attributes" className="mb-4 pt-16 text-[32px] font-medium">
-                  Attributes
-                </h2>
-                <code className="bg-gray-200 text-red-800 rounded p-1 font-mono">
-                  <ul>
-                    {attributes.map((attribute) => (
-                      <li key={attribute.name}>
-                        <Attribute attribute={attribute} />
-                      </li>
-                    ))}
-                  </ul>
-                </code>
-              </>
-            )}
-            {!!attributeGroups.length && (
-              <>
-                <h2 className="mb-4 pt-16 text-[32px] font-medium" id="attribute groups">
-                  Attribute Groups
-                </h2>
-                <code>
-                  <ul className="bg-gray-200 text-red-800 rounded p-1 font-mono">
-                    {attributeGroups.map((attributeGroup) => (
-                      <li key={attributeGroup}>
-                        <AttributeGroup attributeGroupName={attributeGroup} />
-                      </li>
-                    ))}
-                  </ul>
-                </code>
-              </>
-            )}
-            {filteredExamples.length > 0 && (
-              <>
-                <h2 id="examples" className="pt-16 text-[32px] font-medium">
-                  Examples
-                </h2>
-                {filteredExamples.map((exampleKey) => {
-                  const example = examplesForElement.examples[exampleKey];
-                  return (
-                    <div key={`${referenceId}-${example.title}`}>
-                      <h3 className="mt-8 text-[24px] font-medium">{example.title}</h3>
-                      <MarkDown>{`${example.description}`}</MarkDown>
-                      <ExampleView
-                        description={example.title}
-                        baseScene={example.baseSceneOn !== undefined ? example.baseSceneOn : true}
-                        code={example.code}
-                        initialClientCount={1}
-                      />
-                    </div>
-                  );
-                })}
-              </>
-            )}
-            <h2 id="compatibility" className="pt-16 text-[32px] font-medium">
-              Compatibility Table
-            </h2>
-            <CompatibilityTable element={elementDefinition.name} />
-          </main>
-          <LinkList
-            elementList={[
-              "try it",
-              attributes.length ? "attributes" : "",
-              "attribute groups",
-              "examples",
-              "compatibility",
-            ]}
-          />
-        </div>
+      <div>
+        <ReferenceNavigation />
+        <main className="mx-auto w-full px-4 sm:px-0 lg:max-w-[800px]">
+          <h1 className="text-4xl font-semibold uppercase">{elementDefinition.name}</h1>
+          {elementDefinition.description &&
+            elementDefinition.description.map((descriptionText, index) => (
+              <MarkDown className="mb-4" key={index}>
+                {descriptionText}
+              </MarkDown>
+            ))}
+          {primaryExample && (
+            <>
+              <h2 className="mb-4 scroll-m-20 text-3xl font-medium" id="try it">
+                Try it
+              </h2>
+              <ExampleView
+                description="Demo"
+                key={`${referenceId}-primary`}
+                baseScene={
+                  primaryExample.baseSceneOn !== undefined ? primaryExample.baseSceneOn : true
+                }
+                code={primaryExample.code}
+                initialClientCount={1}
+              />
+            </>
+          )}
+          {!!attributes.length && (
+            <>
+              <h2 id="attributes" className="mb-4 mt-6 scroll-m-20 text-3xl font-medium">
+                Attributes
+              </h2>
+              <code className="bg-gray-200 text-red-800 font-mono">
+                <ul>
+                  {attributes.map((attribute) => (
+                    <li key={attribute.name}>
+                      <Attribute attribute={attribute} />
+                    </li>
+                  ))}
+                </ul>
+              </code>
+            </>
+          )}
+          {!!attributeGroups.length && (
+            <>
+              <h2 className="mb-4 mt-6 scroll-m-20 text-3xl font-medium" id="attribute groups">
+                Attribute Groups
+              </h2>
+              <ul className="bg-gray-200 text-red-800 rounded p-1 font-mono">
+                {attributeGroups.map((attributeGroup) => (
+                  <li key={attributeGroup}>
+                    <AttributeGroup attributeGroupName={attributeGroup} />
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+          {filteredExamples.length > 0 && (
+            <>
+              <h2 id="examples" className="mb-4 mt-6 scroll-m-20 text-3xl font-medium">
+                Examples
+              </h2>
+              {filteredExamples.map((exampleKey) => {
+                const example = examplesForElement.examples[exampleKey];
+                return (
+                  <div key={`${referenceId}-${example.title}`}>
+                    <h3 className="mt-8 text-[24px] font-medium">{example.title}</h3>
+                    <MarkDown>{`${example.description}`}</MarkDown>
+                    <ExampleView
+                      description={example.title}
+                      baseScene={example.baseSceneOn !== undefined ? example.baseSceneOn : true}
+                      code={example.code}
+                      initialClientCount={1}
+                    />
+                  </div>
+                );
+              })}
+            </>
+          )}
+          <h2 id="compatibility" className="mb-4 mt-6 scroll-m-20 text-3xl font-medium">
+            Compatibility Table
+          </h2>
+          <CompatibilityTable element={elementDefinition.name} />
+        </main>
+        <LinkList
+          elementList={[
+            "try it",
+            attributes.length ? "attributes" : "",
+            "attribute groups",
+            "examples",
+            "compatibility",
+          ]}
+        />
       </div>
     </>
   );
