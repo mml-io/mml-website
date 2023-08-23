@@ -1,0 +1,294 @@
+## MML Collision Events
+
+Collision events provide a dynamic way for users to interact with MML elements, enabling a variety
+of interactive experiences. They are triggered based on user collisions in a 3D space. To activate
+the collisions, it's necessary to set the `collision-interval` attribute on the element.
+
+## Related attributes
+
+- **collision-interval**: Specifies the time interval (in milliseconds) at which collisions are
+  checked. Setting this attribute is mandatory to activate the collision events. A smaller number
+  means more frequent checks, but also more events being sent to the client which can impact
+  performance.
+
+## Related events
+
+These events are fired depending on the user's actions relative to the element:
+
+- [**collisionstart**](/docs/reference/events/MMLCollisionStartEvent): Triggers when a user collides
+  with the element. The callback receives an event object with the user's connectionId and position,
+  inside the property `detail`.
+
+```javascript
+  {
+    detail:  {
+       position: {
+          x: number,
+          y: number,
+          z: number
+       },
+       connectionId: number
+    }
+  }
+```
+
+- [**collisionmove**](/docs/reference/events/MMLCollisionMoveEvent): Triggers when a user moves
+  while colliding with an element. The callback receives an event object with the user's
+  connectionId and position, inside the property `detail`.
+
+```javascript
+{
+  detail:  {
+     position: {
+        x: number,
+        y: number,
+        z: number
+     },
+     connectionId: number
+  }
+}
+```
+
+- [**collisionend**](/docs/reference/events/MMLCollisionEndEvent): Triggers when a user stops
+  colliding with an element. The callback receives an event object with the user's connectionId and
+  position, inside the property `detail`.
+```javascript
+{
+  detail:  {
+     position: {
+        x: number,
+        y: number,
+        z: number
+     },
+     connectionId: number
+  }
+}
+```
+
+---
+
+## Basic example of element collision
+
+The example showcases platform that alters its color whenever a user steps on it.
+
+<video autoPlay={true} loop={true} muted>
+  <source src="/images/guides/collision-events/basic.mp4" type="video/mp4" />
+</video>
+
+```html
+<!--Basic example of element collision-->
+<m-cube
+  id="collision-ground"
+  y="0.2"
+  height="0.1"
+  width="3"
+  depth="3"
+  color="green"
+  collision-interval="100"
+></m-cube>
+
+<script>
+  const collisionGround = document.getElementById("collision-ground");
+
+  collisionGround.addEventListener("collisionstart", () => {
+    const colors = ["black", "blue", "green", "white", "red", "purple"];
+
+    const selectedColor = Math.floor(Math.random() * colors.length);
+
+    collisionGround.setAttribute("color", colors[selectedColor]);
+  });
+</script>
+```
+
+We have an `m-cube` shaped like a platform, with a `collision-interval` attribute. A `collisionstart` event listener is then attached to this cube. Once a user steps on it, the event listener triggers the callback function which randomly selects a color from an array of colors and sets it on the cube.
+
+---
+
+## Example with multiple users and disconnection events
+
+This example shows how to keep track of the number of user colliding with an element. It also shows how to handle disconnections.
+
+<video autoPlay={true} loop={true} muted>
+  <source src="/images/guides/collision-events/multiple-users.mp4" type="video/mp4" />
+</video>
+
+```html
+<!-- This label shows the number of users connected -->
+<m-label id="my-label" width="4" y="3" height="0.5" alignment="center"></m-label>
+<!-- This is a cube shaped like a platform -->
+<m-cube
+  id="collision-ground"
+  collision-interval="100"
+  y="0.1"
+  height="0.1"
+  width="3"
+  depth="3"
+  color="green"
+></m-cube>
+
+<script>
+  // Elements references
+  const collisionGround = document.getElementById("collision-ground");
+  const label = document.getElementById("my-label");
+
+  // This set will store the connectionId of users colliding with the element
+  let collidingUsers = new Set();
+
+  // This function updates the label with the number of users colliding
+  function updateLabel() {
+    const userCounter = collidingUsers.size;
+
+    label.setAttribute(
+      "content",
+      `${userCounter} user${userCounter === 1 ? "" : "s"} colliding`
+    );
+  }
+
+  updateLabel();
+
+  collisionGround.addEventListener("collisionstart", (event) => {
+    const { connectionId } = event.detail;
+    collidingUsers.add(connectionId);
+    updateLabel();
+  });
+
+  collisionGround.addEventListener("collisionend", (event) => {
+    const { connectionId } = event.detail;
+    collidingUsers.delete(connectionId);
+    updateLabel();
+  });
+
+  // We need to keep track of the disconnections to remove
+  // the corresponding connectionId from the set
+  window.addEventListener("disconnected", (event) => {
+    const { connectionId } = event.detail;
+    collidingUsers.delete(connectionId);
+    updateLabel();
+  });
+
+  collisionGround.addEventListener("collisionstart", handleCollisionStart);
+  collisionGround.addEventListener("collisionend", handleCollisionEnd);
+</script>
+```
+
+In this example we have the same platform as before, as well as an `m-label` that shows a message with the number of users connected. The main logic behind this example is the use of a JavaScript. Set object to store unique `connectionId` values. When a user steps on the platform, the `connectionId` in `detail` is added to the set. When a collision ends or the user disconnects, the corresponding connectionId is removed from the set. The user count is simply the size of this set.
+
+---
+
+## Advanced Example with collisionmove events
+
+This example shows a platform that keeps track of the position of users colliding with it and shows a cube for each user on the board nearby.
+
+<video autoPlay={true} loop={true} muted>
+  <source src="/images/guides/collision-events/advanced-moving.mp4" type="video/mp4" />
+</video>
+
+```html
+<!-- Define a larger cube where the user cubes will appear -->
+<m-cube id="users-panel" height="6" width="12" depth="0.1" y="4" z="-2">
+  <!-- This group will contain all the users cubes -->
+  <m-group rx="90" id="user-presence-holder"></m-group>
+</m-cube>
+
+<!-- Define a platform that detects collisions -->
+<m-cube
+  id="platform"
+  y="0.05"
+  height="0.1"
+  width="6"
+  depth="3"
+  color="green"
+  collision-interval="100"
+></m-cube>
+
+<script>
+  const platform = document.getElementById("platform");
+  const usersPanel = document.getElementById("users-panel");
+  const userPresenceHolder = document.getElementById("user-presence-holder");
+
+  // A map that will hold the user's connectionId and
+  // their associated cube on the users panel.
+  let standingUsers = new Map();
+
+  // A function to either fetch the existing cube representation
+  // for a user or create one.
+  function getOrCreateUser(connectionId, position) {
+    const user = standingUsers.get(connectionId);
+    if (user) {
+      user.position = position;
+      return user;
+    }
+
+    // Create a new cube to represent the user.
+    const userCube = document.createElement("m-cube");
+    userCube.setAttribute("collide", false);
+    userCube.setAttribute("width", 0.25);
+    userCube.setAttribute("height", 0.25);
+    userCube.setAttribute("depth", 0.25);
+    userCube.setAttribute(
+      "color",
+      `#${Math.floor(Math.random() * 0xffffff).toString(16)}`
+    );
+    userPresenceHolder.append(userCube);
+
+    const newUser = {
+      cube: userCube,
+      position,
+    };
+    standingUsers.set(connectionId, newUser);
+    return newUser;
+  }
+
+  // Function to set the cube's position based on the user's position
+  // on the platform.
+  function setCubePosition(connectionId, position) {
+    const user = getOrCreateUser(connectionId, position);
+    user.cube.setAttribute("x", position.x * 2);
+    user.cube.setAttribute("y", 0.2);
+    user.cube.setAttribute("z", position.z * 2);
+  }
+
+  // Remove user representation when they disconnect or stop colliding.
+  function clearUser(connectionId) {
+    const user = standingUsers.get(connectionId);
+    if (!user) return;
+    user.cube.remove();
+    standingUsers.delete(connectionId);
+  }
+
+  // When a user disconnects, their representation is cleared.
+  window.addEventListener("disconnected", (event) => {
+    const { connectionId } = event.detail;
+    clearUser(connectionId);
+  });
+
+  // When a collision starts, set the position of the cube representation.
+  function handleCollisionstart(e) {
+    const { connectionId, position } = event.detail;
+    setCubePosition(connectionId, position);
+  }
+
+  // Update cube position when the user moves while colliding.
+  function handleCollisionmove(e) {
+    const { connectionId, position } = event.detail;
+    setCubePosition(connectionId, position);
+  }
+
+  // Clear user representation when collision ends.
+  function handleCollisionend(e) {
+    const { connectionId } = event.detail;
+    clearUser(connectionId);
+  }
+
+  // Add the necessary event listeners to the platform.
+  platform.addEventListener("collisionstart", handleCollisionstart);
+  platform.addEventListener("collisionmove", handleCollisionmove);
+  platform.addEventListener("collisionend", handleCollisionend);
+</script>
+```
+
+In this example, the users' positions on the platform are visually represented on a display panel. The platform, a green `m-cube`, is designed to detect when users are in contact with it. On the other hand, the display panel, situated above the platform, serves as a visual feedback mechanism. As users come into contact with the platform, individual cubes appear on the display panel corresponding to each user's position. These cubes are not just static; they move on the panel based on the real-time movement of users on the platform.
+
+To ensure that each user has a distinct visual representation, every cube created is given a random color. The code first checks if a user already has a cube representation when they interact with the platform. If not, a new cube is created. If a user is already represented by a cube, then the cube's position is updated based on the user's current position on the platform.
+
+The system is designed to be responsive to users leaving the platform or disconnecting entirely. In such cases, the respective cubes disappear from the display panel, ensuring that the visual feedback is always up-to-date with real-time interactions.
