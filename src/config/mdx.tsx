@@ -6,7 +6,7 @@ import { twMerge } from "tailwind-merge";
 import SyntaxHighlighter from "@/src/components/Common/SyntaxHighlighter";
 
 const sharedTextStyle = "text-[#1B1B1B] dark:text-white";
-export const sharedBodyStyle = `text-base text-justify leading-[32px] font-mono ${sharedTextStyle}`;
+export const sharedBodyStyle = `text-xl text-justify leading-[32px] ${sharedTextStyle}`;
 const sharedHeadingStyle = `font-medium ${sharedTextStyle}`;
 
 export const components = {
