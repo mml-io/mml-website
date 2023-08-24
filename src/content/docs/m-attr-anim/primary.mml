@@ -1,0 +1,13 @@
+<m-cube y="2" color="red">
+  <m-attr-anim
+      attr="x" start="-5" end="5" start-time="1000" duration="2000" easing="easeInOutCubic"
+  ></m-attr-anim>
+
+  <m-attr-anim
+      attr="color" start="hsl(0,100%,50%)" end="hsl(360,100%,50%)" start-time="1000" duration="2000" easing="easeInOutCubic"
+  ></m-attr-anim>
+
+  <m-attr-anim
+      attr="height" start="1" end="2" start-time="1000" duration="500" ping-pong="true" easing="easeInOutCubic"
+  ></m-attr-anim>
+</m-cube>

@@ -14,15 +14,15 @@
   "dependencies": {
     "@mdx-js/loader": "^2.3.0",
     "@mdx-js/react": "^2.3.0",
-    "@mml-io/mml-schema": "0.5.0",
-    "@mml-io/networked-dom-document": "0.5.0",
+    "@mml-io/mml-schema": "0.6.0",
+    "@mml-io/networked-dom-document": "0.6.0",
     "@next/mdx": "^13.4.2",
     "codemirror": "^5.65.13",
     "eslint": "8.39.0",
     "eslint-config-next": "13.3.4",
     "js-beautify": "^1.14.7",
-    "mml-web": "0.5.0",
-    "mml-web-runner": "0.5.0",
+    "mml-web": "0.6.0",
+    "mml-web-runner": "0.6.0",
     "next": "13.3.4",
     "next-themes": "^0.2.1",
     "ot-es.js": "^1.0.7",
@@ -35,7 +35,7 @@
     "tailwind-merge": "^1.14.0"
   },
   "devDependencies": {
-    "@mml-io/mml-schema-validator": "0.5.0",
+    "@mml-io/mml-schema-validator": "0.6.0",
     "@monaco-editor/react": "^4.5.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",

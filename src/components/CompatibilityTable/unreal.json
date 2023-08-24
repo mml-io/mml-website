@@ -1520,5 +1520,59 @@
       "supported": true,
       "description": ""
     }
+  },
+  "m-attr-anim": {
+    "m-attr-anim": {
+      "supported": false,
+      "description": ""
+    },
+    "attr": {
+      "supported": false,
+      "description": ""
+    },
+    "start": {
+      "supported": false,
+      "description": ""
+    },
+    "end": {
+      "supported": false,
+      "description": ""
+    },
+    "start-time": {
+      "supported": false,
+      "description": ""
+    },
+    "pause-time": {
+      "supported": false,
+      "description": ""
+    },
+    "duration": {
+      "supported": false,
+      "description": ""
+    },
+    "loop,": {
+      "supported": false,
+      "description": ""
+    },
+    "easing,": {
+      "supported": false,
+      "description": ""
+    },
+    "ping-pong": {
+      "supported": false,
+      "description": ""
+    },
+    "ping-pong-delay": {
+      "supported": false,
+      "description": ""
+    },
+    "id": {
+      "supported": false,
+      "description": ""
+    },
+    "class": {
+      "supported": false,
+      "description": ""
+    }
   }
 }
