@@ -7,7 +7,7 @@ import SyntaxHighlighter from "@/src/components/Common/SyntaxHighlighter";
 
 const sharedTextStyle = "text-[#1B1B1B] dark:text-white";
 export const sharedBodyStyle = `text-base text-justify leading-[32px] font-mono ${sharedTextStyle}`;
-const sharedHeadingStyle = `font-medium font-mono ${sharedTextStyle}`;
+const sharedHeadingStyle = `font-medium ${sharedTextStyle}`;
 
 export const components = {
   p: (props) => <p className={`${sharedBodyStyle} my-4`} {...props} />,
