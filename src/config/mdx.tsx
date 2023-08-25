@@ -14,14 +14,14 @@ export const components = {
   h1: (props) => (
     <h1
       id={props.children.toLowerCase()}
-      className={`${sharedHeadingStyle} scroll-m-2 pt-[1em] text-4xl leading-normal`}
+      className={`${sharedHeadingStyle} scroll-m-8 pt-[1em] text-4xl leading-normal`}
       {...props}
     />
   ),
   h2: (props) => (
     <h2
       id={props.children?.toLowerCase?.()}
-      className={`${sharedHeadingStyle} mb-6 mt-10 scroll-m-8 p-0 text-2xl`}
+      className={`${sharedHeadingStyle} mb-6 mt-10 scroll-m-20 p-0 text-2xl`}
       {...props}
     />
   ),
