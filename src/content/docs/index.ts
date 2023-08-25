@@ -1,5 +1,6 @@
 import { DocsExamplesByTag } from "@/types/docs-reference";
 
+import * as mAttrAnim from "./m-attr-anim";
 import * as mAudio from "./m-audio";
 import * as mCharacter from "./m-character";
 import * as mCube from "./m-cube";
@@ -31,5 +32,6 @@ export const examples: DocsExamplesByTag = {
   "m-frame": mFrame,
   "m-prompt": mPrompt,
   "m-position-probe": mPositionProbe,
+  "m-attr-anim": mAttrAnim,
   "m-image": mImage,
 };

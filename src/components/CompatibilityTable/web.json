@@ -1520,5 +1520,59 @@
       "supported": false,
       "description": "The m-chat-probe element is not yet supported in the web client."
     }
+  },
+  "m-attr-anim": {
+    "m-attr-anim": {
+      "supported": true,
+      "description": ""
+    },
+    "attr": {
+      "supported": true,
+      "description": ""
+    },
+    "start": {
+      "supported": true,
+      "description": ""
+    },
+    "end": {
+      "supported": true,
+      "description": ""
+    },
+    "start-time": {
+      "supported": true,
+      "description": ""
+    },
+    "pause-time": {
+      "supported": true,
+      "description": ""
+    },
+    "duration": {
+      "supported": true,
+      "description": ""
+    },
+    "loop,": {
+      "supported": true,
+      "description": ""
+    },
+    "easing,": {
+      "supported": true,
+      "description": ""
+    },
+    "ping-pong": {
+      "supported": true,
+      "description": ""
+    },
+    "ping-pong-delay": {
+      "supported": true,
+      "description": ""
+    },
+    "id": {
+      "supported": true,
+      "description": ""
+    },
+    "class": {
+      "supported": true,
+      "description": ""
+    }
   }
 }
