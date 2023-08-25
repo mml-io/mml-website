@@ -7,7 +7,7 @@ import { MarkDown } from "@/src/config/mdx";
 
 const StyledTD = ({ children, className }: { children: React.ReactNode; className?: string }) => {
   return (
-    <td className={`h-10 p-2 pl-6 ${tableBorder} ${className} overflow-hidden text-ellipsis`}>
+    <td className={`h-10 p-2 px-6 ${tableBorder} ${className} overflow-hidden text-ellipsis`}>
       {children}
     </td>
   );
@@ -41,7 +41,7 @@ export function DocsRow({
         {description && isComment(description) ? (
           <TypeDocComment comment={description} />
         ) : (
-          <MarkDown className="[&>p]:mt-0 [&>p]:overflow-hidden [&>p]:text-ellipsis">{`${description}`}</MarkDown>
+          <MarkDown className="text-base [&>*]:text-ellipsis [&>p]:mt-0 [&>p]:overflow-hidden [&>p]:font-mono">{`${description}`}</MarkDown>
         )}
       </StyledTD>
     </tr>

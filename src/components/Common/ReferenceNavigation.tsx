@@ -7,7 +7,7 @@ import { eventClasses } from "@/src/util/event-classes";
 
 const schemaDefinition = createSchemaDefinition(schemaJSON);
 
-export default function Navigation() {
+export default function ReferenceNavigation() {
   const route = useRouter();
   const referenceId = route.query["reference-id"] as string;
   const eventId = route.query["event-id"] as string;
@@ -16,7 +16,7 @@ export default function Navigation() {
     "bg-[#0581DC19] border-l-[#0581DC] border-l-2 text-black dark:text-white pl-4";
 
   return (
-    <nav className="hidden xl:block xl:flex-[0_0_200px]">
+    <nav className="fixed left-10 z-20 hidden xl:top-[220px] xl:block xl:h-[calc(100%-270px)] xl:w-[170px] xl:overflow-x-visible xl:overflow-y-scroll">
       <p className="font-semibold">MML Elements</p>
       <ul>
         {Object.values(schemaDefinition.elements)

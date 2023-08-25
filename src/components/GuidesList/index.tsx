@@ -5,7 +5,7 @@ export default function GuidesList() {
     <DocsListContainer
       title="Guides"
       description="Guides to help you get started with MML"
-      className="mt-8"
+      className="mt-8 max-w-[800px]"
     >
       {Object.entries(guides).map(([key, { title, description }]) => (
         <DocsElement

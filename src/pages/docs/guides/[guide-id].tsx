@@ -2,6 +2,7 @@ import Head from "next/head";
 import * as React from "react";
 
 import Breadcrumb from "@/src/components/Common/Breadcrumb";
+import GuideNavigation from "@/src/components/Common/GuideNavigation";
 import LinkList from "@/src/components/Common/LinkList";
 import { guides } from "@/src/content/guides";
 import { getPageTitle } from "@/src/util";
@@ -32,8 +33,10 @@ export function getStaticProps({ params }) {
 }
 
 const GuidePage = ({ guideId }: { guideId: string }) => {
-  const title = guides[guideId].title;
-  const Body = guides[guideId].body;
+  const currentGuide = guides[guideId];
+
+  const { linkList, title } = currentGuide;
+  const Body = currentGuide.body;
 
   return (
     <>
@@ -45,15 +48,16 @@ const GuidePage = ({ guideId }: { guideId: string }) => {
         ]}
       />
       <Head>{getPageTitle(title)}</Head>
-      <div className="mx-auto max-w-[450px] sm:max-w-[575px] sm:px-0 md:max-w-[768px] lg:max-w-[992px] xl:max-w-[1200px] 2xl:max-w-[1300px]">
-        <div className="mr-4 flex w-full">
-          <main className="w-full flex-1 px-4 sm:px-0 lg:mr-5 lg:flex-[1_0_766px]">
+      <div className="mx-auto max-w-[450px] sm:max-w-[575px] sm:px-0 md:max-w-[768px] lg:max-w-[800px]">
+        <div>
+          <GuideNavigation />
+          <main className="w-full flex-1 px-4 sm:px-0 lg:mr-5 lg:max-w-[800px]">
             <h1 className="text-4xl font-bold">{title}</h1>
             <div className="mt-4">
               <Body />
             </div>
           </main>
-          <LinkList elementList={["CodeSandbox", "Glitch", "Digital Ocean", "Heroku", "Railway"]} />
+          <LinkList elementList={linkList} />
         </div>
       </div>
     </>

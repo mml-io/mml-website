@@ -9,12 +9,12 @@ const Breadcrumb = ({
 }) => {
   return (
     <>
-      <section className="relative z-10 overflow-hidden pt-28 lg:pt-[150px]">
+      <section className="relative z-10 mx-auto max-w-[800px] overflow-hidden pt-28 lg:pt-[150px]">
         <div className="container">
           <div className="-mx-4 flex flex-wrap items-center">
-            <div className="w-full px-4 sm:px-0 md:w-8/12 lg:w-7/12">
+            <div className="w-full px-4 md:px-0">
               <div className="mb-8 max-w-[570px] lg:mb-12">
-                <ul className="flex md:justify-start">
+                <ul className="flex flex-wrap md:justify-start">
                   <li className="flex items-center">
                     <Link
                       href="/"
@@ -25,7 +25,7 @@ const Breadcrumb = ({
                     <span className="mr-3 block h-2 w-2 rotate-45 border-r-2 border-t-2 border-body-color"></span>
                   </li>
                   {parents?.map((parent, index) => (
-                    <li className="flex items-center" key={index}>
+                    <li className="flex flex-wrap items-center" key={index}>
                       <Link
                         href={
                           "/" +
