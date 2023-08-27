@@ -761,6 +761,10 @@ export default function CollisionReactExample() {
 }
 ```
 
+<video autoPlay={true} loop={true} muted>
+  <source src="/images/guides/collision-events/advanced-moving.mp4" type="video/mp4" />
+</video>
+
 We are using the `clearUser` function to remove the user from the `users` map. We are also listening
 for the `disconnected` event to remove the user from the map when they disconnect. We are using the
 `setUsers` callback to make sure our state is updated correctly.
@@ -892,8 +896,12 @@ export default function WallProbe() {
 }
 ```
 
-As you can see, it's very similar to the previous example. The main difference is that we are using
-the rotation of the user to rotate the cube.
+<video autoPlay={true} loop={true} muted>
+  <source src="/images/guides/mml-with-react/position-probe.mp4" type="video/mp4" />
+</video>
+
+As you can see, it's very similar to the previous example. The main difference is that the cube now appears on top of
+the user and tracks their rotation as well.
 
 ## Animations
 
