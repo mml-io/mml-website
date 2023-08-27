@@ -7,7 +7,16 @@ const collisionEvents: DocsGuide = {
   // Give me a better description
   description: "Composability, reusability, and extensibility made easy.",
   body,
-  linkList: [],
+  linkList: [
+    "Why React?",
+    "How to",
+    "Your first React component",
+    "Reusability with React",
+    "MML Events in React",
+    "Collision events",
+    "Position Probe Events",
+    "Animations",
+  ],
 };
 
 export default collisionEvents;
