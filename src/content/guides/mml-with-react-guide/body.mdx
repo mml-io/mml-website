@@ -9,7 +9,7 @@ import TableOfContent, { Section, SubSection } from "@/src/components/TableOfCon
   <Section title="Events" />
   <SubSection title="MML Events In React" />
   <SubSection title="Position Probe Events" />
-  <Section title={"Animations"} />
+  <Section title="Animations" />
 </TableOfContent>
 
 ## Why React?
@@ -101,37 +101,82 @@ function App() {
   <source src="/images/guides/mml-with-react/rotating-cylinder.mp4" type="video/mp4" />
 </video>
 
-And there it is. Click on the cube and it will change its color. You can also use the `useEffect`
-hook to add some animation to the scene.
+And there it is. Click on the cube and it will change its color.
+We can also use the `useEffect` hook to set up side-effects, for example an interval that changes the cube color randomly every second.
 
 ```tsx
 // App.tsx
 ...
 import { useEffect, useState } from "react";
 
+const COLORS = ["red", "yellow", "green", "blue", "purple", "orange"];
+
 function App() {
-  const [cubeColor, setCubeColor] = React.useState<"red" | "yellow">("red");
-  const [cylinderRy, setCylinderRy] = React.useState(0);
+  const [cubeColor, setCubeColor] = useState<typeof COLORS[number]>(COLORS[0]);
+
+  // This function picks a random color from the COLORS array and sets it as the cube color if it's different from the current color
+  // If it's the same color, it calls itself again to pick a new color
+  function setNewColor() {
+    const newColor = COLORS[Math.floor(Math.random() * COLORS.length)];
+    if (newColor !== cubeColor) {
+      setCubeColor(newColor);
+    } else {
+      setNewColor();
+    }
+  }
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCylinderRy((Date.now() / 100) % 360);
-    }, 50);
+      setNewColor();
+    }, 1000);
     return () => clearInterval(interval);
-  }, []);
-
-  ...
+  }, [setNewColor]);
 
   return (
-    <>
-      ...
-      <m-cylinder x="4" y="5" z="3" rx={cylinderRy} radius="0.5" height="2" color="blue" />
+    <m-group z={-10} y={-5}>
+      <Light />
+      <m-cube
+        x={-4}
+        y={5}
+        z={3}
+        width={1}
+        height={2}
+        depth={1}
+        ry={10}
+        color={cubeColor}
+      />
+      <m-cylinder x="4" y="5" z="3" radius="0.5" height="2" color="blue" />
     </>
   );
 }
 ```
 
-And now you can see the cylinder slowly rotating on its x-axis.
+You will see the `m-cube` element change color every second.
+
+We can also add animations to our elements using the `m-attr-anim`. Let's add a rotation animation to the cylinder.
+
+```tsx
+// App.tsx
+...
+function App() {
+  ...
+  return (
+    <m-group z={-10} y={-5}>
+      ...
+      <m-cylinder x="4" y="5" z="3" radius="0.5" height="2" color="blue">
+        <m-attr-anim
+          attr="rx"
+          start="0"
+          end="360"
+          duration="5000"
+        />
+      </m-cylinder>
+    </>
+  );
+}
+```
+
+Now the `m-cylinder` will slowly rotate around the x-axis.
 
 ## Reusability with React
 
