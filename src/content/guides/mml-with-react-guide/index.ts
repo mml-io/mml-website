@@ -13,9 +13,10 @@ const collisionEvents: DocsGuide = {
     "Your first React component",
     "Reusability with React",
     "MML Events in React",
-    "Collision events",
+    "Collision Events",
     "Position Probe Events",
-    "Animations",
+    "Animating On Click",
+    "Animating On Collision",
   ],
 };
 
