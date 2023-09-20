@@ -1,8 +1,8 @@
 import dynamic from "next/dynamic";
 import { solarizedlight } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { CSSRuleObject } from "tailwindcss/types/config";
 
 import { sharedBodyStyle } from "@/src/config/mdx";
-import { CSSRuleObject } from "tailwindcss/types/config";
 
 type SyntaxHighlighterProps = {
   style: any;
