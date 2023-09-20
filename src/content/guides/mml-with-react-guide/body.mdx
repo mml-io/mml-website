@@ -4,15 +4,15 @@ import GuideVideo from "@/src/components/GuideVideo";
 <TableOfContent>
   <Section title="About React" />
   <SubSection title="Why React?" />
-  <SubSection title="How To" />
+  <SubSection title="How to" />
   <SubSection title="Your First React Component" />
-  <SubSection title="Reusability With React" />
+  <SubSection title="Reusability with React" />
   <Section title="Events" />
-  <SubSection title="MML Events In React" />
+  <SubSection title="MML Events in React" />
   <SubSection title="Position Probe Events" />
   <Section title="Animations" />
-  <SubSection title="Animating On Click" />
-  <SubSection title="Animating On Collision" />
+  <SubSection title="Animating on Click" />
+  <SubSection title="Animating on Collision" />
 </TableOfContent>
 
 ## Why React?
@@ -178,7 +178,7 @@ function App() {
 
 Now the `m-cylinder` will slowly rotate around the x-axis.
 
-## Reusability With React
+## Reusability with React
 
 React's component-based architecture promotes reusability and modularity. This aligns well with
 MML's modular nature, allowing for the creation of reusable components that can be easily integrated
@@ -258,7 +258,7 @@ export default function MMLScene(props: MMLSceneProps) {
   const { children, planeColor = "green", planeSize = 100 } = props;
 
   return (
-    <m-group {...props}>
+    <m-group>
       <Light />
       <m-plane rx={90} color={planeColor} width={planeSize} height={planeSize} />
       {children}
@@ -552,16 +552,13 @@ export default function CollisionReactExample() {
 }
 ```
 
-In the example above we are using a `Map` to store the users in the scene. We are using the
-`connectionId` as the key and an object with the `color` and `position` of the user as the value. We
-are using the `createUsers` function to create a user if it doesn't exist. We are using React `ref`
-to get the `platform` element and then we are using `useEffect` to add the event listener when the
-component is mounted. We are also using the `useEffect` hook to remove the event listener when the
-component is unmounted. Stepping onto the platform will trigger the `collisionstart` event and add
-the user to the `users` map. The state update will trigger a re-render and the user will be added to
-the panel.
+In the above example, a `Map` stores the scene's users, with `connectionId` as the key and an object detailing the user's
+`color` and `position` as the value. The `createUsers` function generates a new user if one doesn't exist. A React `ref` fetches
+the platform element, while `useEffect` manages event listeners upon component mounting and unmounting. Stepping onto the
+platform triggers a `collisionstart` event, adding the user to the users map and prompting a re-render to display the user
+in the panel.
 
-Let's handled the `collisionmove` event now.
+Let's handle the `collisionmove` event now.
 
 ```tsx
 import {
@@ -681,10 +678,9 @@ export default function CollisionReactExample() {
 }
 ```
 
-We are using the `setCubePosition` function to update the position of the user in the panel. We are
-using the `setUsers` callback to make sure our state is updated correctly. We are also multiplying
-the `x` and `z` position by 2 to show the user position in the panel correctly since it's twice the
-size of the platform.
+To update the user's position in the panel, we employ the `setCubePosition` function. Additionally, the `setUsers` callback
+ensures correct state updating. To accurately display the user position, the `x` and `z` coordinates are doubled, as the
+panel is twice the platform size.
 
 Finally, let's handle users leaving the platform and disconnections.
 
@@ -831,9 +827,8 @@ export default function CollisionReactExample() {
 
 <GuideVideo src="/images/guides/collision-events/advanced-moving.mp4" />
 
-We are using the `clearUser` function to remove the user from the `users` map. We are also listening
-for the `disconnected` event to remove the user from the map when they disconnect. We are using the
-`setUsers` callback to make sure our state is updated correctly.
+The `clearUser` function removes a user from the `users` map, and we listen for the `disconnected` event to do the same when a
+user disconnects. The `setUsers` callback ensures correct state updating.
 
 ## Position Probe Events
 
@@ -979,10 +974,10 @@ We have already seen how to use `m-attr-anim` in the
 [simple component example](#simple-component-example). Let's see how we can use it to create
 animations programmatically using React.
 
-## Animating On Click
+## Animating on Click
 
 Let's imagine our experience has a door with a couple of buttons to open and close it. Let's first
-create our door component
+create our door component.
 
 ```tsx
 function Door() {
@@ -1178,7 +1173,7 @@ export default function SlidingDoors(props: SlidingDoorsProps) {
   const closeX = width / 4;
 
   return (
-    <m-group id="sliding-doors" {...props}>
+    <m-group id="sliding-doors">
       <m-cube id="left-door" width={width / 2} height={height} depth={0.1} color={color || "white"}>
         <m-attr-anim
           attr="x"
@@ -1215,7 +1210,7 @@ export default function AutomaticDoors(props: AutomaticDoorsProps) {
   const [collidingUsers, setCollidingUsers] = useState<Set<number>>(new Set());
 
   return (
-    <m-group id="sliding-doors" {...props}>
+    <m-group id="sliding-doors">
       <SlidingDoors
         width={props.width}
         height={props.height}
@@ -1275,3 +1270,7 @@ By coupling `SlidingDoors` and `AutomaticDoors`, we achieve a highly interactive
 collision-sensitive animation, making our 3D or 2D space much more engaging.
 
 We will have a guide specifically for animations soon.
+
+## Resources
+- [React starter project](https://github.com/mml-io/mml-react-starter-project)
+- [MML React Space](https://github.com/mml-io/mml-react-space)

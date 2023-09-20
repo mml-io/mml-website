@@ -10,13 +10,14 @@ const collisionEvents: DocsGuide = {
   linkList: [
     "Why React?",
     "How to",
-    "Your first React component",
+    "Your First React Component",
     "Reusability with React",
     "MML Events in React",
     "Collision Events",
     "Position Probe Events",
-    "Animating On Click",
-    "Animating On Collision",
+    "Animating on Click",
+    "Animating on Collision",
+    "Resources",
   ],
 };
 
