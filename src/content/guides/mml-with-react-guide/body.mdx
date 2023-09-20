@@ -1,4 +1,5 @@
 import TableOfContent, { Section, SubSection } from "@/src/components/TableOfContent";
+import GuideVideo from "@/src/components/GuideVideo";
 
 <TableOfContent>
   <Section title="About React" />
@@ -20,10 +21,7 @@ While the MML web client functions effectively with HTML and JavaScript, integra
 offers distinct advantages for dynamic and complex applications. React's component-based
 architecture promotes modular design and reusability, aligning well with MML's modular nature. It
 offers efficient state management, allowing for responsive UIs with real-time updates and smooth
-user experiences. The thriving React community provides a wealth of resources and solutions, while
-its testability and team collaboration benefits contribute to maintainable code. While both
-approaches are valid, using React enhances development efficiency, UI consistency, and application
-performance when working with MML.
+user experiences.
 
 ## How To
 
@@ -99,9 +97,7 @@ function App() {
 }
 ```
 
-<video autoPlay loop muted>
-  <source src="/images/guides/mml-with-react/rotating-cylinder.mp4" type="video/mp4" />
-</video>
+<GuideVideo src="/images/guides/mml-with-react/rotating-cylinder.mp4" type="video/mp4" />
 
 And there it is. Click on the cube and it will change its color. We can also use the `useEffect`
 hook to set up side-effects, for example an interval that changes the cube color randomly every
@@ -833,9 +829,7 @@ export default function CollisionReactExample() {
 }
 ```
 
-<video autoPlay={true} loop={true} muted>
-  <source src="/images/guides/collision-events/advanced-moving.mp4" type="video/mp4" />
-</video>
+<GuideVideo src="/images/guides/collision-events/advanced-moving.mp4" />
 
 We are using the `clearUser` function to remove the user from the `users` map. We are also listening
 for the `disconnected` event to remove the user from the map when they disconnect. We are using the
@@ -971,9 +965,7 @@ export default function WallProbe() {
 }
 ```
 
-<video autoPlay={true} loop={true} muted>
-  <source src="/images/guides/mml-with-react/position-probe.mp4" type="video/mp4" />
-</video>
+<GuideVideo src="/images/guides/mml-with-react/position-probe.mp4" type="video/mp4" />
 
 As you can see, it's very similar to the previous example. The main difference is that the cube now
 appears on top of the user and tracks their rotation as well.
@@ -1039,9 +1031,7 @@ that the value animates back and forth.
 </m-group>
 ```
 
-<video autoPlay={true} loop={true} muted>
-  <source src="/images/guides/mml-with-react/animated-door-wrong.mp4" type="video/mp4" />
-</video>
+<GuideVideo src="/images/guides/mml-with-react/animated-door-wrong.mp4" type="video/mp4" />
 
 It's working, but something isn't right. The rotation is happening around the center of the door,
 but we want it to happen around the left side of the door. We can fix this by adding a `m-group`
@@ -1060,9 +1050,7 @@ function Door() {
 }
 ```
 
-<video autoPlay={true} loop={true} muted>
-  <source src="/images/guides/mml-with-react/animated-door-right.mp4" type="video/mp4" />
-</video>
+<GuideVideo src="/images/guides/mml-with-react/animated-door-right.mp4" type="video/mp4" />
 
 Now the door opens and closes correctly. Let's add the logic to the buttons to open and close the
 door when they are clicked.
@@ -1151,9 +1139,7 @@ function Door({ isOpen, startTime }: { isOpen: boolean; startTime: number }) {
 }
 ```
 
-<video autoPlay={true} loop={true} muted>
-  <source src="/images/guides/mml-with-react/animated-door-final.mp4" type="video/mp4" />
-</video>
+<GuideVideo src="/images/guides/mml-with-react/animated-door-final.mp4" type="video/mp4" />
 
 We have 2 pieces of state, `isOpen` and `startTime`. `isOpen` is used to know whether the door is
 open or closed and to change the animation accordingly (we're using the same `m-attr-anim` element
@@ -1279,13 +1265,11 @@ Now, the `AutomaticDoors` component wraps around `SlidingDoors` and adds a layer
 with collision detection. It maintains a `Set` named `collidingUsers` to keep track of which users
 are currently colliding with the invisible platform.
 
-<video autoPlay={true} loop={true} muted>
-  <source src="/images/guides/mml-with-react/sliding-doors.mp4" type="video/mp4" />
-</video>
+<GuideVideo src="/images/guides/mml-with-react/sliding-doors.mp4" type="video/mp4" />
 
 The key takeaway is that the `SlidingDoors`' `open` prop is dynamically set based on whether
-`collidingUsers.size` is greater than zero. If there's at least one collision, the doors open and stay open.
-Otherwise, they close.
+`collidingUsers.size` is greater than zero. If there's at least one collision, the doors open and
+stay open. Otherwise, they close.
 
 By coupling `SlidingDoors` and `AutomaticDoors`, we achieve a highly interactive,
 collision-sensitive animation, making our 3D or 2D space much more engaging.

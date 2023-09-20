@@ -2,12 +2,15 @@ import dynamic from "next/dynamic";
 import { solarizedlight } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 import { sharedBodyStyle } from "@/src/config/mdx";
+import { CSSRuleObject } from "tailwindcss/types/config";
 
 type SyntaxHighlighterProps = {
   style: any;
   language: string;
   children: React.ReactNode;
   className: string;
+  wrapLines: boolean;
+  lineProps: CSSRuleObject;
 };
 
 const SyntaxHighlighterComponent = dynamic<Partial<SyntaxHighlighterProps>>(
@@ -20,10 +23,12 @@ const SyntaxHighlighter = ({ className, children }) => {
 
   return (
     <SyntaxHighlighterComponent
+      lineProps={{ style: { wordBreak: "break-word", whiteSpace: "pre-wrap" } }}
+      wrapLines={true}
       style={solarizedlight}
       language={languageInternal}
       children={children}
-      className={`rounded bg-[#F5F5F5] p-4 text-[#1B1B1B] ${sharedBodyStyle} ${className} [&>*]:max-w-[800px] [&>*]:overflow-hidden`}
+      className={`rounded bg-[#F5F5F5] p-4 text-sm text-[#1B1B1B] ${sharedBodyStyle} ${className}`}
     />
   );
 };
