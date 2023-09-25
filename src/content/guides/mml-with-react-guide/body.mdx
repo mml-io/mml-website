@@ -1,0 +1,1276 @@
+import TableOfContent, { Section, SubSection } from "@/src/components/TableOfContent";
+import GuideVideo from "@/src/components/GuideVideo";
+
+<TableOfContent>
+  <Section title="About React" />
+  <SubSection title="Why React?" />
+  <SubSection title="How to" />
+  <SubSection title="Your First React Component" />
+  <SubSection title="Reusability with React" />
+  <Section title="Events" />
+  <SubSection title="MML Events in React" />
+  <SubSection title="Position Probe Events" />
+  <Section title="Animations" />
+  <SubSection title="Animating on Click" />
+  <SubSection title="Animating on Collision" />
+</TableOfContent>
+
+## Why React?
+
+While the MML web client functions effectively with HTML and JavaScript, integrating it with React
+offers distinct advantages for dynamic and complex applications. React's component-based
+architecture promotes modular design and reusability, aligning well with MML's modular nature. It
+offers efficient state management, allowing for responsive UIs with real-time updates and smooth
+user experiences.
+
+## How To
+
+To start working with react, we recommend using our
+[React starter project](https://github.com/mml-io/mml-react-starter-project) as a start. We will
+provide a more detailed guide in the future on how to use MML with any other frontend framework.
+Clone the repository, remove all the children in the `App` component in `index.tsx`, except for
+`Light`, and follow along with this guide. Run `npm install` to install the dependencies and
+`npm run dev` to start the development server. You can then open the project in your browser at
+`http://localhost:20205`. The entry point for the application is `mml-document/src/index.tsx`.
+
+## Your First React Component
+
+In `index.tsx` there is a simple React component that renders an empty scene with a `m-light`
+shining from the top. Let's try adding a few elements:
+
+```tsx
+import * as React from "react";
+import Light from "./Light";
+
+function App() {
+  return (
+    <>
+      <Light />
+      <m-cube x={-4} y={5} z={3} width={1} height={2} depth={1} ry={10} color="red" />
+      <m-sphere x={0} y={5} z={3} radius={1} color="green" />
+      <m-cylinder x="4" y="5" z="3" radius="0.5" height="2" color="blue" />
+    </>
+  );
+}
+```
+
+As you can see from the code above, MML elements can be rendered like any other HTML element in JSX.
+You can use any MML element and pass its attributes as props. There is no need to use camelCase for
+the attributes names and you can use strings for all values like on `m-cylinder`.
+
+![react with mml](/images/guides/mml-with-react/simple-component.jpg)
+
+We can use React hooks to add some interactivity to our scene. Let's add some logic to change the
+color of the cube when clicking on it
+
+```tsx
+// App.tsx
+import * as React from "react";
+import { useState } from "react";
+import Light from "./Light";
+
+function App() {
+  const [cubeColor, setCubeColor] = useState<"red" | "yellow">("red");
+
+  function handleCubeClick() {
+    setCubeColor(cubeColor === "red" ? "yellow" : "red");
+  }
+
+  return (
+    <>
+      <Light />
+      <m-cube
+        onClick={handleCubeClick}
+        x={-4}
+        y={5}
+        z={3}
+        width={1}
+        height={2}
+        depth={1}
+        ry={10}
+        color={cubeColor}
+      />
+      <m-sphere x={0} y={5} z={3} radius={1} color="green" />
+      <m-cylinder x="4" y="5" z="3" radius="0.5" height="2" color="blue" />
+    </>
+  );
+}
+```
+
+And there it is. Click on the cube and it will change its color. We can also use the `useEffect`
+hook to set up side-effects, for example an interval that changes the cube color randomly every
+second.
+
+```tsx
+// App.tsx
+...
+import { useEffect, useState } from "react";
+
+const COLORS = ["red", "yellow", "green", "blue", "purple", "orange"];
+
+function App() {
+  const [cubeColor, setCubeColor] = useState<typeof COLORS[number]>(COLORS[0]);
+
+  // This function picks a random color from the COLORS array and sets it as the cube color if it's different from the current color
+  // If it's the same color, it calls itself again to pick a new color
+  function setNewColor() {
+    const newColor = COLORS[Math.floor(Math.random() * COLORS.length)];
+    if (newColor !== cubeColor) {
+      setCubeColor(newColor);
+    } else {
+      setNewColor();
+    }
+  }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setNewColor();
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [setNewColor]);
+
+  return (
+    <m-group z={-10} y={-5}>
+      <Light />
+      <m-cube
+        x={-4}
+        y={5}
+        z={3}
+        width={1}
+        height={2}
+        depth={1}
+        ry={10}
+        color={cubeColor}
+      />
+      <m-cylinder x="4" y="5" z="3" radius="0.5" height="2" color="blue" />
+    </>
+  );
+}
+```
+
+You will see the `m-cube` element change color every second.
+
+We can also add animations to our elements using the `m-attr-anim`. Let's add a rotation animation
+to the cylinder.
+
+```tsx
+// App.tsx
+...
+function App() {
+  ...
+  return (
+    <m-group z={-10} y={-5}>
+      ...
+      <m-cylinder x="4" y="5" z="3" radius="0.5" height="2" color="blue">
+        <m-attr-anim
+          attr="rx"
+          start="0"
+          end="360"
+          duration="5000"
+        />
+      </m-cylinder>
+    </>
+  );
+}
+```
+
+<GuideVideo src="/images/guides/mml-with-react/rotating-cylinder.mp4" type="video/mp4" />
+
+Now the `m-cylinder` will slowly rotate around the x-axis.
+
+## Reusability with React
+
+React's component-based architecture promotes reusability and modularity. This aligns well with
+MML's modular nature, allowing for the creation of reusable components that can be easily integrated
+into other projects. For example, we can create a `MMLScene` component that renders a scene with a
+light and a plane that accepts children to render other elements.
+
+```tsx
+// MMLScene.tsx
+import React from "react";
+import Light from "./Light";
+
+export default function MMLScene({ children }: { children: React.ReactNode }) {
+  return (
+    <m-group>
+      <Light />
+      <m-plane width={100} height={100} rx={-90} color="green" />
+      {children}
+    </m-group>
+  );
+}
+```
+
+We can then use this component in our `App` component to render the current scene and reuse it in
+other parts of our application.
+
+```tsx
+// App.tsx
+...
+import MMLScene from "./MMLScene";
+
+function App() {
+  ...
+  return (
+    <>
+      <MMLScene>
+        <m-cube
+          onClick={handleCubeClick}
+          x={-4}
+          y={5}
+          z={3}
+          width={1}
+          height={2}
+          depth={1}
+          color={cubeColor}
+        />
+        <m-sphere x={0} y={5} z={3} radius={1} color="green" />
+        <m-cylinder
+          x="4"
+          y="5"
+          z="3"
+          rx={cylinderRy}
+          radius="0.5"
+          height="2"
+          color="blue"
+        />
+      </MMLScene>
+    </>
+  );
+}
+```
+
+Of course a component that doesn't accept any props and just renders a scene is not very useful.
+Let's add some props to our `MMLScene` component to make it more flexible.
+
+```tsx
+// MMLScene.tsx
+import React from "react";
+import Light from "./Light";
+
+type MMLSceneProps = {
+  children: React.ReactNode;
+  planeColor?: string;
+  planeSize?: number;
+};
+
+export default function MMLScene(props: MMLSceneProps) {
+  const { children, planeColor = "green", planeSize = 100 } = props;
+
+  return (
+    <m-group>
+      <Light />
+      <m-plane rx={90} color={planeColor} width={planeSize} height={planeSize} />
+      {children}
+    </m-group>
+  );
+}
+```
+
+Now we can use our `MMLScene` component to render different scenes with planes of different colors
+and sizes.
+
+```tsx
+// App.tsx
+...
+function App() {
+  ...
+
+  return (
+    <MMLScene planeColor="blue" planeSize={50}>
+      ...
+    </MMLScene>
+  )
+```
+
+And we can see the result in the image below.
+
+![simple-component-blue](/images/guides/mml-with-react/simple-component-blue.jpg)
+
+Let's extend this concept by creating a room component. Each room consists of a floor and four
+walls. We can use the `MMLScene` component we created before to render the room.
+
+```tsx
+// Room.tsx
+import React from "react";
+
+import MMLScene from "./MMLScene";
+
+type RoomProps = {
+  children: React.ReactNode;
+  x?: number;
+  y?: number;
+  z?: number;
+  floorColor?: string;
+  roomSize?: number;
+  wallColor?: string;
+  wallDepth?: number;
+  wallHeight?: number;
+};
+
+export default function Room(props: RoomProps) {
+  const {
+    children,
+    position = {
+      x: 0,
+      y: 0,
+      z: 0,
+    },
+    floorColor = "green",
+    roomSize = 10,
+    wallColor = "white",
+    wallDepth = 0.3,
+    wallHeight = 3,
+  } = props;
+
+  const wallSize = roomSize + wallDepth;
+
+  return (
+    <m-group x={position.x} y={position.y} z={position.z}>
+      <MMLScene planeSize={roomSize} planeColor={floorColor}>
+        {/*North wall*/}
+        <m-cube
+          x={0}
+          y={wallHeight / 2}
+          z={-roomSize / 2}
+          width={wallSize}
+          height={wallHeight}
+          depth={wallDepth}
+          color={wallColor}
+        />
+        {/*East wall*/}
+        <m-cube
+          x={roomSize / 2}
+          y={wallHeight / 2}
+          z={0}
+          width={wallDepth}
+          height={wallHeight}
+          depth={wallSize}
+          color={wallColor}
+        />
+        {/*South wall*/}
+        <m-cube
+          x={0}
+          y={wallHeight / 2}
+          z={roomSize / 2}
+          width={wallSize}
+          height={wallHeight}
+          depth={wallDepth}
+          color={wallColor}
+        />
+        {/*West wall*/}
+        <m-cube
+          x={-roomSize / 2}
+          y={wallHeight / 2}
+          z={0}
+          width={wallDepth}
+          height={wallHeight}
+          depth={wallSize}
+          color={wallColor}
+        />
+        {children}
+      </MMLScene>
+    </m-group>
+  );
+}
+```
+
+We can then use this component to create a room in `App.tsx` and add the same elements we had before
+in it.
+
+```tsx
+// App.tsx
+function App() {
+  return (
+    <Room roomSize={20}>
+      <m-cube x={-4} y={2} z={3} width={1} height={2} depth={1} color="red" />
+      <m-sphere x={0} y={2} z={3} radius={1} color="green" />
+      <m-cylinder x="4" y="2" z="3" radius="0.5" height="2" color="blue" />
+    </Room>
+  );
+}
+```
+
+![simple-component-blue](/images/guides/mml-with-react/room-component.jpg)
+
+But why limit ourselves to one room? We can easily render multiple rooms by using the position
+properties `x`, `y` and `z` on the `Room` component. We can also group them in an `m-group` to be
+able to move them around if needed.
+
+```tsx
+// App.tsx
+function App() {
+  return (
+    <m-group z={-10} y={-5}>
+      <Room roomSize={20}>
+        <m-cube x={-4} y={2} z={3} width={1} height={2} depth={1} color="red" />
+        <m-sphere x={0} y={2} z={3} radius={1} color="green" />
+        <m-cylinder x="4" y="2" z="3" radius="0.5" height="2" color="blue" />
+      </Room>
+      <Room roomSize={20} z={-20} />
+      <Room roomSize={20} x={-20} z={-20} />
+      <Room roomSize={20} x={20} z={-20} />
+    </m-group>
+  );
+}
+```
+
+![simple-component-blue](/images/guides/mml-with-react/multiple-rooms.jpg)
+
+The examples above can be expanded to create entire buildings or even cities in MML. You can find a
+more complex example of
+[room](https://github.com/mml-io/mml-react-space/blob/main/packages/mml-document/src/components/structures/BasicRoom.tsx)
+with customizable walls with windows and doors in the
+[MML React Space](https://github.com/mml-io/mml-react-space) repo.
+
+## MML Events in React
+
+Some MML elements have events that can be used to trigger actions in the scene. Unfortunately, React
+doesn't allow us to pass those events directly to the elements. We need to use a few workarounds to
+be able to use them. We are going to see a few common cases in the sections below. These examples
+require a user avatar in the scene. We recommend using
+[MML React Space](https://github.com/mml-io/mml-react-space) to play around with these examples.
+
+## Collision Events
+
+Collision events are triggered when a user collides with an MML element. Let's create an example
+that uses all the collision events available in MML. We are going to use a `m-cube` as a platform
+and a `m-cube` as a panel to display the position of the users that are currently in the scene. We
+are going to use the `collisionstart` event to add the users to the panel and the `collisionend`
+event to remove the users from the panel. We are also going to use the `collisionmove` event to
+update the position of the user in the panel.
+
+Let's start with the basic scene structure.
+
+```tsx
+export default function CollisionReactExample() {
+  return (
+    <m-group>
+      <m-cube id="users-panel" height="6" width="12" depth="0.1" y="4" z="-2">
+        <m-group rx="90" id="user-presence-holder"></m-group>
+      </m-cube>
+      <m-cube
+        id="platform"
+        y="0.05"
+        height="0.1"
+        width="6"
+        depth="3"
+        color="green"
+        collision-interval="100"
+      ></m-cube>
+    </m-group>
+  );
+}
+```
+
+![collision-react-example](/images/guides/mml-with-react/react-collision-start.jpg)
+
+We can see the panel and the platform in the image above. Let's add the logic to handle the
+`collisionstart` events.
+
+```tsx
+import { MCubeElement, MMLCollisionStartEvent } from "@mml-io/mml-react-types";
+
+import React, { useEffect, useRef, useState } from "react";
+
+type Position = { x: number; y: number; z: number };
+
+export default function CollisionReactExample() {
+  const platformRef = useRef<MCubeElement>(null);
+  const [users, setUsers] = useState(new Map());
+
+  function handleCollisionstart(e: MMLCollisionStartEvent) {
+    const { connectionId, position } = e.detail;
+
+    const newUser = createUser(connectionId, position);
+
+    if (!newUser) return;
+
+    setUsers((oldUsers) => {
+      return new Map(oldUsers).set(connectionId, newUser);
+    });
+  }
+
+  function createUser(connectionId: number, position: Position) {
+    const user = users.get(connectionId);
+
+    if (user) {
+      return;
+    }
+
+    const newUser = {
+      color: `#${Math.floor(Math.random() * 0xffffff).toString(16)}`,
+      position: {
+        x: position.x * 2,
+        z: position.z * 2,
+      },
+    };
+
+    return newUser;
+  }
+
+  useEffect(() => {
+    const platform = platformRef.current;
+
+    platform?.addEventListener("collisionstart", handleCollisionstart);
+
+    return () => {
+      platform?.removeEventListener("collisionstart", handleCollisionstart);
+    };
+  }, []);
+
+  return (
+    <m-group>
+      <m-cube id="users-panel" height="6" width="12" depth="0.1" y="4" z="-2">
+        <m-group rx="90" id="user-presence-holder">
+          {[...users.entries()].map(([connectionId, cubeData]) => (
+            <m-cube
+              key={connectionId}
+              collide={false}
+              width="0.25"
+              height="0.25"
+              depth="0.25"
+              y={0.25}
+              position={cubeData.position}
+              color={cubeData.color}
+            />
+          ))}
+        </m-group>
+      </m-cube>
+      <m-cube
+        id="platform"
+        ref={platformRef}
+        y="0.05"
+        height="0.1"
+        width="6"
+        depth="3"
+        color="green"
+        collision-interval="100"
+      ></m-cube>
+    </m-group>
+  );
+}
+```
+
+In the above example, a `Map` stores the scene's users, with `connectionId` as the key and an object detailing the user's
+`color` and `position` as the value. The `createUsers` function generates a new user if one doesn't exist. A React `ref` fetches
+the platform element, while `useEffect` manages event listeners upon component mounting and unmounting. Stepping onto the
+platform triggers a `collisionstart` event, adding the user to the users map and prompting a re-render to display the user
+in the panel.
+
+Let's handle the `collisionmove` event now.
+
+```tsx
+import {
+  ConnectionEvent,
+  MCubeElement,
+  MMLCollisionEndEvent,
+  MMLCollisionMoveEvent,
+  MMLCollisionStartEvent,
+} from "@mml-io/mml-react-types";
+import { MMLClickTrigger } from "mml-web";
+
+...
+
+export default function CollisionReactExample() {
+  const platformRef = useRef<MCubeElement>(null);
+  const [users, setUsers] = useState(new Map());
+
+  function setCubePosition(connectionId, position) {
+    // To make sure our state is updated correctly we need to put our logic inside the setUsers callback
+    setUsers((oldUsers) => {
+      const user = oldUsers.get(connectionId);
+
+      if (!user) {
+        return createUser(connectionId, position);
+      }
+
+      // Update the user's position
+      const newUser = { ...user };
+      newUser.position = {
+        x: position.x * 2,
+        z: position.z * 2,
+      };
+
+      // Update the users map
+      return new Map(oldUsers).set(connectionId, newUser);
+    });
+  }
+
+  function handleCollisionstart(e: MMLCollisionStartEvent) {
+    const { connectionId, position } = e.detail;
+
+    const newUser = createUser(connectionId, position);
+
+    if (!newUser) return;
+
+    setUsers((oldUsers) => {
+      return new Map(oldUsers).set(connectionId, newUser);
+    });
+  }
+
+  function handleCollisionmove(e: MMLCollisionMoveEvent) {
+    const { connectionId, position } = e.detail;
+    setCubePosition(connectionId, position);
+  }
+
+  function createUser(connectionId: number, position: Position) {
+    const user = users.get(connectionId);
+
+    if (user) {
+      return;
+    }
+
+    const newUser = {
+      color: `#${Math.floor(Math.random() * 0xffffff).toString(16)}`,
+      position: {
+        x: position.x * 2,
+        z: position.z * 2,
+      },
+    };
+
+    return newUser;
+  }
+
+  useEffect(() => {
+    const platform = platformRef.current;
+
+    platform.addEventListener("collisionstart", handleCollisionstart);
+    platform.addEventListener("collisionmove", handleCollisionmove);
+
+    return () => {
+      platform.removeEventListener("collisionstart", handleCollisionstart);
+      platform.removeEventListener("collisionmove", handleCollisionmove);
+    };
+  }, []);
+
+  return (
+    <m-group>
+      <m-cube id="users-panel" height="6" width="12" depth="0.1" y="4" z="-2">
+        <m-group rx="90" id="user-presence-holder">
+          {[...users.entries()].map(([connectionId, cubeData]) => (
+            <m-cube
+              key={connectionId}
+              collide={false}
+              width="0.25"
+              height="0.25"
+              depth="0.25"
+              y={0.25}
+              x={cubeData.position.x}
+              z={cubeData.position.z}
+              color={cubeData.color}
+            />
+          ))}
+        </m-group>
+      </m-cube>
+      <m-cube
+        id="platform"
+        ref={platformRef}
+        y="0.05"
+        height="0.1"
+        width="6"
+        depth="3"
+        color="green"
+        collision-interval="100"
+      ></m-cube>
+    </m-group>
+  );
+}
+```
+
+To update the user's position in the panel, we employ the `setCubePosition` function. Additionally, the `setUsers` callback
+ensures correct state updating. To accurately display the user position, the `x` and `z` coordinates are doubled, as the
+panel is twice the platform size.
+
+Finally, let's handle users leaving the platform and disconnections.
+
+```tsx
+import {
+  ConnectionEvent,
+  MCubeElement,
+  MMLCollisionEndEvent,
+  MMLCollisionMoveEvent,
+  MMLCollisionStartEvent,
+} from "@mml-io/mml-react-types";
+import { MMLClickTrigger } from "mml-web";
+
+...
+
+export default function CollisionReactExample() {
+  const platformRef = useRef<MCubeElement>(null);
+  const [users, setUsers] = useState(new Map());
+
+  function setCubePosition(connectionId: number, position: Position) {
+    // Get the user from the users map
+    setUsers((oldUsers) => {
+      const user = oldUsers.get(connectionId);
+
+      // If the user doesn't exist, create it
+      if (!user) {
+        return createUser(connectionId, position);
+      }
+
+      // Update the user's position
+      const newUser = { ...user };
+      newUser.position = {
+        x: position.x * 2,
+        z: position.z * 2,
+      };
+
+      // Update the users map
+      return new Map(oldUsers).set(connectionId, newUser);
+    });
+  }
+
+  function handleCollisionstart(e: MMLCollisionStartEvent) {
+    const { connectionId, position } = e.detail;
+
+    const newUser = createUser(connectionId, position);
+
+    if (!newUser) return;
+
+    setUsers((oldUsers) => {
+      return new Map(oldUsers).set(connectionId, newUser);
+    });
+  }
+
+  function handleCollisionmove(e: MMLCollisionMoveEvent) {
+    const { connectionId, position } = e.detail;
+    setCubePosition(connectionId, position);
+  }
+
+  function handleCollisionend(e: MMLCollisionEndEvent) {
+    const { connectionId } = e.detail;
+    clearUser(connectionId);
+  }
+
+  function createUser(connectionId: number, position: Position) {
+    const user = users.get(connectionId);
+
+    if (user) {
+      return;
+    }
+
+    const newUser = {
+      color: `#${Math.floor(Math.random() * 0xffffff).toString(16)}`,
+      position: {
+        x: position.x * 2,
+        z: position.z * 2,
+      },
+    };
+
+    return newUser;
+  }
+
+  function clearUser(connectionId: number) {
+    setUsers((oldUsers) => {
+      const user = oldUsers.get(connectionId);
+      if (!user) return oldUsers;
+      oldUsers.delete(connectionId);
+      return new Map(oldUsers);
+    });
+  }
+
+  useEffect(() => {
+    const platform = platformRef.current;
+
+    // When a user disconnects, their representation is cleared.
+    window.addEventListener("disconnected", (event: ConnectionEvent) => {
+      const { connectionId } = event.detail;
+      clearUser(connectionId);
+    });
+
+    platform.addEventListener("collisionstart", handleCollisionstart);
+    platform.addEventListener("collisionmove", handleCollisionmove);
+    platform.addEventListener("collisionend", handleCollisionend);
+
+    return () => {
+      platform.removeEventListener("collisionstart", handleCollisionstart);
+      platform.removeEventListener("collisionmove", handleCollisionmove);
+      platform.removeEventListener("collisionend", handleCollisionend);
+    };
+  }, []);
+
+  return (
+    <m-group>
+      <m-cube id="users-panel" height="6" width="12" depth="0.1" y="4" z="-2">
+        <m-group rx="90" id="user-presence-holder">
+          {[...users.entries()].map(([connectionId, cubeData]) => (
+            <m-cube
+              key={connectionId}
+              collide={false}
+              width="0.25"
+              height="0.25"
+              depth="0.25"
+              y={0.25}
+              x={cubeData.position.x}
+              z={cubeData.position.z}
+              color={cubeData.color}
+            />
+          ))}
+        </m-group>
+      </m-cube>
+      <m-cube
+        id="platform"
+        ref={platformRef}
+        y="0.05"
+        height="0.1"
+        width="6"
+        depth="3"
+        color="green"
+        collision-interval="100"
+      ></m-cube>
+    </m-group>
+  );
+}
+```
+
+<GuideVideo src="/images/guides/collision-events/advanced-moving.mp4" />
+
+The `clearUser` function removes a user from the `users` map, and we listen for the `disconnected` event to do the same when a
+user disconnects. The `setUsers` callback ensures correct state updating.
+
+## Position Probe Events
+
+We can take inspiration from the previous example to create a position probe that shows a cube above
+the user's head when they move around the position probe.
+
+```tsx
+export default function WallProbe() {
+  const userProbesRef = useRef<MGroupElement>(null);
+  const probeRef = useRef<MPositionProbeElement>(null);
+  const [users, setUsers] = useState<Map<number, any>>(new Map());
+
+  function createUser(
+    connectionId: number,
+    position: { x: number; y: number; z: number },
+    rotation: { x: number; y: number; z: number },
+  ) {
+    const user = users.get(connectionId);
+    if (user) {
+      user.position = position;
+      user.rotation = rotation;
+      return user;
+    }
+
+    const newUser = {
+      color: `#${Math.floor(Math.random() * 0xffffff).toString(16)}`,
+      position,
+      rotation,
+    };
+
+    console.log(newUser);
+
+    return newUser;
+  }
+
+  function setCubePosition(
+    connectionId: number,
+    position: { x: number; y: number; z: number },
+    rotation: { x: number; y: number; z: number },
+  ) {
+    // Get the user from the users map
+    setUsers((oldUsers) => {
+      const user = oldUsers.get(connectionId);
+
+      // If the user doesn't exist, create it
+      if (!user) {
+        const newUser = createUser(connectionId, position, rotation);
+        return new Map(oldUsers.set(connectionId, newUser));
+      }
+
+      // Update the user's position
+      const newUser = { ...user };
+      newUser.position = position;
+      newUser.rotation = rotation;
+
+      // Update the users map
+      return new Map(oldUsers).set(connectionId, newUser);
+    });
+  }
+
+  function handlePositionEnter(event: MMLPositionEnterEvent) {
+    const { connectionId, elementRelative } = event.detail;
+    setCubePosition(connectionId, elementRelative.position, elementRelative.rotation);
+  }
+
+  function handlePositionMove(event: MMLPositionMoveEvent) {
+    const { connectionId, elementRelative } = event.detail;
+    setCubePosition(connectionId, elementRelative.position, elementRelative.rotation);
+  }
+
+  function handlePositionLeave(event: MMLPositionLeaveEvent) {
+    const { connectionId } = event.detail;
+    clearUser(connectionId);
+  }
+
+  function clearUser(connectionId: number) {
+    setUsers((oldUsers) => {
+      const user = oldUsers.get(connectionId);
+      if (!user) return oldUsers;
+      oldUsers.delete(connectionId);
+      return new Map(oldUsers);
+    });
+  }
+
+  function handleDisconnect(event: ConnectionEvent) {
+    const { connectionId } = event.detail;
+    clearUser(connectionId);
+  }
+
+  useEffect(() => {
+    const userProbe = probeRef.current;
+    userProbe?.addEventListener("positionenter", handlePositionEnter);
+    userProbe?.addEventListener("positionmove", handlePositionMove);
+    userProbe?.addEventListener("positionleave", handlePositionLeave);
+
+    window.addEventListener("disconnected", handleDisconnect);
+
+    return () => {
+      userProbe?.removeEventListener("positionenter", handlePositionEnter);
+      userProbe?.removeEventListener("positionmove", handlePositionMove);
+      userProbe?.removeEventListener("positionleave", handlePositionLeave);
+      window.removeEventListener("disconnected", handleDisconnect);
+    };
+  }, []);
+
+  return (
+    <m-group y={-5.5}>
+      <m-position-probe ref={probeRef} range="8" id="my-probe" interval="100" />
+      <m-group ref={userProbesRef} id="user-presence-holder">
+        {[...users.entries()].map(([connectionId, cubeData]) => (
+          <m-cube
+            key={connectionId}
+            collide={false}
+            width="0.25"
+            height="0.25"
+            depth="0.25"
+            y={cubeData.position.y + 2}
+            x={cubeData.position.x}
+            z={cubeData.position.z}
+            rx={cubeData.rotation.x}
+            ry={cubeData.rotation.y}
+            rz={cubeData.rotation.z}
+            color={cubeData.color}
+          />
+        ))}
+      </m-group>
+    </m-group>
+  );
+}
+```
+
+<GuideVideo src="/images/guides/mml-with-react/position-probe.mp4" type="video/mp4" />
+
+As you can see, it's very similar to the previous example. The main difference is that the cube now
+appears on top of the user and tracks their rotation as well.
+
+## Animations
+
+Animations are a great way to add interactivity to your scenes. `m-attr-anim` allows you to animate
+almost any attribute of an MML element.
+
+We have already seen how to use `m-attr-anim` in the
+[simple component example](#simple-component-example). Let's see how we can use it to create
+animations programmatically using React.
+
+## Animating on Click
+
+Let's imagine our experience has a door with a couple of buttons to open and close it. Let's first
+create our door component.
+
+```tsx
+function Door() {
+  return (
+    <m-cube x={0.5} y={1} width={1} height={2} depth={0.1} color="brown">
+      <m-cylinder rx={90} radius={0.05} height={0.1} x={0.3} y={-0.1} z={-0.05} color="yellow" />
+    </m-cube>
+  );
+}
+```
+
+Then let's create a wall in which we will place the door and the buttons.
+
+```tsx
+function WallWithDoor() {
+  return (
+    <m-group>
+      <m-cube x={1.6} y={1} width={2} height={2} depth={0.1}>
+        <m-cylinder rx={90} radius={0.1} height={0.1} x={-0.6} y={-0.1} z={-0.05} color="green" />
+        <m-cylinder rx={90} radius={0.1} height={0.1} x={-0.3} y={-0.1} z={-0.05} color="red" />
+      </m-cube>
+      <m-cube x={0.55} y={1} width={0.1} height={2} depth={0.1} color="brown" />
+      <m-cube x={-1.6} y={1} width={2} height={2} depth={0.1} />
+      <m-cube x={-0.55} y={1} width={0.1} height={2} depth={0.1} color="brown" />
+      <Door />
+    </m-group>
+  );
+}
+```
+
+The wall is made of 2 cubes per side, one for the wall, and one for the door frame. The result
+should look like the image below.
+
+![wall-with-door](/images/guides/mml-with-react/wall-with-door.jpg)
+
+Now let's add the logic to open and close the door automatically. We are going to use the
+`m-attr-anim` element to animate the `ry` attribute of the door with `ping-pong` set as `true` so
+that the value animates back and forth.
+
+```tsx
+<m-group ry={0} x={-0.5}>
+  <m-cube x={0.5} y={1} width={1} height={2} depth={0.1} color="brown">
+    <m-cylinder rx={90} radius={0.05} height={0.1} x={0.3} y={-0.1} z={-0.05} color="yellow" />
+    <m-attr-anim attr="ry" start="0" end="90" duration={1000} ping-pong={false} />
+  </m-cube>
+</m-group>
+```
+
+<GuideVideo src="/images/guides/mml-with-react/animated-door-wrong.mp4" type="video/mp4" />
+
+It's working, but something isn't right. The rotation is happening around the center of the door,
+but we want it to happen around the left side of the door. We can fix this by adding a `m-group`
+element around the door and offsetting the `x` attribute.
+
+```tsx
+function Door() {
+  return (
+    <m-group ry={0} x={-0.5}>
+      <m-cube x={0.5} y={1} width={1} height={2} depth={0.1} color="brown">
+        <m-cylinder rx={90} radius={0.05} height={0.1} x={0.3} y={-0.1} z={-0.05} color="yellow" />
+      </m-cube>
+      <m-attr-anim attr="ry" start="0" end="90" duration={1000} ping-pong />
+    </m-group>
+  );
+}
+```
+
+<GuideVideo src="/images/guides/mml-with-react/animated-door-right.mp4" type="video/mp4" />
+
+Now the door opens and closes correctly. Let's add the logic to the buttons to open and close the
+door when they are clicked.
+
+```tsx
+const ANIMATION_LENGTH = 1000;
+
+function WallWithDoor() {
+  // This is to know whether the animation needs to open or close the door
+  const [isOpen, setIsOpen] = useState(false);
+
+  // This is to know when the animation needs to start
+  const [startTime, setStartTime] = useState(0);
+
+  // The functions to open and close the door only differs in the isOpen value
+  const handleButtonClick = (setOpen: boolean) => {
+    // We take the current document time to start the animation as soon as we click the button
+    const currentTime = document.timeline.currentTime as number;
+
+    // We check whether the previous animation is still running and only execute the animation if it's not
+    if (currentTime - startTime > ANIMATION_LENGTH) {
+      setIsOpen(setOpen);
+      setStartTime(currentTime);
+    }
+  };
+
+  const handleOpenDoor = () => {
+    handleButtonClick(false);
+  };
+
+  const handleCloseDoor = () => {
+    handleButtonClick(true);
+  };
+
+  return (
+    <m-group>
+      <m-cube x={1.6} y={1} width={2} height={2} depth={0.1}>
+        <m-cylinder
+          rx={90}
+          radius={0.1}
+          height={0.1}
+          x={-0.6}
+          y={-0.1}
+          z={-0.05}
+          color="green"
+          onClick={handleOpenDoor}
+        />
+        <m-cylinder
+          rx={90}
+          radius={0.1}
+          height={0.1}
+          x={-0.3}
+          y={-0.1}
+          z={-0.05}
+          color="red"
+          onClick={handleCloseDoor}
+        />
+      </m-cube>
+      <m-cube x={0.55} y={1} width={0.1} height={2} depth={0.1} color="brown" />
+      <m-cube x={-1.6} y={1} width={2} height={2} depth={0.1} />
+      <m-cube x={-0.55} y={1} width={0.1} height={2} depth={0.1} color="brown" />
+      <Door isOpen={isOpen} startTime={startTime} />
+    </m-group>
+  );
+}
+
+function Door({ isOpen, startTime }: { isOpen: boolean; startTime: number }) {
+  return (
+    <m-group ry={0} x={-0.5}>
+      <m-cube x={0.5} y={1} width={1} height={2} depth={0.1} color="brown">
+        <m-cylinder rx={90} radius={0.05} height={0.1} x={0.3} y={-0.1} z={-0.05} color="yellow" />
+      </m-cube>
+      {/* This is to avoid the animation running once when the document starts */}
+      {startTime && (
+        <m-attr-anim
+          attr="ry"
+          start-time={startTime}
+          start={isOpen ? "90" : "0"}
+          end={isOpen ? "0" : "90"}
+          duration={ANIMATION_LENGTH}
+          loop={false}
+        />
+      )}
+    </m-group>
+  );
+}
+```
+
+<GuideVideo src="/images/guides/mml-with-react/animated-door-final.mp4" type="video/mp4" />
+
+We have 2 pieces of state, `isOpen` and `startTime`. `isOpen` is used to know whether the door is
+open or closed and to change the animation accordingly (we're using the same `m-attr-anim` element
+to open and close the door). `startTime` is used to know when the animation needs to start. We are
+using the `document.timeline.currentTime` to get the current time when the button is clicked and
+then we are assigning it to `startTime`.
+
+## Animating on Collision
+
+Building on the concept of animating elements through `m-attr-anim`, let's talk about a more
+interactive scenario: animating doors based on user collision. This is a feature you'll find in the
+[MML React Space](https://github.com/mml-io/mml-react-space) repository. In this example, we have
+the `AutomaticDoors` component which uses the `SlidingDoors` component for the actual door rendering
+and animation.
+
+```tsx
+export default function SlidingDoors(props: SlidingDoorsProps) {
+  const { duration = 1000, color, height, width, open } = props;
+  const [startTime, setStartTime] = useState(0);
+  const [isOpen, setIsOpen] = useState(props.open);
+
+  useEffect(() => {
+    const shouldBeOpen = open;
+    if (shouldBeOpen !== isOpen) {
+      setIsOpen(shouldBeOpen);
+      const t = document.timeline.currentTime as number;
+      if (startTime > t - duration) {
+        setStartTime(t - (duration - (t - startTime)));
+      } else {
+        setStartTime(t);
+      }
+    }
+  }, [open, isOpen, startTime, duration]);
+
+  const openX = width / 4 + width / 2 - 0.01;
+  const closeX = width / 4;
+
+  return (
+    <m-group id="sliding-doors">
+      <m-cube id="left-door" width={width / 2} height={height} depth={0.1} color={color || "white"}>
+        <m-attr-anim
+          attr="x"
+          duration={duration}
+          start-time={startTime}
+          easing="easeInOutQuad"
+          loop={false}
+          start={(-(isOpen ? closeX : openX)).toString(10)}
+          end={(-(isOpen ? openX : closeX)).toString(10)}
+        />
+      </m-cube>
+      <m-cube
+        id="right-door"
+        width={width / 2}
+        height={height}
+        depth={0.1}
+        color={color || "white"}
+      >
+        <m-attr-anim
+          attr="x"
+          duration={duration}
+          start-time={startTime}
+          easing="easeInOutQuad"
+          loop={false}
+          start={(isOpen ? closeX : openX).toString(10)}
+          end={(isOpen ? openX : closeX).toString(10)}
+        />
+      </m-cube>
+    </m-group>
+  );
+}
+
+export default function AutomaticDoors(props: AutomaticDoorsProps) {
+  const [collidingUsers, setCollidingUsers] = useState<Set<number>>(new Set());
+
+  return (
+    <m-group id="sliding-doors">
+      <SlidingDoors
+        width={props.width}
+        height={props.height}
+        open={collidingUsers.size > 0}
+        color={props.color}
+      />
+      {/* This is the invisible platform that will trigger the collision events. */}
+      <m-cube
+        width={props.width}
+        height={0.1}
+        depth={5}
+        visible={props.visiblePlatform ?? false}
+        y={-props.height / 2 + 0.01}
+        collision-interval={500}
+        ref={(el: MCubeElement) => {
+          if (!el) {
+            return;
+          }
+          el.addEventListener("collisionstart", (event: MMLCollisionStartEvent) => {
+            const { connectionId } = event.detail;
+            setCollidingUsers(new Set(Array.from(collidingUsers).concat([connectionId])));
+          });
+          el.addEventListener("collisionend", (event: MMLCollisionEndEvent) => {
+            const { connectionId } = event.detail;
+            const newSet = new Set(Array.from(collidingUsers));
+            newSet.delete(connectionId);
+            setCollidingUsers(newSet);
+          });
+        }}
+      />
+    </m-group>
+  );
+}
+```
+
+Firstly, as we saw earlier, `SlidingDoors` uses two pieces of state, `isOpen` and `startTime`, to
+control the animation. When the `open` prop changes, a `useEffect` recalculates the `startTime`
+using `document.timeline.currentTime`, ensuring that the animation starts at the correct moment. It
+also updates the `isOpen` state to either open or close the door.
+
+The actual animation is performed by `<m-attr-anim>`. It animates the doors along the x-axis based
+on the `start` and `end` positions, with `isOpen` determining whether the door should slide open or
+closed. You'll notice the ease of reuse here, as we can use the same `m-attr-anim` component to
+animate the door in both directions.
+
+Now, the `AutomaticDoors` component wraps around `SlidingDoors` and adds a layer of interactivity
+with collision detection. It maintains a `Set` named `collidingUsers` to keep track of which users
+are currently colliding with the invisible platform.
+
+<GuideVideo src="/images/guides/mml-with-react/sliding-doors.mp4" type="video/mp4" />
+
+The key takeaway is that the `SlidingDoors`' `open` prop is dynamically set based on whether
+`collidingUsers.size` is greater than zero. If there's at least one collision, the doors open and
+stay open. Otherwise, they close.
+
+By coupling `SlidingDoors` and `AutomaticDoors`, we achieve a highly interactive,
+collision-sensitive animation, making our 3D or 2D space much more engaging.
+
+We will have a guide specifically for animations soon.
+
+## Resources
+- [React starter project](https://github.com/mml-io/mml-react-starter-project)
+- [MML React Space](https://github.com/mml-io/mml-react-space)

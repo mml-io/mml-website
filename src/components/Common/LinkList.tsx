@@ -12,7 +12,7 @@ const LinkList = ({ elementList }: { elementList: string[] }) => {
           .map((item) => (
             <li
               key={item}
-              className="min-h-10 mt-2 flex items-center text-sm capitalize text-[#4E4E4E] dark:text-white"
+              className="min-h-10 mt-2 flex items-center text-sm text-[#4E4E4E] dark:text-white"
             >
               <a href={`#${item.toLowerCase()}`}>{item}</a>
             </li>
