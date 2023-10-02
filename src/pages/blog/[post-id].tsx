@@ -3,6 +3,7 @@ import Link from "next/link";
 import * as React from "react";
 
 import { posts } from "@/src/content/blogPosts";
+import { getPageTitle } from "@/src/util";
 
 export function getStaticPaths() {
   const elements = Object.keys(posts).map((element) => element);
@@ -33,9 +34,7 @@ const GuidePage = ({ postId }: { postId: string }) => {
 
   return (
     <>
-      <Head>
-        <title>{title} - MML</title>
-      </Head>
+      <Head>{getPageTitle(title)}</Head>
       <div className="mt-32">
         <div className="flex justify-center">
           <div className="mx-4 w-full max-w-[800px] flex-1">

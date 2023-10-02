@@ -1,0 +1,84 @@
+# MML August 2023: React, Collision Events, and More
+_[Marcus Longmuir](https://twitter.com/marcuslongmuir) - 2023-08-09_
+
+MML was [open sourced](https://github.com/mml-io/mml) at [`v0.1.0`](https://github.com/mml-io/mml/releases/tag/v0.1.0) in June 2023 and since then the project has added new capabilities, gathered feedback and ideas from users on the [MSquared Discord server](https://discord.gg/msquared), and has spawned new complementary projects.
+
+The ideas and feedback from the community have already led to new capabilities in MML and also in other components that can enable the virtual world ecosystem that aligns with MML’s approach to the dynamic composition of worlds and content.
+
+Continue reading to learn more about MML, find out what's been recently added, and what's coming next.
+
+# What is MML?
+
+Metaverse Markup Language (MML) is a markup language that builds on top of HTML and JavaScript to enable the creation of interactive 3D multi-user experiences. In the MML stack, HTML pages and elements are stateful objects that run on a server, providing a widely-understood and powerful environment for creators whilst also extending the capabilities of these technologies for use in shared 3D virtual worlds.
+
+![An Example of MML Editing](/images/blog/aug-2023/mml-edit.gif)
+
+Join the [MSquared Discord server](https://discord.gg/msquared) to coordinate contributing to MML, seek advice, and stay up-to-date with the project and the community.
+
+# How does MML work?
+
+The power of MML comes from running a HTML document describing MML elements on a server (rather than on each client independently as with regular HTML pages and with most projects that use HTML to describe 3D elements).
+
+This document running on the server is then synchronized with each connected client, allowing the document to evolve over time and with interactions from users. This underlying capability of running a HTML page on a server and synchronising it is achieved using a library built expressly for the MML stack called NetworkedDOM.
+
+![How MML Works](/images/blog/aug-2023/how-mml-works.gif)
+
+# MML's Approach to Virtual Worlds
+
+MML and NetworkedDOM enable a decomposition of the logic and computation of content from worlds (and also engines) whilst retaining the ability to have that content be interactive, stateful, and multi-user.
+
+![MML Worlds and Content](/images/blog/aug-2023/worlds-and-content.gif)
+
+Whilst there are formats for describing 3D content interoperably, MML’s design with NetworkedDOM allows that content to have synchronized, multi-user logic.
+
+# New Capabilities
+
+One early piece of feedback from creators was that they wanted to make the 3D creations aware of users’ presence and react to physical contact with the HTML elements. This led to the addition of collision events and also [`m-position-probe`](https://mml.io/docs/reference/elements/m-position-probe).
+
+![MML Stairs with Collision Events](/images/blog/aug-2023/collision-events-stairs.gif)
+The MML code for the stairs in this gif can be found [here](https://github.com/mml-io/3d-web-experience/blob/a69741642cf2efeea38799aa15d06aaa3a886c72/example/server/mml-documents/example-mml.html#L30).
+
+With the addition of collision events, an element can indicate that it should be sent events describing that a user's avatar has collided with this element, the collision point has moved, and when the collision ends.
+
+![MML Position Probe](/images/blog/aug-2023/position-probe.gif)
+The MML code for the position probe usage in this gif can be found [here](https://github.com/mml-io/mml-playground/blob/782c5078bbce4575c59c2ef8711920b0b35d6bfc/packages/server/examples/position-probe.html#L2).
+
+These capabilities are particularly interesting when considering that multiple users are affecting this state. With just a few lines of HTML and JavaScript you can create a *multi-user* 3D experience that responds to users walking on surfaces or moving near a point.
+
+# React + MML
+
+Writing HTML and JavaScript for stateful content in an ergonomic way is the well-explored challenge of modern web development, and as MML is valid HTML, those tools can be used in much the same way to describe 3D interactive, multi-user content.
+
+[React](https://react.dev/) is designed to make it easier to build complex, interactive UIs by breaking them down into smaller, reusable components. React can be used to describe the HTML/MML document that runs inside a NetworkedDOM server, and by running this document on a server that accepts WebSockets, you can have multiple users connect to the same single instance of the React document which can use all of the familiar React capabilities, but now with NetworkedDOM it can be synchronized to multiple users and have them all interact at once.
+
+You can use React hooks, add event listeners, create reusable components, and also include external libraries (`react` itself is just a dependency) to build multi-user, interactive 3D experiences in a way that feels as familiar and as effective as building web pages with modern tooling.
+
+This React-based workflow was initially made available as part of the [MML React Starter project](https://github.com/mml-io/mml-react-starter-project), which is a good starting point for making an MML creation using React that is served on a WebSocket.
+
+# React-based Multi-user 3D Web Experience
+
+MML is designed to enable the dynamic composition of interactive content into virtual worlds. This vision therefore benefits from virtual worlds that support MML being easier to make, and therefore the MML project included a [web playground](https://github.com/mml-io/mml-playground) that allows users that join to see other users and dynamically add MML creations to the world.
+
+This web playground included the core of a 3D web experience that has now been extracted to packages that are open sourced at [github.com/mml-io/3d-web-experience](https://github.com/mml-io/3d-web-experience).
+
+As a result, the packages can be used as dependencies in other projects. The first project that uses these dependencies is [github.com/mml-io/mml-react-space](https://github.com/mml-io/mml-react-space). This project combines the React-based workflow described above for creating interactive MML content with the 3D web experience, and a multi-level modular building with some interactive scenes to build on top of.
+
+Below is a video walkthrough of [github.com/mml-io/mml-react-space](https://github.com/mml-io/mml-react-space):
+<video controls={true} src="https://storage.googleapis.com/mml-public-content/mml-react-space.mp4"></video>
+
+This project is a great starting point to explore how a platform-independent web-based virtual world can work for an experience you may already have in mind. It can be run locally and be self-hosted, and using MML you can easily add more content that can be interacted with in real-time by multiple users.
+
+# What’s next?
+
+MML as a project represents a novel approach to interactive virtual objects and their composition into both virtual worlds and augmented reality. To further this exploration and expand usability, the project is aiming to add more core capabilities, usage modes, and work with others to expand the venues in which creators and users can use MML.
+There is a public backlog and project view [available on GitHub here](https://github.com/orgs/mml-io/projects/1).
+
+Here are some specific items that you might be interested in following:
+
+* [Animated Attributes](https://github.com/mml-io/mml/issues/52)
+* [Apple Vision Pro Proof-of-concept](https://github.com/mml-io/mml/issues/56)
+* [WebXR Proof-of-concept](https://github.com/mml-io/mml/issues/55)
+* [m-chat-probe](https://github.com/mml-io/mml/issues/61)
+* [Authentication](https://github.com/mml-io/mml/issues/58)
+
+Join the [MSquared Discord server](https://discord.gg/msquared) to coordinate contributing to MML, seek advice, and stay up-to-date with the project and the community.

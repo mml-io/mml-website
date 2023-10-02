@@ -7,6 +7,7 @@ import { ChangeEvent, useEffect } from "react";
 
 import ExampleView from "@/src/components/ExampleView/ExamplePageExampleViewDynamic";
 import { examples } from "@/src/content/examples";
+import { getPageTitle } from "@/src/util";
 import { Example, ExamplesByName } from "@/types/example";
 
 const ExamplesPage = () => {
@@ -54,9 +55,7 @@ const ExamplesPage = () => {
 
   return (
     <>
-      <Head>
-        <title>Examples - MML</title>
-      </Head>
+      <Head>{getPageTitle("Examples")}</Head>
       <main
         id="about"
         className="mx-4 mt-28 flex flex-col border-[1px] border-editor-border bg-white dark:border-editor-border-dark dark:bg-editor-bg xl:h-[calc(100vh-132px)] xl:flex-row"

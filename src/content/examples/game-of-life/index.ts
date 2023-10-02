@@ -5,7 +5,6 @@ export const gameOfLifeExample: Example = {
   description: "Conway's Game of Life",
   code: `
 <script>
-  const parent = document.getElementsByTagName("m-group")[0];
   let world = [];
   const worldSize = 20,
     cellSize = 0.5;
@@ -21,7 +20,7 @@ export const gameOfLifeExample: Example = {
   function createCube(x, y) {
     const cube = document.createElement("m-cube");
     cube.setAttribute("x", (x - worldSize / 2) * cellSize);
-    cube.setAttribute("y", y * cellSize);
+    cube.setAttribute("y", y * cellSize + 1);
     cube.setAttribute("z", 0);
     cube.setAttribute("color", "skyblue");
     cube.setAttribute("id", x + ":" + y);

@@ -12,7 +12,7 @@ import { ExampleClient } from "./ExampleClient";
 const CLIENTS = 4;
 
 function createDocumentCode(code: string): string {
-  return `${'<m-plane color="white" width="20" height="20" rx="-90"></m-plane><m-light type="spotlight" ry="45" rx="65" rz="-45" x="10" y="10" z="10"></m-light>'}${code}`;
+  return `${'<m-plane color="white" width="20" height="20" rx="-90"></m-plane><m-light type="point" x="10" y="10" z="10"></m-light>'}${code}`;
 }
 
 const initialCode = `<m-cube x="-3" height="2" width="2" depth="2" y="2" color="#FF6666" id="my-cube"></m-cube>
@@ -64,10 +64,6 @@ export function AnimatedExampleView(props) {
   const handleResetClick = useCallback(() => {
     setCode(initialCode);
     setResetKey((key) => key + 1);
-  }, []);
-
-  const handleSphereClick = useCallback(() => {
-    setAppendCode(`<m-sphere color="red" radius="2" y="5" z="5"></m-sphere>`);
   }, []);
 
   return (

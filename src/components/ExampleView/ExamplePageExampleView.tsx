@@ -12,7 +12,7 @@ import { CloseableClient } from "./CloseableClient";
 function createDocumentCode(code: string, lightOn: boolean): string {
   return `${
     lightOn &&
-    '<m-plane color="white" width="20" height="20" rx="-90"></m-plane><m-light type="spotlight" ry="45" rx="65" rz="-45" x="10" y="10" z="10"></m-light>'
+    '<m-plane color="white" width="20" height="20" rx="-90"></m-plane><m-light type="point" x="10" y="10" z="10"></m-light>'
   }${code}`;
 }
 
@@ -27,7 +27,7 @@ export function ExamplePageExampleView(props: {
     null,
   );
   const clients = [...Array(props.initialClientCount || 1).keys()];
-  const [baseScene, setBaseScene] = useState<boolean>(props.baseScene);
+  const { baseScene } = props;
 
   useEffect(() => {
     const document = new EditableNetworkedDOM(
@@ -46,10 +46,6 @@ export function ExamplePageExampleView(props: {
   useEffect(() => {
     networkedDOMDocument?.load(createDocumentCode(code, baseScene));
   }, [code, baseScene]);
-
-  const toggleBaseScene = () => {
-    setBaseScene((lightOn) => !lightOn);
-  };
 
   const handleResetClick = useCallback(() => {
     setCode(props.code);
