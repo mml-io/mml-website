@@ -9,7 +9,9 @@ export function Attribute(props: { attribute: Attribute }) {
     <div>
       <MarkDown className="inline-block [&>*]:mb-0">{"`" + props.attribute.name + "`"}</MarkDown>
       :&nbsp;
-      {props.attribute.type && <span>{attributeTypes[props.attribute.type]}</span>}
+      {props.attribute.type && (
+        <span>{attributeTypes[props.attribute.type as keyof typeof attributeTypes]}</span>
+      )}
       {props.attribute.enum && (
         <ul>
           {props.attribute.enum.map((enumValue) => (

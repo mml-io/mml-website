@@ -5,9 +5,8 @@ import { IframeObservableDOMFactory } from "@mml-io/networked-dom-web-runner";
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
 
+import { ExampleClient } from "@/src/components/AnimatedExampleView/ExampleClient";
 import HTMLEditor from "@/src/components/ExampleView/HTMLEditor";
-
-import { CloseableClient } from "./CloseableClient";
 
 function createDocumentCode(code: string, lightOn: boolean): string {
   return `${
@@ -77,11 +76,13 @@ export function DocsExampleView(props: {
           </div>
           <HTMLEditor className="h-[332px]" code={code} setCode={setCode} />
         </div>
-        <div className="relative flex h-full flex-[0_0_40%] flex-row">
+        <div className="relative flex h-full flex-[0_0_40%] flex-col">
           {networkedDOMDocument && (
             <>
               {clients.map((clientId) => {
-                return <CloseableClient key={clientId} document={networkedDOMDocument} />;
+                return (
+                  <ExampleClient clientId={0} key={clientId} document={networkedDOMDocument} />
+                );
               })}
             </>
           )}

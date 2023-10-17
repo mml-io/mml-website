@@ -10,6 +10,8 @@ const createJestConfig = nextJest({
 const config = {
   // Add more setup options before each test is run
   setupFilesAfterEnv: ["<rootDir>/src/tests/setup.ts"],
+  extensionsToTreatAsEsm: [".ts",".tsx"],
+  testEnvironment: "jsdom",
   moduleNameMapper: {
     "@/(.*)$": "<rootDir>/$1",
   },
@@ -17,7 +19,6 @@ const config = {
     "\\.mml$": "./jest-raw-loader.js",
     "\\.md$": "./jest-raw-loader.js"
   },
-  testEnvironment: "jest-environment-jsdom",
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async

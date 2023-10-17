@@ -6,13 +6,13 @@ import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
 
 import { AnimatedEditorContainer, CodemirrorEditor } from "@/src/components/AnimatedEditor";
+import { ExampleAvatarClient } from "@/src/components/AnimatedExampleView/ExampleAvatarClient";
+import { LocalAvatarServer } from "@/src/components/AnimatedExampleView/LocalAvatar/LocalAvatarServer";
 
 import { ExampleClient } from "./ExampleClient";
 
-const CLIENTS = 4;
-
 function createDocumentCode(code: string): string {
-  return `${'<m-plane color="white" width="20" height="20" rx="-90"></m-plane><m-light type="point" x="10" y="10" z="10"></m-light>'}${code}`;
+  return `${'<m-plane color="white" width="20" height="20" rx="-90" y="-0.1"></m-plane><m-light type="point" x="10" y="10" z="10"></m-light>'}${code}`;
 }
 
 const initialCode = `<m-cube x="-3" height="2" width="2" depth="2" y="2" color="#FF6666" id="my-cube"></m-cube>
@@ -21,17 +21,16 @@ const initialCode = `<m-cube x="-3" height="2" width="2" depth="2" y="2" color="
 
 `;
 
-export function AnimatedExampleView(props) {
+export function AnimatedExampleView() {
   const [code, setCode] = useState<string>(initialCode);
   const [networkedDOMDocument, setNetworkedDOMDocument] = useState<EditableNetworkedDOM | null>(
     null,
   );
   const [resetKey, setResetKey] = useState(0);
   const [appendCode, setAppendCode] = useState<string | undefined>(undefined);
+  const [server] = useState(new LocalAvatarServer());
 
   const documentRef = React.useRef<EditableNetworkedDOM | null>(null);
-
-  const clients = [...Array(CLIENTS).keys()];
 
   useEffect(() => {
     const document = new EditableNetworkedDOM(
@@ -44,7 +43,9 @@ export function AnimatedExampleView(props) {
 
     return () => {
       document.dispose();
-      documentRef.current.dispose();
+      if (documentRef.current) {
+        documentRef.current.dispose();
+      }
     };
   }, []);
 
@@ -59,7 +60,7 @@ export function AnimatedExampleView(props) {
     }
 
     documentRef.current.load(createDocumentCode(code));
-  }, [code, props.baseScene]);
+  }, [code]);
 
   const handleResetClick = useCallback(() => {
     setCode(initialCode);
@@ -101,23 +102,36 @@ export function AnimatedExampleView(props) {
         <div className=" relative flex w-[56%] flex-wrap content-between items-start">
           {networkedDOMDocument && (
             <>
-              {clients.map((clientId) => {
-                return (
-                  <ExampleClient
-                    clientId={clientId}
-                    key={clientId}
-                    document={networkedDOMDocument}
-                  />
-                );
-              })}
+              <div className="relative h-[50%] w-[50%]">
+                <ExampleClient clientId={0} key={0} document={networkedDOMDocument} />
+              </div>
+              <div className="relative h-[50%] w-[50%]">
+                <ExampleAvatarClient
+                  server={server}
+                  clientId={1}
+                  key={1}
+                  document={networkedDOMDocument}
+                  position={{ x: 0.5, y: 0.5, z: 5 }}
+                  rotation={{ x: 0, y: Math.PI, z: 0 }}
+                />
+              </div>
+              <div className="relative h-[50%] w-[50%]">
+                <ExampleAvatarClient
+                  server={server}
+                  clientId={2}
+                  key={2}
+                  document={networkedDOMDocument}
+                  position={{ x: -0.5, y: 0.5, z: 5 }}
+                  rotation={{ x: 0, y: Math.PI, z: 0 }}
+                />
+              </div>
+              <div className="relative h-[50%] w-[50%]">
+                <ExampleClient clientId={3} key={3} document={networkedDOMDocument} />
+              </div>
             </>
           )}
         </div>
       </div>
-
-      {/*<button className="ml-4 h-12 w-24 bg-yellow" onClick={handleSphereClick}>*/}
-      {/*  Sphere*/}
-      {/*</button>*/}
     </AnimatedEditorContainer>
   );
 }

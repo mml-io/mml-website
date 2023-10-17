@@ -1,4 +1,15 @@
-export const editorState = [
+import { Operation, Selection } from "ot-es.js";
+
+export type EditorStateOperation = {
+  time: number;
+  type: string;
+  revision?: number;
+  selection?: Selection | null;
+  operation?: Operation;
+  waitTime?: number;
+};
+
+export const editorState: Array<EditorStateOperation> = [
   {
     time: 1686849703203,
     type: "selection",

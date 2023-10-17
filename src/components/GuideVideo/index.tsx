@@ -1,15 +1,17 @@
 import { useEffect, useRef } from "react";
 
 export default function GuideVideo({ src, type = "video/mp4" }: { src: string; type: string }) {
-  const videoRef = useRef(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           const video = videoRef.current;
-          video.src = src;
-          observer.disconnect();
+          if (video) {
+            video.src = src;
+            observer.disconnect();
+          }
         }
       },
       {

@@ -1,6 +1,6 @@
 import { IframeWrapper, IframeWrapperResult, registerCustomElementsToWindow } from "mml-web";
 
-let iframeRemoteSceneWrapperPromise: Promise<IframeWrapperResult> = null;
+let iframeRemoteSceneWrapperPromise: Promise<IframeWrapperResult> | null = null;
 
 export function getIframeTargetWindow(): Promise<IframeWrapperResult> {
   if (iframeRemoteSceneWrapperPromise !== null) {

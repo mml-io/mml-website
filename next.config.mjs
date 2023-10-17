@@ -3,6 +3,7 @@ import createMDX from "@next/mdx";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  productionBrowserSourceMaps: true,
   webpack: (config, options) => {
     config.module.rules.push(
       {
@@ -20,6 +21,10 @@ const nextConfig = {
             loader: "raw-loader",
           },
         ],
+      },
+      {
+        test: /\.(glb|hdr)/,
+        type: "asset/resource",
       },
     );
 

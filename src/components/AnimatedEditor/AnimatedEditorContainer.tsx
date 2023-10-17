@@ -1,9 +1,12 @@
 import CodeMirror from "codemirror";
 import beautify from "js-beautify";
-import ot, { EditorClient } from "ot-es.js";
+import ot, { EditorClient, Operation, Selection } from "ot-es.js";
 import React, { createContext, useEffect, useRef } from "react";
 
-import { editorState } from "@/src/components/AnimatedExampleView/EditorState";
+import {
+  editorState,
+  EditorStateOperation,
+} from "@/src/components/AnimatedExampleView/EditorState";
 
 import OTServerAdapter from "./otServerAdapter";
 
@@ -20,14 +23,14 @@ type AnimatedEditorParentProps = {
   children: React.ReactNode;
   code: string;
   setCode: (s: string) => void;
-  appendCode: string;
-  setAppendCode: (s: string) => void;
+  appendCode?: string;
+  setAppendCode: (s: string | undefined) => void;
 };
 
 export const AnimatedEditorContext = createContext<{
-  editorContainerRef: React.MutableRefObject<HTMLDivElement>;
+  editorContainerRef: React.MutableRefObject<HTMLDivElement | null>;
   onClick: () => void;
-}>(null);
+} | null>(null);
 
 export const AnimatedEditorContainer = ({
   children,
@@ -36,16 +39,16 @@ export const AnimatedEditorContainer = ({
   appendCode,
   setAppendCode,
 }: AnimatedEditorParentProps) => {
-  const editorContainerRef = useRef(null);
-  const codeMirrorRef = useRef();
+  const editorContainerRef = useRef<HTMLDivElement>(null);
+  const codeMirrorRef = useRef<CodeMirror.Editor>();
 
-  const codeMirrorAdapterRef = useRef();
+  const codeMirrorAdapterRef = useRef<ot.CodeMirrorAdapter>();
   const otServerAdapterRef = useRef<OTServerAdapter>();
-  const otClientRef = useRef();
+  const otClientRef = useRef<EditorClient>();
   const stepIndexRef = useRef(0);
   const timerRef = useRef<ReturnType<typeof setTimeout>>();
 
-  const actionHistory = useRef([]);
+  const actionHistory = useRef<Array<EditorStateOperation>>([]);
 
   useEffect(() => {
     init();
@@ -79,7 +82,7 @@ export const AnimatedEditorContainer = ({
     }
   }, [appendCode, code]);
 
-  const sendChange = (revision, operation, selection) => {
+  const sendChange = (revision: number, operation: Operation, selection: Selection) => {
     console.log("Sending change", operation);
 
     // ADDING CHANGES TO ACTION HISTORY - USE TO RECORD SEQUENCE
@@ -101,7 +104,7 @@ export const AnimatedEditorContainer = ({
     });
   };
 
-  const sendSelection = (selection) => {
+  const sendSelection = (selection: Selection) => {
     console.log("Sending selection", selection);
 
     // ADDING SELECTIONS TO ACTION HISTORY - USE TO RECORD SEQUENCE
@@ -120,6 +123,9 @@ export const AnimatedEditorContainer = ({
 
   const deleteAll = () => {
     const otServerAdapter = otServerAdapterRef.current;
+    if (!otServerAdapter) {
+      throw new Error("otServerAdapter is not defined");
+    }
     otServerAdapter.onChange("1", 0, [""], {
       ranges: [
         {
@@ -143,12 +149,19 @@ export const AnimatedEditorContainer = ({
     const { operation, selection, waitTime } = currentStepItem;
 
     const otServerAdapter = otServerAdapterRef.current;
+    if (!otServerAdapter) {
+      throw new Error("otServerAdapter is not defined");
+    }
 
     otServerAdapter.onChange("1", 0, operation || [], selection);
     stepIndexRef.current++;
 
     if (stepIndexRef.current >= editorState.length) {
-      editorContainerRef.current.style.display = "none";
+      const editorContainer = editorContainerRef.current;
+      if (!editorContainer) {
+        throw new Error("editorContainer is not defined");
+      }
+      editorContainer.style.display = "none";
 
       clearTimeout(timerRef.current);
       stepIndexRef.current = 0;
@@ -163,7 +176,7 @@ export const AnimatedEditorContainer = ({
       });
 
       timerRef.current = setTimeout(() => timeoutSequence(), 2000);
-      editorContainerRef.current.style.display = "block";
+      editorContainer.style.display = "block";
       return;
     }
 
@@ -175,12 +188,14 @@ export const AnimatedEditorContainer = ({
   };
 
   const init = () => {
-    const codeMirror = new CodeMirror(editorContainerRef.current, {
+    if (!editorContainerRef.current) {
+      throw new Error("editorContainerRef is not defined");
+    }
+    const codeMirror = CodeMirror(editorContainerRef.current, {
       lineNumbers: true,
       lineWrapping: true,
       mode: "htmlmixed", // Use the custom mode
       theme: "material-darker",
-      focus: false,
     });
 
     const codeMirrorAdapter = new ot.CodeMirrorAdapter(codeMirror);

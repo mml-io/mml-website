@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { MouseEvent, useContext } from "react";
 
 import { AnimatedEditorContext } from "@/src/components/AnimatedEditor/AnimatedEditorContainer";
 
@@ -6,9 +6,13 @@ import { AnimatedEditorContext } from "@/src/components/AnimatedEditor/AnimatedE
 type EditorProps = React.HTMLAttributes<HTMLDivElement>;
 
 export function CodemirrorEditor({ onClick: onClickProps, ...props }: EditorProps) {
-  const { editorContainerRef, onClick: clearTimeoutHandler } = useContext(AnimatedEditorContext);
+  const ctx = useContext(AnimatedEditorContext);
+  if (!ctx) {
+    throw new Error("AnimatedEditorContext not found");
+  }
+  const { editorContainerRef, onClick: clearTimeoutHandler } = ctx;
 
-  const handleClick = (e) => {
+  const handleClick = (e: MouseEvent<HTMLDivElement>) => {
     clearTimeoutHandler();
     onClickProps?.(e);
   };

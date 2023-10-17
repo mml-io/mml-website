@@ -3,63 +3,71 @@ import { Example } from "@/types/example";
 export const diceExample: Example = {
   name: "Dice",
   description: "A dice with advanced animation",
-  code: `<m-model
-  id="dice"
-  src="https://public.mml.io/dice.glb"
-  sx="1"
-  sy="1"
-  sz="1"
-  y="1"
-  rx="0"
-  ry="0"
-  rz="0"
-  onclick="rollDice()"
-></m-model>
+  code: `<m-model id="dice" src="https://public.mml.io/dice.glb" y="1" collide="true" onclick="rollDice()">
+  <m-attr-anim id="rx" attr="rx" ping-pong="false" easing="linear" start="0" end="0" loop="false" start-time="0" duration="1"></m-attr-anim>
+  <m-attr-anim id="ry" attr="ry" ping-pong="false" easing="linear" start="0" end="0" loop="false" start-time="0" duration="1"></m-attr-anim>
+  <m-attr-anim id="rz" attr="rz" ping-pong="false" easing="linear" start="0" end="0" loop="false" start-time="0" duration="1"></m-attr-anim>
+  <m-attr-anim id="y" attr="y" ping-pong="false" easing="linear" start="1" end="1" loop="false" start-time="0" duration="1"></m-attr-anim>
+</m-model>
 <script>
-  function lerp(start, end, t) {
-    return start * (1 - t) + end * t;
-  }
+  let rolling = false;
+  let rollResult = 1;
+  let rollDuration = 750;
+  let rollHeight = 3.1;
 
   function radToDeg(radians) {
     return radians * (180 / Math.PI);
   }
 
-  let rollResult = 1;
+  function animate(attr, easing, targetRotation, duration) {
+    rolling = true;
+    const mAttrAnim = document.getElementById(attr);
+    const newStart = mAttrAnim.getAttribute("end");
+    mAttrAnim.setAttribute("easing", easing);
+    mAttrAnim.setAttribute("start", newStart);
+    mAttrAnim.setAttribute("end", targetRotation);
+    mAttrAnim.setAttribute("loop", "false");
+    mAttrAnim.setAttribute("duration", duration);
+    mAttrAnim.setAttribute("start-time", document.timeline.currentTime);
+    setTimeout(() => {
+      rolling = false;
+    }, duration + 10);
+  }
 
   function rollDice() {
+    if (rolling) return;
     const rollMap = {
       1: {
-        rx: radToDeg(2 * Math.PI),
+        rx: 0,
         ry: 0,
-        rz: radToDeg(2 * Math.PI),
+        rz: 0
       },
       2: {
-        rx: radToDeg(2 * Math.PI),
+        rx: 0,
         ry: 0,
-        rz: radToDeg(2 * Math.PI - Math.PI / 2),
+        rz: radToDeg(-Math.PI / 2)
       },
       3: {
-        rx: radToDeg(2 * Math.PI - Math.PI / 2),
+        rx: radToDeg(-Math.PI / 2),
         ry: 0,
-        rz: radToDeg(2 * Math.PI),
+        rz: 0
       },
       4: {
-        rx: radToDeg(2 * Math.PI + Math.PI / 2),
+        rx: radToDeg(Math.PI / 2),
         ry: 0,
-        rz: radToDeg(2 * Math.PI),
+        rz: 0
       },
       5: {
-        rx: radToDeg(2 * Math.PI),
+        rx: 0,
         ry: 0,
-        rz: radToDeg(2 * Math.PI + Math.PI / 2),
+        rz: radToDeg(Math.PI / 2)
       },
       6: {
-        rx: radToDeg(2 * Math.PI + Math.PI),
+        rx: radToDeg(Math.PI),
         ry: 0,
-        rz: radToDeg(2 * Math.PI),
+        rz: 0
       },
     };
-
     const diceElement = document.getElementById("dice");
 
     let newRoll = Math.floor(Math.random() * 6) + 1;
@@ -74,30 +82,14 @@ export const diceExample: Example = {
       ry: parseFloat(diceElement.getAttribute("ry")),
       rz: parseFloat(diceElement.getAttribute("rz")),
     };
-    const animationTime = 400;
-    const interval = 40;
-    let currentTime = 0;
 
-    let intervalId = setInterval(() => {
-      currentTime += interval;
-      if (currentTime < animationTime) {
-        let t = currentTime / animationTime;
-        let currentRotation = {
-          rx: lerp(startRotation.rx, targetRotation.rx, t),
-          ry: lerp(startRotation.ry, targetRotation.ry, t),
-          rz: lerp(startRotation.rz, targetRotation.rz, t),
-        };
-        diceElement.setAttribute("rx", currentRotation.rx.toString());
-        diceElement.setAttribute("ry", currentRotation.ry.toString());
-        diceElement.setAttribute("rz", currentRotation.rz.toString());
-        diceElement.setAttribute("y", Math.cos(t * 2.0 - 0.5) * 3.5);
-      } else {
-        diceElement.setAttribute("rx", targetRotation.rx.toString());
-        diceElement.setAttribute("ry", targetRotation.ry.toString());
-        diceElement.setAttribute("rz", targetRotation.rz.toString());
-        clearInterval(intervalId);
-      }
-    }, interval);
+    animate("rx", "easeOutCubic", targetRotation.rx, rollDuration);
+    animate("ry", "easeOutCubic", targetRotation.ry, rollDuration);
+    animate("rz", "easeOutCubic", targetRotation.rz, rollDuration);
+    animate("y", "easeOutQuint", rollHeight, rollDuration * 0.35);
+    setTimeout(() => {
+      animate("y", "easeOutBounce", 1, rollDuration * 0.65);
+    }, rollDuration * 0.35);
   }
 </script>`,
   image: "/images/examples/dice.png",

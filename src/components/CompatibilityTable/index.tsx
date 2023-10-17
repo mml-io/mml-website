@@ -5,23 +5,35 @@ import { twMerge } from "tailwind-merge";
 import unrealJSON from "./unreal.json";
 import webJSON from "./web.json";
 
+type CompatibilityTableJSON = {
+  [key: string]: {
+    [key: string]: {
+      supported: boolean;
+      description: string;
+    };
+  };
+};
+
 const PLATFORMS = ["web", "unreal"] as const;
 
 function getItemsLists(element: string): {
   [key: string]: {
     web: {
-      supported: string;
+      supported: boolean;
       description: string;
     };
     unreal: {
-      supported: string;
+      supported: boolean;
       description: string;
     };
   };
 }[] {
-  const webList: { [key: string]: { supported: string; description: string } } = webJSON[element];
-  const unrealList: { [key: string]: { supported: string; description: string } } =
-    unrealJSON[element];
+  const webList: { [key: string]: { supported: boolean; description: string } } = (
+    webJSON as CompatibilityTableJSON
+  )[element];
+  const unrealList: { [key: string]: { supported: boolean; description: string } } = (
+    unrealJSON as CompatibilityTableJSON
+  )[element];
 
   // since we can assume they have the same elements, let's zip them together
 
@@ -53,7 +65,7 @@ const ICON_COLORS = {
 
 export default function CompatibilityTable({ element }: { element: string }) {
   const [itemsList, setItemsList] = useState(getItemsLists(element));
-  const [openRowNumber, setOpenRowNumber] = useState(null);
+  const [openRowNumber, setOpenRowNumber] = useState<number | null>(null);
   const [rowMessage, setRowMessage] = useState("");
   const [selected, setSelected] = useState<(number | null)[]>([null, null]);
 
@@ -65,7 +77,7 @@ export default function CompatibilityTable({ element }: { element: string }) {
     setItemsList(getItemsLists(element));
   }, [element]);
 
-  function handleCellClick(lineIndex: number, index: number, description) {
+  function handleCellClick(lineIndex: number, index: number, description: string) {
     if ((selected[0] === lineIndex && selected[1] === index) || !description) {
       return;
     }
@@ -107,6 +119,15 @@ export default function CompatibilityTable({ element }: { element: string }) {
                   const { supported, description } = item[name][platform];
                   const isSelected = selected[0] === lineIndex && selected[1] === index;
 
+                  let iconColor;
+                  if (supported === undefined) {
+                    iconColor = ICON_COLORS.undefined;
+                  } else if (supported === true) {
+                    iconColor = ICON_COLORS.true;
+                  } else {
+                    iconColor = ICON_COLORS.false;
+                  }
+
                   return (
                     <td
                       className={twMerge(
@@ -114,7 +135,7 @@ export default function CompatibilityTable({ element }: { element: string }) {
                         description &&
                           "hover:border-b-gray cursor-pointer hover:border-b-4 dark:hover:border-b-white",
                         isSelected && "border-b-[3px] text-white",
-                        `text-${ICON_COLORS[supported]}`,
+                        `text-${iconColor}`,
                       )}
                       style={{
                         color: supported === undefined ? "gray" : supported ? "green" : "red",

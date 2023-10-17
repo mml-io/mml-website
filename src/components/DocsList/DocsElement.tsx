@@ -1,6 +1,14 @@
 import Link from "next/link";
 
-export const DocsElement = ({ description, name, link }) => (
+export const DocsElement = ({
+  description,
+  name,
+  link,
+}: {
+  description: string;
+  name: string;
+  link: string;
+}) => (
   <div>
     <Link href={link}>
       <h5 className="mt-8 text-lg font-normal text-editor-title underline">{name}</h5>
