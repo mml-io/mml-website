@@ -9,3 +9,4 @@ coverage/
 .netlify/*
 .netlify/state.json
 .next/
+tsconfig.tsbuildinfo

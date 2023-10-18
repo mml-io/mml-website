@@ -1,24 +1,30 @@
 import dynamic from "next/dynamic";
+import { HTMLProps } from "react";
 import { solarizedlight } from "react-syntax-highlighter/dist/cjs/styles/prism";
-import { CSSRuleObject } from "tailwindcss/types/config";
 
 import { sharedBodyStyle } from "@/src/config/mdx";
 
 type SyntaxHighlighterProps = {
-  style: any;
-  language: string;
-  children: React.ReactNode;
-  className: string;
-  wrapLines: boolean;
-  lineProps: CSSRuleObject;
+  style?: any;
+  language?: string;
+  children: string | string[];
+  className?: string;
+  wrapLines?: boolean;
+  lineProps?: HTMLProps<HTMLElement> | ((lineNumber: number) => HTMLProps<HTMLElement>);
 };
 
-const SyntaxHighlighterComponent = dynamic<Partial<SyntaxHighlighterProps>>(
+const SyntaxHighlighterComponent = dynamic<SyntaxHighlighterProps>(
   () => import("react-syntax-highlighter").then((mod) => mod.PrismLight),
   { ssr: false },
 );
 
-const SyntaxHighlighter = ({ className, children }) => {
+const SyntaxHighlighter = ({
+  className,
+  children,
+}: {
+  className: string;
+  children: string | string[];
+}) => {
   const languageInternal = className?.replace(/language-/, "");
 
   return (

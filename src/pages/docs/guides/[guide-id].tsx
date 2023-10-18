@@ -24,7 +24,7 @@ export function getStaticPaths() {
 }
 
 // This also gets called at build time
-export function getStaticProps({ params }) {
+export function getStaticProps({ params }: { params: { "guide-id": string } }) {
   // params contains the element returned by getStaticPaths
   const guideId = params["guide-id"];
 

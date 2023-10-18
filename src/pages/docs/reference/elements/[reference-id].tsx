@@ -33,7 +33,7 @@ export function getStaticPaths() {
 }
 
 // This also gets called at build time
-export function getStaticProps({ params }) {
+export function getStaticProps({ params }: { params: { "reference-id": string } }) {
   // params contains the element returned by getStaticPaths
   const referenceId = params["reference-id"];
 

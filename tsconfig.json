@@ -13,6 +13,7 @@
     "incremental": true,
     "esModuleInterop": true,
     "module": "esnext",
+    "target": "ES6",
     "moduleResolution": "node",
     "downlevelIteration": true,
     "resolveJsonModule": true,
@@ -22,8 +23,13 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "noImplicitAny": true,
+    "types": ["node", "jest"],
+    "strictNullChecks": true,
+    "allowSyntheticDefaultImports": true
   },
   "include": ["next-env.d.ts", ".next/types/**/*.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "exclude": ["**/build/*", "types-src"]
 }
+

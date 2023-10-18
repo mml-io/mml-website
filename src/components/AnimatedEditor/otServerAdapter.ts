@@ -1,14 +1,29 @@
-export default class OTServerAdapter {
-  forwardSendOperation;
-  forwardSendSelection;
-  forwardGetOperations;
-  private callbacks: any;
+import { Operation, Selection } from "ot-es.js";
 
-  constructor(forwardSendOperation: any, forwardSendSelection: any, forwardGetOperations: any) {
-    this.forwardSendOperation = forwardSendOperation;
-    this.forwardSendSelection = forwardSendSelection;
-    this.forwardGetOperations = forwardGetOperations;
-  }
+type EditorCallback = {
+  change?: (operation: Operation, inverse: Operation) => void;
+  selectionChange?: () => void;
+  blur?: () => void;
+  set_color?: () => void;
+  client_left?: () => void;
+  ack?: () => void;
+  operation?: () => void;
+  operations?: () => void;
+  selection?: () => void;
+};
+
+export default class OTServerAdapter {
+  private callbacks?: EditorCallback;
+
+  constructor(
+    private forwardSendOperation: (
+      revision: number,
+      operation: Operation,
+      selection: Selection,
+    ) => void,
+    private forwardSendSelection: (selection: Selection) => void,
+    private forwardGetOperations: (base: number, head: number) => void,
+  ) {}
 
   onClientConnected(clientId: string, color: string) {
     this.trigger("set_color", clientId, color);
@@ -35,26 +50,23 @@ export default class OTServerAdapter {
     this.trigger("selection", clientId, selection);
   }
 
-  sendOperation(revision, operation, selection) {
-    // console.log("Called sendOperation", revision, operation, selection);
+  sendOperation(revision: number, operation: Operation, selection: Selection) {
     this.forwardSendOperation(revision, operation, selection);
   }
 
-  sendSelection(selection) {
-    // console.log('Called sendSelection', selection)
+  sendSelection(selection: Selection) {
     this.forwardSendSelection(selection);
   }
 
-  getOperations(base, head) {
-    // console.log('Called getOperations', base, head)
+  getOperations(base: number, head: number) {
     this.forwardGetOperations(base, head);
   }
 
-  registerCallbacks(cb) {
+  registerCallbacks(cb: EditorCallback) {
     this.callbacks = cb;
   }
 
-  trigger(event, ...args: any[]) {
+  trigger(event: keyof EditorCallback, ...args: any[]) {
     const action = this.callbacks && this.callbacks[event];
     if (action) {
       try {

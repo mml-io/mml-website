@@ -29,7 +29,7 @@ export function getStaticPaths() {
 }
 
 // This also gets called at build time
-export function getStaticProps({ params }) {
+export function getStaticProps({ params }: { params: { "event-id": string } }) {
   // params contains the element returned by getStaticPaths
   const eventId = params["event-id"];
 
@@ -46,7 +46,7 @@ function getEventClass(name: string) {
 }
 
 const DocsPage = ({ eventId }: { eventId: string }) => {
-  const eventClassDefinition: EventsClassSchemaType = getEventClass(eventId);
+  const eventClassDefinition: EventsClassSchemaType = getEventClass(eventId)!;
 
   const showInheritedProperties = true;
   const showExternalProperties = false;
@@ -99,40 +99,41 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
             <h2 className="mb-4 mt-6 scroll-m-20 text-3xl font-medium" id="properties">
               Properties
             </h2>
-            {eventClassDefinition.children
-              .filter((property) => {
-                if (!showExternalProperties && property.flags.isExternal) {
-                  return false;
-                }
-                if (!showInheritedProperties && property.inheritedFrom) {
-                  return false;
-                }
-                return true;
-              })
-              .map((property) => (
-                <div key={property.name}>
-                  <h3 className="mb-4 flex items-center pt-8 text-lg">
-                    {property.name}
-                    {Object.entries(property.flags).map(([flag]) => {
-                      return (
-                        <span
-                          key={flag}
-                          className="ml-2 inline-block rounded-3xl px-2 text-sm text-black dark:bg-white"
-                        >
-                          {flag}
-                        </span>
-                      );
-                    })}
-                  </h3>
-                  {property.comment &&
-                    property.comment.summary.map((descriptionText, index) => (
-                      <ReactMarkdown key={index} className="font-mono">
-                        {descriptionText.text}
-                      </ReactMarkdown>
-                    ))}
-                  <TypeDocType name={property.name} type={property.type as EventType} />
-                </div>
-              ))}
+            {eventClassDefinition.children &&
+              eventClassDefinition.children
+                .filter((property) => {
+                  if (!showExternalProperties && property.flags.isExternal) {
+                    return false;
+                  }
+                  if (!showInheritedProperties && property.inheritedFrom) {
+                    return false;
+                  }
+                  return true;
+                })
+                .map((property) => (
+                  <div key={property.name}>
+                    <h3 className="mb-4 flex items-center pt-8 text-lg">
+                      {property.name}
+                      {Object.entries(property.flags).map(([flag]) => {
+                        return (
+                          <span
+                            key={flag}
+                            className="ml-2 inline-block rounded-3xl px-2 text-sm text-black dark:bg-white"
+                          >
+                            {flag}
+                          </span>
+                        );
+                      })}
+                    </h3>
+                    {property.comment &&
+                      property.comment.summary.map((descriptionText, index) => (
+                        <ReactMarkdown key={index} className="font-mono">
+                          {descriptionText.text}
+                        </ReactMarkdown>
+                      ))}
+                    <TypeDocType name={property.name} type={property.type as EventType} />
+                  </div>
+                ))}
             {eventClassDefinition.extendedBy && (
               <>
                 <h2 className="mb-4 mt-6 scroll-m-20 text-3xl font-medium">Subclasses</h2>
@@ -216,20 +217,20 @@ function TypeDocType(props: { type: EventType | ReflectionType | ReferenceType; 
   } else if (type.type === "reflection") {
     return (
       <div>
-        {type.declaration.children.length === 1 ? (
+        {type.declaration.children?.length === 1 ? (
           <ul>
             {type.declaration.children?.map((dec, index) => {
               return (
                 <li className={"mb-4"} key={index}>
                   <div className="flex border-[1px] border-editor-border-dark p-4">
                     <h3 className="text-primary">{dec.name}: &nbsp;</h3>
-                    <TypeDocType type={dec.type} />
+                    <TypeDocType type={dec.type!} />
                   </div>
                   <div className="mt-4">
                     <h2 className="mb-4 mt-6 scroll-m-20 text-3xl font-medium">Type declaration</h2>
                     <ul className="mb-4 ml-12 flex ">
                       <li className="list-disc text-primary">{dec.name}: &nbsp;</li>
-                      <TypeDocType type={dec.type} />
+                      <TypeDocType type={dec.type!} />
                     </ul>
                     <div className="mb-4 ml-8">
                       {dec.comment && <TypeDocComment comment={dec.comment} />}
@@ -245,14 +246,15 @@ function TypeDocType(props: { type: EventType | ReflectionType | ReferenceType; 
             {"{"}
             <span>
               {`\n         `}
-              {type.declaration.children.map((declaration: any, index) => (
-                <Fragment key={index}>
-                  <span className="text-primary">{`${index ? "\n         " : ""}${
-                    declaration.name
-                  }`}</span>
-                  {`: ${declaration.type.name}`}
-                </Fragment>
-              ))}
+              {type.declaration.children &&
+                type.declaration.children.map((declaration: any, index) => (
+                  <Fragment key={index}>
+                    <span className="text-primary">{`${index ? "\n         " : ""}${
+                      declaration.name
+                    }`}</span>
+                    {`: ${declaration.type.name}`}
+                  </Fragment>
+                ))}
               {"\n}"}
             </span>
           </div>
@@ -262,7 +264,7 @@ function TypeDocType(props: { type: EventType | ReflectionType | ReferenceType; 
   } else if (type.type === "intrinsic") {
     return <div>{type.name}</div>;
   } else if (type.type === "literal") {
-    return <div className="mt-4">Literal: {type.value.toString()}</div>;
+    return <div className="mt-4">Literal: {type.value!.toString()}</div>;
   } else if (type.type === "reference") {
     return <div>{type.name}</div>;
   }

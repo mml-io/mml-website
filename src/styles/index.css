@@ -133,9 +133,3 @@
   /* CSS rules for the custom string */
   color: #608b4e !important;
 }
-
-.ClientContainer {
-  border: none !important;
-  width: 100% !important;
-  color: black;
-}
