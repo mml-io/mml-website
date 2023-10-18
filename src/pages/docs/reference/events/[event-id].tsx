@@ -217,7 +217,7 @@ function TypeDocType(props: { type: EventType | ReflectionType | ReferenceType; 
   } else if (type.type === "reflection") {
     return (
       <div>
-        {type.declaration.children && type.declaration.children.length === 1 ? (
+        {type.declaration.children?.length === 1 ? (
           <ul>
             {type.declaration.children?.map((dec, index) => {
               return (

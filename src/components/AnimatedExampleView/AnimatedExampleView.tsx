@@ -3,7 +3,7 @@
 import { EditableNetworkedDOM } from "@mml-io/networked-dom-document";
 import { IframeObservableDOMFactory } from "@mml-io/networked-dom-web-runner";
 import * as React from "react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { AnimatedEditorContainer, CodemirrorEditor } from "@/src/components/AnimatedEditor";
 import { ExampleAvatarClient } from "@/src/components/AnimatedExampleView/ExampleAvatarClient";
@@ -28,7 +28,7 @@ export function AnimatedExampleView() {
   );
   const [resetKey, setResetKey] = useState(0);
   const [appendCode, setAppendCode] = useState<string | undefined>(undefined);
-  const [server] = useState(new LocalAvatarServer());
+  const server = useRef(new LocalAvatarServer());
 
   const documentRef = React.useRef<EditableNetworkedDOM | null>(null);
 
@@ -107,7 +107,7 @@ export function AnimatedExampleView() {
               </div>
               <div className="relative h-[50%] w-[50%]">
                 <ExampleAvatarClient
-                  server={server}
+                  server={server.current}
                   clientId={1}
                   key={1}
                   document={networkedDOMDocument}
@@ -117,7 +117,7 @@ export function AnimatedExampleView() {
               </div>
               <div className="relative h-[50%] w-[50%]">
                 <ExampleAvatarClient
-                  server={server}
+                  server={server.current}
                   clientId={2}
                   key={2}
                   document={networkedDOMDocument}
