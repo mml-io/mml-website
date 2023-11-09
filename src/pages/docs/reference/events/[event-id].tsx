@@ -1,4 +1,5 @@
 import { EventsClassSchemaType, EventType } from "@mml-io/mml-schema";
+import dynamic from "next/dynamic";
 import Head from "next/head";
 import Link from "next/link";
 import * as React from "react";
@@ -10,6 +11,8 @@ import Breadcrumb from "@/src/components/Common/Breadcrumb";
 import LinkList from "@/src/components/Common/LinkList";
 import ReferenceNavigation from "@/src/components/Common/ReferenceNavigation";
 import TypeDocComment from "@/src/components/TypeDocComment";
+import { MarkDown } from "@/src/config/mdx";
+import * as docsExamples from "@/src/content/docs";
 import { getPageTitle } from "@/src/util";
 import { eventClasses } from "@/src/util/event-classes";
 
@@ -37,6 +40,13 @@ export function getStaticProps({ params }: { params: { "event-id": string } }) {
   return { props: { eventId } };
 }
 
+const ExampleView = dynamic(
+  () => import("@/src/components/ExampleView/DocsExampleView").then((mod) => mod.DocsExampleView),
+  {
+    ssr: false,
+  },
+);
+
 function isReference(type: { type: string }): type is ReferenceType {
   return type.type === "reference";
 }
@@ -60,6 +70,12 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
     }
   }
 
+  let primaryExample = null;
+  const examplesForElement = docsExamples.examples[eventId];
+  if (examplesForElement && examplesForElement.examples.primary) {
+    primaryExample = examplesForElement.examples.primary;
+  }
+
   const createTypeLink = (type: string, index: number) => {
     if (getEventClass(type)) {
       return (
@@ -71,6 +87,10 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
 
     return type;
   };
+
+  const filteredExamples = examplesForElement
+    ? Object.keys(examplesForElement.examples).filter((key) => key !== "primary")
+    : [];
 
   return (
     <>
@@ -96,6 +116,23 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
             {eventClassDefinition.comment && (
               <TypeDocComment comment={eventClassDefinition.comment} />
             )}
+            {primaryExample && (
+              <>
+                <h2 className="mb-4 mt-8 scroll-m-20 text-3xl font-medium" id="try it">
+                  Try it
+                </h2>
+                <ExampleView
+                  description="Demo"
+                  key={`${eventId}-primary`}
+                  baseScene={
+                    primaryExample.baseSceneOn !== undefined ? primaryExample.baseSceneOn : true
+                  }
+                  code={primaryExample.code}
+                  initialClientCount={primaryExample?.clientsNumber ?? 1}
+                  showClientsControls={primaryExample?.showClientsControls}
+                />
+              </>
+            )}
             <h2 className="mb-4 mt-6 scroll-m-20 text-3xl font-medium" id="properties">
               Properties
             </h2>
@@ -105,10 +142,7 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
                   if (!showExternalProperties && property.flags.isExternal) {
                     return false;
                   }
-                  if (!showInheritedProperties && property.inheritedFrom) {
-                    return false;
-                  }
-                  return true;
+                  return !(!showInheritedProperties && property.inheritedFrom);
                 })
                 .map((property) => (
                   <div key={property.name}>
@@ -142,6 +176,29 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
                     <h3 className="mb-2 text-xl uppercase">{eventClass.name}</h3>
                   </div>
                 ))}
+              </>
+            )}
+            {filteredExamples.length > 0 && (
+              <>
+                <h2 id="examples" className="mb-4 mt-6 scroll-m-20 text-3xl font-medium">
+                  Examples
+                </h2>
+                {filteredExamples.map((exampleKey) => {
+                  const example = examplesForElement.examples[exampleKey];
+                  return (
+                    <div key={`${eventId}-${example.title}`}>
+                      <h3 className="mt-8 text-[24px] font-medium">{example.title}</h3>
+                      <MarkDown>{`${example.description}`}</MarkDown>
+                      <ExampleView
+                        description={example.title}
+                        baseScene={example.baseSceneOn !== undefined ? example.baseSceneOn : true}
+                        code={example.code}
+                        initialClientCount={example?.clientsNumber ?? 1}
+                        showClientsControls={example?.showClientsControls}
+                      />
+                    </div>
+                  );
+                })}
               </>
             )}
           </main>

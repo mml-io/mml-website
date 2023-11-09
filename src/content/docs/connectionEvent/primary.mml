@@ -1,0 +1,15 @@
+<m-label y="5" width="10" height="5" color="red" font-size="150">
+</m-label>
+
+<script>
+  const connections = new Set();
+
+  window.addEventListener("connected", (e) => {
+    const labelElement = document.querySelector("m-label")
+    connections.add(e.detail.connectionId)
+
+    const connectionsString = Array.from(connections).join(", ")
+
+    labelElement.setAttribute("content", "Connected Ids: " + connectionsString)
+  })
+</script>

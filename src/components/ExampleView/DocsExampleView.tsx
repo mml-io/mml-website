@@ -20,12 +20,16 @@ export function DocsExampleView(props: {
   initialClientCount?: number;
   baseScene: boolean;
   description: string;
+  showClientsControls?: boolean;
 }) {
   const [code, setCode] = useState(props.code);
   const [networkedDOMDocument, setNetworkedDOMDocument] = useState<EditableNetworkedDOM | null>(
     null,
   );
-  const clients = [...Array(props.initialClientCount || 1).keys()];
+  const [clients, setClients] = useState<number[]>([
+    ...Array(props.initialClientCount ?? 1).keys(),
+  ]);
+
   const { baseScene } = props;
 
   useEffect(() => {
@@ -49,6 +53,14 @@ export function DocsExampleView(props: {
   const handleResetClick = useCallback(() => {
     setCode(props.code);
   }, []);
+
+  const addNewClient = () => {
+    setClients((oldClients) => [...oldClients, oldClients.length]);
+  };
+
+  const removeClient = () => {
+    setClients((oldClients) => oldClients.slice(0, oldClients.length - 1));
+  };
 
   return (
     <>
@@ -79,9 +91,24 @@ export function DocsExampleView(props: {
         <div className="relative flex h-full flex-[0_0_40%] flex-col">
           {networkedDOMDocument && (
             <>
-              {clients.map((clientId) => {
+              {clients.map((clientId, index) => {
+                const isLast = index === clients.length - 1 && index !== 0;
                 return (
-                  <ExampleClient clientId={0} key={clientId} document={networkedDOMDocument} />
+                  <ExampleClient
+                    clientId={clientId}
+                    clientsNumber={clients.length}
+                    key={clientId}
+                    document={networkedDOMDocument}
+                  >
+                    {props.showClientsControls && (isLast || clientId === 0) && (
+                      <button
+                        className="absolute right-0 top-0 mr-1 mt-1 border-[1px] border-editor-border bg-white px-[10px] py-[3px] text-[13px] text-black dark:border-editor-border-dark dark:bg-editor-bg dark:text-white"
+                        onClick={isLast ? removeClient : addNewClient}
+                      >
+                        {isLast ? "remove client" : "Add new client"}
+                      </button>
+                    )}
+                  </ExampleClient>
                 );
               })}
             </>

@@ -1,0 +1,17 @@
+<m-cube id="cube" y="1" width="2" height="2" depth="2" color="black">
+</m-cube>
+<m-label y="5" width="10" height="5" color="red" font-size="120" content="Click the cube!">
+</m-label>
+
+<script>
+  const cube = document.querySelector("#cube")
+
+  const getShortPosition = str => str.toString().substring(0, 6)
+
+  cube.addEventListener("click", (e) => {
+    const label = document.querySelector("m-label")
+    const { position } = e.detail
+
+    label.setAttribute("content", "Clicked at: \n" + "x: " + getShortPosition(position.x) + ",\ny: " + getShortPosition(position.y) + ",\nz: " + getShortPosition(position.z))
+  })
+</script>
