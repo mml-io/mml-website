@@ -70,9 +70,9 @@ export const ExampleClient = React.memo(function ExampleClient(props: {
     <>
       <div className="relative h-[35px] w-full border-b-[1px] border-editor-border bg-white dark:border-editor-border-dark dark:bg-editor-bg">
         {children}
-        <span className="inline-block h-full w-[83px] border-b-[3px] bg-transparent pt-2 text-center text-[13px] text-editor-title">
-          Client {clientId + 1}
-        </span>
+        {/*<span className="inline-block h-full w-[83px] border-b-[3px] bg-transparent pt-2 text-center text-[13px] text-editor-title">*/}
+        {/*  Client {clientId + 1}*/}
+        {/*</span>*/}
       </div>
       <Container clientHeight={clientHeight} refProp={elementRef} />
     </>

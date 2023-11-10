@@ -6,7 +6,7 @@
   window.addEventListener("connected", (e) => {
     const newLabel = document.createElement("m-label")
 
-    newLabel.setAttribute("id", e.detail.connectionId)
+    newLabel.setAttribute("id", `#client-${e.detail.connectionId}`)
     newLabel.setAttribute("y", "5")
     newLabel.setAttribute("width", "10")
     newLabel.setAttribute("height", "4")
@@ -20,7 +20,7 @@
   })
 
   window.addEventListener("disconnected", (e) => {
-    const label = document.querySelector(`#${e.detail.connectionId}`)
+    const label = document.querySelector(`#client-${e.detail.connectionId}`)
 
     labelGroup.removeChild(label)
   })

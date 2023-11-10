@@ -20,7 +20,7 @@ export const examples: DocsExamples = {
     showClientsControls: true,
   },
   visibleTo: {
-    title: "Basic visibleTo event",
+    title: "Visible to event",
     description: "A label that shows only the client id of one specific client",
     code: visibleTo,
     clientsNumber: 2,
