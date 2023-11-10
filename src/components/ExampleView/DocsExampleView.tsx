@@ -15,13 +15,15 @@ function createDocumentCode(code: string, lightOn: boolean): string {
   }${code}`;
 }
 
-export function DocsExampleView(props: {
+export type DocsExampleViewProps = {
   code: string;
   initialClientCount?: number;
   baseScene: boolean;
   description: string;
   showClientsControls?: boolean;
-}) {
+};
+
+export function DocsExampleView(props: DocsExampleViewProps) {
   const [code, setCode] = useState(props.code);
   const [networkedDOMDocument, setNetworkedDOMDocument] = useState<EditableNetworkedDOM | null>(
     null,

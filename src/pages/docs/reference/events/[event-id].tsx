@@ -1,5 +1,4 @@
 import { EventsClassSchemaType, EventType } from "@mml-io/mml-schema";
-import dynamic from "next/dynamic";
 import Head from "next/head";
 import Link from "next/link";
 import * as React from "react";
@@ -10,6 +9,7 @@ import { ReferenceType, ReflectionType } from "typedoc";
 import Breadcrumb from "@/src/components/Common/Breadcrumb";
 import LinkList from "@/src/components/Common/LinkList";
 import ReferenceNavigation from "@/src/components/Common/ReferenceNavigation";
+import ExampleView from "@/src/components/ExampleView/DocsExampleViewDynamic";
 import TypeDocComment from "@/src/components/TypeDocComment";
 import { MarkDown } from "@/src/config/mdx";
 import * as docsExamples from "@/src/content/docs";
@@ -39,13 +39,6 @@ export function getStaticProps({ params }: { params: { "event-id": string } }) {
   // Pass post data to the page via props
   return { props: { eventId } };
 }
-
-const ExampleView = dynamic(
-  () => import("@/src/components/ExampleView/DocsExampleView").then((mod) => mod.DocsExampleView),
-  {
-    ssr: false,
-  },
-);
 
 function isReference(type: { type: string }): type is ReferenceType {
   return type.type === "reference";

@@ -1,29 +1,12 @@
 import dynamic from "next/dynamic";
 
-type ExampleViewProps = {
-  code: string;
-  baseScene?: boolean;
-  initialClientCount?: number;
-  description?: string;
-};
+import { DocsExampleViewProps } from "@/src/components/ExampleView/DocsExampleView";
 
-const ExampleViewStatic = dynamic<Partial<ExampleViewProps>>(
+const ExampleViewStatic = dynamic<Partial<DocsExampleViewProps>>(
   () => import("@/src/components/ExampleView/DocsExampleView").then((mod) => mod.DocsExampleView),
   { ssr: false },
 );
 
-export default function ExampleView({
-  code,
-  description,
-  baseScene,
-  initialClientCount,
-}: ExampleViewProps) {
-  return (
-    <ExampleViewStatic
-      baseScene={baseScene}
-      initialClientCount={initialClientCount ?? 1}
-      code={code}
-      description={description ?? "Demo"}
-    />
-  );
+export default function ExampleView(props: DocsExampleViewProps) {
+  return <ExampleViewStatic {...props} />;
 }
