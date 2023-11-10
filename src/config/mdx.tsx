@@ -1,4 +1,4 @@
-import { DetailedHTMLProps, HTMLProps, OlHTMLAttributes, ReactNode } from "react";
+import { DetailedHTMLProps, HTMLProps, OlHTMLAttributes } from "react";
 import ReactMarkdown from "react-markdown";
 import { Components } from "react-markdown/lib/ast-to-react";
 import { ReactMarkdownOptions } from "react-markdown/lib/react-markdown";

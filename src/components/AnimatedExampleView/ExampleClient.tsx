@@ -14,7 +14,7 @@ export const ExampleClient = React.memo(function ExampleClient(props: {
   document: NetworkedDOM | EditableNetworkedDOM;
   clientId: number;
   children?: React.ReactNode;
-  clientsNumber: number;
+  clientsNumber?: number;
 }) {
   const [clientState, setClientState] = useState<{
     client: MMLWebRunnerClient;
@@ -62,7 +62,7 @@ export const ExampleClient = React.memo(function ExampleClient(props: {
     clientState?.scene.fitContainer();
   }, 1);
 
-  const { children, clientsNumber, clientId } = props;
+  const { children, clientsNumber = 1, clientId } = props;
 
   const clientHeight = Math.floor(368 / clientsNumber);
 
