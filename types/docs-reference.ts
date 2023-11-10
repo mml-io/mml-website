@@ -3,6 +3,8 @@ export type DocsReference = {
   description: string;
   code: string;
   baseSceneOn?: boolean;
+  clientsNumber?: number;
+  showClientsControls?: boolean;
 };
 
 export type DocsExamples = {

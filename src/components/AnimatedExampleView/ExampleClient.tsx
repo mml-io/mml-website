@@ -6,17 +6,20 @@ import { useEffect, useState } from "react";
 
 import { getIframeTargetWindow } from "@/src/util/iframe-target";
 
-function Container(props: { refProp: React.Ref<HTMLDivElement> }) {
-  return <div className={"h-[100%] w-[100%]"} ref={props.refProp} />;
+function Container(props: { refProp: React.Ref<HTMLDivElement>; clientHeight: number }) {
+  return <div style={{ height: props.clientHeight - 35 }} ref={props.refProp} />;
 }
 
 export const ExampleClient = React.memo(function ExampleClient(props: {
   document: NetworkedDOM | EditableNetworkedDOM;
   clientId: number;
+  children?: React.ReactNode;
+  clientsNumber?: number;
 }) {
   const [clientState, setClientState] = useState<{
     client: MMLWebRunnerClient;
     scene: MMLScene;
+    children?: React.ReactNode;
   } | null>(null);
   const elementRef = React.useRef<HTMLDivElement>(null);
 
@@ -58,14 +61,20 @@ export const ExampleClient = React.memo(function ExampleClient(props: {
   setTimeout(() => {
     clientState?.scene.fitContainer();
   }, 1);
+
+  const { children, clientsNumber = 1 } = props;
+
+  const clientHeight = Math.floor(368 / clientsNumber);
+
   return (
     <>
-      <div className="h-[35px] w-full border-b-[1px] border-editor-border bg-white dark:border-editor-border-dark dark:bg-editor-bg">
+      <div className="relative h-[35px] w-full border-b-[1px] border-editor-border bg-white dark:border-editor-border-dark dark:bg-editor-bg">
+        {children}
         <span className="inline-block h-full w-[83px] border-b-[3px] bg-transparent pt-2 text-center text-[13px] text-editor-title">
-          Client {props.clientId + 1}
+          Client
         </span>
       </div>
-      <Container refProp={elementRef} />
+      <Container clientHeight={clientHeight} refProp={elementRef} />
     </>
   );
 });

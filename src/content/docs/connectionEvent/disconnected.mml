@@ -1,0 +1,17 @@
+<m-label y="5" width="10" height="5" color="red" font-size="150">
+</m-label>
+
+<script>
+  const labelElement = document.querySelector("m-label")
+  const connections = new Set([1, 2]);
+  const connectionsString = Array.from(connections).join(", ")
+  labelElement.setAttribute("content", "Connected Ids: " + connectionsString)
+
+  window.addEventListener("disconnected", (e) => {
+    connections.delete(e.detail.connectionId)
+
+    const connectionsString = Array.from(connections).join(", ")
+
+    labelElement.setAttribute("content", "Connected Ids: " + connectionsString)
+  })
+</script>

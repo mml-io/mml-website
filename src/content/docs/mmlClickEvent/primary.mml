@@ -1,0 +1,13 @@
+<m-cube id="cube" y="2" color="red">
+</m-cube>
+
+<script>
+  const cube = document.querySelector("#cube")
+
+  cube.addEventListener("click", (e) => {
+    // let's create a random new color
+    const newColor = "#" + Math.floor(Math.random() * 16777215).toString(16)
+    // and set it as the new color of the cube
+    cube.setAttribute("color", newColor)
+  })
+</script>

@@ -1,0 +1,27 @@
+<m-group id="label-group"></m-group>
+
+<script>
+  const labelGroup = document.querySelector("#label-group")
+
+  window.addEventListener("connected", (e) => {
+    const newLabel = document.createElement("m-label")
+
+    newLabel.setAttribute("id", `#client-${e.detail.connectionId}`)
+    newLabel.setAttribute("y", "5")
+    newLabel.setAttribute("width", "10")
+    newLabel.setAttribute("height", "4")
+    newLabel.setAttribute("color", "red")
+    newLabel.setAttribute("font-size", "300")
+    newLabel.setAttribute("alignment", "center")
+    newLabel.setAttribute("visible-to", e.detail.connectionId)
+    newLabel.setAttribute("content", e.detail.connectionId)
+
+    labelGroup.appendChild(newLabel)
+  })
+
+  window.addEventListener("disconnected", (e) => {
+    const label = document.querySelector(`#client-${e.detail.connectionId}`)
+
+    labelGroup.removeChild(label)
+  })
+</script>

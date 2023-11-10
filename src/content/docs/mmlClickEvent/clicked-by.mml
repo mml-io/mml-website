@@ -1,0 +1,13 @@
+<m-cube id="cube" y="1" width="2" height="2" depth="2" color="black">
+</m-cube>
+<m-label y="5" width="10" height="5" color="red" font-size="180" content="Click the cube!">
+</m-label>
+
+<script>
+  const cube = document.querySelector("#cube")
+
+  cube.addEventListener("click", (e) => {
+    const label = document.querySelector("m-label")
+    label.setAttribute("content", "Clicked by: " + e.detail.connectionId)
+  })
+</script>
