@@ -107,7 +107,7 @@ export function DocsExampleView(props: DocsExampleViewProps) {
                         className="absolute right-0 top-0 mr-1 mt-1 border-[1px] border-editor-border bg-white px-[10px] py-[3px] text-[13px] text-black dark:border-editor-border-dark dark:bg-editor-bg dark:text-white"
                         onClick={isLast ? removeClient : addNewClient}
                       >
-                        {isLast ? "remove client" : "Add new client"}
+                        {isLast ? "Remove client" : "Add new client"}
                       </button>
                     )}
                   </ExampleClient>
