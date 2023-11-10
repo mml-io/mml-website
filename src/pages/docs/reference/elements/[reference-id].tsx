@@ -1,5 +1,4 @@
 import { createSchemaDefinition, schemaJSON } from "@mml-io/mml-schema";
-import dynamic from "next/dynamic";
 import Head from "next/head";
 import * as React from "react";
 
@@ -9,6 +8,7 @@ import ReferenceNavigation from "@/src/components/Common/ReferenceNavigation";
 import CompatibilityTable from "@/src/components/CompatibilityTable";
 import { Attribute } from "@/src/components/Docs/Attribute";
 import { AttributeGroup } from "@/src/components/Docs/AttributeGroup";
+import ExampleView from "@/src/components/ExampleView/DocsExampleViewDynamic";
 import { MarkDown } from "@/src/config/mdx";
 import * as docsExamples from "@/src/content/docs";
 import { getPageTitle } from "@/src/util";
@@ -40,13 +40,6 @@ export function getStaticProps({ params }: { params: { "reference-id": string } 
   // Pass post data to the page via props
   return { props: { referenceId } };
 }
-
-const ExampleView = dynamic(
-  () => import("@/src/components/ExampleView/DocsExampleView").then((mod) => mod.DocsExampleView),
-  {
-    ssr: false,
-  },
-);
 
 const schemaDefinition = createSchemaDefinition(schemaJSON);
 
