@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 
-import { DocsExampleViewProps } from "@/src/components/ExampleView/DocsExampleView";
+import type { DocsExampleViewProps } from "@/src/components/ExampleView/DocsExampleView";
 
 const ExampleViewStatic = dynamic<Partial<DocsExampleViewProps>>(
   () => import("@/src/components/ExampleView/DocsExampleView").then((mod) => mod.DocsExampleView),
