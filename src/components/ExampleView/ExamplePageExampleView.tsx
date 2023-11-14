@@ -1,10 +1,13 @@
 import { EditableNetworkedDOM } from "@mml-io/networked-dom-document";
 import { IframeObservableDOMFactory } from "@mml-io/networked-dom-web-runner";
 import * as React from "react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
+import { ExampleAvatarClient } from "@/src/components/AnimatedExampleView/ExampleAvatarClient";
 import { ExampleClient } from "@/src/components/AnimatedExampleView/ExampleClient";
+import { LocalAvatarServer } from "@/src/components/AnimatedExampleView/LocalAvatar/LocalAvatarServer";
 import HTMLEditor from "@/src/components/ExampleView/HTMLEditor";
+import { CLIENT_TYPES, ClientType } from "@/types/docs-reference";
 
 function createDocumentCode(code: string, lightOn: boolean): string {
   return `${
@@ -15,7 +18,7 @@ function createDocumentCode(code: string, lightOn: boolean): string {
 
 export function ExamplePageExampleView(props: {
   code: string;
-  initialClientCount?: number;
+  initialClients?: ClientType[];
   baseScene: boolean;
   description: string;
 }) {
@@ -23,8 +26,8 @@ export function ExamplePageExampleView(props: {
   const [networkedDOMDocument, setNetworkedDOMDocument] = useState<EditableNetworkedDOM | null>(
     null,
   );
-  const clients = [...Array(props.initialClientCount || 1).keys()];
-  const { baseScene } = props;
+  const { baseScene, initialClients = [CLIENT_TYPES.FLOATING] } = props;
+  const server = useRef(new LocalAvatarServer());
 
   useEffect(() => {
     const document = new EditableNetworkedDOM(
@@ -81,9 +84,25 @@ export function ExamplePageExampleView(props: {
         <div className="relative flex h-full flex-[0_1_40%] flex-col">
           {networkedDOMDocument && (
             <>
-              {clients.map((clientId) => {
-                return (
-                  <ExampleClient clientId={0} key={clientId} document={networkedDOMDocument} />
+              {initialClients.map((clientType, index) => {
+                return clientType === CLIENT_TYPES.FLOATING ? (
+                  <ExampleClient
+                    clientId={index}
+                    parentHeight={740}
+                    clientsNumber={initialClients.length}
+                    key={index}
+                    document={networkedDOMDocument}
+                  />
+                ) : (
+                  <ExampleAvatarClient
+                    server={server.current}
+                    clientsNumber={initialClients.length}
+                    parentHeight={740}
+                    document={networkedDOMDocument}
+                    clientId={index}
+                    position={{ x: -0.5, y: 0.5, z: 5 }}
+                    rotation={{ x: 0, y: Math.PI, z: 0 }}
+                  />
                 );
               })}
             </>

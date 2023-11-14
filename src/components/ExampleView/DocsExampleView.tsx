@@ -3,12 +3,15 @@
 import { EditableNetworkedDOM } from "@mml-io/networked-dom-document";
 import { IframeObservableDOMFactory } from "@mml-io/networked-dom-web-runner";
 import * as React from "react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
+import { ExampleAvatarClient } from "@/src/components/AnimatedExampleView/ExampleAvatarClient";
 import { ExampleClient } from "@/src/components/AnimatedExampleView/ExampleClient";
+import { LocalAvatarServer } from "@/src/components/AnimatedExampleView/LocalAvatar/LocalAvatarServer";
 import HTMLEditor from "@/src/components/ExampleView/HTMLEditor";
+import { CLIENT_TYPES, ClientType } from "@/types/docs-reference";
 
-function createDocumentCode(code: string, lightOn: boolean): string {
+function createDocumentCode(code: string, lightOn?: boolean): string {
   return `${
     lightOn &&
     '<m-plane color="white" width="20" height="20" rx="-90"></m-plane><m-light type="point" x="10" y="10" z="10"></m-light>'
@@ -17,8 +20,8 @@ function createDocumentCode(code: string, lightOn: boolean): string {
 
 export type DocsExampleViewProps = {
   code: string;
-  initialClientCount?: number;
-  baseScene: boolean;
+  initialClients: ClientType[];
+  baseScene?: boolean;
   description: string;
   showClientsControls?: boolean;
 };
@@ -28,9 +31,9 @@ export function DocsExampleView(props: DocsExampleViewProps) {
   const [networkedDOMDocument, setNetworkedDOMDocument] = useState<EditableNetworkedDOM | null>(
     null,
   );
-  const [clients, setClients] = useState<number[]>([
-    ...Array(props.initialClientCount ?? 1).keys(),
-  ]);
+  const [clients, setClients] = useState<ClientType[]>(props.initialClients);
+
+  const server = useRef(new LocalAvatarServer());
 
   const { baseScene } = props;
 
@@ -56,8 +59,8 @@ export function DocsExampleView(props: DocsExampleViewProps) {
     setCode(props.code);
   }, []);
 
-  const addNewClient = () => {
-    setClients((oldClients) => [...oldClients, oldClients.length]);
+  const addNewClient = (clientType: ClientType) => {
+    setClients((oldClients) => [...oldClients, clientType]);
   };
 
   const removeClient = () => {
@@ -90,27 +93,51 @@ export function DocsExampleView(props: DocsExampleViewProps) {
           </div>
           <HTMLEditor className="h-[332px]" code={code} setCode={setCode} />
         </div>
-        <div className="relative flex h-full flex-[0_0_40%] flex-col">
+        <div className="relative flex h-full w-[40%] flex-[0_0_40%] flex-col">
           {networkedDOMDocument && (
             <>
-              {clients.map((clientId, index) => {
+              {clients.map((clientType, index) => {
                 const isLast = index === clients.length - 1 && index !== 0;
-                return (
-                  <ExampleClient
-                    clientId={clientId}
-                    clientsNumber={clients.length}
-                    key={clientId}
-                    document={networkedDOMDocument}
-                  >
-                    {props.showClientsControls && (isLast || clientId === 0) && (
+
+                const children =
+                  props.showClientsControls && (isLast || index === 0) ? (
+                    <>
                       <button
                         className="absolute right-0 top-0 mr-1 mt-1 border-[1px] border-editor-border bg-white px-[10px] py-[3px] text-[13px] text-black dark:border-editor-border-dark dark:bg-editor-bg dark:text-white"
-                        onClick={isLast ? removeClient : addNewClient}
+                        onClick={isLast ? removeClient : () => addNewClient(CLIENT_TYPES.FLOATING)}
                       >
-                        {isLast ? "Remove client" : "Add new client"}
+                        {isLast ? "Remove client" : "New client"}
                       </button>
-                    )}
-                  </ExampleClient>
+                      {!isLast && (
+                        <button
+                          className="absolute right-[88px] top-0 mr-1 mt-1 border-[1px] border-editor-border bg-white px-[10px] py-[3px] text-[13px] text-black dark:border-editor-border-dark dark:bg-editor-bg dark:text-white"
+                          onClick={() => addNewClient(CLIENT_TYPES.AVATAR)}
+                        >
+                          New avatar client
+                        </button>
+                      )}
+                    </>
+                  ) : null;
+
+                return clientType === CLIENT_TYPES.FLOATING ? (
+                  <ExampleClient
+                    clientId={index}
+                    clientsNumber={clients.length}
+                    key={index}
+                    document={networkedDOMDocument}
+                    children={children}
+                  />
+                ) : (
+                  <ExampleAvatarClient
+                    key={index}
+                    server={server.current}
+                    clientsNumber={clients.length}
+                    document={networkedDOMDocument}
+                    clientId={index}
+                    position={{ x: -0.5, y: 0.5, z: 5 }}
+                    rotation={{ x: 0, y: Math.PI, z: 0 }}
+                    children={children}
+                  />
                 );
               })}
             </>

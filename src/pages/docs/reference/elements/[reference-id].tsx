@@ -12,6 +12,7 @@ import ExampleView from "@/src/components/ExampleView/DocsExampleViewDynamic";
 import { MarkDown } from "@/src/config/mdx";
 import * as docsExamples from "@/src/content/docs";
 import { getPageTitle } from "@/src/util";
+import { CLIENT_TYPES } from "@/types/docs-reference";
 
 // This function gets called at build time to generate all the files
 export function getStaticPaths() {
@@ -86,13 +87,13 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
                 Try it
               </h2>
               <ExampleView
-                description="Demo"
+                description={primaryExample.description}
                 key={`${referenceId}-primary`}
                 baseScene={
                   primaryExample.baseSceneOn !== undefined ? primaryExample.baseSceneOn : true
                 }
                 code={primaryExample.code}
-                initialClientCount={1}
+                initialClients={primaryExample.clients ?? [CLIENT_TYPES.FLOATING]}
               />
             </>
           )}
@@ -141,7 +142,7 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
                       description={example.title}
                       baseScene={example.baseSceneOn !== undefined ? example.baseSceneOn : true}
                       code={example.code}
-                      initialClientCount={1}
+                      initialClients={example.clients ?? [CLIENT_TYPES.FLOATING]}
                     />
                   </div>
                 );

@@ -15,6 +15,7 @@ import { MarkDown } from "@/src/config/mdx";
 import * as docsExamples from "@/src/content/docs";
 import { getPageTitle } from "@/src/util";
 import { eventClasses } from "@/src/util/event-classes";
+import { CLIENT_TYPES } from "@/types/docs-reference";
 
 // This function gets called at build time to generate all the files
 export function getStaticPaths() {
@@ -115,13 +116,13 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
                   Try it
                 </h2>
                 <ExampleView
-                  description="Demo"
+                  description={primaryExample.description}
                   key={`${eventId}-primary`}
                   baseScene={
                     primaryExample.baseSceneOn !== undefined ? primaryExample.baseSceneOn : true
                   }
                   code={primaryExample.code}
-                  initialClientCount={primaryExample?.clientsNumber ?? 1}
+                  initialClients={primaryExample.clients ?? [CLIENT_TYPES.FLOATING]}
                   showClientsControls={primaryExample?.showClientsControls}
                 />
               </>
@@ -186,7 +187,7 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
                         description={example.title}
                         baseScene={example.baseSceneOn !== undefined ? example.baseSceneOn : true}
                         code={example.code}
-                        initialClientCount={example?.clientsNumber ?? 1}
+                        initialClients={example.clients ?? [CLIENT_TYPES.FLOATING]}
                         showClientsControls={example?.showClientsControls}
                       />
                     </div>

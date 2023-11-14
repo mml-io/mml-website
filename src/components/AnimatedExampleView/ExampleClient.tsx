@@ -15,6 +15,7 @@ export const ExampleClient = React.memo(function ExampleClient(props: {
   clientId: number;
   children?: React.ReactNode;
   clientsNumber?: number;
+  parentHeight?: number;
 }) {
   const [clientState, setClientState] = useState<{
     client: MMLWebRunnerClient;
@@ -62,9 +63,10 @@ export const ExampleClient = React.memo(function ExampleClient(props: {
     clientState?.scene.fitContainer();
   }, 1);
 
-  const { children, clientsNumber = 1 } = props;
+  // 368 is the client height we're using in the docs, we use it as a default value here
+  const { children, clientsNumber = 1, parentHeight = 368 } = props;
 
-  const clientHeight = Math.floor(368 / clientsNumber);
+  const clientHeight = Math.floor(parentHeight / clientsNumber);
 
   return (
     <>

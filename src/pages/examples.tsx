@@ -8,6 +8,7 @@ import { ChangeEvent, useEffect } from "react";
 import ExampleView from "@/src/components/ExampleView/ExamplePageExampleViewDynamic";
 import { examples } from "@/src/content/examples";
 import { getPageTitle } from "@/src/util";
+import { CLIENT_TYPES } from "@/types/docs-reference";
 import { Example, ExamplesByName } from "@/types/example";
 
 const ExamplesPage = () => {
@@ -109,7 +110,7 @@ const ExamplesPage = () => {
         <div className="h-full flex-1">
           <ExampleView
             key={selectedExample?.name || "default"}
-            initialClientCount={1}
+            initialClients={selectedExample?.clients ?? [CLIENT_TYPES.FLOATING]}
             code={selectedExample?.code || ""}
             baseScene={
               typeof selectedExample?.baseScene === "boolean" ? selectedExample?.baseScene : true

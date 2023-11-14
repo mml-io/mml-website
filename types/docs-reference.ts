@@ -1,9 +1,17 @@
+// Technically not a type but I'm not sure where to put this constant
+export const CLIENT_TYPES = {
+  FLOATING: "floating",
+  AVATAR: "avatar",
+} as const;
+
+export type ClientType = (typeof CLIENT_TYPES)[keyof typeof CLIENT_TYPES];
+
 export type DocsReference = {
   title: string;
   description: string;
   code: string;
   baseSceneOn?: boolean;
-  clientsNumber?: number;
+  clients?: ClientType[];
   showClientsControls?: boolean;
 };
 

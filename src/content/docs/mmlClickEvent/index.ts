@@ -1,4 +1,4 @@
-import { DocsExamples } from "@/types/docs-reference";
+import { CLIENT_TYPES, DocsExamples } from "@/types/docs-reference";
 
 import clickedBy from "./clicked-by.mml";
 import position from "./position.mml";
@@ -14,7 +14,7 @@ export const examples: DocsExamples = {
     title: "Clicked by",
     description: "This example shows which client clicked the cube.",
     code: clickedBy,
-    clientsNumber: 2,
+    clients: [CLIENT_TYPES.FLOATING, CLIENT_TYPES.FLOATING],
     showClientsControls: true,
   },
   position: {
