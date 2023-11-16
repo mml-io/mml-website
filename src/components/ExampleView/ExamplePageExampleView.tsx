@@ -1,18 +1,14 @@
 import { EditableNetworkedDOM } from "@mml-io/networked-dom-document";
 import { IframeObservableDOMFactory } from "@mml-io/networked-dom-web-runner";
 import * as React from "react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import ExampleClientsSection from "@/src/components/ExampleView/ExampleClientsSection";
 import HTMLEditor from "@/src/components/ExampleView/HTMLEditor";
+import { getClientIdFunctionGenerator } from "@/src/util/clients-utils";
 import { CLIENT_TYPES, ClientType } from "@/types/docs-reference";
 
-function createDocumentCode(code: string, lightOn: boolean): string {
-  return `${
-    lightOn &&
-    '<m-plane color="white" width="20" height="20" rx="-90"></m-plane><m-light type="point" x="10" y="10" z="10"></m-light>'
-  }${code}`;
-}
+const getNextClientId = getClientIdFunctionGenerator();
 
 export function ExamplePageExampleView(props: {
   code: string;
@@ -28,7 +24,7 @@ export function ExamplePageExampleView(props: {
 
   const clients = initialClients.map((type) => ({
     type,
-    id: `${Math.random().toString(36).substr(2, 9)}_${Date.now()}`,
+    id: getNextClientId(),
   }));
 
   useEffect(() => {
@@ -37,7 +33,7 @@ export function ExamplePageExampleView(props: {
       IframeObservableDOMFactory,
       true,
     );
-    document.load(createDocumentCode(code, baseScene));
+    document.load(code);
     setNetworkedDOMDocument(document);
 
     return () => {
@@ -46,7 +42,7 @@ export function ExamplePageExampleView(props: {
   }, []);
 
   useEffect(() => {
-    networkedDOMDocument?.load(createDocumentCode(code, baseScene));
+    networkedDOMDocument?.load(code);
   }, [code, baseScene]);
 
   const handleResetClick = useCallback(() => {
@@ -87,6 +83,7 @@ export function ExamplePageExampleView(props: {
           networkedDOMDocument={networkedDOMDocument}
           clients={clients}
           sectionWidth="40%"
+          baseScene={props.baseScene}
         />
       </div>
     </>

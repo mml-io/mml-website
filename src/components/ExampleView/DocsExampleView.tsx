@@ -11,12 +11,10 @@ import { twMerge } from "tailwind-merge";
 
 import ExampleClientsSection from "@/src/components/ExampleView/ExampleClientsSection";
 import HTMLEditor from "@/src/components/ExampleView/HTMLEditor";
+import { getClientIdFunctionGenerator } from "@/src/util/clients-utils";
 import { CLIENT_TYPES, ClientType } from "@/types/docs-reference";
 
-function getNextClientId() {
-  return ++getNextClientId.id;
-}
-getNextClientId.id = 0;
+const getNextClientId = getClientIdFunctionGenerator();
 
 export type DocsExampleViewProps = {
   code: string;
