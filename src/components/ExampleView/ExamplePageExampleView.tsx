@@ -3,9 +3,7 @@ import { IframeObservableDOMFactory } from "@mml-io/networked-dom-web-runner";
 import * as React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { ExampleAvatarClient } from "@/src/components/AnimatedExampleView/ExampleAvatarClient";
-import { ExampleClient } from "@/src/components/AnimatedExampleView/ExampleClient";
-import { LocalAvatarServer } from "@/src/components/AnimatedExampleView/LocalAvatar/LocalAvatarServer";
+import ExampleClientsSection from "@/src/components/ExampleView/ExampleClientsSection";
 import HTMLEditor from "@/src/components/ExampleView/HTMLEditor";
 import { CLIENT_TYPES, ClientType } from "@/types/docs-reference";
 
@@ -22,12 +20,16 @@ export function ExamplePageExampleView(props: {
   baseScene: boolean;
   description: string;
 }) {
+  const { baseScene, initialClients = [CLIENT_TYPES.FLOATING] } = props;
   const [code, setCode] = useState(props.code);
   const [networkedDOMDocument, setNetworkedDOMDocument] = useState<EditableNetworkedDOM | null>(
     null,
   );
-  const { baseScene, initialClients = [CLIENT_TYPES.FLOATING] } = props;
-  const server = useRef(new LocalAvatarServer());
+
+  const clients = initialClients.map((type) => ({
+    type,
+    id: `${Math.random().toString(36).substr(2, 9)}_${Date.now()}`,
+  }));
 
   useEffect(() => {
     const document = new EditableNetworkedDOM(
@@ -81,33 +83,11 @@ export function ExamplePageExampleView(props: {
             setCode={setCode}
           />
         </div>
-        <div className="relative flex h-full flex-[0_1_40%] flex-col">
-          {networkedDOMDocument && (
-            <>
-              {initialClients.map((clientType, index) => {
-                return clientType === CLIENT_TYPES.FLOATING ? (
-                  <ExampleClient
-                    clientId={index}
-                    parentHeight={740}
-                    clientsNumber={initialClients.length}
-                    key={index}
-                    document={networkedDOMDocument}
-                  />
-                ) : (
-                  <ExampleAvatarClient
-                    server={server.current}
-                    clientsNumber={initialClients.length}
-                    parentHeight={740}
-                    document={networkedDOMDocument}
-                    clientId={index}
-                    position={{ x: -0.5, y: 0.5, z: 5 }}
-                    rotation={{ x: 0, y: Math.PI, z: 0 }}
-                  />
-                );
-              })}
-            </>
-          )}
-        </div>
+        <ExampleClientsSection
+          networkedDOMDocument={networkedDOMDocument}
+          clients={clients}
+          sectionWidth="40%"
+        />
       </div>
     </>
   );

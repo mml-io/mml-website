@@ -34,5 +34,9 @@ export default function ExampleView(props: DocsExampleViewProps) {
     return () => observer.disconnect();
   }, []);
 
-  return <div ref={ref}>{isVisible && <ExampleViewStatic {...props} />}</div>;
+  return (
+    <div className="h-full w-full" ref={ref}>
+      {isVisible && <ExampleViewStatic {...props} />}
+    </div>
+  );
 }

@@ -3,19 +3,16 @@ import { MMLScene } from "mml-web";
 import { MMLWebRunnerClient } from "mml-web-runner";
 import * as React from "react";
 import { useEffect, useState } from "react";
+import * as THREE from "three";
 
+import ExampleClientView from "@/src/components/ExampleView/ExampleClientView";
 import { getIframeTargetWindow } from "@/src/util/iframe-target";
 
-function Container(props: { refProp: React.Ref<HTMLDivElement>; clientHeight: number }) {
-  return <div style={{ height: props.clientHeight - 35 }} ref={props.refProp} />;
-}
-
-export const ExampleClient = React.memo(function ExampleClient(props: {
+export const ExampleFloatingClient = React.memo(function ExampleClient(props: {
   document: NetworkedDOM | EditableNetworkedDOM;
   clientId: number;
   children?: React.ReactNode;
-  clientsNumber?: number;
-  parentHeight?: number;
+  baseScene?: boolean;
 }) {
   const [clientState, setClientState] = useState<{
     client: MMLWebRunnerClient;
@@ -33,6 +30,17 @@ export const ExampleClient = React.memo(function ExampleClient(props: {
         return;
       }
       mmlScene = new MMLScene();
+      if (props.baseScene) {
+        const pointLight = new THREE.PointLight(0xffffff, 1, 100);
+        pointLight.position.set(10, 10, 10);
+        const plane = new THREE.Mesh(
+          new THREE.PlaneGeometry(20, 20),
+          new THREE.MeshPhongMaterial({ color: 0xffffff }),
+        );
+        plane.rotation.x = -Math.PI / 2;
+        mmlScene.getThreeScene().add(plane);
+        mmlScene.getThreeScene().add(pointLight);
+      }
       runnerClient = new MMLWebRunnerClient(wrapper.iframeWindow, wrapper.iframeBody, mmlScene);
       runnerClient.connect(props.document);
       setClientState({ client: runnerClient, scene: mmlScene });
@@ -63,20 +71,5 @@ export const ExampleClient = React.memo(function ExampleClient(props: {
     clientState?.scene.fitContainer();
   }, 1);
 
-  // 368 is the client height we're using in the docs, we use it as a default value here
-  const { children, clientsNumber = 1, parentHeight = 368 } = props;
-
-  const clientHeight = Math.floor(parentHeight / clientsNumber);
-
-  return (
-    <>
-      <div className="relative h-[35px] w-full border-b-[1px] border-editor-border bg-white dark:border-editor-border-dark dark:bg-editor-bg">
-        {children}
-        <span className="inline-block h-full w-[83px] border-b-[3px] bg-transparent pt-2 text-center text-[13px] text-editor-title">
-          Client
-        </span>
-      </div>
-      <Container clientHeight={clientHeight} refProp={elementRef} />
-    </>
-  );
+  return <ExampleClientView elementRef={elementRef}>{props.children}</ExampleClientView>;
 });
