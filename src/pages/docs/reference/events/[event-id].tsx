@@ -123,7 +123,6 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
                   }
                   code={primaryExample.code}
                   initialClients={primaryExample.clients ?? [CLIENT_TYPES.FLOATING]}
-                  showClientsControls={primaryExample?.showClientsControls}
                 />
               </>
             )}
@@ -188,7 +187,6 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
                         baseScene={example.baseSceneOn !== undefined ? example.baseSceneOn : true}
                         code={example.code}
                         initialClients={example.clients ?? [CLIENT_TYPES.FLOATING]}
-                        showClientsControls={example?.showClientsControls}
                       />
                     </div>
                   );

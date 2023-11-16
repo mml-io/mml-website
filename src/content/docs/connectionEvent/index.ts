@@ -10,20 +10,17 @@ export const examples: DocsExamples = {
     description: "A label that shows the client ids that have connected.",
     code: primary,
     clients: [CLIENT_TYPES.FLOATING, CLIENT_TYPES.FLOATING],
-    showClientsControls: true,
   },
   test: {
     title: "Basic disconnection event",
     description: "A label that shows the client ids that have disconnected.",
     code: disconnected,
     clients: [CLIENT_TYPES.FLOATING, CLIENT_TYPES.FLOATING],
-    showClientsControls: true,
   },
   visibleTo: {
     title: "Visible to event",
     description: "A label that shows only the client id of one specific client",
     code: visibleTo,
     clients: [CLIENT_TYPES.FLOATING, CLIENT_TYPES.FLOATING],
-    showClientsControls: true,
   },
 };

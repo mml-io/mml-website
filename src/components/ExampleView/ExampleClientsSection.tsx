@@ -10,7 +10,6 @@ import { CLIENT_TYPES, ClientType } from "@/types/docs-reference";
 type ExampleClientsSectionProps = {
   clients: { type: ClientType; id: string }[];
   removeClient?: (index: string) => void;
-  showClientsControls?: boolean;
   networkedDOMDocument: EditableNetworkedDOM | null;
   sectionWidth?: string;
   baseScene?: boolean;
@@ -19,7 +18,6 @@ type ExampleClientsSectionProps = {
 export default function ExampleClientsSection({
   clients,
   removeClient,
-  showClientsControls,
   networkedDOMDocument,
   sectionWidth = "50%",
   baseScene,
@@ -45,15 +43,13 @@ export default function ExampleClientsSection({
       {networkedDOMDocument && (
         <div style={gridStyle}>
           {clients.map(({ type, id }, index) => {
-            const children = showClientsControls && (
-              <>
-                <button
-                  className="absolute right-0 top-0 z-10 mr-1 mt-1 rounded border-[1px] border-editor-border bg-editor-bg px-[10px] py-[3px] text-[13px] text-white opacity-50 hover:opacity-100 dark:border-editor-border-dark"
-                  onClick={() => removeClient?.(id)}
-                >
-                  X
-                </button>
-              </>
+            const children = (
+              <button
+                className="absolute right-0 top-0 z-10 mr-1 mt-1 rounded border-[1px] border-editor-border bg-editor-bg px-[10px] py-[3px] text-[13px] text-white opacity-50 hover:opacity-100 dark:border-editor-border-dark"
+                onClick={() => removeClient?.(id)}
+              >
+                X
+              </button>
             );
 
             return type === CLIENT_TYPES.FLOATING ? (

@@ -22,7 +22,6 @@ export type DocsExampleViewProps = {
   initialClients: ClientType[];
   baseScene?: boolean;
   description: string;
-  showClientsControls?: boolean;
 };
 
 export function DocsExampleView(props: DocsExampleViewProps) {
@@ -110,7 +109,6 @@ export function DocsExampleView(props: DocsExampleViewProps) {
         <ExampleClientsSection
           baseScene={baseScene}
           networkedDOMDocument={networkedDOMDocument}
-          showClientsControls={props.showClientsControls}
           clients={clients}
           removeClient={removeClient}
         />

@@ -15,7 +15,6 @@ export const examples: DocsExamples = {
     description: "This example shows which client clicked the cube.",
     code: clickedBy,
     clients: [CLIENT_TYPES.FLOATING, CLIENT_TYPES.FLOATING],
-    showClientsControls: true,
   },
   position: {
     title: "Position",

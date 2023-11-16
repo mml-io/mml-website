@@ -7,7 +7,6 @@ export const examples: DocsExamples = {
     description: "The label shows the connection id of the user colliding with the platform.",
     code: primary,
     clients: [CLIENT_TYPES.AVATAR, CLIENT_TYPES.AVATAR],
-    showClientsControls: true,
     baseSceneOn: false,
   },
 };

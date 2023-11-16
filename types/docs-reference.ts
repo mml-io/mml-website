@@ -12,7 +12,6 @@ export type DocsReference = {
   code: string;
   baseSceneOn?: boolean;
   clients?: ClientType[];
-  showClientsControls?: boolean;
 };
 
 export type DocsExamples = {

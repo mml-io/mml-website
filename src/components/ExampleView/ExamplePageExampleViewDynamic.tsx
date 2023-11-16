@@ -7,7 +7,6 @@ type ExampleViewProps = {
   initialClients: ClientType[];
   baseScene?: boolean;
   description: string;
-  showClientsControls?: boolean;
 };
 
 const ExamplePageExampleViewStatic = dynamic<Partial<ExampleViewProps>>(
