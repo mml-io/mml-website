@@ -84,6 +84,7 @@ export function ExamplePageExampleView(props: {
           clients={clients}
           sectionWidth="40%"
           baseScene={props.baseScene}
+          hideButtons
         />
       </div>
     </>
