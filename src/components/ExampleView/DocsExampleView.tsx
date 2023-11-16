@@ -13,9 +13,10 @@ import ExampleClientsSection from "@/src/components/ExampleView/ExampleClientsSe
 import HTMLEditor from "@/src/components/ExampleView/HTMLEditor";
 import { CLIENT_TYPES, ClientType } from "@/types/docs-reference";
 
-function generateRandomId() {
-  return `${Math.random().toString(36).substr(2, 9)}_${Date.now()}`;
+function getNextClientId() {
+  return ++getNextClientId.id;
 }
+getNextClientId.id = 0;
 
 export type DocsExampleViewProps = {
   code: string;
@@ -25,10 +26,10 @@ export type DocsExampleViewProps = {
 };
 
 export function DocsExampleView(props: DocsExampleViewProps) {
-  const [clients, setClients] = useState<{ type: ClientType; id: string }[]>(
+  const [clients, setClients] = useState<{ type: ClientType; id: number }[]>(() =>
     props.initialClients.map((type) => ({
       type,
-      id: generateRandomId(),
+      id: getNextClientId(),
     })),
   );
 
@@ -71,13 +72,13 @@ export function DocsExampleView(props: DocsExampleViewProps) {
     if (clients.length >= 4) return;
     const newClient = {
       type: clientType,
-      id: generateRandomId(),
+      id: getNextClientId(),
     };
     setClients((oldClients) => [...oldClients, newClient]);
     setShowAddButtons(false);
   };
 
-  const removeClient = (elemId: string) => {
+  const removeClient = (elemId: number) => {
     setClients((oldClients) => oldClients.filter(({ id }) => id !== elemId));
   };
 

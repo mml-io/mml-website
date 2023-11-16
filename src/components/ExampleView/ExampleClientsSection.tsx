@@ -8,8 +8,8 @@ import { ExampleFloatingClient } from "@/src/components/ExampleView/ExampleFloat
 import { CLIENT_TYPES, ClientType } from "@/types/docs-reference";
 
 type ExampleClientsSectionProps = {
-  clients: { type: ClientType; id: string }[];
-  removeClient?: (index: string) => void;
+  clients: { type: ClientType; id: number }[];
+  removeClient?: (index: number) => void;
   networkedDOMDocument: EditableNetworkedDOM | null;
   sectionWidth?: string;
   baseScene?: boolean;
@@ -52,9 +52,15 @@ export default function ExampleClientsSection({
               </button>
             );
 
+            const avatarPositionForIndex = {
+              x: [0, 2].includes(index) ? -1 : 1,
+              y: 0.5,
+              z: [0, 1].includes(index) ? 5 : 7,
+            };
+
             return type === CLIENT_TYPES.FLOATING ? (
               <ExampleFloatingClient
-                clientId={index}
+                clientId={id}
                 key={id}
                 document={networkedDOMDocument}
                 children={children}
@@ -62,11 +68,11 @@ export default function ExampleClientsSection({
               />
             ) : (
               <ExampleAvatarClient
-                clientId={index}
+                clientId={id}
                 key={id}
                 server={server.current}
                 document={networkedDOMDocument}
-                position={{ x: -0.5, y: 0.5, z: 5 }}
+                position={avatarPositionForIndex}
                 rotation={{ x: 0, y: Math.PI, z: 0 }}
                 children={children}
               />
