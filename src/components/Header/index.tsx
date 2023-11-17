@@ -57,20 +57,20 @@ const Header = () => {
             <div className="w-60 max-w-full px-4 sm:px-0 xl:mr-12">
               <Link
                 href="/"
-                className={`header-logo block w-full ${sticky ? "py-5 lg:py-2" : "py-8"} `}
+                className={`header-logo block w-[115px] ${sticky ? "py-5 lg:py-2" : "py-8"} `}
               >
                 <img
-                  src="/images/logo/logo-2.svg"
+                  src="/images/logo/mml-logotype-black.svg"
                   alt="logo"
-                  width={140}
-                  height={30}
+                  width={115}
+                  height={45}
                   className="w-full dark:hidden"
                 />
                 <img
-                  src="/images/logo/logo.svg"
+                  src="/images/logo/mml-logotype-white.svg"
                   alt="logo"
-                  width={140}
-                  height={30}
+                  width={115}
+                  height={45}
                   className="hidden w-full dark:block"
                 />
               </Link>
