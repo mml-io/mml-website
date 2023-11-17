@@ -33,10 +33,12 @@ export const ExampleFloatingClient = React.memo(function ExampleClient(props: {
       if (props.baseScene) {
         const pointLight = new THREE.PointLight(0xffffff, 1, 100);
         pointLight.position.set(10, 10, 10);
+        pointLight.castShadow = true;
         const plane = new THREE.Mesh(
           new THREE.PlaneGeometry(20, 20),
-          new THREE.MeshPhongMaterial({ color: 0xffffff }),
+          new THREE.MeshStandardMaterial({ color: 0xffffff }),
         );
+        plane.receiveShadow = true;
         plane.rotation.x = -Math.PI / 2;
         mmlScene.getThreeScene().add(plane);
         mmlScene.getThreeScene().add(pointLight);

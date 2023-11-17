@@ -111,20 +111,19 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
               <TypeDocComment comment={eventClassDefinition.comment} />
             )}
             {primaryExample && (
-              <>
+              <div>
                 <h2 className="mb-4 mt-8 scroll-m-20 text-3xl font-medium" id="try it">
                   Try it
                 </h2>
                 <ExampleView
                   description={primaryExample.description}
-                  key={`${eventId}-primary`}
                   baseScene={
                     primaryExample.baseSceneOn !== undefined ? primaryExample.baseSceneOn : true
                   }
                   code={primaryExample.code}
                   initialClients={primaryExample.clients ?? [CLIENT_TYPES.FLOATING]}
                 />
-              </>
+              </div>
             )}
             <h2 className="mb-4 mt-6 scroll-m-20 text-3xl font-medium" id="properties">
               Properties
