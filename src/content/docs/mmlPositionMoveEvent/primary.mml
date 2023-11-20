@@ -1,0 +1,19 @@
+<m-label y="5" z="-6" width="10" height="5" color="red" font-size="100">
+</m-label>
+
+<m-position-probe id="my-probe" z="3" range="5" y="1" debug="true" id="my-probe" interval="100"></m-position-probe>
+<script>
+  const labelElement = document.querySelector("m-label")
+  const positionProbe = document.querySelector("#my-probe");
+
+  positionProbe.addEventListener("positionmove", ({ detail }) => {
+    console.log(detail.documentRelative)
+
+    const text = `User at
+x: ${detail.documentRelative.position.x.toString().substring(0, 6)},
+y: ${detail.documentRelative.position.y.toString().substring(0, 6)},
+z: ${detail.documentRelative.position.z.toString().substring(0, 6)}`
+
+    labelElement.setAttribute("content", text)
+  })
+</script>

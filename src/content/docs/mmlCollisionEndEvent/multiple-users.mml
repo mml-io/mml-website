@@ -1,0 +1,19 @@
+<m-label y="5" z="-3" width="10" height="5" color="red" font-size="150">
+</m-label>
+
+<m-cube id="my-cube" y="0.1" z="5" width="4" depth="2" height="0.3" collision-interval="100"></m-cube>
+
+<script>
+  const labelElement = document.querySelector("m-label")
+  const collidingCube = document.querySelector("#my-cube");
+
+  const collidingUsers = new Set();
+
+  collidingCube.addEventListener("collisionend", ({ detail }) => {
+    collidingUsers.add(detail.connectionId)
+    const text = `User ${Array.from(collidingUsers).join(", ")} ${collidingUsers.size > 1 ? "have" : "has"} stopped colliding!`
+
+
+    labelElement.setAttribute("content", text)
+  })
+</script>
