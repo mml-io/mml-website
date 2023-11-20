@@ -1,10 +1,12 @@
 import dynamic from "next/dynamic";
 
+import { ClientType } from "@/types/docs-reference";
+
 type ExampleViewProps = {
   code: string;
+  initialClients: ClientType[];
   baseScene?: boolean;
-  initialClientCount?: number;
-  description?: string;
+  description: string;
 };
 
 const ExamplePageExampleViewStatic = dynamic<Partial<ExampleViewProps>>(
@@ -15,18 +17,6 @@ const ExamplePageExampleViewStatic = dynamic<Partial<ExampleViewProps>>(
   { ssr: false },
 );
 
-export default function ExamplePageExampleView({
-  code,
-  description,
-  baseScene,
-  initialClientCount,
-}: ExampleViewProps) {
-  return (
-    <ExamplePageExampleViewStatic
-      baseScene={baseScene}
-      initialClientCount={initialClientCount ?? 1}
-      code={code}
-      description={description ?? "Demo"}
-    />
-  );
+export default function ExamplePageExampleView(props: ExampleViewProps) {
+  return <ExamplePageExampleViewStatic {...props} />;
 }

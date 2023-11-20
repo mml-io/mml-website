@@ -11,4 +11,4 @@
 <m-cube x="-5" y="3" color="white" width="3" height="3" depth="3"></m-cube>
 <m-cube y="3" color="white" width="3" height="3" depth="3"></m-cube>
 <m-cube x="5" y="3" color="white" width="3" height="3" depth="3"></m-cube>
-<m-plane color="white" width="20" height="20" rx="-90"></m-plane>
+<m-plane color="white" y="0.1" width="20" height="20" rx="-90"></m-plane>

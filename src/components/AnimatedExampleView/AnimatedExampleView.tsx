@@ -6,10 +6,10 @@ import * as React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { AnimatedEditorContainer, CodemirrorEditor } from "@/src/components/AnimatedEditor";
-import { ExampleAvatarClient } from "@/src/components/AnimatedExampleView/ExampleAvatarClient";
 import { LocalAvatarServer } from "@/src/components/AnimatedExampleView/LocalAvatar/LocalAvatarServer";
+import { ExampleAvatarClient } from "@/src/components/ExampleView/ExampleAvatarClient";
 
-import { ExampleClient } from "./ExampleClient";
+import { ExampleFloatingClient } from "../ExampleView/ExampleFloatingClient";
 
 function createDocumentCode(code: string): string {
   return `${'<m-plane color="white" width="20" height="20" rx="-90" y="-0.1"></m-plane><m-light type="point" x="10" y="10" z="10"></m-light>'}${code}`;
@@ -103,7 +103,7 @@ export function AnimatedExampleView() {
           {networkedDOMDocument && (
             <>
               <div className="relative h-[50%] w-[50%]">
-                <ExampleClient clientId={0} key={0} document={networkedDOMDocument} />
+                <ExampleFloatingClient clientId={0} key={0} document={networkedDOMDocument} />
               </div>
               <div className="relative h-[50%] w-[50%]">
                 <ExampleAvatarClient
@@ -126,7 +126,7 @@ export function AnimatedExampleView() {
                 />
               </div>
               <div className="relative h-[50%] w-[50%]">
-                <ExampleClient clientId={3} key={3} document={networkedDOMDocument} />
+                <ExampleFloatingClient clientId={3} key={3} document={networkedDOMDocument} />
               </div>
             </>
           )}

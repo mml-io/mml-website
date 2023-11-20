@@ -15,6 +15,7 @@ import { MarkDown } from "@/src/config/mdx";
 import * as docsExamples from "@/src/content/docs";
 import { getPageTitle } from "@/src/util";
 import { eventClasses } from "@/src/util/event-classes";
+import { CLIENT_TYPES } from "@/types/docs-reference";
 
 // This function gets called at build time to generate all the files
 export function getStaticPaths() {
@@ -110,21 +111,19 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
               <TypeDocComment comment={eventClassDefinition.comment} />
             )}
             {primaryExample && (
-              <>
+              <div>
                 <h2 className="mb-4 mt-8 scroll-m-20 text-3xl font-medium" id="try it">
                   Try it
                 </h2>
                 <ExampleView
-                  description="Demo"
-                  key={`${eventId}-primary`}
+                  description={primaryExample.description}
                   baseScene={
                     primaryExample.baseSceneOn !== undefined ? primaryExample.baseSceneOn : true
                   }
                   code={primaryExample.code}
-                  initialClientCount={primaryExample?.clientsNumber ?? 1}
-                  showClientsControls={primaryExample?.showClientsControls}
+                  initialClients={primaryExample.clients ?? [CLIENT_TYPES.FLOATING]}
                 />
-              </>
+              </div>
             )}
             <h2 className="mb-4 mt-6 scroll-m-20 text-3xl font-medium" id="properties">
               Properties
@@ -186,8 +185,7 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
                         description={example.title}
                         baseScene={example.baseSceneOn !== undefined ? example.baseSceneOn : true}
                         code={example.code}
-                        initialClientCount={example?.clientsNumber ?? 1}
-                        showClientsControls={example?.showClientsControls}
+                        initialClients={example.clients ?? [CLIENT_TYPES.FLOATING]}
                       />
                     </div>
                   );

@@ -3,14 +3,11 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import { Euler, Vector3 } from "three";
 
+import ExampleClientView from "@/src/components/ExampleView/ExampleClientView";
 import { getIframeTargetWindow } from "@/src/util/iframe-target";
 
-import { LocalAvatarClient } from "./LocalAvatar/LocalAvatarClient";
-import { LocalAvatarServer } from "./LocalAvatar/LocalAvatarServer";
-
-function Container(props: { refProp: React.Ref<HTMLDivElement> }) {
-  return <div className={"h-[100%]"} ref={props.refProp} />;
-}
+import { LocalAvatarClient } from "../AnimatedExampleView/LocalAvatar/LocalAvatarClient";
+import { LocalAvatarServer } from "../AnimatedExampleView/LocalAvatar/LocalAvatarServer";
 
 export const ExampleAvatarClient = React.memo(function ExampleAvatarClient(props: {
   server: LocalAvatarServer;
@@ -18,6 +15,7 @@ export const ExampleAvatarClient = React.memo(function ExampleAvatarClient(props
   clientId: number;
   position: { x: number; y: number; z: number };
   rotation: { x: number; y: number; z: number };
+  children?: React.ReactNode;
 }) {
   const [client, setClient] = useState<LocalAvatarClient | null>(null);
   const elementRef = React.useRef<HTMLDivElement>(null);
@@ -50,6 +48,7 @@ export const ExampleAvatarClient = React.memo(function ExampleAvatarClient(props
 
   useEffect(() => {
     if (elementRef.current && client) {
+      client.element.setAttribute("style", "height: 100%");
       elementRef.current.appendChild(client.element);
     }
   }, [elementRef.current, client]);
@@ -58,14 +57,5 @@ export const ExampleAvatarClient = React.memo(function ExampleAvatarClient(props
     return null;
   }
 
-  return (
-    <>
-      <div className="h-[35px] w-full border-b-[1px] border-editor-border bg-white dark:border-editor-border-dark dark:bg-editor-bg">
-        <span className="inline-block h-full w-[83px] border-b-[3px] bg-transparent pt-2 text-center text-[13px] text-editor-title">
-          Client {props.clientId + 1}
-        </span>
-      </div>
-      <Container refProp={elementRef} />
-    </>
-  );
+  return <ExampleClientView elementRef={elementRef}>{props.children}</ExampleClientView>;
 });

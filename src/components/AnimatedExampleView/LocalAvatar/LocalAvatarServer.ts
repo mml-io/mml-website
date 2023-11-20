@@ -23,5 +23,9 @@ export class LocalAvatarServer {
 
   removeClient(clientId: number) {
     this.callbacks.delete(clientId);
+
+    this.callbacks.forEach((callback) => {
+      callback(clientId, null);
+    });
   }
 }
