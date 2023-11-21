@@ -1,5 +1,5 @@
-import multipleUsers from "@/src/content/docs/mmlPositionEnterEvent/multiple-users.mml";
-import primary from "@/src/content/docs/mmlPositionEnterEvent/primary.mml";
+import multipleUsers from "@/src/content/docs/mmlPositionLeaveEvent/multiple-users.mml";
+import primary from "@/src/content/docs/mmlPositionLeaveEvent/primary.mml";
 import { CLIENT_TYPES, DocsExamples } from "@/types/docs-reference";
 
 export const examples: DocsExamples = {
