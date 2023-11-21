@@ -3,7 +3,7 @@ import { Example } from "@/types/example";
 export const gameOfLifeExample: Example = {
   name: "game-of-life",
   description: "Conway's Game of Life",
-  code: `
+  code: `<m-group></m-group>
 <script>
   let world = [];
   const worldSize = 20,

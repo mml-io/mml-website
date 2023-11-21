@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import * as React from "react";
+import { twMerge } from "tailwind-merge";
 
 import type { DocsExampleViewProps } from "@/src/components/ExampleView/DocsExampleView";
 
@@ -9,7 +10,7 @@ const ExampleViewStatic = dynamic<Partial<DocsExampleViewProps>>(
   { ssr: false },
 );
 
-export default function ExampleView(props: DocsExampleViewProps) {
+export default function ExampleView(props: DocsExampleViewProps & { containerHeight?: number }) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -34,8 +35,13 @@ export default function ExampleView(props: DocsExampleViewProps) {
     return () => observer.disconnect();
   }, []);
 
+  const { containerHeight } = props;
+
   return (
-    <div className="h-[420px] w-full" ref={ref}>
+    <div
+      className={twMerge("h-full w-full", containerHeight && `h-[${containerHeight}px]`)}
+      ref={ref}
+    >
       {isVisible && <ExampleViewStatic {...props} />}
     </div>
   );
