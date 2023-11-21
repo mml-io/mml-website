@@ -116,6 +116,7 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
                   Try it
                 </h2>
                 <ExampleView
+                  key={eventId + primaryExample.title}
                   description={primaryExample.description}
                   baseScene={
                     primaryExample.baseSceneOn !== undefined ? primaryExample.baseSceneOn : true
