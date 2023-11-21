@@ -11,7 +11,6 @@ import LinkList from "@/src/components/Common/LinkList";
 import ReferenceNavigation from "@/src/components/Common/ReferenceNavigation";
 import ExampleView from "@/src/components/ExampleView/DocsExampleViewDynamic";
 import TypeDocComment from "@/src/components/TypeDocComment";
-import { MarkDown } from "@/src/config/mdx";
 import * as docsExamples from "@/src/content/docs";
 import { getPageTitle } from "@/src/util";
 import { eventClasses } from "@/src/util/event-classes";
@@ -86,6 +85,11 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
     ? Object.keys(examplesForElement.examples).filter((key) => key !== "primary")
     : [];
 
+  const linkList = ["properties"];
+  if (filteredExamples.length > 0) {
+    linkList.push("examples");
+  }
+
   return (
     <>
       <Breadcrumb
@@ -116,6 +120,7 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
                   Try it
                 </h2>
                 <ExampleView
+                  key={eventId + primaryExample.title}
                   description={primaryExample.description}
                   baseScene={
                     primaryExample.baseSceneOn !== undefined ? primaryExample.baseSceneOn : true
@@ -179,10 +184,9 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
                   const example = examplesForElement.examples[exampleKey];
                   return (
                     <div key={`${eventId}-${example.title}`}>
-                      <h3 className="mt-8 text-[24px] font-medium">{example.title}</h3>
-                      <MarkDown>{`${example.description}`}</MarkDown>
+                      <h3 className="mb-4 mt-8 text-[24px] font-medium">{example.title}</h3>
                       <ExampleView
-                        description={example.title}
+                        description={example.description}
                         baseScene={example.baseSceneOn !== undefined ? example.baseSceneOn : true}
                         code={example.code}
                         initialClients={example.clients ?? [CLIENT_TYPES.FLOATING]}
@@ -193,7 +197,7 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
               </>
             )}
           </main>
-          <LinkList elementList={["properties"]} />
+          <LinkList elementList={linkList} />
         </div>
       </main>
     </>

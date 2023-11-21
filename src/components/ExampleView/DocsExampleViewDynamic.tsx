@@ -35,7 +35,7 @@ export default function ExampleView(props: DocsExampleViewProps) {
   }, []);
 
   return (
-    <div className="h-full w-full" ref={ref}>
+    <div className="h-[420px] w-full" ref={ref}>
       {isVisible && <ExampleViewStatic {...props} />}
     </div>
   );

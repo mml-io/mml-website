@@ -1,0 +1,19 @@
+<m-label y="5" z="-6" width="10" height="5" color="red" font-size="150">
+</m-label>
+
+<m-position-probe id="my-probe" z="3" range="5" y="1" debug="true" interval="100"></m-position-probe>
+
+<script>
+  const labelElement = document.querySelector("m-label")
+  const positionProbe = document.querySelector("#my-probe");
+
+  const collidingUsers = new Set();
+
+  positionProbe.addEventListener("positionleave", ({ detail }) => {
+    collidingUsers.add(detail.connectionId)
+    const text = `User ${Array.from(collidingUsers).join(", ")} ${collidingUsers.size > 1 ? "have" : "has"} left the probe area!`
+
+
+    labelElement.setAttribute("content", text)
+  })
+</script>

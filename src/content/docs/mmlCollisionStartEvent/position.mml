@@ -1,0 +1,18 @@
+<m-label y="5" z="-3" width="10" height="5" color="red" font-size="100">
+</m-label>
+
+<m-cube id="my-cube" y="0.1" z="0" width="4" depth="2" height="0.3" collision-interval="100"></m-cube>
+
+<script>
+  const labelElement = document.querySelector("m-label")
+  const collidingCube = document.querySelector("#my-cube");
+
+  collidingCube.addEventListener("collisionstart", ({ detail }) => {
+    const text = `Collided at
+x: ${detail.position.x.toString().substring(0, 6)},
+y: ${detail.position.y.toString().substring(0, 6)},
+z: ${detail.position.z.toString().substring(0, 6)}`
+
+    labelElement.setAttribute("content", text)
+  })
+</script>

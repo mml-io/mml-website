@@ -1,0 +1,97 @@
+<!-- Define a larger cube where the user cubes will appear -->
+<m-cube id="users-panel" height="6" width="12" depth="0.1" y="4" z="-2">
+  <!-- This group will contain all the users cubes -->
+  <m-group rx="90" id="user-presence-holder"></m-group>
+</m-cube>
+
+<!-- Define a platform that detects collisions -->
+<m-cube
+  id="platform"
+  y="0.05"
+  height="0.1"
+  width="6"
+  depth="3"
+  color="green"
+  collision-interval="100"
+></m-cube>
+
+<script>
+  const platform = document.getElementById("platform");
+  const userPresenceHolder = document.getElementById("user-presence-holder");
+
+  // A map that will hold the user's connectionId and
+  // their associated cube on the users panel.
+  let standingUsers = new Map();
+
+  // A function to either fetch the existing cube representation
+  // for a user or create one.
+  function getOrCreateUser(connectionId, position) {
+    const user = standingUsers.get(connectionId);
+    if (user) {
+      user.position = position;
+      return user;
+    }
+
+    // Create a new cube to represent the user.
+    const userCube = document.createElement("m-cube");
+    userCube.setAttribute("collide", false);
+    userCube.setAttribute("width", 0.25);
+    userCube.setAttribute("height", 0.25);
+    userCube.setAttribute("depth", 0.25);
+    userCube.setAttribute("color", `#${Math.floor(Math.random() * 0xffffff).toString(16)}`);
+    userPresenceHolder.append(userCube);
+
+    const newUser = {
+      cube: userCube,
+      position,
+    };
+    standingUsers.set(connectionId, newUser);
+    return newUser;
+  }
+
+  // Function to set the cube's position based on the user's position
+  // on the platform.
+  function setCubePosition(connectionId, position) {
+    const user = getOrCreateUser(connectionId, position);
+    user.cube.setAttribute("x", position.x * 2);
+    user.cube.setAttribute("y", 0.2);
+    user.cube.setAttribute("z", position.z * 2);
+  }
+
+  // Remove user representation when they disconnect or stop colliding.
+  function clearUser(connectionId) {
+    const user = standingUsers.get(connectionId);
+    if (!user) return;
+    user.cube.remove();
+    standingUsers.delete(connectionId);
+  }
+
+  // When a user disconnects, their representation is cleared.
+  window.addEventListener("disconnected", (event) => {
+    const { connectionId } = event.detail;
+    clearUser(connectionId);
+  });
+
+  // When a collision starts, set the position of the cube representation.
+  function handleCollisionstart(e) {
+    const { connectionId, position } = event.detail;
+    setCubePosition(connectionId, position);
+  }
+
+  // Update cube position when the user moves while colliding.
+  function handleCollisionmove(e) {
+    const { connectionId, position } = event.detail;
+    setCubePosition(connectionId, position);
+  }
+
+  // Clear user representation when collision ends.
+  function handleCollisionend(e) {
+    const { connectionId } = event.detail;
+    clearUser(connectionId);
+  }
+
+  // Add the necessary event listeners to the platform.
+  platform.addEventListener("collisionstart", handleCollisionstart);
+  platform.addEventListener("collisionmove", handleCollisionmove);
+  platform.addEventListener("collisionend", handleCollisionend);
+</script>

@@ -1,0 +1,45 @@
+<!--Basic example of element collision-->
+<m-cube
+  id="collision-ground"
+  y="0.2"
+  height="0.1"
+  width="3"
+  depth="3"
+  color="green"
+  collision-interval="200"
+></m-cube>
+
+<script>
+  const collisionGround = document.getElementById("collision-ground");
+
+  function getShortenedPosition(position) {
+    return {
+      x: position.x.toString().substring(0, 6),
+      y: position.y.toString().substring(0, 6),
+      z: position.z.toString().substring(0, 6),
+    };
+  }
+
+  let lastKnownPosition = { x: 0, y: 0, z: 0 };
+
+  collisionGround.addEventListener("collisionmove", ({ detail }) => {
+    // This is because of javascript floating point precision
+    const shortenedPosition = getShortenedPosition(detail.position);
+
+    // This is to prevent the label from updating every frame if the position is the same
+    if (JSON.stringify(lastKnownPosition) === JSON.stringify(shortenedPosition)) return;
+
+    lastKnownPosition = shortenedPosition;
+
+    const colors = ["black", "blue", "green", "white", "red", "purple"];
+
+    let selectedColor = Math.floor(Math.random() * colors.length);
+
+    // We don't want the color to be the same as the ground
+    while (colors[selectedColor] === collisionGround.getAttribute("color")) {
+      selectedColor = Math.floor(Math.random() * colors.length);
+    }
+
+    collisionGround.setAttribute("color", colors[selectedColor]);
+  });
+</script>
