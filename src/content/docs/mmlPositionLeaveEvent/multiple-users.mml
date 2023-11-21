@@ -1,7 +1,7 @@
 <m-label y="5" z="-6" width="10" height="5" color="red" font-size="150">
 </m-label>
 
-<m-position-probe id="my-probe" z="-3" range="3" y="1" debug="true" id="my-probe" interval="100"></m-position-probe>
+<m-position-probe id="my-probe" z="-3" range="3" y="1" debug="true" interval="100"></m-position-probe>
 
 <script>
   const labelElement = document.querySelector("m-label")
