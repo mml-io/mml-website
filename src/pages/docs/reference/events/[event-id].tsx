@@ -127,6 +127,7 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
                   }
                   code={primaryExample.code}
                   initialClients={primaryExample.clients ?? [CLIENT_TYPES.FLOATING]}
+                  containerHeight={420}
                 />
               </div>
             )}
@@ -190,6 +191,7 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
                         baseScene={example.baseSceneOn !== undefined ? example.baseSceneOn : true}
                         code={example.code}
                         initialClients={example.clients ?? [CLIENT_TYPES.FLOATING]}
+                        containerHeight={420}
                       />
                     </div>
                   );

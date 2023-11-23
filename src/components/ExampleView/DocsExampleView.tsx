@@ -1,5 +1,3 @@
-"use client";
-
 import { faArrowRotateRight } from "@fortawesome/free-solid-svg-icons/faArrowRotateRight";
 import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -21,6 +19,7 @@ export type DocsExampleViewProps = {
   initialClients: ClientType[];
   baseScene?: boolean;
   description: string;
+  noBorders?: boolean;
 };
 
 export function DocsExampleView(props: DocsExampleViewProps) {
@@ -81,8 +80,13 @@ export function DocsExampleView(props: DocsExampleViewProps) {
   };
 
   return (
-    <div className="relative">
-      <div className="relative flex h-[50px] justify-between border-[1px] border-b-0 border-editor-border bg-white px-[17px] pt-[14px] leading-[19px] text-black dark:border-editor-border-dark dark:bg-editor-bg dark:text-white">
+    <div className="relative h-full">
+      <div
+        className={twMerge(
+          "relative flex h-[50px] justify-between border-b-0 border-editor-border bg-white px-[17px] pt-[14px] leading-[19px] text-black dark:border-editor-border-dark dark:bg-editor-bg dark:text-white",
+          !props.noBorders && "border-[1px]",
+        )}
+      >
         {props.description}
         <div>
           <button
@@ -96,14 +100,24 @@ export function DocsExampleView(props: DocsExampleViewProps) {
           </button>
         </div>
       </div>
-      <div className="relative flex h-[370px] flex-row border-[1px] border-editor-border dark:border-editor-border-dark">
-        <div className="h-full w-0 flex-[0_0_50%] border-r-[1px] border-editor-border dark:border-editor-border-dark">
+      <div
+        className={twMerge(
+          "relative flex h-[calc(100%-50px)] flex-row border-t-[1px] border-editor-border dark:border-editor-border-dark",
+          !props.noBorders && "border-[1px]",
+        )}
+      >
+        <div
+          className={twMerge(
+            "h-full w-0 flex-[0_0_50%] border-editor-border dark:border-editor-border-dark",
+            !props.noBorders && "border-r-[1px]",
+          )}
+        >
           <div className="flex h-[35px] border-b-[1px] border-editor-border bg-white dark:border-editor-border-dark dark:bg-editor-bg">
             <span className="inline-block h-full w-[83px] border-b-[3px] bg-transparent pt-2 text-center text-[13px] text-editor-title">
               CODE
             </span>
           </div>
-          <HTMLEditor className="h-[332px]" code={code} setCode={setCode} />
+          <HTMLEditor className="h-[calc(100%-35px)]" code={code} setCode={setCode} />
         </div>
         <ExampleClientsSection
           baseScene={baseScene}

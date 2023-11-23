@@ -39,9 +39,7 @@ export default function ExampleClientsSection({
   };
 
   return (
-    <div
-      className={`relative flex h-full w-[${sectionWidth}] flex-[0_0_${sectionWidth}%] flex-col`}
-    >
+    <div className={`relative flex h-full w-[${sectionWidth}] flex-[0_0_${sectionWidth}] flex-col`}>
       {networkedDOMDocument && (
         <div style={gridStyle}>
           {clients.map(({ type, id }, index) => {

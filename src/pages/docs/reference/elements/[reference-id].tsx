@@ -86,15 +86,18 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
               <h2 className="mb-4 scroll-m-20 text-3xl font-medium" id="try it">
                 Try it
               </h2>
-              <ExampleView
-                description={primaryExample.description}
-                key={`${referenceId}-primary`}
-                baseScene={
-                  primaryExample.baseSceneOn !== undefined ? primaryExample.baseSceneOn : true
-                }
-                code={primaryExample.code}
-                initialClients={primaryExample.clients ?? [CLIENT_TYPES.FLOATING]}
-              />
+              <div className="h-[420px]">
+                <ExampleView
+                  description={primaryExample.description}
+                  key={`${referenceId}-primary`}
+                  baseScene={
+                    primaryExample.baseSceneOn !== undefined ? primaryExample.baseSceneOn : true
+                  }
+                  code={primaryExample.code}
+                  initialClients={primaryExample.clients ?? [CLIENT_TYPES.FLOATING]}
+                  containerHeight={420}
+                />
+              </div>
             </>
           )}
           {!!attributes.length && (
@@ -138,12 +141,15 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
                   <div key={`${referenceId}-${example.title}`}>
                     <h3 className="mt-8 text-[24px] font-medium">{example.title}</h3>
                     <MarkDown>{`${example.description}`}</MarkDown>
-                    <ExampleView
-                      description={example.title}
-                      baseScene={example.baseSceneOn !== undefined ? example.baseSceneOn : true}
-                      code={example.code}
-                      initialClients={example.clients ?? [CLIENT_TYPES.FLOATING]}
-                    />
+                    <div className="h-[420px]">
+                      <ExampleView
+                        description={example.title}
+                        baseScene={example.baseSceneOn !== undefined ? example.baseSceneOn : true}
+                        code={example.code}
+                        initialClients={example.clients ?? [CLIENT_TYPES.FLOATING]}
+                        containerHeight={420}
+                      />
+                    </div>
                   </div>
                 );
               })}
