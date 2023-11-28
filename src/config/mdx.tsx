@@ -1,7 +1,6 @@
 import { DetailedHTMLProps, HTMLProps, OlHTMLAttributes } from "react";
 import ReactMarkdown from "react-markdown";
-import { Components } from "react-markdown/lib/ast-to-react";
-import { ReactMarkdownOptions } from "react-markdown/lib/react-markdown";
+import { Components, Options as ReactMarkdownOptions } from "react-markdown/lib";
 import { twMerge } from "tailwind-merge";
 
 import SyntaxHighlighter from "@/src/components/Common/SyntaxHighlighter";
