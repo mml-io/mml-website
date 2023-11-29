@@ -58,6 +58,7 @@
     "@types/react": "18.2.39",
     "@types/react-syntax-highlighter": "15.5.10",
     "@types/three": "0.153.0",
+    "@types/jest": "29.5.10",
     "@typescript-eslint/eslint-plugin": "5.59.2",
     "@typescript-eslint/parser": "5.62.0",
     "autoprefixer": "10.4.16",
