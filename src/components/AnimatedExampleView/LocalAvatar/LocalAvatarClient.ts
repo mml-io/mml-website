@@ -111,6 +111,7 @@ export class LocalAvatarClient {
         localAvatarServer.send(localClientId, characterState);
       },
     );
+    (this.characterManager as any).updateLocationHash = false;
     this.scene.add(this.characterManager.group);
 
     this.mmlComposition = new MMLCompositionScene(
@@ -137,6 +138,12 @@ export class LocalAvatarClient {
       spawnPosition,
       spawnRotation,
     );
+
+    this.cameraManager.camera.position.copy(spawnPosition).add(new Vector3(0, 1.5, 3.3));
+    this.cameraManager.setTarget(
+      new Vector3().add(spawnPosition).add(this.characterManager.headTargetOffset),
+    );
+    this.cameraManager.reverseUpdateFromPositions();
   }
 
   public dispose() {
@@ -158,7 +165,7 @@ export class LocalAvatarClient {
     this.timeManager.update();
     this.characterManager.update();
     this.cameraManager.update();
-    this.composer.sun?.updateCharacterPosition(this.characterManager.character?.position);
+    this.composer.sun?.updateCharacterPosition(this.characterManager.localCharacter?.position);
     this.composer.render(this.timeManager);
     this.animationFrame = requestAnimationFrame(() => {
       this.update();

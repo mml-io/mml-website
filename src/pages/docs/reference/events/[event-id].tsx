@@ -4,7 +4,6 @@ import Link from "next/link";
 import * as React from "react";
 import { Fragment } from "react";
 import ReactMarkdown from "react-markdown";
-import { ReferenceType, ReflectionType } from "typedoc";
 
 import Breadcrumb from "@/src/components/Common/Breadcrumb";
 import LinkList from "@/src/components/Common/LinkList";
@@ -15,6 +14,11 @@ import * as docsExamples from "@/src/content/docs";
 import { getPageTitle } from "@/src/util";
 import { eventClasses } from "@/src/util/event-classes";
 import { CLIENT_TYPES } from "@/types/docs-reference";
+
+type ReferenceType = {
+  type: "reference";
+  name: string;
+};
 
 // This function gets called at build time to generate all the files
 export function getStaticPaths() {
@@ -54,7 +58,7 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
   const showInheritedProperties = true;
   const showExternalProperties = false;
 
-  const extendedTypes = [];
+  const extendedTypes: Array<string> = [];
   if (eventClassDefinition.extendedTypes && eventClassDefinition.extendedTypes.length > 0) {
     for (const extendedType of eventClassDefinition.extendedTypes) {
       if (isReference(extendedType)) {
@@ -206,7 +210,7 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
   );
 };
 
-function TypeDocType(props: { type: EventType | ReflectionType | ReferenceType; name?: string }) {
+function TypeDocType(props: { type: EventType; name?: string }) {
   const { type, name } = props;
 
   if (type.type === "intersection") {

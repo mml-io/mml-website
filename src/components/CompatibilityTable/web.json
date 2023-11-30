@@ -1453,72 +1453,72 @@
   },
   "m-chat-probe": {
     "m-chat-probe": {
-      "supported": false,
-      "description": "The m-chat-probe element is not yet supported in the web client."
+      "supported": true,
+      "description": ""
     },
-    "radius": {
-      "supported": false,
-      "description": "The m-chat-probe element is not yet supported in the web client."
+    "range": {
+      "supported": true,
+      "description": ""
     },
     "enabled": {
-      "supported": false,
-      "description": "The m-chat-probe element is not yet supported in the web client."
+      "supported": true,
+      "description": ""
     },
     "onchat": {
-      "supported": false,
-      "description": "The m-chat-probe element is not yet supported in the web client."
+      "supported": true,
+      "description": ""
     },
     "debug": {
-      "supported": false,
-      "description": "The m-chat-probe element is not yet supported in the web client."
+      "supported": true,
+      "description": ""
     },
     "x": {
-      "supported": false,
-      "description": "The m-chat-probe element is not yet supported in the web client."
+      "supported": true,
+      "description": ""
     },
     "y": {
-      "supported": false,
-      "description": "The m-chat-probe element is not yet supported in the web client."
+      "supported": true,
+      "description": ""
     },
     "z": {
-      "supported": false,
-      "description": "The m-chat-probe element is not yet supported in the web client."
+      "supported": true,
+      "description": ""
     },
     "rx": {
-      "supported": false,
-      "description": "The m-chat-probe element is not yet supported in the web client."
+      "supported": true,
+      "description": ""
     },
     "ry": {
-      "supported": false,
-      "description": "The m-chat-probe element is not yet supported in the web client."
+      "supported": true,
+      "description": ""
     },
     "rz": {
-      "supported": false,
-      "description": "The m-chat-probe element is not yet supported in the web client."
+      "supported": true,
+      "description": ""
     },
     "sx": {
-      "supported": false,
-      "description": "The m-chat-probe element is not yet supported in the web client."
+      "supported": true,
+      "description": ""
     },
     "sy": {
-      "supported": false,
-      "description": "The m-chat-probe element is not yet supported in the web client."
+      "supported": true,
+      "description": ""
     },
     "sz": {
-      "supported": false,
-      "description": "The m-chat-probe element is not yet supported in the web client."
+      "supported": true,
+      "description": ""
     },
     "visible": {
-      "supported": false,
-      "description": "The m-chat-probe element is not yet supported in the web client."
+      "supported": true,
+      "description": ""
     },
     "id": {
-      "supported": false,
-      "description": "The m-chat-probe element is not yet supported in the web client."
+      "supported": true,
+      "description": ""
     },
     "class": {
-      "supported": false,
-      "description": "The m-chat-probe element is not yet supported in the web client."
+      "supported": true,
+      "description": ""
     }
   },
   "m-attr-anim": {

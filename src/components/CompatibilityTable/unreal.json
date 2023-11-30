@@ -1456,9 +1456,9 @@
       "supported": true,
       "description": ""
     },
-    "radius": {
+    "range": {
       "supported": true,
-      "description": ""
+      "description": "The 'range' attribute is named 'radius' in Unreal. To ensure compatibility with Unreal specify both 'radius' and 'range'."
     },
     "enabled": {
       "supported": true,
@@ -1523,55 +1523,55 @@
   },
   "m-attr-anim": {
     "m-attr-anim": {
-      "supported": false,
+      "supported": true,
       "description": ""
     },
     "attr": {
-      "supported": false,
+      "supported": true,
       "description": ""
     },
     "start": {
-      "supported": false,
+      "supported": true,
       "description": ""
     },
     "end": {
-      "supported": false,
+      "supported": true,
       "description": ""
     },
     "start-time": {
-      "supported": false,
+      "supported": true,
       "description": ""
     },
     "pause-time": {
-      "supported": false,
+      "supported": true,
       "description": ""
     },
     "duration": {
-      "supported": false,
+      "supported": true,
       "description": ""
     },
     "loop,": {
-      "supported": false,
+      "supported": true,
       "description": ""
     },
     "easing,": {
-      "supported": false,
+      "supported": true,
       "description": ""
     },
     "ping-pong": {
-      "supported": false,
+      "supported": true,
       "description": ""
     },
     "ping-pong-delay": {
-      "supported": false,
+      "supported": true,
       "description": ""
     },
     "id": {
-      "supported": false,
+      "supported": true,
       "description": ""
     },
     "class": {
-      "supported": false,
+      "supported": true,
       "description": ""
     }
   }
