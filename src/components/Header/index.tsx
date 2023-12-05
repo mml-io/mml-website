@@ -54,10 +54,7 @@ const Header = () => {
         <div className="container">
           <div className="relative -mx-4 flex items-center justify-between">
             <div className="w-60 max-w-full px-4 sm:px-0 xl:mr-12">
-              <Link
-                href="/"
-                className={`header-logo block w-[115px] ${sticky ? "py-5 lg:py-2" : "py-8"} `}
-              >
+              <Link href="/" className={`header-logo block w-[115px] py-5 lg:py-2`}>
                 <img
                   src="/images/logo/mml-logotype-black.svg"
                   alt="logo"
