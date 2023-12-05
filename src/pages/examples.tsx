@@ -58,9 +58,9 @@ const ExamplesPage = () => {
       <Head>{getPageTitle("Examples")}</Head>
       <main
         id="about"
-        className="mx-4 mt-28 flex flex-col border-[1px] border-editor-border bg-white dark:border-editor-border-dark dark:bg-editor-bg xl:h-[calc(100vh-132px)] xl:flex-row"
+        className="mx-4 mt-28 flex flex-col rounded border-[1px] border-editor-border bg-white dark:border-editor-border-dark dark:bg-editor-bg xl:h-[calc(100vh-132px)] xl:flex-row"
       >
-        <div className="order-1 flex-1 xl:order-first xl:flex-[0_1_350px]">
+        <div className="order-1 flex-1 overflow-hidden rounded-t xl:order-first xl:flex-[0_1_350px]">
           <div className="h-[50px] bg-white px-[17px] pt-[14px] leading-[19px] text-black dark:bg-editor-bg dark:text-white">
             Examples
           </div>
@@ -79,7 +79,7 @@ const ExamplesPage = () => {
               onChange={handleSearch}
             />
           </div>
-          <div className=" overflow-y-scroll border-editor-border bg-white p-6 pt-2 dark:border-editor-border-dark dark:bg-editor-bg xl:h-[calc(100vh-219px)] xl:border-r-[1px]">
+          <div className=" overflow-y-scroll rounded-b border-editor-border bg-white p-6 pt-2 dark:border-editor-border-dark dark:bg-editor-bg xl:h-[calc(100vh-219px)] xl:border-r-[1px]">
             {Object.keys(exampleList).map((key) => {
               const currentExample = exampleList[key];
               const { name, description, image } = currentExample;
@@ -106,7 +106,7 @@ const ExamplesPage = () => {
             })}
           </div>
         </div>
-        <div className="flex-[0_0_calc(100vh-219px)] xl:flex-1">
+        <div className="flex-[0_0_calc(100vh-219px)] overflow-hidden xl:flex-1 xl:rounded-b">
           <ExampleView
             key={selectedExample?.name || "default"}
             initialClients={selectedExample?.clients ?? [CLIENT_TYPES.FLOATING]}

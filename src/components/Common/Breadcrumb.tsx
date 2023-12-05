@@ -9,11 +9,11 @@ const Breadcrumb = ({
 }) => {
   return (
     <>
-      <section className="relative z-10 mx-auto max-w-[800px] overflow-hidden pt-28 lg:pt-[150px]">
-        <div className="container">
-          <div className="-mx-4 flex flex-wrap items-center">
-            <div className="w-full px-4 md:px-0">
-              <div className="mb-8 max-w-[570px] lg:mb-12">
+      <section className="relative z-10 w-full overflow-hidden">
+        <div>
+          <div className="flex flex-wrap items-center">
+            <div className="w-full">
+              <div className="mb-4 max-w-[570px] lg:mb-6">
                 <ul className="flex flex-wrap md:justify-start">
                   <li className="flex items-center">
                     <Link

@@ -9,7 +9,7 @@ const sharedTextStyle = "text-[#1B1B1B] dark:text-white";
 export const sharedBodyStyle = `text-xl text-justify leading-[32px] ${sharedTextStyle}`;
 const sharedHeadingStyle = `font-medium ${sharedTextStyle}`;
 
-export const components = {
+export const componentsBlog = {
   p: (props: HTMLProps<HTMLParagraphElement>) => (
     <p className={`${sharedBodyStyle} my-4`} {...props} />
   ),
@@ -51,15 +51,6 @@ export const components = {
       {...props}
     />
   ),
-  a: (props: HTMLProps<HTMLAnchorElement>) => (
-    <a target="_blank" className="font-normal text-[#0069C2] underline" {...props} />
-  ),
-  blockquote: (props: HTMLProps<HTMLQuoteElement>) => (
-    <blockquote
-      className={`${sharedTextStyle} mt-[1.12em] rounded-md bg-[#F2F1F1] px-4 py-2 text-[14px] leading-[18.2px] text-[#0069C2]`}
-      {...props}
-    />
-  ),
   li: (props: HTMLProps<HTMLLIElement>) => <li className={`${sharedBodyStyle} !mt-0`} {...props} />,
   ul: (props: HTMLProps<HTMLUListElement>) => (
     <ul className={`${sharedBodyStyle} !mt-1 ml-6 list-disc`} {...props} />
@@ -75,20 +66,54 @@ export const components = {
   ),
   pre: ({ props, children }: { props: HTMLProps<HTMLPreElement>; children: any }) => (
     <pre
-      className={twMerge(
-        `font-mono ${sharedBodyStyle}`,
-        "mb-4 max-w-[800px] break-after-all text-base",
-      )}
+      className={twMerge(`font-mono ${sharedBodyStyle}`, "mb-4 break-after-all text-base")}
       {...props}
     >
       <SyntaxHighlighter {...children.props} />
     </pre>
   ),
-  img: (props: HTMLProps<HTMLImageElement>) => <img className="mx-auto my-4" {...props} />,
+  img: (props: HTMLProps<HTMLImageElement>) => <img className="mx-auto my-4 w-full" {...props} />,
 };
 
-export const MarkDown = (props: ReactMarkdownOptions) => (
-  <ReactMarkdown {...props} components={components as unknown as Components}>
+export const MarkDownBlog = (props: ReactMarkdownOptions) => (
+  <ReactMarkdown {...props} components={componentsBlog as unknown as Components}>
+    {props.children}
+  </ReactMarkdown>
+);
+
+export const sharedBodyStyleDocs = `text-base text-justify leading-[32px] ${sharedTextStyle}`;
+export const componentsDocs = {
+  ...componentsBlog,
+  p: (props: HTMLProps<HTMLParagraphElement>) => (
+    <p className={`${sharedBodyStyleDocs} my-2 text-[1.0625rem] font-sans`} {...props} />
+  ),
+  li: (props: HTMLProps<HTMLLIElement>) => (
+    <li className={`${sharedBodyStyleDocs} !mt-0`} {...props} />
+  ),
+  ul: (props: HTMLProps<HTMLUListElement>) => (
+    <ul className={`${sharedBodyStyleDocs} !mt-1 ml-6 list-disc`} {...props} />
+  ),
+  ol: (props: DetailedHTMLProps<OlHTMLAttributes<HTMLOListElement>, HTMLOListElement>) => (
+    <ol className={`!mt-2 ${sharedBodyStyle}`} {...props} />
+  ),
+  code: (props: HTMLProps<HTMLElement>) => (
+    <code
+      className={`!m-0 my-[1.12em] bg-[#F2F1F1] px-1 py-0.5 text-base !text-[#e8912d] dark:bg-[#262626] ${sharedTextStyle}`}
+      {...props}
+    />
+  ),
+  pre: ({ props, children }: { props: HTMLProps<HTMLPreElement>; children: any }) => (
+    <pre
+      className={twMerge(`font-sans ${sharedBodyStyleDocs}`, "mb-4 break-after-all text-base")}
+      {...props}
+    >
+      <SyntaxHighlighter {...children.props} />
+    </pre>
+  ),
+};
+
+export const MarkDownDocs = (props: ReactMarkdownOptions) => (
+  <ReactMarkdown {...props} components={componentsDocs as unknown as Components}>
     {props.children}
   </ReactMarkdown>
 );

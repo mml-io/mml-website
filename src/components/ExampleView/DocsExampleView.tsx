@@ -22,6 +22,12 @@ export type DocsExampleViewProps = {
   noBorders?: boolean;
 };
 
+/**
+ * DocsExampleView
+ *
+ * @param {DocsExampleViewProps} props - The props for the DocsExampleView component
+ * @returns {JSX.Element} - The rendered JSX element
+ */
 export function DocsExampleView(props: DocsExampleViewProps) {
   const [clients, setClients] = useState<{ type: ClientType; id: number }[]>(() =>
     props.initialClients.map((type) => ({
@@ -56,6 +62,14 @@ export function DocsExampleView(props: DocsExampleViewProps) {
     networkedDOMDocument?.load(code);
   }, [code]);
 
+  /**
+   * Function handleResetClick
+   *
+   * @description Resets the code to the initial value
+   *
+   * @function
+   * @returns {void}
+   */
   const handleResetClick = useCallback(() => {
     setCode(props.code);
   }, []);
@@ -80,10 +94,10 @@ export function DocsExampleView(props: DocsExampleViewProps) {
   };
 
   return (
-    <div className="relative h-full">
+    <div className="relative h-full overflow-hidden">
       <div
         className={twMerge(
-          "relative flex h-[50px] justify-between border-b-0 border-editor-border bg-white px-[17px] pt-[14px] leading-[19px] text-black dark:border-editor-border-dark dark:bg-editor-bg dark:text-white",
+          "relative flex h-[50px] justify-between overflow-hidden rounded-t border-b-0 border-editor-border bg-white px-[17px] pt-[14px] leading-[19px] text-black dark:border-editor-border-dark dark:bg-editor-bg dark:text-white",
           !props.noBorders && "border-[1px]",
         )}
       >
@@ -102,8 +116,8 @@ export function DocsExampleView(props: DocsExampleViewProps) {
       </div>
       <div
         className={twMerge(
-          "relative flex h-[calc(100%-50px)] flex-row border-t-[1px] border-editor-border dark:border-editor-border-dark",
-          !props.noBorders && "border-[1px]",
+          "relative flex h-[calc(100%-50px)] flex-row overflow-hidden border-t-[1px] border-editor-border dark:border-editor-border-dark",
+          !props.noBorders && "rounded-b border-[1px]",
         )}
       >
         <div
@@ -117,7 +131,7 @@ export function DocsExampleView(props: DocsExampleViewProps) {
               CODE
             </span>
           </div>
-          <HTMLEditor className="h-[calc(100%-35px)]" code={code} setCode={setCode} />
+          <HTMLEditor code={code} setCode={setCode} />
         </div>
         <ExampleClientsSection
           baseScene={baseScene}

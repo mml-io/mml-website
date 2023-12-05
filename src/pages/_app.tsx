@@ -6,7 +6,7 @@ import "@/src/styles/index.css";
 
 import { Providers } from "@/src/components/_providers";
 import Header from "@/src/components/Header";
-import { components } from "@/src/config/mdx";
+import { componentsBlog } from "@/src/config/mdx";
 
 const ibmPlexSans = IBM_Plex_Sans({
   subsets: ["latin"],
@@ -27,7 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
       className={`${ibmPlexSans.variable} ${ibmPlexMono.variable} font-sans text-black dark:text-white`}
     >
       <Providers>
-        <MDXProvider components={components}>
+        <MDXProvider components={componentsBlog}>
           <Header />
           <Component {...pageProps} />
         </MDXProvider>

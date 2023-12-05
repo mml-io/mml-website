@@ -1,15 +1,16 @@
 import * as React from "react";
-import ReactMarkdown from "react-markdown";
+
+import { MarkDownDocs } from "@/src/config/mdx";
 
 export default function TypeDocComment(props: { comment: { summary: { text: string }[] } }) {
   return (
-    <ReactMarkdown className="font-mono text-base">
+    <MarkDownDocs className="text-[1.0625rem] mt-2 [&>p]:mt-0">
       {props.comment.summary
         .map(
           (descriptionText, index) =>
             descriptionText.text + (props.comment.summary[index + 1]?.text === "." ? "" : " "),
         )
         .join("")}
-    </ReactMarkdown>
+    </MarkDownDocs>
   );
 }
