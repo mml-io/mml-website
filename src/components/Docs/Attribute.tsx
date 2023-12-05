@@ -24,7 +24,9 @@ export function Attribute(props: { attribute: Attribute }) {
       {props.attribute.description &&
         props.attribute.description.map((descriptionText, index) => (
           <div className="pl-4">
-            <MarkDownDocs key={index}>{descriptionText}</MarkDownDocs>
+            <MarkDownDocs key={index}>
+              {descriptionText.replaceAll(/(\s{2,}|\n)/g, " ")}
+            </MarkDownDocs>
           </div>
         ))}
     </div>

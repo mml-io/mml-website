@@ -87,7 +87,7 @@
   /* CSS rules for the custom attribute */
   color: #ff0000 !important;
 }
-
+i
 .CodeMirror .cm-string, .CodeMirror .cm-string-2, .CodeMirror .cm-keyword {
   /* CSS rules for the custom string */
   color: #0000ff !important;

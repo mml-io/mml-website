@@ -103,119 +103,121 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
       <Head>{getPageTitle(eventClassDefinition.name)}</Head>
       <div className="flex w-full pt-32">
         <ReferenceNavigation />
-        <main className="mx-auto w-full px-4 lg:px-0 max-w-centerColumn">
-          <ReduceWidthDiv>
-            <Breadcrumb
-              pageName={`${eventClassDefinition.name}`}
-              parents={[
-                { name: "Docs", path: "docs" },
-                { name: "Reference", path: "reference" },
-                { name: "Events", path: "events" },
-              ]}
-            />
-            <h1 className="mb-4 text-4xl font-semibold uppercase">
-              {eventClassDefinition.name}
-              {extendedTypes.length > 0 && (
-                <span className="text-sm"> extends {extendedTypes.map(createTypeLink)}</span>
-              )}
-            </h1>
-            {eventClassDefinition.comment && (
-              <TypeDocComment comment={eventClassDefinition.comment} />
-            )}
-          </ReduceWidthDiv>
-          {primaryExample && (
-            <div>
-              <ReduceWidthDiv>
-                <h2 className="mb-4 mt-8 scroll-m-20 text-3xl font-medium" id="try it">
-                  Try it
-                </h2>
-              </ReduceWidthDiv>
-              <ExampleView
-                key={eventId + primaryExample.title}
-                description={primaryExample.description}
-                baseScene={
-                  primaryExample.baseSceneOn !== undefined ? primaryExample.baseSceneOn : true
-                }
-                code={primaryExample.code}
-                initialClients={primaryExample.clients ?? [CLIENT_TYPES.FLOATING]}
-                containerHeight={480}
-                containerStyle="mt-4"
+        <div className="px-5 sm:px-12 w-full">
+          <main className="mx-auto w-full px-4 lg:px-0 max-w-centerColumn">
+            <ReduceWidthDiv>
+              <Breadcrumb
+                pageName={`${eventClassDefinition.name}`}
+                parents={[
+                  { name: "Docs", path: "docs" },
+                  { name: "Reference", path: "reference" },
+                  { name: "Events", path: "events" },
+                ]}
               />
-            </div>
-          )}
-          <ReduceWidthDiv>
-            <h2 className="mb-4 mt-6 scroll-m-20 text-3xl font-medium" id="properties">
-              Properties
-            </h2>
-            {eventClassDefinition.children &&
-              eventClassDefinition.children
-                .filter((property) => {
-                  if (!showExternalProperties && property.flags.isExternal) {
-                    return false;
+              <h1 className="mb-4 text-4xl font-semibold uppercase">
+                {eventClassDefinition.name}
+                {extendedTypes.length > 0 && (
+                  <span className="text-sm"> extends {extendedTypes.map(createTypeLink)}</span>
+                )}
+              </h1>
+              {eventClassDefinition.comment && (
+                <TypeDocComment comment={eventClassDefinition.comment} />
+              )}
+            </ReduceWidthDiv>
+            {primaryExample && (
+              <div>
+                <ReduceWidthDiv>
+                  <h2 className="mb-4 mt-8 scroll-m-20 text-3xl font-medium" id="try it">
+                    Try it
+                  </h2>
+                </ReduceWidthDiv>
+                <ExampleView
+                  key={eventId + primaryExample.title}
+                  description={primaryExample.description}
+                  baseScene={
+                    primaryExample.baseSceneOn !== undefined ? primaryExample.baseSceneOn : true
                   }
-                  return !(!showInheritedProperties && property.inheritedFrom);
-                })
-                .map((property) => (
-                  <div key={property.name}>
-                    <h3 className="mb-4 flex items-center pt-8 text-lg">
-                      {property.name}
-                      {Object.entries(property.flags).map(([flag]) => {
-                        return (
-                          <span
-                            key={flag}
-                            className="ml-2 inline-block rounded-3xl px-2 text-sm text-black dark:bg-white"
-                          >
-                            {flag}
-                          </span>
-                        );
-                      })}
-                    </h3>
-                    {property.comment &&
-                      property.comment.summary.map((descriptionText, index) => (
-                        <MarkDownDocs key={index}>{descriptionText.text}</MarkDownDocs>
-                      ))}
-                    <TypeDocType name={property.name} type={property.type as EventType} />
-                  </div>
-                ))}
-            {eventClassDefinition.extendedBy && (
+                  code={primaryExample.code}
+                  initialClients={primaryExample.clients ?? [CLIENT_TYPES.FLOATING]}
+                  containerHeight={480}
+                  containerStyle="mt-4"
+                />
+              </div>
+            )}
+            <ReduceWidthDiv>
+              <h2 className="mb-4 mt-6 scroll-m-20 text-3xl font-medium" id="properties">
+                Properties
+              </h2>
+              {eventClassDefinition.children &&
+                eventClassDefinition.children
+                  .filter((property) => {
+                    if (!showExternalProperties && property.flags.isExternal) {
+                      return false;
+                    }
+                    return !(!showInheritedProperties && property.inheritedFrom);
+                  })
+                  .map((property) => (
+                    <div key={property.name}>
+                      <h3 className="mb-4 flex items-center pt-8 text-lg">
+                        {property.name}
+                        {Object.entries(property.flags).map(([flag]) => {
+                          return (
+                            <span
+                              key={flag}
+                              className="ml-2 inline-block rounded-3xl px-2 text-sm text-black dark:bg-white"
+                            >
+                              {flag}
+                            </span>
+                          );
+                        })}
+                      </h3>
+                      {property.comment &&
+                        property.comment.summary.map((descriptionText, index) => (
+                          <MarkDownDocs key={index}>{descriptionText.text}</MarkDownDocs>
+                        ))}
+                      <TypeDocType name={property.name} type={property.type as EventType} />
+                    </div>
+                  ))}
+              {eventClassDefinition.extendedBy && (
+                <>
+                  <h2 className="mb-4 mt-6 scroll-m-20 text-3xl font-medium">Subclasses</h2>
+                  {eventClassDefinition.extendedBy.map((eventClass) => (
+                    <div key={eventClass.name}>
+                      <h3 className="mb-2 text-xl uppercase">{eventClass.name}</h3>
+                    </div>
+                  ))}
+                </>
+              )}
+            </ReduceWidthDiv>
+            {filteredExamples.length > 0 && (
               <>
-                <h2 className="mb-4 mt-6 scroll-m-20 text-3xl font-medium">Subclasses</h2>
-                {eventClassDefinition.extendedBy.map((eventClass) => (
-                  <div key={eventClass.name}>
-                    <h3 className="mb-2 text-xl uppercase">{eventClass.name}</h3>
-                  </div>
-                ))}
+                <ReduceWidthDiv>
+                  <h2 id="examples" className="mb-4 mt-6 scroll-m-20 text-3xl font-medium">
+                    Examples
+                  </h2>
+                </ReduceWidthDiv>
+                {filteredExamples.map((exampleKey) => {
+                  const example = examplesForElement.examples[exampleKey];
+                  return (
+                    <div key={`${eventId}-${example.title}`}>
+                      <ReduceWidthDiv>
+                        <h3 className="mb-4 mt-8 text-[24px] font-medium">{example.title}</h3>
+                      </ReduceWidthDiv>
+                      <ExampleView
+                        description={example.description}
+                        baseScene={example.baseSceneOn !== undefined ? example.baseSceneOn : true}
+                        code={example.code}
+                        initialClients={example.clients ?? [CLIENT_TYPES.FLOATING]}
+                        containerHeight={480}
+                        containerStyle="mt-4"
+                      />
+                    </div>
+                  );
+                })}
               </>
             )}
-          </ReduceWidthDiv>
-          {filteredExamples.length > 0 && (
-            <>
-              <ReduceWidthDiv>
-                <h2 id="examples" className="mb-4 mt-6 scroll-m-20 text-3xl font-medium">
-                  Examples
-                </h2>
-              </ReduceWidthDiv>
-              {filteredExamples.map((exampleKey) => {
-                const example = examplesForElement.examples[exampleKey];
-                return (
-                  <div key={`${eventId}-${example.title}`}>
-                    <ReduceWidthDiv>
-                      <h3 className="mb-4 mt-8 text-[24px] font-medium">{example.title}</h3>
-                    </ReduceWidthDiv>
-                    <ExampleView
-                      description={example.description}
-                      baseScene={example.baseSceneOn !== undefined ? example.baseSceneOn : true}
-                      code={example.code}
-                      initialClients={example.clients ?? [CLIENT_TYPES.FLOATING]}
-                      containerHeight={480}
-                      containerStyle="mt-4"
-                    />
-                  </div>
-                );
-              })}
-            </>
-          )}
-        </main>
+          </main>
+        </div>
         <LinkList elementList={linkList} />
       </div>
     </>
