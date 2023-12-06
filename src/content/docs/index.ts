@@ -4,11 +4,13 @@ import * as connectionEvent from "./connectionEvent";
 import * as mAttrAnim from "./m-attr-anim";
 import * as mAudio from "./m-audio";
 import * as mCharacter from "./m-character";
+import * as mChatProbe from "./m-chat-probe";
 import * as mCube from "./m-cube";
 import * as mCylinder from "./m-cylinder";
 import * as mFrame from "./m-frame";
 import * as mGroup from "./m-group";
 import * as mImage from "./m-image";
+import * as mInteraction from "./m-interaction";
 import * as mLabel from "./m-label";
 import * as mLight from "./m-light";
 import * as mModel from "./m-model";
@@ -45,6 +47,8 @@ export const examples: DocsExamplesByTag = {
   "m-position-probe": mPositionProbe,
   "m-attr-anim": mAttrAnim,
   "m-image": mImage,
+  "m-chat-probe": mChatProbe,
+  "m-interaction": mInteraction,
   ConnectionEvent: connectionEvent,
   MMLChatEvent: mmlChatEvent,
   MMLClickEvent: mmlClickEvent,

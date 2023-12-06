@@ -1,6 +1,10 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import * as React from "react";
 import { useEffect, useState } from "react";
+import { twMerge } from "tailwind-merge";
+
+import { SearchBar } from "@/src/components/Header/SearchBar";
 
 import menuData from "./menuData";
 import ThemeToggler from "./ThemeToggler";
@@ -45,11 +49,12 @@ const Header = () => {
   return (
     <>
       <header
-        className={`header left-0 top-0 z-40 flex w-full items-center bg-transparent ${
+        className={twMerge(
+          "header left-0 top-0 z-40 flex w-full items-center bg-transparent transform-gpu transition-opacity opacity-100",
           sticky
             ? "!fixed !z-[9999] !bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm !transition dark:!bg-body-color dark:!bg-opacity-20"
-            : "absolute"
-        }`}
+            : "absolute",
+        )}
       >
         <div className="container">
           <div className="relative -mx-4 flex items-center justify-between">
@@ -71,8 +76,8 @@ const Header = () => {
                 />
               </Link>
             </div>
-            <div className="flex w-full items-center justify-between">
-              <div>
+            <div className="flex w-full items-center space-between">
+              <div className="flex justify-between items-center flex-1">
                 <button
                   onClick={navbarToggleHandler}
                   id="navbarToggler"
@@ -153,6 +158,7 @@ const Header = () => {
                     ))}
                   </ul>
                 </nav>
+                <SearchBar />
               </div>
               <div className="flex items-center justify-between pr-14 sm:pr-10 lg:pr-0">
                 <div>{mounted && <ThemeToggler />}</div>
