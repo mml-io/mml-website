@@ -10,7 +10,9 @@ const ExampleViewStatic = dynamic<Partial<DocsExampleViewProps>>(
   { ssr: false },
 );
 
-export default function ExampleView(props: DocsExampleViewProps & { containerHeight?: number }) {
+export default function ExampleView(
+  props: DocsExampleViewProps & { containerHeight?: number; containerStyle?: string },
+) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -35,12 +37,15 @@ export default function ExampleView(props: DocsExampleViewProps & { containerHei
     return () => observer.disconnect();
   }, []);
 
-  const { containerHeight } = props;
+  const { containerHeight, containerStyle } = props;
 
   return (
     <div
-      className={twMerge("h-full w-full", containerHeight && `h-[${containerHeight}px]`)}
+      className={twMerge("w-full h-full", containerStyle)}
       ref={ref}
+      style={{
+        height: containerHeight,
+      }}
     >
       {isVisible && <ExampleViewStatic {...props} />}
     </div>

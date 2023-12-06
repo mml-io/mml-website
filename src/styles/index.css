@@ -46,7 +46,7 @@
 }
 
 .dark .CodeMirror {
-  background: #202B36 !important;
+  background: #24272F !important;
   color: #808080 !important;
 }
 
@@ -56,7 +56,7 @@
 }
 
 .dark .CodeMirror .CodeMirror-gutter {
-  background-color: #202B36 !important;
+  background-color: #24272F !important;
   border-right: 1px solid #455969 !important;
 }
 
@@ -87,7 +87,7 @@
   /* CSS rules for the custom attribute */
   color: #ff0000 !important;
 }
-
+i
 .CodeMirror .cm-string, .CodeMirror .cm-string-2, .CodeMirror .cm-keyword {
   /* CSS rules for the custom string */
   color: #0000ff !important;

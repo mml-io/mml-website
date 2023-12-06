@@ -2,12 +2,14 @@ import { Attribute } from "@mml-io/mml-schema";
 import * as React from "react";
 
 import { attributeTypes } from "@/src/config/maps";
-import { MarkDown } from "@/src/config/mdx";
+import { MarkDownDocs } from "@/src/config/mdx";
 
 export function Attribute(props: { attribute: Attribute }) {
   return (
     <div>
-      <MarkDown className="inline-block [&>*]:mb-0">{"`" + props.attribute.name + "`"}</MarkDown>
+      <MarkDownDocs className="inline-block [&>*]:mb-0">
+        {"`" + props.attribute.name + "`"}
+      </MarkDownDocs>
       :&nbsp;
       {props.attribute.type && (
         <span>{attributeTypes[props.attribute.type as keyof typeof attributeTypes]}</span>
@@ -21,7 +23,11 @@ export function Attribute(props: { attribute: Attribute }) {
       )}
       {props.attribute.description &&
         props.attribute.description.map((descriptionText, index) => (
-          <MarkDown key={index}>{descriptionText}</MarkDown>
+          <div className="pl-4">
+            <MarkDownDocs key={index}>
+              {descriptionText.replaceAll(/(\s{2,}|\n)/g, " ")}
+            </MarkDownDocs>
+          </div>
         ))}
     </div>
   );

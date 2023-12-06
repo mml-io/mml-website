@@ -73,7 +73,7 @@ export function AnimatedExampleView() {
       setAppendCode={setAppendCode}
       key={resetKey}
     >
-      <div className="relative h-[50px] border-[1px] border-b-0 border-editor-border bg-white px-[17px] pt-[14px] leading-[19px] text-black dark:border-editor-border-dark dark:bg-editor-bg dark:text-white">
+      <div className="relative h-[50px] overflow-hidden rounded-t border-[1px] border-b-0 border-editor-border bg-white px-[17px] pt-[14px] leading-[19px] text-black dark:border-editor-border-dark dark:bg-editor-bg dark:text-white">
         Create an interactive, multi-user 3D scene with HTML and JavaScript
         <button
           onClick={handleResetClick}
@@ -88,7 +88,7 @@ export function AnimatedExampleView() {
           />
         </button>
       </div>
-      <div className="flex h-[529px] border-[1px] border-editor-border dark:border-editor-border-dark">
+      <div className="flex h-[529px] overflow-hidden rounded-b border-[1px] border-editor-border dark:border-editor-border-dark">
         <div className="mb-16 h-full w-[44%]">
           <div className="flex h-[35px] border-b-[1px] border-editor-border bg-white dark:border-editor-border-dark dark:bg-editor-bg">
             <span className="inline-block h-full w-[83px] border-b-[3px] bg-transparent pt-2 text-center text-[13px] text-editor-title">

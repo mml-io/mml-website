@@ -1,15 +1,20 @@
 import Link from "next/link";
 import * as React from "react";
 
-import { tableBorder } from "@/src/components/DocsTable/DocsTableContainer";
 import TypeDocComment from "@/src/components/TypeDocComment";
-import { MarkDown } from "@/src/config/mdx";
+import { MarkDownDocs } from "@/src/config/mdx";
 
-const StyledTD = ({ children, className }: { children: React.ReactNode; className?: string }) => {
+const StyledElement = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
   return (
-    <td className={`h-10 p-2 px-6 ${tableBorder} ${className} overflow-hidden text-ellipsis`}>
+    <p className={`inline-block ${className} text-[1.0625rem] whitespace-break-spaces`}>
       {children}
-    </td>
+    </p>
   );
 };
 
@@ -29,21 +34,19 @@ export function DocsRow({
   link: string;
 }) {
   return (
-    <tr>
-      <StyledTD>
+    <li className="relative before:absolute dark:before:bg-white before:bg-black before:-left-5 before:h-2 before:w-2 before:top-[0.6rem] before:rounded">
+      <StyledElement>
         <Link href={link}>
-          <code className="bg-[#F2F1F1] p-0.5 font-mono !text-[#0069C2] dark:bg-[#262626]">
-            {name}
-          </code>
+          <code className="bg-[#F2F1F1] !text-[#0069C2] text-lg dark:bg-[#262626]">{name}</code>
         </Link>
-      </StyledTD>
-      <StyledTD>
-        {description && isComment(description) ? (
-          <TypeDocComment comment={description} />
-        ) : (
-          <MarkDown className="text-base [&>*]:text-ellipsis [&>p]:mt-0 [&>p]:overflow-hidden [&>p]:font-mono">{`${description}`}</MarkDown>
-        )}
-      </StyledTD>
-    </tr>
+        <span className="pl-4 block">
+          {description && isComment(description) ? (
+            <TypeDocComment comment={description} />
+          ) : (
+            <MarkDownDocs className="text-base mt-2 [&>p]:mt-0">{`${description}`}</MarkDownDocs>
+          )}
+        </span>
+      </StyledElement>
+    </li>
   );
 }

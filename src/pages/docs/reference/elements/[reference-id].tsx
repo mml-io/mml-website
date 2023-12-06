@@ -9,7 +9,7 @@ import CompatibilityTable from "@/src/components/CompatibilityTable";
 import { Attribute } from "@/src/components/Docs/Attribute";
 import { AttributeGroup } from "@/src/components/Docs/AttributeGroup";
 import ExampleView from "@/src/components/ExampleView/DocsExampleViewDynamic";
-import { MarkDown } from "@/src/config/mdx";
+import { MarkDownDocs } from "@/src/config/mdx";
 import * as docsExamples from "@/src/content/docs";
 import { getPageTitle } from "@/src/util";
 import { CLIENT_TYPES } from "@/types/docs-reference";
@@ -44,6 +44,10 @@ export function getStaticProps({ params }: { params: { "reference-id": string } 
 
 const schemaDefinition = createSchemaDefinition(schemaJSON);
 
+const ReducedWidthDiv = (props: { children: React.ReactNode }) => (
+  <div className="w-full mx-auto xl:max-w-[900px]">{props.children}</div>
+);
+
 const DocsPage = ({ referenceId }: { referenceId: string }) => {
   const elementDefinition = schemaDefinition.elements[referenceId];
 
@@ -62,31 +66,35 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
 
   return (
     <>
-      <Breadcrumb
-        pageName={`${elementDefinition.name}`}
-        parents={[
-          { name: "Docs", path: "docs" },
-          { name: "Reference", path: "reference" },
-          { name: "Elements", path: "elements" },
-        ]}
-      />
       <Head>{getPageTitle(elementDefinition.name)}</Head>
-      <div>
+      <div className="flex pt-32">
         <ReferenceNavigation />
-        <main className="mx-auto w-full px-4 md:max-w-[800px] lg:px-0">
-          <h1 className="text-4xl font-semibold uppercase">{elementDefinition.name}</h1>
-          {elementDefinition.description &&
-            elementDefinition.description.map((descriptionText, index) => (
-              <MarkDown className="mb-4" key={index}>
-                {descriptionText}
-              </MarkDown>
-            ))}
-          {primaryExample && (
-            <>
-              <h2 className="mb-4 scroll-m-20 text-3xl font-medium" id="try it">
-                Try it
-              </h2>
-              <div className="h-[420px]">
+        <div className="px-5 sm:px-12 w-full">
+          <main className="mx-auto w-full px-4 lg:px-0 max-w-centerColumn">
+            <ReducedWidthDiv>
+              <Breadcrumb
+                pageName={`${elementDefinition.name}`}
+                parents={[
+                  { name: "Docs", path: "docs" },
+                  { name: "Reference", path: "reference" },
+                  { name: "Elements", path: "elements" },
+                ]}
+              />
+              <h1 className="text-4xl font-semibold mb-4">&lt;{elementDefinition.name}&gt;</h1>
+              {elementDefinition.description &&
+                elementDefinition.description.map((descriptionText, index) => (
+                  <MarkDownDocs className="my-6 text-base" key={index}>
+                    {descriptionText}
+                  </MarkDownDocs>
+                ))}
+            </ReducedWidthDiv>
+            {primaryExample && (
+              <>
+                <ReducedWidthDiv>
+                  <h2 className="my-6 scroll-m-20 text-3xl font-medium" id="try it">
+                    Try it
+                  </h2>
+                </ReducedWidthDiv>
                 <ExampleView
                   description={primaryExample.description}
                   key={`${referenceId}-primary`}
@@ -95,78 +103,83 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
                   }
                   code={primaryExample.code}
                   initialClients={primaryExample.clients ?? [CLIENT_TYPES.FLOATING]}
-                  containerHeight={420}
+                  containerHeight={480}
                 />
-              </div>
-            </>
-          )}
-          {!!attributes.length && (
-            <>
-              <h2 id="attributes" className="mb-4 mt-6 scroll-m-20 text-3xl font-medium">
-                Attributes
-              </h2>
-              <code className="bg-gray-200 text-red-800 font-mono">
-                <ul>
-                  {attributes.map((attribute) => (
-                    <li key={attribute.name}>
-                      <Attribute attribute={attribute} />
+              </>
+            )}
+            {!!attributes.length && (
+              <ReducedWidthDiv>
+                <h2 id="attributes" className="mb-4 mt-6 scroll-m-20 text-3xl font-medium">
+                  Attributes
+                </h2>
+                <code className="bg-gray-200 text-red-800 font-mono">
+                  <ul>
+                    {attributes.map((attribute) => (
+                      <li key={attribute.name}>
+                        <Attribute attribute={attribute} />
+                      </li>
+                    ))}
+                  </ul>
+                </code>
+              </ReducedWidthDiv>
+            )}
+            {!!attributeGroups.length && (
+              <ReducedWidthDiv>
+                <h2 className="mb-4 mt-6 scroll-m-20 text-3xl font-medium" id="attribute groups">
+                  Attribute Groups
+                </h2>
+                <ul className="bg-gray-200 text-red-800 rounded p-1 font-mono">
+                  {attributeGroups.map((attributeGroup) => (
+                    <li key={attributeGroup}>
+                      <AttributeGroup attributeGroupName={attributeGroup} />
                     </li>
                   ))}
                 </ul>
-              </code>
-            </>
-          )}
-          {!!attributeGroups.length && (
-            <>
-              <h2 className="mb-4 mt-6 scroll-m-20 text-3xl font-medium" id="attribute groups">
-                Attribute Groups
-              </h2>
-              <ul className="bg-gray-200 text-red-800 rounded p-1 font-mono">
-                {attributeGroups.map((attributeGroup) => (
-                  <li key={attributeGroup}>
-                    <AttributeGroup attributeGroupName={attributeGroup} />
-                  </li>
-                ))}
-              </ul>
-            </>
-          )}
-          {filteredExamples.length > 0 && (
-            <>
-              <h2 id="examples" className="mb-4 mt-6 scroll-m-20 text-3xl font-medium">
-                Examples
-              </h2>
-              {filteredExamples.map((exampleKey) => {
-                const example = examplesForElement.examples[exampleKey];
-                return (
-                  <div key={`${referenceId}-${example.title}`}>
-                    <h3 className="mt-8 text-[24px] font-medium">{example.title}</h3>
-                    <MarkDown>{`${example.description}`}</MarkDown>
-                    <div className="h-[420px]">
+              </ReducedWidthDiv>
+            )}
+            {filteredExamples.length > 0 && (
+              <>
+                <ReducedWidthDiv>
+                  <h2 id="examples" className="mb-4 mt-6 scroll-m-20 text-3xl font-medium">
+                    Examples
+                  </h2>
+                </ReducedWidthDiv>
+                {filteredExamples.map((exampleKey) => {
+                  const example = examplesForElement.examples[exampleKey];
+                  return (
+                    <div key={`${referenceId}-${example.title}`}>
+                      <ReducedWidthDiv>
+                        <h3 className="mt-8 text-[24px] font-medium">{example.title}</h3>
+                        <MarkDownDocs>{`${example.description}`}</MarkDownDocs>
+                      </ReducedWidthDiv>
                       <ExampleView
                         description={example.title}
                         baseScene={example.baseSceneOn !== undefined ? example.baseSceneOn : true}
                         code={example.code}
                         initialClients={example.clients ?? [CLIENT_TYPES.FLOATING]}
-                        containerHeight={420}
+                        containerHeight={480}
+                        containerStyle="mt-4"
                       />
                     </div>
-                  </div>
-                );
-              })}
-            </>
-          )}
-          <h2 id="compatibility" className="mb-4 mt-6 scroll-m-20 text-3xl font-medium">
-            Compatibility Table
-          </h2>
-          <CompatibilityTable element={elementDefinition.name} />
-        </main>
+                  );
+                })}
+              </>
+            )}
+            <ReducedWidthDiv>
+              <h2 id="compatibility" className="mb-4 mt-10 scroll-m-20 text-3xl font-medium">
+                Compatibility Table
+              </h2>
+              <CompatibilityTable element={elementDefinition.name} />
+            </ReducedWidthDiv>
+          </main>
+        </div>
         <LinkList
           elementList={[
-            "try it",
-            attributes.length ? "attributes" : "",
-            "attribute groups",
-            "examples",
-            "compatibility",
+            "Try it",
+            attributes.length ? "Attributes" : "",
+            "Attribute groups",
+            "Examples",
+            "Compatibility",
           ]}
         />
       </div>

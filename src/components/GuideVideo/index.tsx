@@ -27,7 +27,7 @@ export default function GuideVideo({ src, type = "video/mp4" }: { src: string; t
   }, []);
 
   return (
-    <video autoPlay loop muted playsInline ref={videoRef}>
+    <video className="mx-auto w-full aspect-auto" autoPlay loop muted playsInline ref={videoRef}>
       <source type={type} />
     </video>
   );

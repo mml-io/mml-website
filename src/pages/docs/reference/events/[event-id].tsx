@@ -3,13 +3,13 @@ import Head from "next/head";
 import Link from "next/link";
 import * as React from "react";
 import { Fragment } from "react";
-import ReactMarkdown from "react-markdown";
 
 import Breadcrumb from "@/src/components/Common/Breadcrumb";
 import LinkList from "@/src/components/Common/LinkList";
 import ReferenceNavigation from "@/src/components/Common/ReferenceNavigation";
 import ExampleView from "@/src/components/ExampleView/DocsExampleViewDynamic";
 import TypeDocComment from "@/src/components/TypeDocComment";
+import { MarkDownDocs } from "@/src/config/mdx";
 import * as docsExamples from "@/src/content/docs";
 import { getPageTitle } from "@/src/util";
 import { eventClasses } from "@/src/util/event-classes";
@@ -52,6 +52,10 @@ function getEventClass(name: string) {
   return eventClasses.find((eventClass) => eventClass.name === name);
 }
 
+const ReduceWidthDiv = (props: { children: React.ReactNode }) => (
+  <div className="w-full mx-auto xl:max-w-[900px]">{props.children}</div>
+);
+
 const DocsPage = ({ eventId }: { eventId: string }) => {
   const eventClassDefinition: EventsClassSchemaType = getEventClass(eventId)!;
 
@@ -89,40 +93,44 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
     ? Object.keys(examplesForElement.examples).filter((key) => key !== "primary")
     : [];
 
-  const linkList = ["properties"];
+  const linkList = ["Properties"];
   if (filteredExamples.length > 0) {
-    linkList.push("examples");
+    linkList.push("Examples");
   }
 
   return (
     <>
-      <Breadcrumb
-        pageName={`${eventClassDefinition.name}`}
-        parents={[
-          { name: "Docs", path: "docs" },
-          { name: "Reference", path: "reference" },
-          { name: "Events", path: "events" },
-        ]}
-      />
       <Head>{getPageTitle(eventClassDefinition.name)}</Head>
-      <main className="mx-auto w-full px-4 lg:max-w-[800px] xl:px-0">
-        <div className="flex w-full">
-          <ReferenceNavigation />
-          <main className="w-full flex-1 px-4 sm:px-0 lg:mr-5 lg:flex-[1_0_766px]">
-            <h1 className="mb-4 text-4xl font-semibold uppercase">
-              {eventClassDefinition.name}
-              {extendedTypes.length > 0 && (
-                <span className="text-sm"> extends {extendedTypes.map(createTypeLink)}</span>
+      <div className="flex w-full pt-32">
+        <ReferenceNavigation />
+        <div className="px-5 sm:px-12 w-full">
+          <main className="mx-auto w-full px-4 lg:px-0 max-w-centerColumn">
+            <ReduceWidthDiv>
+              <Breadcrumb
+                pageName={`${eventClassDefinition.name}`}
+                parents={[
+                  { name: "Docs", path: "docs" },
+                  { name: "Reference", path: "reference" },
+                  { name: "Events", path: "events" },
+                ]}
+              />
+              <h1 className="mb-4 text-4xl font-semibold uppercase">
+                {eventClassDefinition.name}
+                {extendedTypes.length > 0 && (
+                  <span className="text-sm"> extends {extendedTypes.map(createTypeLink)}</span>
+                )}
+              </h1>
+              {eventClassDefinition.comment && (
+                <TypeDocComment comment={eventClassDefinition.comment} />
               )}
-            </h1>
-            {eventClassDefinition.comment && (
-              <TypeDocComment comment={eventClassDefinition.comment} />
-            )}
+            </ReduceWidthDiv>
             {primaryExample && (
               <div>
-                <h2 className="mb-4 mt-8 scroll-m-20 text-3xl font-medium" id="try it">
-                  Try it
-                </h2>
+                <ReduceWidthDiv>
+                  <h2 className="mb-4 mt-8 scroll-m-20 text-3xl font-medium" id="try it">
+                    Try it
+                  </h2>
+                </ReduceWidthDiv>
                 <ExampleView
                   key={eventId + primaryExample.title}
                   description={primaryExample.description}
@@ -131,71 +139,77 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
                   }
                   code={primaryExample.code}
                   initialClients={primaryExample.clients ?? [CLIENT_TYPES.FLOATING]}
-                  containerHeight={420}
+                  containerHeight={480}
+                  containerStyle="mt-4"
                 />
               </div>
             )}
-            <h2 className="mb-4 mt-6 scroll-m-20 text-3xl font-medium" id="properties">
-              Properties
-            </h2>
-            {eventClassDefinition.children &&
-              eventClassDefinition.children
-                .filter((property) => {
-                  if (!showExternalProperties && property.flags.isExternal) {
-                    return false;
-                  }
-                  return !(!showInheritedProperties && property.inheritedFrom);
-                })
-                .map((property) => (
-                  <div key={property.name}>
-                    <h3 className="mb-4 flex items-center pt-8 text-lg">
-                      {property.name}
-                      {Object.entries(property.flags).map(([flag]) => {
-                        return (
-                          <span
-                            key={flag}
-                            className="ml-2 inline-block rounded-3xl px-2 text-sm text-black dark:bg-white"
-                          >
-                            {flag}
-                          </span>
-                        );
-                      })}
-                    </h3>
-                    {property.comment &&
-                      property.comment.summary.map((descriptionText, index) => (
-                        <ReactMarkdown key={index} className="font-mono">
-                          {descriptionText.text}
-                        </ReactMarkdown>
-                      ))}
-                    <TypeDocType name={property.name} type={property.type as EventType} />
-                  </div>
-                ))}
-            {eventClassDefinition.extendedBy && (
-              <>
-                <h2 className="mb-4 mt-6 scroll-m-20 text-3xl font-medium">Subclasses</h2>
-                {eventClassDefinition.extendedBy.map((eventClass) => (
-                  <div key={eventClass.name}>
-                    <h3 className="mb-2 text-xl uppercase">{eventClass.name}</h3>
-                  </div>
-                ))}
-              </>
-            )}
+            <ReduceWidthDiv>
+              <h2 className="mb-4 mt-6 scroll-m-20 text-3xl font-medium" id="properties">
+                Properties
+              </h2>
+              {eventClassDefinition.children &&
+                eventClassDefinition.children
+                  .filter((property) => {
+                    if (!showExternalProperties && property.flags.isExternal) {
+                      return false;
+                    }
+                    return !(!showInheritedProperties && property.inheritedFrom);
+                  })
+                  .map((property) => (
+                    <div key={property.name}>
+                      <h3 className="mb-4 flex items-center pt-8 text-lg">
+                        {property.name}
+                        {Object.entries(property.flags).map(([flag]) => {
+                          return (
+                            <span
+                              key={flag}
+                              className="ml-2 inline-block rounded-3xl px-2 text-sm text-black dark:bg-white"
+                            >
+                              {flag}
+                            </span>
+                          );
+                        })}
+                      </h3>
+                      {property.comment &&
+                        property.comment.summary.map((descriptionText, index) => (
+                          <MarkDownDocs key={index}>{descriptionText.text}</MarkDownDocs>
+                        ))}
+                      <TypeDocType name={property.name} type={property.type as EventType} />
+                    </div>
+                  ))}
+              {eventClassDefinition.extendedBy && (
+                <>
+                  <h2 className="mb-4 mt-6 scroll-m-20 text-3xl font-medium">Subclasses</h2>
+                  {eventClassDefinition.extendedBy.map((eventClass) => (
+                    <div key={eventClass.name}>
+                      <h3 className="mb-2 text-xl uppercase">{eventClass.name}</h3>
+                    </div>
+                  ))}
+                </>
+              )}
+            </ReduceWidthDiv>
             {filteredExamples.length > 0 && (
               <>
-                <h2 id="examples" className="mb-4 mt-6 scroll-m-20 text-3xl font-medium">
-                  Examples
-                </h2>
+                <ReduceWidthDiv>
+                  <h2 id="examples" className="mb-4 mt-6 scroll-m-20 text-3xl font-medium">
+                    Examples
+                  </h2>
+                </ReduceWidthDiv>
                 {filteredExamples.map((exampleKey) => {
                   const example = examplesForElement.examples[exampleKey];
                   return (
                     <div key={`${eventId}-${example.title}`}>
-                      <h3 className="mb-4 mt-8 text-[24px] font-medium">{example.title}</h3>
+                      <ReduceWidthDiv>
+                        <h3 className="mb-4 mt-8 text-[24px] font-medium">{example.title}</h3>
+                      </ReduceWidthDiv>
                       <ExampleView
                         description={example.description}
                         baseScene={example.baseSceneOn !== undefined ? example.baseSceneOn : true}
                         code={example.code}
                         initialClients={example.clients ?? [CLIENT_TYPES.FLOATING]}
-                        containerHeight={420}
+                        containerHeight={480}
+                        containerStyle="mt-4"
                       />
                     </div>
                   );
@@ -203,9 +217,9 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
               </>
             )}
           </main>
-          <LinkList elementList={linkList} />
         </div>
-      </main>
+        <LinkList elementList={linkList} />
+      </div>
     </>
   );
 };

@@ -40,25 +40,23 @@ const GuidePage = ({ guideId }: { guideId: string }) => {
 
   return (
     <>
-      <Breadcrumb
-        pageName={title}
-        parents={[
-          { name: "Docs", path: "docs" },
-          { name: "Guides", path: "guides" },
-        ]}
-      />
       <Head>{getPageTitle(title)}</Head>
-      <div className="mx-auto max-w-[450px] sm:max-w-[575px] sm:px-0 md:max-w-[768px] lg:max-w-[800px]">
-        <div>
-          <GuideNavigation />
-          <main className="w-full flex-1 px-4 sm:px-0 lg:mr-5 lg:max-w-[800px]">
-            <h1 className="text-4xl font-bold">{title}</h1>
-            <div className="mt-4">
-              <Body />
-            </div>
-          </main>
-          <LinkList elementList={linkList} />
-        </div>
+      <div className="flex pt-32">
+        <GuideNavigation />
+        <main className="w-full mx-auto xl:max-w-[900px]">
+          <Breadcrumb
+            pageName={title}
+            parents={[
+              { name: "Docs", path: "docs" },
+              { name: "Guides", path: "guides" },
+            ]}
+          />
+          <h1 className="text-4xl font-bold">{title}</h1>
+          <div className="mt-4">
+            <Body />
+          </div>
+        </main>
+        <LinkList elementList={linkList} />
       </div>
     </>
   );

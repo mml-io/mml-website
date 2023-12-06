@@ -14,13 +14,13 @@ const config = {
       grey: "#303030",
       black: "#000000",
       dark: "#1D2144",
-      primary: "#0581DC",
+      primary: "#0586E4",
       secondary: "#4B4B4B",
-      "dark-theme": "#071120",
+      "dark-theme": "#121212",
       yellow: "#FBB040",
-      "light-theme": "#F4FBFF",
+      "light-theme": "#f9f9f9",
       "body-color": "#959CB1",
-      "editor-bg": "#202B36",
+      "editor-bg": "#24272F",
       "editor-border": "#C3D7E7",
       "editor-border-dark": "#455969",
       "editor-title": "#47B1FF",
@@ -43,6 +43,10 @@ const config = {
 
       "2xl": "1300px",
       // => @media (min-width: 1400px) { ... }
+      "3xl": "1600px",
+    },
+    maxWidth: {
+      centerColumn: 1280,
     },
     extend: {
       boxShadow: {

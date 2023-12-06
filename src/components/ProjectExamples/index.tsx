@@ -14,7 +14,7 @@ const Examples = () => {
           <div className="grid grid-cols-1 gap-x-4 gap-y-4 md:grid-cols-2 lg:grid-cols-4">
             {Object.entries(examples).map(([id, { image, name }], index) => (
               <Link href={`/examples/?example=${id}`} key={index} className="relative">
-                <div className="relative aspect-[1.60738255] h-full w-full overflow-hidden">
+                <div className="relative aspect-[1.60738255] h-full w-full overflow-hidden rounded">
                   <img
                     className="absolute top-1/2 w-full -translate-y-1/2"
                     src={image}

@@ -18,7 +18,7 @@ const Header = () => {
   // Sticky Navbar
   const [sticky, setSticky] = useState(false);
   const handleStickyNavbar = () => {
-    if (window.scrollY >= 80) {
+    if (window.scrollY >= 1) {
       setSticky(true);
     } else {
       setSticky(false);
@@ -47,17 +47,14 @@ const Header = () => {
       <header
         className={`header left-0 top-0 z-40 flex w-full items-center bg-transparent ${
           sticky
-            ? "!fixed !z-[9999] !bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm !transition dark:!bg-primary dark:!bg-opacity-20"
+            ? "!fixed !z-[9999] !bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm !transition dark:!bg-body-color dark:!bg-opacity-20"
             : "absolute"
         }`}
       >
         <div className="container">
           <div className="relative -mx-4 flex items-center justify-between">
             <div className="w-60 max-w-full px-4 sm:px-0 xl:mr-12">
-              <Link
-                href="/"
-                className={`header-logo block w-[115px] ${sticky ? "py-5 lg:py-2" : "py-8"} `}
-              >
+              <Link href="/" className={`header-logo block w-[115px] py-5 lg:py-2`}>
                 <img
                   src="/images/logo/mml-logotype-black.svg"
                   alt="logo"

@@ -18,7 +18,7 @@ loader.init().then((monaco) => {
     inherit: true,
     rules: [],
     colors: {
-      "editor.background": "#202B36",
+      "editor.background": "#24272F",
     },
   });
 });
@@ -33,15 +33,17 @@ export default function HTMLEditor(props: {
   const { theme } = useTheme();
 
   return (
-    <MonacoEditor
-      className={props.className}
-      theme={theme + "Theme"}
-      defaultLanguage="html"
-      options={{ wordWrap: "on" }}
-      value={code}
-      onChange={(e) => {
-        setCode(e || "");
-      }}
-    />
+    <div className="h-[calc(100%-35px)] overflow-hidden rounded-b">
+      <MonacoEditor
+        className={props.className}
+        theme={theme + "Theme"}
+        defaultLanguage="html"
+        options={{ wordWrap: "on" }}
+        value={code}
+        onChange={(e) => {
+          setCode(e || "");
+        }}
+      />
+    </div>
   );
 }
