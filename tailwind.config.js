@@ -12,7 +12,7 @@ const config = {
       transparent: "transparent",
       white: "#FFFFFF",
       grey: "#3B3B3B",
-      lightgrey: "#CBCBCB",
+      lightgrey: "#ECEDF0",
       black: "#000000",
       dark: "#1D2144",
       primary: "#0586E4",

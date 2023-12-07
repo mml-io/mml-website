@@ -86,18 +86,18 @@ export function SearchBar() {
       />
       <ul className="w-[calc(100%-30px)] absolute top-[calc(100%+2px)] flex flex-col bg-lightgrey dark:bg-grey left-1/2 -translate-x-1/2">
         {results.slice(0, MAX_RESULTS).map((item, index) => (
-          <li className="bloc h-14 px-4">
-            <span
-              className={twMerge(
-                "w-full border-b-[1px] h-full flex items-center",
-                (index === MAX_RESULTS - 1 || results.length - 1 === index) && "border-none",
-              )}
-            >
-              <Link href={item.link} key={index} onClick={emptySearch}>
+          <Link href={item.link} key={index} onClick={emptySearch}>
+            <li className="bloc h-14 px-4">
+              <span
+                className={twMerge(
+                  "w-full border-b-[1px] h-full flex items-center",
+                  (index === MAX_RESULTS - 1 || results.length - 1 === index) && "border-none",
+                )}
+              >
                 {item.name}
-              </Link>
-            </span>
-          </li>
+              </span>
+            </li>
+          </Link>
         ))}
       </ul>
     </label>
