@@ -12,6 +12,7 @@ import {
   TimeManager,
 } from "@mml-io/3d-web-client-core";
 import { EditableNetworkedDOM, NetworkedDOM } from "@mml-io/networked-dom-document";
+import { IMMLScene } from "mml-web";
 import { MMLWebRunnerClient } from "mml-web-runner";
 import { AudioListener, Euler, Scene, Vector3 } from "three";
 
@@ -184,7 +185,7 @@ export class LocalAvatarClient {
     const mmlWebRunnerClient = new MMLWebRunnerClient(
       windowTarget,
       remoteHolderElement,
-      this.mmlComposition.mmlScene,
+      this.mmlComposition.mmlScene as IMMLScene,
     );
     mmlWebRunnerClient.connect(mmlDocument);
     this.documentRunnerClients.add(mmlWebRunnerClient);
