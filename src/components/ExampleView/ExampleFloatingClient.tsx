@@ -34,6 +34,8 @@ export const ExampleFloatingClient = React.memo(function ExampleClient(props: {
         const pointLight = new THREE.PointLight(0xffffff, 1, 100);
         pointLight.position.set(10, 10, 10);
         pointLight.castShadow = true;
+        pointLight.shadow.bias = -0.001;
+        pointLight.shadow.normalBias = 0.01;
         const plane = new THREE.Mesh(
           new THREE.PlaneGeometry(20, 20),
           new THREE.MeshStandardMaterial({ color: 0xffffff }),

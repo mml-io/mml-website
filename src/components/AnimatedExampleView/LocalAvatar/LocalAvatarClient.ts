@@ -1,4 +1,5 @@
 import {
+  AnimationConfig,
   CameraManager,
   CharacterDescription,
   CharacterManager,
@@ -23,13 +24,15 @@ import sprintAnimationFileUrl from "./assets/models/unreal-run.glb";
 import { LocalAvatarServer } from "./LocalAvatarServer";
 import { Room } from "./Room";
 
-const characterDescription: CharacterDescription = {
-  meshFileUrl,
+const animationConfig: AnimationConfig = {
   idleAnimationFileUrl,
   jogAnimationFileUrl,
   sprintAnimationFileUrl,
   airAnimationFileUrl,
-  modelScale: 1,
+};
+
+const characterDescription: CharacterDescription = {
+  meshFileUrl,
 };
 
 export class LocalAvatarClient {
@@ -110,6 +113,8 @@ export class LocalAvatarClient {
       (characterState: CharacterState) => {
         localAvatarServer.send(localClientId, characterState);
       },
+      animationConfig,
+      characterDescription,
     );
     (this.characterManager as any).updateLocationHash = false;
     this.scene.add(this.characterManager.group);
@@ -131,10 +136,9 @@ export class LocalAvatarClient {
     this.collisionsManager.addMeshesGroup(room);
     this.scene.add(room);
 
-    this.characterManager.spawnCharacter(
+    this.characterManager.spawnLocalCharacter(
       characterDescription!,
       localClientId,
-      true,
       spawnPosition,
       spawnRotation,
     );
