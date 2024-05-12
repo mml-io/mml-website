@@ -48,6 +48,10 @@
       "supported": true,
       "description": ""
     },
+    "socket": {
+      "supported": true,
+      "description": ""
+    },
     "id": {
       "supported": true,
       "description": ""
@@ -123,6 +127,10 @@
       "description": ""
     },
     "visible": {
+      "supported": true,
+      "description": ""
+    },
+    "socket": {
       "supported": true,
       "description": ""
     },
@@ -224,6 +232,10 @@
       "supported": true,
       "description": ""
     },
+    "socket": {
+      "supported": true,
+      "description": ""
+    },
     "collide": {
       "supported": true,
       "description": ""
@@ -278,6 +290,10 @@
       "supported": true,
       "description": ""
     },
+    "opacity": {
+      "supported": true,
+      "description": ""
+    },
     "debug": {
       "supported": true,
       "description": ""
@@ -322,6 +338,10 @@
       "supported": true,
       "description": ""
     },
+    "socket": {
+      "supported": true,
+      "description": ""
+    },
     "collide": {
       "supported": true,
       "description": ""
@@ -355,6 +375,10 @@
       "description": ""
     },
     "onclick": {
+      "supported": true,
+      "description": ""
+    },
+    "cast-shadows": {
       "supported": true,
       "description": ""
     }
@@ -428,6 +452,10 @@
       "supported": true,
       "description": ""
     },
+    "socket": {
+      "supported": true,
+      "description": ""
+    },
     "color": {
       "supported": true,
       "description": ""
@@ -455,6 +483,10 @@
       "description": ""
     },
     "height": {
+      "supported": true,
+      "description": ""
+    },
+    "opacity": {
       "supported": true,
       "description": ""
     },
@@ -499,6 +531,10 @@
       "description": ""
     },
     "visible": {
+      "supported": true,
+      "description": ""
+    },
+    "socket": {
       "supported": true,
       "description": ""
     },
@@ -616,6 +652,10 @@
       "supported": true,
       "description": ""
     },
+    "socket": {
+      "supported": true,
+      "description": ""
+    },
     "collide": {
       "supported": true,
       "description": ""
@@ -726,6 +766,10 @@
       "supported": true,
       "description": ""
     },
+    "socket": {
+      "supported": true,
+      "description": ""
+    },
     "collide": {
       "supported": true,
       "description": ""
@@ -816,6 +860,10 @@
       "supported": true,
       "description": ""
     },
+    "socket": {
+      "supported": true,
+      "description": ""
+    },
     "id": {
       "supported": true,
       "description": ""
@@ -824,7 +872,35 @@
       "supported": true,
       "description": ""
     },
-    "onclick": {
+    "load-range": {
+      "supported": true,
+      "description": ""
+    },
+    "unload-range": {
+      "supported": true,
+      "description": ""
+    },
+    "min-x": {
+      "supported": true,
+      "description": ""
+    },
+    "max-x": {
+      "supported": true,
+      "description": ""
+    },
+    "min-y": {
+      "supported": true,
+      "description": ""
+    },
+    "max-y": {
+      "supported": true,
+      "description": ""
+    },
+    "min-z": {
+      "supported": true,
+      "description": ""
+    },
+    "max-z": {
       "supported": true,
       "description": ""
     }
@@ -847,6 +923,14 @@
       "description": ""
     },
     "volume": {
+      "supported": true,
+      "description": ""
+    },
+    "cone-angle": {
+      "supported": true,
+      "description": ""
+    },
+    "cone-falloff-angle": {
       "supported": true,
       "description": ""
     },
@@ -902,6 +986,10 @@
       "supported": true,
       "description": ""
     },
+    "socket": {
+      "supported": true,
+      "description": ""
+    },
     "id": {
       "supported": true,
       "description": ""
@@ -925,6 +1013,10 @@
       "description": ""
     },
     "height": {
+      "supported": true,
+      "description": ""
+    },
+    "opacity": {
       "supported": true,
       "description": ""
     },
@@ -969,6 +1061,10 @@
       "description": ""
     },
     "visible": {
+      "supported": true,
+      "description": ""
+    },
+    "socket": {
       "supported": true,
       "description": ""
     },
@@ -1086,6 +1182,10 @@
       "supported": true,
       "description": ""
     },
+    "socket": {
+      "supported": true,
+      "description": ""
+    },
     "collide": {
       "supported": true,
       "description": ""
@@ -1196,6 +1296,10 @@
       "supported": true,
       "description": ""
     },
+    "socket": {
+      "supported": true,
+      "description": ""
+    },
     "color": {
       "supported": true,
       "description": ""
@@ -1286,6 +1390,10 @@
       "supported": true,
       "description": ""
     },
+    "socket": {
+      "supported": true,
+      "description": ""
+    },
     "id": {
       "supported": true,
       "description": ""
@@ -1357,6 +1465,10 @@
       "description": ""
     },
     "visible": {
+      "supported": true,
+      "description": ""
+    },
+    "socket": {
       "supported": true,
       "description": ""
     },
@@ -1442,6 +1554,10 @@
       "supported": true,
       "description": ""
     },
+    "socket": {
+      "supported": true,
+      "description": ""
+    },
     "id": {
       "supported": true,
       "description": ""
@@ -1457,10 +1573,6 @@
       "description": ""
     },
     "range": {
-      "supported": true,
-      "description": ""
-    },
-    "enabled": {
       "supported": true,
       "description": ""
     },
@@ -1512,6 +1624,10 @@
       "supported": true,
       "description": ""
     },
+    "socket": {
+      "supported": true,
+      "description": ""
+    },
     "id": {
       "supported": true,
       "description": ""
@@ -1550,11 +1666,11 @@
       "supported": true,
       "description": ""
     },
-    "loop,": {
+    "loop": {
       "supported": true,
       "description": ""
     },
-    "easing,": {
+    "easing": {
       "supported": true,
       "description": ""
     },

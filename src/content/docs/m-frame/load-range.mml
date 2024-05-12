@@ -1,0 +1,8 @@
+<m-frame
+    src="https://public.mml.io/rgb-cubes.html"
+    load-range="5"
+    unload-range="3"
+    debug="true"
+></m-frame>
+
+<m-label y="6" width="5" z="5" content="Move inside the inner debug cube to load the m-frame contents. Move out of the outer debug cube to unload."></m-label>

@@ -103,34 +103,36 @@ export class LocalAvatarClient {
       },
     );
 
-    this.characterManager = new CharacterManager(
-      this.composer,
-      this.characterModelLoader,
-      this.collisionsManager,
-      this.cameraManager,
-      this.timeManager,
-      this.keyInputManager,
-      this.remoteUserStates,
-      (characterState: CharacterState) => {
+    this.characterManager = new CharacterManager({
+      composer: this.composer,
+      characterModelLoader: this.characterModelLoader,
+      collisionsManager: this.collisionsManager,
+      cameraManager: this.cameraManager,
+      timeManager: this.timeManager,
+      keyInputManager: this.keyInputManager,
+      remoteUserStates: this.remoteUserStates,
+      sendUpdate: (characterState: CharacterState) => {
         localAvatarServer.send(localClientId, characterState);
       },
       animationConfig,
-      characterDescription,
-    );
+      characterResolve: () => {
+        return { username: "User", characterDescription };
+      },
+    });
     (this.characterManager as any).updateLocationHash = false;
     this.scene.add(this.characterManager.group);
 
-    this.mmlComposition = new MMLCompositionScene(
-      this.element,
-      this.composer.renderer,
-      this.scene,
-      this.cameraManager.camera,
-      this.audioListener,
-      this.collisionsManager,
-      () => {
+    this.mmlComposition = new MMLCompositionScene({
+      targetElement: this.element,
+      renderer: this.composer.renderer,
+      scene: this.scene,
+      camera: this.cameraManager.camera,
+      audioListener: this.audioListener,
+      collisionsManager: this.collisionsManager,
+      getUserPositionAndRotation: () => {
         return this.characterManager.getLocalCharacterPositionAndRotation();
       },
-    );
+    });
     this.scene.add(this.mmlComposition.group);
 
     const room = new Room();
@@ -138,8 +140,9 @@ export class LocalAvatarClient {
     this.scene.add(room);
 
     this.characterManager.spawnLocalCharacter(
-      characterDescription!,
       localClientId,
+      "User",
+      characterDescription!,
       spawnPosition,
       spawnRotation,
     );

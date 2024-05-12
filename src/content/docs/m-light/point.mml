@@ -1,8 +1,9 @@
 <m-light
     type="point"
+    intensity="30"
     x="3"
     y="7"
-    z="0"
+    z="3"
     debug="true"
 ></m-light>
 

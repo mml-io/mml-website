@@ -1,4 +1,16 @@
 <m-model
-  src="https://public.mml.io/duck.glb"
-  ry="-90"
+    x="2"
+    src="https://public.mml.io/duck.glb"
+    sx="1.5"
+    sy="1.5"
+    sz="1.5"
+    ry="-90"
+></m-model>
+
+<!-- Battle Damaged Sci-fi Helmet - PBR by theblueturtle_
+https://sketchfab.com/models/b81008d513954189a063ff901f7abfe4 -->
+<m-model
+    x="-2"
+    src="https://public.mml.io/damaged-helmet.glb"
+    y="1.2"
 ></m-model>

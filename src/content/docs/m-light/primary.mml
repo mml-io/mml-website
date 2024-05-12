@@ -1,5 +1,6 @@
 <m-light
     type="spotlight"
+    intensity="500"
     ry="45"
     rx="65"
     rz="-45"

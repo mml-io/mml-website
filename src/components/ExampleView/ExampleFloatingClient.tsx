@@ -31,7 +31,7 @@ export const ExampleFloatingClient = React.memo(function ExampleClient(props: {
       }
       mmlScene = new MMLScene();
       if (props.baseScene) {
-        const pointLight = new THREE.PointLight(0xffffff, 1, 100);
+        const pointLight = new THREE.PointLight(0xffffff, 600, 100);
         pointLight.position.set(10, 10, 10);
         pointLight.castShadow = true;
         pointLight.shadow.bias = -0.001;

@@ -10,7 +10,7 @@ import { ExampleAvatarClient } from "@/src/components/ExampleView/ExampleAvatarC
 import { ExampleFloatingClient } from "../ExampleView/ExampleFloatingClient";
 
 function createDocumentCode(code: string): string {
-  return `${'<m-plane color="white" width="20" height="20" rx="-90" y="-0.1"></m-plane><m-light type="point" x="10" y="10" z="10"></m-light>'}${code}`;
+  return `${'<m-plane color="white" width="20" height="20" rx="-90" y="-0.1"></m-plane><m-light intensity="700" type="point" x="15" y="15" z="15"></m-light>'}${code}`;
 }
 
 const initialCode = `<m-cube x="-3" height="2" width="2" depth="2" y="2" color="#FF6666" id="my-cube"></m-cube>

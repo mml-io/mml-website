@@ -1,10 +1,10 @@
-import { Attribute } from "@mml-io/mml-schema";
+import { Attribute as MMLSchemaAttribute } from "@mml-io/mml-schema";
 import * as React from "react";
 
 import { attributeTypes } from "@/src/config/maps";
 import { MarkDownDocs } from "@/src/config/mdx";
 
-export function Attribute(props: { attribute: Attribute }) {
+export function Attribute(props: { attribute: MMLSchemaAttribute }) {
   return (
     <div>
       <MarkDownDocs className="inline-block [&>*]:mb-0">

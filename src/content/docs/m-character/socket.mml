@@ -1,0 +1,24 @@
+<m-character
+    sx="5"
+    sy="5"
+    sz="5"
+    src="https://public.mml.io/character-body.glb"
+    anim="https://public.mml.io/character-idle-animation.glb"
+>
+  <m-model
+      src="https://public.mml.io/character-head.glb"
+  ></m-model>
+  <m-model
+      socket="hand_r"
+      rx="180"
+      ry="10"
+      rz="-90"
+      x="-0.15"
+      z="0.04"
+      y="-0.047"
+      sx="0.1"
+      sy="0.1"
+      sz="0.1"
+      src="https://public.mml.io/duck.glb"
+  ></m-model>
+</m-character>

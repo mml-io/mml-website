@@ -1,0 +1,18 @@
+<m-label font-size="40" width="4" x="3" content="Bounded (clipped)" y="5"></m-label>
+<m-frame
+    src="https://public.mml.io/rgb-cubes.html"
+    x="3"
+    min-x="-2"
+    max-x="2"
+    min-y="0"
+    max-y="3"
+    min-z="-2"
+    max-z="2"
+    debug="true"
+></m-frame>
+
+<m-label font-size="40" width="4" content="Original (unclipped)" x="-3" y="5"></m-label>
+<m-frame
+    x="-3"
+    src="https://public.mml.io/rgb-cubes.html"
+></m-frame>
