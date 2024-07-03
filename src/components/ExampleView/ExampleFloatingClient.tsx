@@ -20,7 +20,6 @@ export const ExampleFloatingClient = React.memo(function ExampleClient(props: {
     children?: React.ReactNode;
   } | null>(null);
   const elementRef = React.useRef<HTMLDivElement>(null);
-  const [loaded, setLoaded] = React.useState(false);
 
   useEffect(() => {
     let disposed = false;
@@ -63,10 +62,10 @@ export const ExampleFloatingClient = React.memo(function ExampleClient(props: {
   }, []);
 
   useEffect(() => {
-    if (elementRef.current && clientState && loaded) {
+    if (elementRef.current && clientState) {
       elementRef.current.appendChild(clientState.scene.element);
     }
-  }, [elementRef, clientState, loaded]);
+  }, [elementRef.current, clientState]);
 
   if (!clientState) {
     return null;
@@ -76,9 +75,5 @@ export const ExampleFloatingClient = React.memo(function ExampleClient(props: {
     clientState?.scene.fitContainer();
   }, 1);
 
-  return (
-    <ExampleClientView onLoad={() => setLoaded(true)} elementRef={elementRef}>
-      {props.children}
-    </ExampleClientView>
-  );
+  return <ExampleClientView elementRef={elementRef}>{props.children}</ExampleClientView>;
 });
