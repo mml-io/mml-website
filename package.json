@@ -28,7 +28,7 @@
     "@mml-io/3d-web-client-core": "0.16.0",
     "@mml-io/mml-schema": "0.14.0",
     "@mml-io/networked-dom-document": "0.14.0",
-    "@netlify/plugin-nextjs": "5.4.0",
+    "@netlify/plugin-nextjs": "4.41.3",
     "@next/mdx": "14.2.4",
     "codemirror": "5.65.16",
     "js-beautify": "1.15.1",
