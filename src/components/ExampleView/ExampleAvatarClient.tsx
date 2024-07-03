@@ -19,6 +19,7 @@ export const ExampleAvatarClient = React.memo(function ExampleAvatarClient(props
 }) {
   const [client, setClient] = useState<LocalAvatarClient | null>(null);
   const elementRef = React.useRef<HTMLDivElement>(null);
+  const [loaded, setLoaded] = React.useState(false);
 
   useEffect(() => {
     let disposed = false;
@@ -47,15 +48,19 @@ export const ExampleAvatarClient = React.memo(function ExampleAvatarClient(props
   }, []);
 
   useEffect(() => {
-    if (elementRef.current && client) {
+    if (elementRef.current && client && loaded) {
       client.element.setAttribute("style", "height: 100%");
       elementRef.current.appendChild(client.element);
     }
-  }, [elementRef.current, client]);
+  }, [elementRef, client, loaded]);
 
   if (!client) {
     return null;
   }
 
-  return <ExampleClientView elementRef={elementRef}>{props.children}</ExampleClientView>;
+  return (
+    <ExampleClientView onLoad={() => setLoaded(true)} elementRef={elementRef}>
+      {props.children}
+    </ExampleClientView>
+  );
 });
