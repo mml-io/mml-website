@@ -135,5 +135,5 @@ export const ticTacToe: Example = {
     }
   }
 </script>
-<m-light type="point" x="10" y="10" z="10"></m-light>`,
+<m-light type="point" intensity="500" x="10" y="10" z="10"></m-light>`,
 };

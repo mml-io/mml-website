@@ -60,7 +60,7 @@ export const componentsBlog = {
   ),
   code: (props: HTMLProps<HTMLElement>) => (
     <code
-      className={`!m-0 my-[1.12em] bg-[#F2F1F1] px-1 py-0.5 text-base !text-[#e8912d] dark:bg-[#262626] ${sharedTextStyle}`}
+      className={`!m-0 my-[1.12em] bg-code-bg px-1 py-0.5 text-base text-mdx-code-text dark:bg-code-bg-dark ${sharedTextStyle}`}
       {...props}
     />
   ),
@@ -98,7 +98,7 @@ export const componentsDocs = {
   ),
   code: (props: HTMLProps<HTMLElement>) => (
     <code
-      className={`!m-0 my-[1.12em] bg-[#F2F1F1] px-1 py-0.5 text-base !text-[#e8912d] dark:bg-[#262626] ${sharedTextStyle}`}
+      className={`!m-0 my-[1.12em] bg-code-bg px-1 py-0.5 text-base !text-mdx-code-text dark:bg-code-bg-dark ${sharedTextStyle}`}
       {...props}
     />
   ),

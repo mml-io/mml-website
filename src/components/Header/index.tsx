@@ -19,19 +19,6 @@ const Header = () => {
     setNavbarOpen(!navbarOpen);
   };
 
-  // Sticky Navbar
-  const [sticky, setSticky] = useState(false);
-  const handleStickyNavbar = () => {
-    if (window.scrollY >= 1) {
-      setSticky(true);
-    } else {
-      setSticky(false);
-    }
-  };
-  useEffect(() => {
-    window.addEventListener("scroll", handleStickyNavbar);
-  });
-
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -51,14 +38,12 @@ const Header = () => {
       <header
         className={twMerge(
           "header left-0 top-0 z-40 flex w-full items-center bg-transparent transform-gpu transition-opacity opacity-100",
-          sticky
-            ? "!fixed !z-[9999] !bg-white !bg-opacity-80 shadow-sticky backdrop-blur-sm !transition dark:!bg-body-color dark:!bg-opacity-20"
-            : "absolute",
+          "!fixed !z-[9999] !bg-white !bg-opacity-80 shadow backdrop-blur-sm !transition dark:!bg-dark-theme dark:!bg-opacity-80",
         )}
       >
         <div className="container">
           <div className="relative -mx-4 flex items-center justify-between">
-            <div className="w-60 max-w-full px-4 sm:px-0 xl:mr-12">
+            <div className="w-60 max-w-full px-4 xl:mr-12">
               <Link href="/" className={`header-logo block w-[115px] py-5 lg:py-2`}>
                 <img
                   src="/images/logo/mml-logotype-black.svg"

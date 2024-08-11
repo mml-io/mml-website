@@ -2,9 +2,9 @@ import { EditableNetworkedDOM } from "@mml-io/networked-dom-document";
 import * as React from "react";
 import { useRef } from "react";
 
-import { LocalAvatarServer } from "@/src/components/AnimatedExampleView/LocalAvatar/LocalAvatarServer";
 import { ExampleAvatarClient } from "@/src/components/ExampleView/ExampleAvatarClient";
 import { ExampleFloatingClient } from "@/src/components/ExampleView/ExampleFloatingClient";
+import { LocalAvatarServer } from "@/src/components/ExampleView/LocalAvatar/LocalAvatarServer";
 import { CLIENT_TYPES, ClientType } from "@/types/docs-reference";
 
 type ExampleClientsSectionProps = {

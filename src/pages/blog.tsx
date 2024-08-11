@@ -4,23 +4,52 @@ import * as React from "react";
 
 import { posts } from "@/src/content/blogPosts";
 import { getPageTitle } from "@/src/util";
-const DocsPage = () => {
+
+type BlogPostProps = {
+  postId: string;
+  image: string;
+  title: string;
+  subtitle: string;
+  date: string;
+};
+
+const BlogPost = ({ postId, image, title, subtitle, date }: BlogPostProps) => {
+  const link = `/blog/${postId}`;
+  return (
+    <Link href={link} className="border-[1px] rounded-md p-4 mb-6 flex flex-col md:flex-row">
+      <img
+        src={image}
+        alt={title}
+        className="w-full md:w-48 h-32 md:h-auto object-cover rounded-md flex-shrink-0 mb-4 md:mb-0 md:mr-4"
+      />
+      <div>
+        <h2 className="text-2xl font-semibold">{title}</h2>
+        <p className="text-gray-500 text-sm mt-1">{subtitle}</p>
+        <p className="text-gray-400 text-xs mt-1">{date}</p>
+        <a href={link} className="text-blue-500 hover:underline mt-2 inline-block">
+          Read more
+        </a>
+      </div>
+    </Link>
+  );
+};
+
+const BlogPage = () => {
   return (
     <>
       <Head>{getPageTitle("Blog")}</Head>
-      <main className="mx-auto mt-32 max-w-[450px] px-4 sm:max-w-[575px] sm:px-0 md:max-w-[768px] lg:max-w-[992px] xl:max-w-[1200px] 2xl:max-w-[1300px]">
-        <h1 className="text-4xl font-semibold">Blog</h1>
-        <div className="flex flex-wrap items-stretch justify-center xl:justify-between">
-          {Object.entries(posts).map(([key, { title, description, image }]) => (
-            <Link key={key} href={`/blog/${key}`} className="xl:max-w-[49%]">
-              <div className="mt-9 flex h-[calc(100%-36px)] w-full flex-1 flex-col border-[1px] border-editor-border dark:border-editor-border-dark">
-                <img className="w-full" src={image} alt={title} width={620} height={321} />
-                <div className="h-full flex-1 p-8 dark:bg-editor-bg">
-                  <p className="text-2xl font-medium">{title}</p>
-                  <p className="mt-4">{description}</p>
-                </div>
-              </div>
-            </Link>
+      <main className="mx-auto mt-32 center-column">
+        <h1 className="text-4xl">Blog</h1>
+        <div className="container mx-auto px-4 py-8">
+          {Object.entries(posts).map(([key, { title, description, image, date }]) => (
+            <BlogPost
+              key={key}
+              postId={key}
+              image={image}
+              title={title}
+              subtitle={description}
+              date={date}
+            />
           ))}
         </div>
       </main>
@@ -28,4 +57,4 @@ const DocsPage = () => {
   );
 };
 
-export default DocsPage;
+export default BlogPage;

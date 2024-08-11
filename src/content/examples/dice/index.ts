@@ -2,7 +2,7 @@ import { Example } from "@/types/example";
 
 export const diceExample: Example = {
   name: "Dice",
-  description: "A dice with advanced animation",
+  description: "A dice with animated rolling",
   code: `<m-model id="dice" src="https://public.mml.io/dice.glb" y="1" collide="true" onclick="rollDice()">
   <m-attr-anim id="rx" attr="rx" ping-pong="false" easing="linear" start="0" end="0" loop="false" start-time="0" duration="1"></m-attr-anim>
   <m-attr-anim id="ry" attr="ry" ping-pong="false" easing="linear" start="0" end="0" loop="false" start-time="0" duration="1"></m-attr-anim>

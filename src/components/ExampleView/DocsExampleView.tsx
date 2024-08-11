@@ -94,11 +94,11 @@ export function DocsExampleView(props: DocsExampleViewProps) {
   };
 
   return (
-    <div className="relative h-full overflow-hidden">
+    <div className="relative h-full overflow-hidden shadow-lg">
       <div
         className={twMerge(
           "relative flex h-[50px] justify-between overflow-hidden rounded-t border-b-0 border-editor-border bg-white px-[17px] pt-[14px] leading-[19px] text-black dark:border-editor-border-dark dark:bg-editor-bg dark:text-white",
-          !props.noBorders && "border-[1px]",
+          !props.noBorders && "border-[1px] border-b-0",
         )}
       >
         {props.description}

@@ -1,18 +1,15 @@
 import { DocsElement, DocsListContainer } from "@/src/components/DocsList";
-import { guides } from "@/src/content/guides";
+import { orderedGuidesList } from "@/src/content/guides";
+
 export default function GuidesList() {
   return (
-    <DocsListContainer
-      title="Guides"
-      description="Guides to help you get started with MML"
-      className="mt-8 max-w-centerColumn"
-    >
-      {Object.entries(guides).map(([key, { title, description }]) => (
+    <DocsListContainer title="Guides" description="Guides to help you get started with MML">
+      {orderedGuidesList.map(({ id, guide }) => (
         <DocsElement
-          key={key}
-          description={description}
-          name={`${title}`}
-          link={`/docs/guides/${key}`}
+          key={id}
+          description={guide.description}
+          name={`${guide.title}`}
+          link={`/docs/guides/${id}`}
         />
       ))}
     </DocsListContainer>

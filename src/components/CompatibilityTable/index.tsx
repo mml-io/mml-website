@@ -111,7 +111,7 @@ export default function CompatibilityTable({ element }: { element: string }) {
             <Fragment key={name}>
               <tr className="border border-editor-border dark:border-editor-border-dark">
                 <td className="border border-editor-border p-3 dark:border-editor-border-dark">
-                  <code className="bg-[#F2F1F1] p-0.5 font-mono !text-[#0069C2] dark:bg-[#262626]">
+                  <code className="bg-code-bg p-0.5 font-mono !text-code-text dark:bg-code-bg-dark">
                     {name}
                   </code>
                 </td>

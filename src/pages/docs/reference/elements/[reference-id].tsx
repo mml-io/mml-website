@@ -14,6 +14,8 @@ import * as docsExamples from "@/src/content/docs";
 import { getPageTitle } from "@/src/util";
 import { CLIENT_TYPES } from "@/types/docs-reference";
 
+import { AnchorLink } from "../../../../components/Anchors/AnchorLink";
+
 // This function gets called at build time to generate all the files
 export function getStaticPaths() {
   // Call an external API endpoint to get posts
@@ -44,10 +46,6 @@ export function getStaticProps({ params }: { params: { "reference-id": string } 
 
 const schemaDefinition = createSchemaDefinition(schemaJSON);
 
-const ReducedWidthDiv = (props: { children: React.ReactNode }) => (
-  <div className="w-full mx-auto xl:max-w-[900px]">{props.children}</div>
-);
-
 const DocsPage = ({ referenceId }: { referenceId: string }) => {
   const elementDefinition = schemaDefinition.elements[referenceId];
 
@@ -70,31 +68,29 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
       <div className="flex pt-32">
         <ReferenceNavigation />
         <div className="px-5 sm:px-12 w-full">
-          <main className="mx-auto w-full px-4 lg:px-0 max-w-centerColumn">
-            <ReducedWidthDiv>
-              <Breadcrumb
-                pageName={`${elementDefinition.name}`}
-                parents={[
-                  { name: "Docs", path: "docs" },
-                  { name: "Reference", path: "reference" },
-                  { name: "Elements", path: "elements" },
-                ]}
-              />
-              <h1 className="text-4xl font-semibold mb-4">&lt;{elementDefinition.name}&gt;</h1>
-              {elementDefinition.description &&
-                elementDefinition.description.map((descriptionText, index) => (
-                  <MarkDownDocs className="my-6 text-base" key={index}>
-                    {descriptionText}
-                  </MarkDownDocs>
-                ))}
-            </ReducedWidthDiv>
+          <main className="mx-auto px-4 center-column">
+            <Breadcrumb
+              pageName={`${elementDefinition.name}`}
+              parents={[
+                { name: "Docs", path: "docs" },
+                { name: "Reference", path: "reference" },
+                { name: "Elements", path: "elements" },
+              ]}
+            />
+            <h1 className="text-4xl font-semibold mb-4">&lt;{elementDefinition.name}&gt;</h1>
+            {elementDefinition.description &&
+              elementDefinition.description.map((descriptionText, index) => (
+                <MarkDownDocs className="my-6 text-base" key={index}>
+                  {descriptionText}
+                </MarkDownDocs>
+              ))}
             {primaryExample && (
               <>
-                <ReducedWidthDiv>
-                  <h2 className="my-6 scroll-m-20 text-3xl font-medium" id="try it">
+                <AnchorLink anchorId={`try`} title={"Try It"} verticalOffset>
+                  <h2 className="my-6 scroll-m-20 text-3xl font-medium inline-block" id="try it">
                     Try it
                   </h2>
-                </ReducedWidthDiv>
+                </AnchorLink>
                 <ExampleView
                   description={primaryExample.description}
                   key={`${referenceId}-primary`}
@@ -108,10 +104,12 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
               </>
             )}
             {!!attributes.length && (
-              <ReducedWidthDiv>
-                <h2 id="attributes" className="mb-4 mt-6 scroll-m-20 text-3xl font-medium">
-                  Attributes
-                </h2>
+              <>
+                <AnchorLink anchorId={`attributes`} title={"Attributes"} verticalOffset>
+                  <h2 className="mt-12 scroll-m-20 text-3xl font-medium inline-block">
+                    Attributes
+                  </h2>
+                </AnchorLink>
                 <code className="bg-gray-200 text-red-800 font-mono">
                   <ul>
                     {attributes.map((attribute) => (
@@ -121,13 +119,15 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
                     ))}
                   </ul>
                 </code>
-              </ReducedWidthDiv>
+              </>
             )}
             {!!attributeGroups.length && (
-              <ReducedWidthDiv>
-                <h2 className="mb-4 mt-6 scroll-m-20 text-3xl font-medium" id="attribute groups">
-                  Attribute Groups
-                </h2>
+              <>
+                <AnchorLink anchorId={`attribute-groups`} title={"Attribute Groups"} verticalOffset>
+                  <h2 className="mt-12 scroll-m-20 text-3xl font-medium inline-block">
+                    Attribute Groups
+                  </h2>
+                </AnchorLink>
                 <ul className="bg-gray-200 text-red-800 rounded p-1 font-mono">
                   {attributeGroups.map((attributeGroup) => (
                     <li key={attributeGroup}>
@@ -135,23 +135,27 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
                     </li>
                   ))}
                 </ul>
-              </ReducedWidthDiv>
+              </>
             )}
             {filteredExamples.length > 0 && (
               <>
-                <ReducedWidthDiv>
-                  <h2 id="examples" className="mb-4 mt-6 scroll-m-20 text-3xl font-medium">
-                    Examples
-                  </h2>
-                </ReducedWidthDiv>
+                <AnchorLink anchorId={`examples`} title={"Examples"} verticalOffset>
+                  <h2 className="mt-12 scroll-m-20 text-3xl font-medium inline-block">Examples</h2>
+                </AnchorLink>
                 {filteredExamples.map((exampleKey) => {
                   const example = examplesForElement.examples[exampleKey];
                   return (
                     <div key={`${referenceId}-${example.title}`}>
-                      <ReducedWidthDiv>
-                        <h3 className="mt-8 text-[24px] font-medium">{example.title}</h3>
-                        <MarkDownDocs>{`${example.description}`}</MarkDownDocs>
-                      </ReducedWidthDiv>
+                      <AnchorLink
+                        anchorId={`example-${exampleKey}`}
+                        title={`Example ${exampleKey}`}
+                        verticalOffset
+                      >
+                        <h3 className="mt-8 text-[24px] font-medium inline-block">
+                          {example.title}
+                        </h3>
+                      </AnchorLink>
+                      <MarkDownDocs>{`${example.description}`}</MarkDownDocs>
                       <ExampleView
                         description={example.title}
                         baseScene={example.baseSceneOn !== undefined ? example.baseSceneOn : true}
@@ -165,12 +169,12 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
                 })}
               </>
             )}
-            <ReducedWidthDiv>
-              <h2 id="compatibility" className="mb-4 mt-10 scroll-m-20 text-3xl font-medium">
+            <AnchorLink anchorId={`compatibility`} title={"Compatibility"} verticalOffset>
+              <h2 className="mt-12 scroll-m-20 text-3xl font-medium inline-block">
                 Compatibility Table
               </h2>
-              <CompatibilityTable element={elementDefinition.name} />
-            </ReducedWidthDiv>
+            </AnchorLink>
+            <CompatibilityTable element={elementDefinition.name} />
           </main>
         </div>
         <LinkList
