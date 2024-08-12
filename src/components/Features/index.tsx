@@ -1,5 +1,6 @@
 import { useTheme } from "next-themes";
 import * as React from "react";
+import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
 type FeatureData = {
@@ -30,7 +31,7 @@ const FeatureItem = ({ feature, index }: { feature: FeatureData; index: number }
       />
       <div className="md:w-1/2 md:px-8 p-8">
         <h2 className="text-2xl md:text-4xl font-bold text-gray-900">{feature.title}</h2>
-        <p className="mt-2 md:mt-4 text-lg md:text-xl text-gray-500">{feature.description}</p>
+        <div className="mt-2 md:mt-4 text-lg md:text-xl text-gray-500">{feature.description}</div>
       </div>
     </div>
   );
@@ -38,6 +39,14 @@ const FeatureItem = ({ feature, index }: { feature: FeatureData; index: number }
 
 const Features = () => {
   const { theme } = useTheme();
+
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  if (!mounted) {
+    return null;
+  }
 
   const features = [
     {
@@ -70,8 +79,15 @@ const Features = () => {
     },
     {
       title: "Interoperability across multiple game engines, web, and AR",
-      description:
-        "As the HTML & JavaScript is being run separately on a server, the content is interoperable across multiple game engines and form factors, even allowing different engines to interact with the same document at the same time.",
+      description: (
+        <>
+          <p>
+            As the HTML & JavaScript is being run separately on a server, the content is
+            interoperable across multiple game engines and form factors, even allowing different
+            engines to interact with the same document at the same time.
+          </p>
+        </>
+      ),
       imgSrc:
         theme === "dark" ? "/images/homepage/interop-dark.svg" : "/images/homepage/interop.svg",
     },

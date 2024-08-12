@@ -27,8 +27,8 @@ export default function ExampleClientsSection({
   const server = useRef(new LocalAvatarServer());
 
   // Determine the number of columns and rows based on the number of clients
-  const columns = clients.length < 3 ? 1 : 2; // We want one or two clients per row
-  const rows = Math.min(clients.length, 2); // Calculate the number of rows needed
+  const rows = clients.length < 3 ? 1 : 2; // We want one or two clients per row
+  const columns = Math.min(clients.length, 2); // Calculate the number of rows needed
 
   const gridStyle = {
     display: "grid",
@@ -39,7 +39,7 @@ export default function ExampleClientsSection({
   };
 
   return (
-    <div className={`relative flex h-full w-[${sectionWidth}] flex-[0_0_${sectionWidth}] flex-col`}>
+    <div className={`relative flex h-[50%] md:h-full w-[${sectionWidth}] flex-[0_0_${sectionWidth}] flex-col`}>
       {networkedDOMDocument && (
         <div style={gridStyle}>
           {clients.map(({ type, id }, index) => {

@@ -25,8 +25,8 @@ export function Attribute(props: { attribute: MMLSchemaAttribute }) {
       )}
       {props.attribute.description &&
         props.attribute.description.map((descriptionText, index) => (
-          <div className="pl-4">
-            <MarkDownDocs key={index}>
+          <div className="pl-4" key={index}>
+            <MarkDownDocs>
               {descriptionText.replaceAll(/(\s{2,}|\n)/g, " ")}
             </MarkDownDocs>
           </div>
