@@ -20,15 +20,31 @@ const FeatureItem = ({ feature, index }: { feature: FeatureData; index: number }
   return (
     <div
       ref={ref}
-      className={`mb-20 flex flex-col md:flex-row items-center my-8 transition duration-1000 ease-in-out transform ${
+      className={`mb-20 flex flex-col md:flex-row items-center my-8 transition duration-1000 ease-in-out shadow-xl transform ${
         inView ? "opacity-100 translate-x-0" : "opacity-0 translate-y-12"
-      } ${isOdd ? "md:flex-row-reverse bg-feature-odd-bg dark:bg-feature-odd-bg-dark" : ""}`}
+      } ${
+        isOdd
+          ? "bg-[radial-gradient(50%_100%_at_25%_25%,_rgb(189_189_189_/_40%)_0%,_rgba(0,_0,_0,_0.10)_150%)] dark:bg-[radial-gradient(50%_100%_at_25%_25%,_rgb(130_130_130_/_40%)_0%,_rgba(0,_0,_0,_0.10)_150%)] md:flex-row-reverse"
+          : "bg-[radial-gradient(50%_100%_at_75%_75%,_rgb(189_189_189_/_40%)_0%,_rgba(0,_0,_0,_0.10)_150%)] dark:bg-[radial-gradient(50%_100%_at_75%_75%,_rgb(130_130_130_/_40%)_0%,_rgba(0,_0,_0,_0.10)_150%)]"
+      }`}
     >
-      <img
-        className="w-full md:w-1/2 max-h-96 md:h-120 object-contain mb-4 md:mb-0 rounded-lg"
-        src={feature.imgSrc}
-        alt={feature.title}
-      />
+      {feature.imgSrc.endsWith(".webm") ? (
+        <video
+          className="w-full md:w-1/2 max-h-96 md:h-120 object-contain p-4 md:p-2 rounded-lg"
+          src={feature.imgSrc}
+          autoPlay
+          loop
+          muted
+          playsInline
+          alt={feature.title}
+        />
+      ) : (
+        <img
+          className="w-full md:w-1/2 max-h-96 md:h-120 object-contain p-4 md:p-2 rounded-lg"
+          src={feature.imgSrc}
+          alt={feature.title}
+        />
+      )}
       <div className="md:w-1/2 md:px-8 p-8">
         <h2 className="text-2xl md:text-4xl font-bold text-gray-900">{feature.title}</h2>
         <div className="mt-2 md:mt-4 text-lg md:text-xl text-gray-500">{feature.description}</div>
@@ -58,7 +74,8 @@ const Features = () => {
           <p>Creating multi-user, interactive content is just like building a web page.</p>
         </>
       ),
-      imgSrc: "/images/homepage/html-js.svg",
+      imgSrc:
+        theme === "dark" ? "/images/homepage/html-js-dark.svg" : "/images/homepage/html-js.svg",
     },
     {
       title: "MML documents run on a server and multiple users connect at once",
@@ -75,7 +92,10 @@ const Features = () => {
           </p>
         </>
       ),
-      imgSrc: "/images/homepage/how-mml-works.webp",
+      imgSrc:
+        theme === "dark"
+          ? "/images/homepage/how-mml-works-dark.webm"
+          : "/images/homepage/how-mml-works.webm",
     },
     {
       title: "Interoperability across multiple game engines, web, and AR",
