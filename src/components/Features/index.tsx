@@ -36,7 +36,7 @@ const FeatureItem = ({ feature, index }: { feature: FeatureData; index: number }
           loop
           muted
           playsInline
-          alt={feature.title}
+          
         />
       ) : (
         <img
