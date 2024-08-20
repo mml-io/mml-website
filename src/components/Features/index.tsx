@@ -20,7 +20,7 @@ const FeatureItem = ({ feature, index }: { feature: FeatureData; index: number }
   return (
     <div
       ref={ref}
-      className={`mb-20 flex flex-col md:flex-row items-center my-8 transition duration-1000 ease-in-out shadow-xl transform ${
+      className={`mb-20 rounded-sm flex flex-col md:flex-row items-center my-8 transition duration-1000 ease-in-out shadow-xl transform ${
         inView ? "opacity-100 translate-x-0" : "opacity-0 translate-y-12"
       } ${
         isOdd
@@ -36,7 +36,6 @@ const FeatureItem = ({ feature, index }: { feature: FeatureData; index: number }
           loop
           muted
           playsInline
-          
         />
       ) : (
         <img

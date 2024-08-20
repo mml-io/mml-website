@@ -16,7 +16,7 @@ type BlogPostProps = {
 const BlogPost = ({ postId, image, title, subtitle, date }: BlogPostProps) => {
   const link = `/blog/${postId}`;
   return (
-    <Link href={link} className="border-[1px] rounded-md p-4 mb-6 flex flex-col md:flex-row">
+    <Link href={link} className="shadow-xl rounded-sm p-4 mb-6 flex flex-col md:flex-row bg-[radial-gradient(50%_100%_at_75%_75%,_rgb(189_189_189_/_40%)_0%,_rgba(0,_0,_0,_0.10)_150%)] dark:bg-[radial-gradient(50%_100%_at_75%_75%,_rgb(130_130_130_/_40%)_0%,_rgba(0,_0,_0,_0.10)_150%)]">
       <img
         src={image}
         alt={title}
