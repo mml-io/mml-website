@@ -18,6 +18,14 @@ Range.prototype.getClientRects = () => ({
   [Symbol.iterator]: jest.fn() as () => IterableIterator<DOMRect>,
 });
 
+class IntersectionObserver {
+  constructor() {}
+  public observe() {}
+  public unobserve() {}
+  public disconnect() {}
+}
+(window as any).IntersectionObserver = IntersectionObserver;
+
 jest.unstable_mockModule("next/dynamic", () => {
   return {
     __esModule: true,
