@@ -65,7 +65,7 @@ const Hero = () => {
           </div>
           <div className="relative">
             <h1
-              className="font-neue-metana-bold text-4xl sm:text-6xl md:text-7xl xl:text-8xl text-white uppercase mb-2 p-4 mix-blend-difference"
+              className="font-neue-metana-bold text-4xl sm:text-6xl md:text-7xl xl:text-8xl text-white mb-2 p-4 mix-blend-difference"
               aria-hidden="true"
             >
               Metaverse
@@ -74,7 +74,7 @@ const Hero = () => {
               <br />
               Language
             </h1>
-            <h1 className="absolute top-0 left-0 z-10 font-neue-metana-bold text-4xl sm:text-6xl md:text-7xl xl:text-8xl text-white opacity-50 uppercase mb-2 p-4">
+            <h1 className="absolute top-0 left-0 z-10 font-neue-metana-bold text-4xl sm:text-6xl md:text-7xl xl:text-8xl text-white opacity-50 mb-2 p-4">
               Metaverse
               <br />
               Markup
