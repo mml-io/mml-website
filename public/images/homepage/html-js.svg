@@ -1,11 +1,529 @@
 <svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
-<!--  <rect width="800" height="600" fill="white"/>-->
+<!--  <rect width="800" height="600" fill="grey"/>-->
 
-<!--  Text of a <m-model> html snippet-->
-  <text x="150" y="90" font-family="monospace" font-size="70" fill="black"> &lt;m-model&gt; </text>
-  <text x="350" y="180" font-family="monospace" font-size="70" fill="black"> &lt;m-image&gt; </text>
-  <text x="60" y="250" font-family="monospace" font-size="70" fill="black"> &lt;m-audio&gt; </text>
-  <text x="200" y="350" font-family="monospace" font-size="70" fill="black"> &lt;m-character&gt; </text>
-  <text x="120" y="450" font-family="monospace" font-size="70" fill="black"> &lt;m-video&gt; </text>
-  <text x="180" y="550" font-family="monospace" font-size="70" fill="black"> &lt;m-group&gt; </text>
+  <defs>
+    <linearGradient id="fadeGrad" x1="0" y1="0" y2="0" x2="1">
+      <stop offset="0" stop-color="white" stop-opacity="0"/>
+      <stop offset="0.2" stop-color="white" stop-opacity="1"/>
+      <stop offset="0.8" stop-color="white" stop-opacity="1"/>
+      <stop offset="1" stop-color="white" stop-opacity="0"/>
+    </linearGradient>
+    <mask id="fade" maskContentUnits="userSpaceOnUse">
+      <rect width="100%" height="100%" fill="url(#fadeGrad)"/>
+    </mask>
+  </defs>
+
+  <svg mask="url(#fade)" width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+    <text font-family="monospace" font-size="30">
+      <tspan>
+        <animate
+          attributeName="dx"
+          values="-62.6em;0em"
+          dur="40s"
+          repeatCount="indefinite" />
+        <tspan x="0.5em" y="1.1em">
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+        </tspan>
+      </tspan>
+      <tspan x="0" dy="1.25em">
+        <animate
+          attributeName="dx"
+          values="-62.6em;0em"
+          dur="25s"
+          repeatCount="indefinite" />
+        <tspan x="0.5em" dy="1.5em">
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+        </tspan>
+      </tspan>
+      <tspan x="0" dy="1.25em">
+        <animate
+          attributeName="dx"
+          values="-62.6em;0em"
+          dur="35s"
+          repeatCount="indefinite" />
+        <tspan x="0.5em" dy="1.5em">
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+        </tspan>
+      </tspan>
+      <tspan x="0" dy="1.25em">
+        <animate
+          attributeName="dx"
+          values="-62.6em;0em"
+          dur="40s"
+          repeatCount="indefinite" />
+        <tspan x="0.5em" dy="1.5em">
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+        </tspan>
+      </tspan>
+      <tspan x="0" dy="1.25em">
+        <animate
+          attributeName="dx"
+          values="-62.6em;0em"
+          dur="30s"
+          repeatCount="indefinite" />
+        <tspan x="0.5em" dy="1.5em">
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+        </tspan>
+      </tspan>
+      <tspan x="0" dy="1.25em">
+        <animate
+          attributeName="dx"
+          values="-62.6em;0em"
+          dur="25s"
+          repeatCount="indefinite" />
+        <tspan x="0.5em" dy="1.5em">
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+        </tspan>
+      </tspan>
+      <tspan x="0" dy="1.25em">
+        <animate
+          attributeName="dx"
+          values="-62.6em;0em"
+          dur="32s"
+          repeatCount="indefinite" />
+        <tspan x="0.5em" dy="1.5em">
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+        </tspan>
+      </tspan>
+      <tspan x="0" dy="1.25em">
+        <animate
+          attributeName="dx"
+          values="-62.6em;0em"
+          dur="28s"
+          repeatCount="indefinite" />
+        <tspan x="0.5em" dy="1.5em">
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+        </tspan>
+      </tspan>
+      <tspan x="0" dy="1.25em">
+        <animate
+          attributeName="dx"
+          values="-62.6em;0em"
+          dur="39s"
+          repeatCount="indefinite" />
+        <tspan x="0.5em" dy="1.5em">
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+        </tspan>
+      </tspan>
+      <tspan x="0" dy="1.25em">
+        <animate
+          attributeName="dx"
+          values="-62.6em;0em"
+          dur="29s"
+          repeatCount="indefinite" />
+        <tspan x="0.5em" dy="1.5em">
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+        </tspan>
+      </tspan>
+      <tspan x="0" dy="1.25em">
+        <animate
+          attributeName="dx"
+          values="-62.6em;0em"
+          dur="25s"
+          repeatCount="indefinite" />
+        <tspan x="0.5em" dy="1.5em">
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+        </tspan>
+      </tspan>
+      <tspan x="0" dy="1.25em">
+        <animate
+          attributeName="dx"
+          values="-62.6em;0em"
+          dur="35s"
+          repeatCount="indefinite" />
+        <tspan x="0.5em" dy="1.5em">
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+        </tspan>
+      </tspan>
+      <tspan x="0" dy="1.25em">
+        <animate
+          attributeName="dx"
+          values="-62.6em;0em"
+          dur="20s"
+          repeatCount="indefinite" />
+        <tspan x="0.5em" dy="1.5em">
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+
+          <tspan fill="#7777774F">&lt;m-position-probe&gt; </tspan>
+          <tspan fill="#7777779F">&lt;m-model&gt; </tspan>
+          <tspan fill="#777777AA">&lt;m-image&gt; </tspan>
+          <tspan fill="#777777AF">&lt;m-interaction&gt; </tspan>
+          <tspan fill="#7777775F">&lt;m-group&gt; </tspan>
+          <tspan fill="#77777777">&lt;m-video&gt; </tspan>
+          <tspan fill="#777777BF">&lt;m-light&gt; </tspan>
+          <tspan fill="#7777776F">&lt;m-frame&gt; </tspan>
+          <tspan fill="#7777778F">&lt;m-cube&gt; </tspan>
+        </tspan>
+      </tspan>
+    </text>
+  </svg>
+
+  <svg x="32" y="132" width="46em" height="20em" viewBox="0 0 46em 10em" xmlns="http://www.w3.org/2000/svg">
+    <rect width="46em" height="20em" fill="#1d2331" rx="1em" ry="1em"/>
+    <text font-family="monospace" font-size="20" fill="black">
+      <tspan x="1em" dy="1.5em"><tspan fill="#d4d2c8">&lt;</tspan><tspan fill="#73D0FF">m-cube</tspan> <tspan fill="#FFD173">id<tspan fill="#FFAD66">=</tspan></tspan><tspan fill="#D5FF80">"my-cube"</tspan> <tspan fill="#FFD173">color<tspan fill="#FFAD66">=</tspan></tspan><tspan fill="#D5FF80">"red"</tspan> <tspan fill="#FFD173">y<tspan fill="#FFAD66">=</tspan></tspan><tspan fill="#D5FF80">"1"</tspan><tspan fill="#d4d2c8">&gt;&lt;/<tspan fill="#73D0FF">m-cube</tspan><tspan fill="#d4d2c8">&gt;</tspan></tspan></tspan>
+      <tspan x="1em" dy="3em"><tspan fill="#d4d2c8">&lt;</tspan><tspan fill="#73D0FF">script</tspan><tspan fill="#d4d2c8">&gt;</tspan></tspan>
+      <tspan x="2em" dy="1.5em"><tspan fill="#FFAD66">const </tspan><tspan fill="#d4d2c8">myCube</tspan><tspan fill="#FFAD66"> = </tspan><tspan fill="#FFD173">document</tspan><tspan fill="#d4d2c8">.getElementById(</tspan><tspan fill="#D5FF80">"my-cube"</tspan><tspan fill="#d4d2c8">);</tspan></tspan>
+      <tspan x="2em" dy="1.5em"><tspan fill="#FFAD66">let </tspan><tspan fill="#d4d2c8">toggle</tspan><tspan fill="#FFAD66"> = false;</tspan></tspan>
+      <tspan x="2em" dy="1.5em"><tspan fill="#d4d2c8">myCube.addEventListener(</tspan><tspan fill="#D5FF80">"click"</tspan><tspan fill="#d4d2c8">, () =&gt; {</tspan></tspan>
+      <tspan x="3em" dy="1.5em"><tspan fill="#d4d2c8">toggle </tspan><tspan fill="#FFAD66"> = !</tspan><tspan fill="#d4d2c8">toggle;</tspan></tspan>
+      <tspan x="3em" dy="1.5em"><tspan fill="#d4d2c8">myCube.setAttribute(</tspan><tspan fill="#D5FF80">"color"</tspan><tspan fill="#d4d2c8">, toggle</tspan><tspan fill="#FFAD66"> ? </tspan><tspan fill="#D5FF80">"green"</tspan><tspan fill="#FFAD66"> : </tspan><tspan fill="#D5FF80">"red"</tspan><tspan fill="#d4d2c8">);</tspan></tspan>
+      <tspan x="2em" dy="1.5em"><tspan fill="#d4d2c8">});</tspan></tspan>
+      <tspan x="1em" dy="1.5em"><tspan fill="#d4d2c8">&lt;/</tspan><tspan fill="#73D0FF">script</tspan><tspan fill="#d4d2c8">&gt;</tspan></tspan>
+    </text>
+  </svg>
 </svg>

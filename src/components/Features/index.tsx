@@ -24,8 +24,8 @@ const FeatureItem = ({ feature, index }: { feature: FeatureData; index: number }
         inView ? "opacity-100 translate-x-0" : "opacity-0 translate-y-12"
       } ${
         isOdd
-          ? "bg-[radial-gradient(50%_100%_at_25%_25%,_rgb(189_189_189_/_40%)_0%,_rgba(0,_0,_0,_0.10)_150%)] dark:bg-[radial-gradient(50%_100%_at_25%_25%,_rgb(130_130_130_/_40%)_0%,_rgba(0,_0,_0,_0.10)_150%)] md:flex-row-reverse"
-          : "bg-[radial-gradient(50%_100%_at_75%_75%,_rgb(189_189_189_/_40%)_0%,_rgba(0,_0,_0,_0.10)_150%)] dark:bg-[radial-gradient(50%_100%_at_75%_75%,_rgb(130_130_130_/_40%)_0%,_rgba(0,_0,_0,_0.10)_150%)]"
+          ? "bg-[radial-gradient(50%_100%_at_25%_25%,_rgb(209_209_209_/_40%)_0%,_rgba(0,_0,_0,_0.24)_150%)] dark:bg-[radial-gradient(50%_100%_at_25%_25%,_rgb(130_130_130_/_40%)_0%,_rgba(0,_0,_0,_0.10)_150%)] md:flex-row-reverse"
+          : "bg-[radial-gradient(50%_100%_at_75%_75%,_rgb(209_209_209_/_40%)_0%,_rgba(0,_0,_0,_0.24)_150%)] dark:bg-[radial-gradient(50%_100%_at_75%_75%,_rgb(130_130_130_/_40%)_0%,_rgba(0,_0,_0,_0.10)_150%)]"
       }`}
     >
       {feature.imgSrc.endsWith(".webm") ? (
@@ -68,13 +68,18 @@ const Features = () => {
       title: "Use familiar and powerful web technologies",
       description: (
         <>
-          <p>Use familiar tools, frameworks, and even call APIs. </p>
+          <p>
+            Creating 3D, multi-user, interactive content with MML is just like building a web page
+            that multiple users can interact with at once.
+          </p>
           <br />
-          <p>Creating multi-user, interactive content is just like building a web page.</p>
+          <p>
+            How those elements get created or updated is up to you; you can handwrite tags, use
+            frameworks like React, and use external web APIs or libraries.
+          </p>
         </>
       ),
-      imgSrc:
-        theme === "dark" ? "/images/homepage/html-js-dark.svg" : "/images/homepage/html-js.svg",
+      imgSrc: "/images/homepage/html-js.svg",
     },
     {
       title: "MML documents run on a server and multiple users connect at once",
@@ -101,9 +106,14 @@ const Features = () => {
       description: (
         <>
           <p>
-            As the HTML & JavaScript is being run separately on a server, the content is
-            interoperable across multiple game engines and form factors, even allowing different
-            engines to interact with the same document at the same time.
+            The HTML & JavaScript logic of an MML document runs on a server separate from the rest
+            of a virtual world.
+          </p>
+          <br />
+          <p>
+            This allows the content to be interoperable across multiple game engines and form
+            factors, even allowing different engines to interact with the same document at the same
+            time.
           </p>
         </>
       ),
@@ -114,9 +124,10 @@ const Features = () => {
       title: "Open Source",
       description: (
         <>
-          <p>The MML libraries are open-source and can be hosted however you like</p>
-          <br />
-          <p>There are services such as MServe that can host MML and also 3D web worlds.</p>
+          <p>
+            The MML specification and libraries are open-source and MIT licensed, allowing you to
+            run your own server, build your own tools, and also contribute back to the project.
+          </p>
         </>
       ),
       imgSrc: "/images/homepage/open-source.svg",

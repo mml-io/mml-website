@@ -60,7 +60,7 @@ const Hero = () => {
             <img
               src="/images/hero/animated-mml-logo.svg"
               alt="MML Logo"
-              className="absolute top-0 left-0 w-48 md:w-64 lg:w-96 opacity-40"
+              className="absolute top-0 left-0 w-48 md:w-64 lg:w-96 opacity-50"
             />
           </div>
           <div className="relative">
@@ -74,7 +74,7 @@ const Hero = () => {
               <br />
               Language
             </h1>
-            <h1 className="absolute top-0 left-0 z-10 font-neue-metana-bold text-4xl sm:text-6xl md:text-7xl xl:text-8xl text-white opacity-40 uppercase mb-2 p-4">
+            <h1 className="absolute top-0 left-0 z-10 font-neue-metana-bold text-4xl sm:text-6xl md:text-7xl xl:text-8xl text-white opacity-50 uppercase mb-2 p-4">
               Metaverse
               <br />
               Markup
