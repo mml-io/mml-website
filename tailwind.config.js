@@ -10,7 +10,7 @@ const config = {
     colors: {
       current: "currentColor",
       transparent: "transparent",
-      white: "#D9D9D9",
+      white: "#FFFFFF",
       grey: "#363A47",
       lightgrey: "#ECEDF0",
       "hero-link-bg": "#ECEDF0BB",
