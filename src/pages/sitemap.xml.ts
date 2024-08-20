@@ -1,3 +1,5 @@
+import type { ServerResponse } from "http";
+
 import { getStaticPaths as getBlogStaticPaths } from "./blog/[post-id]";
 import { getStaticPaths as getGuideStaticPaths } from "./docs/guides/[guide-id]";
 import { getStaticPaths as getElementStaticPaths } from "./docs/reference/elements/[reference-id]";
@@ -62,7 +64,7 @@ function generateSiteMap() {
 
 function SiteMap() {}
 
-export function getServerSideProps({ res }) {
+export function getServerSideProps({ res }: { res: ServerResponse }) {
   // We make an API call to gather the URLs for our site
 
   // We generate the XML sitemap with the posts data
