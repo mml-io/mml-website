@@ -31,9 +31,6 @@ const Hero = () => {
   useEffect(() => {
     setMounted(true);
   }, []);
-  if (!mounted) {
-    return null;
-  }
 
   const videoSrc =
     aspectRatio > 1 ? "/videos/mml-website-landscape.mp4" : "/videos/mml-website-portrait.mp4";
@@ -51,7 +48,7 @@ const Hero = () => {
             muted
           ></video>
         ) : (
-          <div className="absolute top-0 left-0 w-full h-full bg-black"></div>
+          <div className="absolute top-0 left-0 w-full h-full bg-grey"></div>
         )}
         <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-50 text-center">
           <div className="relative">
