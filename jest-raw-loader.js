@@ -3,4 +3,4 @@ const e = {
     code: "module.exports = " + JSON.stringify(content),
   }),
 };
-export default e;
+module.exports = e;
