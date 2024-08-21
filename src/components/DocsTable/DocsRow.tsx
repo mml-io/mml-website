@@ -47,7 +47,16 @@ export function DocsRow({
           {description && isComment(description) ? (
             <TypeDocComment comment={description} />
           ) : (
-            <MarkDownDocs className="text-base mt-2 [&>p]:mt-0">{`${description}`}</MarkDownDocs>
+            <MarkDownDocs className="text-base mt-2 [&>p]:mt-0">{`${(Array.isArray(description)
+              ? description
+              : [description]
+            ).map((text) =>
+              text
+                .split("\n")
+                .map((line) => line.trim())
+                .join(" ")
+                .replaceAll("  ", " "),
+            )}`}</MarkDownDocs>
           )}
         </span>
       </StyledElement>

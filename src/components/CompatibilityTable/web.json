@@ -1795,7 +1795,7 @@
       "description": ""
     },
     "socket": {
-      "supported": false,
+      "supported": true,
       "description": ""
     },
     "id": {
