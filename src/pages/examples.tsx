@@ -94,6 +94,7 @@ const ExamplesPage = () => {
         </div>
         <div className="flex-[0_0_calc(100vh-219px)] overflow-hidden xl:flex-1 xl:rounded-b">
           <ExampleView
+            key={selectedExample?.name}
             initialClients={selectedExample?.clients ?? [CLIENT_TYPES.FLOATING]}
             code={selectedExample?.code || ""}
             baseScene={
