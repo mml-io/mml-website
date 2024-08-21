@@ -12,7 +12,9 @@ const StyledElement = ({
   className?: string;
 }) => {
   return (
-    <p className={`inline-block ${className} text-[1.0625rem] whitespace-break-spaces`}>
+    <p
+      className={`inline-block ${className ? className : ""} text-[1.0625rem] whitespace-break-spaces`}
+    >
       {children}
     </p>
   );
@@ -37,7 +39,9 @@ export function DocsRow({
     <li className="relative before:absolute dark:before:bg-white before:bg-black before:-left-5 before:h-2 before:w-2 before:top-[0.6rem] before:rounded">
       <StyledElement>
         <Link href={link}>
-          <code className="bg-[#F2F1F1] !text-[#0069C2] text-lg dark:bg-[#262626]">{name}</code>
+          <code className="bg-code-bg text-code-text dark:text-code-text-dark text-lg dark:bg-code-bg-dark">
+            {name}
+          </code>
         </Link>
         <span className="pl-4 block">
           {description && isComment(description) ? (

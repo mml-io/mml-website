@@ -94,11 +94,11 @@ export function DocsExampleView(props: DocsExampleViewProps) {
   };
 
   return (
-    <div className="relative h-full overflow-hidden">
+    <div className="relative h-full overflow-hidden shadow-lg">
       <div
         className={twMerge(
           "relative flex h-[50px] justify-between overflow-hidden rounded-t border-b-0 border-editor-border bg-white px-[17px] pt-[14px] leading-[19px] text-black dark:border-editor-border-dark dark:bg-editor-bg dark:text-white",
-          !props.noBorders && "border-[1px]",
+          !props.noBorders && "border-[1px] border-b-0",
         )}
       >
         {props.description}
@@ -116,13 +116,13 @@ export function DocsExampleView(props: DocsExampleViewProps) {
       </div>
       <div
         className={twMerge(
-          "relative flex h-[calc(100%-50px)] flex-row overflow-hidden border-t-[1px] border-editor-border dark:border-editor-border-dark",
+          "relative h-[calc(100%-50px)] flex flex-col md:flex-row overflow-hidden border-t-[1px] border-editor-border dark:border-editor-border-dark",
           !props.noBorders && "rounded-b border-[1px]",
         )}
       >
         <div
           className={twMerge(
-            "h-full w-0 flex-[0_0_50%] border-editor-border dark:border-editor-border-dark",
+            "h-[50%] md:h-full w-full md:w-0 flex-[0_0_50%] border-editor-border dark:border-editor-border-dark",
             !props.noBorders && "border-r-[1px]",
           )}
         >

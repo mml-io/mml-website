@@ -18,7 +18,7 @@ const Breadcrumb = ({
                   <li className="flex items-center">
                     <Link
                       href="/"
-                      className="pr-1 text-base font-medium text-body-color hover:text-primary"
+                      className="pr-1 text-base font-medium text-body-color dark:text-body-color-dark hover:dark:text-primary-dark"
                     >
                       Home
                     </Link>
@@ -34,14 +34,16 @@ const Breadcrumb = ({
                             .map((ancestor) => ancestor.path)
                             .join("/")
                         }
-                        className="pr-1 text-base font-medium text-body-color hover:text-primary"
+                        className="pr-1 text-base font-medium text-body-color dark:text-body-color-dark hover:text-primary hover:dark:text-primary-dark"
                       >
                         {parent.name}
                       </Link>
                       <span className="mr-3 block h-2 w-2 rotate-45 border-r-2 border-t-2 border-body-color"></span>
                     </li>
                   ))}
-                  <li className="text-base font-medium text-primary">{pageName}</li>
+                  <li className="text-base font-medium text-primary dark:text-primary-dark">
+                    {pageName}
+                  </li>
                 </ul>
               </div>
             </div>

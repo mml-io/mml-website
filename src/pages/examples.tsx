@@ -74,7 +74,7 @@ const ExamplesPage = () => {
             />
             <input
               className="h-full w-full bg-transparent px-6 text-[13px] outline-0"
-              placeholder="Search example"
+              placeholder="Search examples..."
               value={searchQuery}
               onChange={handleSearch}
             />

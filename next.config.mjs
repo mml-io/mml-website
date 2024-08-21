@@ -4,6 +4,25 @@ import createMDX from "@next/mdx";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   productionBrowserSourceMaps: true,
+  redirects: async () => {
+    return [
+      {
+        source: "/docs/guides",
+        destination: "/docs",
+        permanent: true,
+      },
+      {
+        source: "/docs/reference",
+        destination: "/docs#events",
+        permanent: true,
+      },
+      {
+        source: "/docs/reference/elements",
+        destination: "/docs#elements",
+        permanent: true,
+      },
+    ];
+  },
   webpack: (config, options) => {
     config.module.rules.push(
       {

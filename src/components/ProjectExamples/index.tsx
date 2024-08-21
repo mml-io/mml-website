@@ -7,7 +7,7 @@ import SectionTitle from "../Common/SectionTitle";
 const Examples = () => {
   return (
     <>
-      <section id="features" className=" py-16 md:py-20 lg:py-28">
+      <section id="features" className="mb-16">
         <div className="container">
           <SectionTitle title="Examples" paragraph="" center mb="40px" />
 
@@ -22,7 +22,7 @@ const Examples = () => {
                     alt={name}
                   />
                 </div>
-                <div className="hover absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-black bg-transparent text-2xl font-medium text-white text-opacity-0 hover:bg-[#00000080] hover:text-opacity-100">
+                <div className="hover absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-black bg-transparent text-2xl font-medium text-white text-opacity-0 hover:bg-[#00000080] hover:text-opacity-100 shadow-xl">
                   See example
                 </div>
               </Link>

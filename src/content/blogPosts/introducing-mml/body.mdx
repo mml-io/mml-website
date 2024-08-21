@@ -55,8 +55,8 @@ demonstrating one document seen by multiple clients complete with live editing. 
 some attributes:
 
 <div className="w-full lg:w-[992px] xl:w-[1200px] 2xl:w-[1300px] relative -translate-x-1/2 left-1/2 mt-8 h-[500px]">
-  <DocsExampleView description="Demo" initialClients={[CLIENT_TYPES.FLOATING, CLIENT_TYPES.FLOATING]} code={`<m-plane color="green" width="20" height="20" rx="-90"></m-plane>
-    <m-light type="spotlight" ry="45" rx="65" rz="-45" x="10" y="10" z="10"></m-light>
+  <DocsExampleView description="Demo" initialClients={[CLIENT_TYPES.FLOATING, CLIENT_TYPES.FLOATING]} code={`<m-plane color="green" width="20" height="20" y="0.1" rx="-90"></m-plane>
+    <m-light type="point" intensity="750" ry="45" rx="65" rz="-45" x="10" y="10" z="10"></m-light>
     <m-cube y="2" id="my-cube" color="red"></m-cube>
     <m-model x="2" y="1.25" src="https://public.mml.io/duck.glb"></m-cube>
 

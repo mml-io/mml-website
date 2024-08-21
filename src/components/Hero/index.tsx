@@ -1,59 +1,99 @@
-import dynamic from "next/dynamic";
-import Link from "next/link";
 import * as React from "react";
+import { useEffect, useState } from "react";
 
-import HeroBackground from "./hero-background";
+import HomepageLinkCollection from "../HomepageLinkCollection";
 
-const AnimatedExampleView = dynamic(
-  () =>
-    import("@/src/components/AnimatedExampleView/AnimatedExampleView").then(
-      (mod) => mod.AnimatedExampleView,
-    ),
-  { ssr: false },
-);
+function useAspectRatio() {
+  if (typeof window === "undefined") {
+    return 1;
+  }
+  const getAspectRatio = () => window.innerWidth / window.innerHeight;
+  const [aspectRatio, setAspectRatio] = useState(getAspectRatio);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setAspectRatio(getAspectRatio());
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  return aspectRatio;
+}
 
 const Hero = () => {
+  const aspectRatio = useAspectRatio();
+
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const videoSrc =
+    aspectRatio > 1 ? "/videos/mml-website-landscape.mp4" : "/videos/mml-website-portrait.mp4";
+
   return (
     <>
-      <section
-        id="home"
-        className="relative z-10 overflow-hidden pt-[120px] md:pt-[150px] xl:pt-[180px]"
-      >
-        <div className="container">
-          <HeroBackground />
-          <div className="-mx-4 flex flex-wrap">
-            <div className="w-full px-4">
-              <div className="wow fadeInUp mx-auto max-w-[1000px] text-center" data-wow-delay=".2s">
-                <h1 className="mb-5 mt-10 text-5xl font-medium leading-[52px] text-black dark:text-white sm:leading-tight md:leading-tight lg:text-6xl xl:mt-0">
-                  Metaverse Markup Language
-                </h1>
-                <p className="mb-12 whitespace-pre-line text-xl font-normal !leading-relaxed text-black dark:text-white dark:opacity-90 md:text-2xl lg:text-3xl">
-                  {`Create interactive, portable, multi-user 3D experiences and objects
-                  with powerful and familiar HTML and JavaScript`}
-                </p>
-                <div className="flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
-                  <Link
-                    href="https://github.com/mml-io/mml"
-                    className="w-48 rounded bg-white px-8 py-4 text-base font-semibold text-black duration-300
-ease-in-out hover:bg-white/30 dark:bg-[#1F2931] dark:text-white dark:hover:bg-[#1F2931]/30"
-                  >
-                    View on GitHub
-                  </Link>
-                  <Link
-                    href="/examples"
-                    className="w-48 rounded bg-primary px-8 py-4 text-base font-semibold text-white duration-300 ease-in-out hover:bg-primary/80"
-                  >
-                    Examples
-                  </Link>
-                </div>
-              </div>
-            </div>
+      <div className="relative h-screen overflow-hidden">
+        {mounted ? (
+          <video
+            className="absolute top-0 left-0 w-full h-full object-cover"
+            src={videoSrc}
+            autoPlay
+            loop
+            playsInline
+            muted
+          ></video>
+        ) : (
+          <div className="absolute top-0 left-0 w-full h-full bg-grey"></div>
+        )}
+        <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-50 text-center">
+          <div className="relative">
+            <img
+              src="/images/hero/animated-mml-logo.svg"
+              alt="MML Logo"
+              className="w-48 md:w-64 lg:w-96 mix-blend-difference"
+            />
+            <img
+              src="/images/hero/animated-mml-logo.svg"
+              alt="MML Logo"
+              className="absolute top-0 left-0 w-48 md:w-64 lg:w-96 opacity-50"
+            />
           </div>
-          <div className="mt-16">
-            <AnimatedExampleView />
+          <div className="relative">
+            <h1
+              className="font-neue-metana-bold text-4xl sm:text-6xl md:text-7xl xl:text-8xl text-white mb-2 p-4 mix-blend-difference"
+              aria-hidden="true"
+            >
+              Metaverse
+              <br />
+              Markup
+              <br />
+              Language
+            </h1>
+            <h1 className="absolute top-0 left-0 z-10 font-neue-metana-bold text-4xl sm:text-6xl md:text-7xl xl:text-8xl text-white opacity-50 mb-2 p-4">
+              Metaverse
+              <br />
+              Markup
+              <br />
+              Language
+            </h1>
           </div>
+          <p className="text-xl !leading-[1.75rem] md:text-2xl md:!leading-[2rem] lg:text-3xl lg:!leading-[2.5rem]  text-[#ffffffbb] p-4 pt-0">
+            <b>Open-Source</b> Web Technologies for
+            <br />
+            Building Multi-user Metaverse Experiences
+            <br />
+            using <b>HTML</b> and <b>JavaScript</b>
+          </p>
         </div>
-      </section>
+        <div className="absolute bottom-0 left-0 w-full pb-8">
+          <HomepageLinkCollection />
+        </div>
+      </div>
     </>
   );
 };

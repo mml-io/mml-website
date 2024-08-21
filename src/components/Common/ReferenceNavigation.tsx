@@ -5,20 +5,40 @@ import * as React from "react";
 
 import { eventClasses } from "@/src/util/event-classes";
 
+import { guides } from "../../content/guides";
+
 const schemaDefinition = createSchemaDefinition(schemaJSON);
 
 export default function ReferenceNavigation() {
   const route = useRouter();
   const referenceId = route.query["reference-id"] as string;
+  const guideId = route.query["guide-id"] as string;
   const eventId = route.query["event-id"] as string;
 
   const selectedStyle =
-    "bg-body-color bg-opacity-30 text-black dark:text-white pl-4 rounded-br rounded-tr";
+    "bg-body-color bg-opacity-15 text-black dark:text-white pl-4 rounded-br rounded-tr";
 
   return (
     <div className="basis-80 flex-grow-0 flex-shrink-0 w-full hidden 2xl:block 2xl:relative">
       <nav className="lg:overflow-y-scroll w-80 fixed bottom-0 top-32 pb-10">
-        <p className="font-semibold pl-5 mb-2">MML Elements</p>
+        <p className="font-semibold pl-5 mb-2">Guides</p>
+        <ul>
+          {Object.entries(guides).map(([key, guide]) => {
+            const isSelected = key === guideId;
+
+            return (
+              <li
+                key={key}
+                className={`flex h-11 w-full items-center text-sm pl-7 ${
+                  isSelected && selectedStyle
+                }`}
+              >
+                <Link href={`/docs/guides/${key}`}>{guide.title}</Link>
+              </li>
+            );
+          })}
+        </ul>
+        <p className="font-semibold pl-5 mt-8 mb-2">MML Elements</p>
         <ul>
           {Object.values(schemaDefinition.elements)
             .filter((element) => element.name.startsWith("m-"))

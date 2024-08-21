@@ -2,10 +2,11 @@ import Head from "next/head";
 import * as React from "react";
 
 import Breadcrumb from "@/src/components/Common/Breadcrumb";
-import GuideNavigation from "@/src/components/Common/GuideNavigation";
 import LinkList from "@/src/components/Common/LinkList";
 import { guides } from "@/src/content/guides";
 import { getPageTitle } from "@/src/util";
+
+import ReferenceNavigation from "../../../components/Common/ReferenceNavigation";
 
 export function getStaticPaths() {
   // Call an external API endpoint to get posts
@@ -42,20 +43,22 @@ const GuidePage = ({ guideId }: { guideId: string }) => {
     <>
       <Head>{getPageTitle(title)}</Head>
       <div className="flex pt-32">
-        <GuideNavigation />
-        <main className="w-full mx-auto xl:max-w-[900px]">
-          <Breadcrumb
-            pageName={title}
-            parents={[
-              { name: "Docs", path: "docs" },
-              { name: "Guides", path: "guides" },
-            ]}
-          />
-          <h1 className="text-4xl font-bold">{title}</h1>
-          <div className="mt-4">
-            <Body />
-          </div>
-        </main>
+        <ReferenceNavigation />
+        <div className="px-5 sm:px-12 w-full">
+          <main className="mx-auto px-4 center-column">
+            <Breadcrumb
+              pageName={title}
+              parents={[
+                { name: "Docs", path: "docs" },
+                { name: "Guides", path: "guides" },
+              ]}
+            />
+            <h1 className="text-4xl font-semibold mb-4">{title}</h1>
+            <div className="mt-4">
+              <Body />
+            </div>
+          </main>
+        </div>
         <LinkList elementList={linkList} />
       </div>
     </>

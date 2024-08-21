@@ -4,16 +4,18 @@ import * as React from "react";
 import { attributeTypes } from "@/src/config/maps";
 import { MarkDownDocs } from "@/src/config/mdx";
 
+import { AnchorLink } from "../Anchors/AnchorLink";
+
 export function Attribute(props: { attribute: MMLSchemaAttribute }) {
+  const anchorId = `attribute-${props.attribute.name}`;
   return (
     <div>
-      <MarkDownDocs className="inline-block [&>*]:mb-0">
-        {"`" + props.attribute.name + "`"}
-      </MarkDownDocs>
-      :&nbsp;
-      {props.attribute.type && (
-        <span>{attributeTypes[props.attribute.type as keyof typeof attributeTypes]}</span>
-      )}
+      <AnchorLink anchorId={anchorId} title={props.attribute.name} verticalOffset>
+        <MarkDownDocs className="inline-block [&>*]:mb-0">
+          {`\`${props.attribute.name}\`: \`${attributeTypes[props.attribute.type as keyof typeof attributeTypes]}\``}
+        </MarkDownDocs>
+      </AnchorLink>
+
       {props.attribute.enum && (
         <ul>
           {props.attribute.enum.map((enumValue) => (
@@ -23,10 +25,8 @@ export function Attribute(props: { attribute: MMLSchemaAttribute }) {
       )}
       {props.attribute.description &&
         props.attribute.description.map((descriptionText, index) => (
-          <div className="pl-4">
-            <MarkDownDocs key={index}>
-              {descriptionText.replaceAll(/(\s{2,}|\n)/g, " ")}
-            </MarkDownDocs>
+          <div className="pl-4" key={index}>
+            <MarkDownDocs>{descriptionText.replaceAll(/(\s{2,}|\n)/g, " ")}</MarkDownDocs>
           </div>
         ))}
     </div>

@@ -6,8 +6,8 @@ import { Euler, Vector3 } from "three";
 import ExampleClientView from "@/src/components/ExampleView/ExampleClientView";
 import { getIframeTargetWindow } from "@/src/util/iframe-target";
 
-import { LocalAvatarClient } from "../AnimatedExampleView/LocalAvatar/LocalAvatarClient";
-import { LocalAvatarServer } from "../AnimatedExampleView/LocalAvatar/LocalAvatarServer";
+import { LocalAvatarClient } from "./LocalAvatar/LocalAvatarClient";
+import { LocalAvatarServer } from "./LocalAvatar/LocalAvatarServer";
 
 export const ExampleAvatarClient = React.memo(function ExampleAvatarClient(props: {
   server: LocalAvatarServer;

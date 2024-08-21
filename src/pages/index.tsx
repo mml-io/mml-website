@@ -5,7 +5,6 @@ import Brands from "@/src/components/Brands";
 import ScrollUp from "@/src/components/Common/ScrollUp";
 import Features from "@/src/components/Features";
 import Hero from "@/src/components/Hero";
-import HowItWorks from "@/src/components/HowItWorks";
 import Examples from "@/src/components/ProjectExamples";
 
 export default function Home() {
@@ -17,7 +16,6 @@ export default function Home() {
       <ScrollUp />
       <Hero />
       <Features />
-      <HowItWorks />
       <Examples />
       <Brands />
     </>

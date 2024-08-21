@@ -1,4 +1,5 @@
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 import { Brand } from "@/types/brand";
 
@@ -13,6 +14,13 @@ const brandsData: Brand[] = [
 
 const Brands = () => {
   const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <section className="pb-32">
