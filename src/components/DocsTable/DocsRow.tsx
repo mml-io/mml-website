@@ -51,7 +51,7 @@ export function DocsRow({
               ? description
               : [description]
             ).map((text) =>
-              text
+              (text || "")
                 .split("\n")
                 .map((line) => line.trim())
                 .join(" ")
