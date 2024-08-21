@@ -59,7 +59,7 @@ const GuidePage = ({ guideId }: { guideId: string }) => {
             </div>
           </main>
         </div>
-        <LinkList elementList={linkList} />
+        <LinkList elementList={linkList.map((link) => ({ id: link.toLowerCase(), name: link }))} />
       </div>
     </>
   );

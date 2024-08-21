@@ -90,9 +90,9 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
     ? Object.keys(examplesForElement.examples).filter((key) => key !== "primary")
     : [];
 
-  const linkList = ["Properties"];
+  const linkList = [{ id: "properties", name: "Properties" }];
   if (filteredExamples.length > 0) {
-    linkList.push("Examples");
+    linkList.push({ id: "examples", name: "Examples" });
   }
 
   return (

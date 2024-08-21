@@ -185,11 +185,11 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
         </div>
         <LinkList
           elementList={[
-            "Try it",
-            attributes.length ? "Attributes" : "",
-            "Attribute groups",
-            "Examples",
-            "Compatibility",
+            { id: "try", name: "Try it" },
+            ...(attributes.length ? [{ id: "attributes", name: "Attributes" }] : []),
+            { id: "attribute-groups", name: "Attribute groups" },
+            { id: "examples", name: "Examples" },
+            { id: "compatibility", name: "Compatibility" },
           ]}
         />
       </div>
