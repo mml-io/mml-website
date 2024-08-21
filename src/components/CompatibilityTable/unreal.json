@@ -408,6 +408,10 @@
       "supported": true,
       "description": ""
     },
+    "cast-shadow": {
+      "supported": false,
+      "description": ""
+    },
     "debug": {
       "supported": true,
       "description": ""
@@ -918,6 +922,10 @@
       "supported": true,
       "description": ""
     },
+    "loop-duration": {
+      "supported": false,
+      "description": ""
+    },
     "enabled": {
       "supported": true,
       "description": ""
@@ -1021,6 +1029,10 @@
       "description": ""
     },
     "opacity": {
+      "supported": true,
+      "description": ""
+    },
+    "emissive": {
       "supported": true,
       "description": ""
     },
@@ -1138,6 +1150,10 @@
       "supported": true,
       "description": ""
     },
+    "emissive": {
+      "supported": true,
+      "description": ""
+    },
     "debug": {
       "supported": true,
       "description": ""
@@ -1249,6 +1265,10 @@
       "description": ""
     },
     "alignment": {
+      "supported": true,
+      "description": ""
+    },
+    "emissive": {
       "supported": true,
       "description": ""
     },
@@ -1688,6 +1708,102 @@
     },
     "class": {
       "supported": true,
+      "description": ""
+    }
+  },
+  "m-attr-lerp": {
+    "m-attr-lerp": {
+      "supported": false,
+      "description": ""
+    },
+    "attr": {
+      "supported": false,
+      "description": ""
+    },
+    "duration": {
+      "supported": false,
+      "description": ""
+    },
+    "easing": {
+      "supported": false,
+      "description": ""
+    },
+    "id": {
+      "supported": false,
+      "description": ""
+    },
+    "class": {
+      "supported": false,
+      "description": ""
+    }
+  },
+  "m-link": {
+    "m-link": {
+      "supported": false,
+      "description": ""
+    },
+    "href": {
+      "supported": false,
+      "description": ""
+    },
+    "target": {
+      "supported": false,
+      "description": ""
+    },
+    "debug": {
+      "supported": false,
+      "description": ""
+    },
+    "x": {
+      "supported": false,
+      "description": ""
+    },
+    "y": {
+      "supported": false,
+      "description": ""
+    },
+    "z": {
+      "supported": false,
+      "description": ""
+    },
+    "rx": {
+      "supported": false,
+      "description": ""
+    },
+    "ry": {
+      "supported": false,
+      "description": ""
+    },
+    "rz": {
+      "supported": false,
+      "description": ""
+    },
+    "sx": {
+      "supported": false,
+      "description": ""
+    },
+    "sy": {
+      "supported": false,
+      "description": ""
+    },
+    "sz": {
+      "supported": false,
+      "description": ""
+    },
+    "visible": {
+      "supported": false,
+      "description": ""
+    },
+    "socket": {
+      "supported": false,
+      "description": ""
+    },
+    "id": {
+      "supported": false,
+      "description": ""
+    },
+    "class": {
+      "supported": false,
       "description": ""
     }
   }

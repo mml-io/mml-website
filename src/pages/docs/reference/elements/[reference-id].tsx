@@ -81,7 +81,7 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
             {elementDefinition.description &&
               elementDefinition.description.map((descriptionText, index) => (
                 <MarkDownDocs className="my-6 text-base" key={index}>
-                  {descriptionText}
+                  {descriptionText.replaceAll("\n", " ")}
                 </MarkDownDocs>
               ))}
             {primaryExample && (
@@ -93,6 +93,12 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
                 </AnchorLink>
                 <ExampleView
                   description={primaryExample.description}
+                  /*
+                    The "key" here is necessary to ensure the stateful example
+                    container is re-rendered between pages. Don't remove unless
+                    you know that navigating from one doc page to another does
+                    update the example container.
+                  */
                   key={`${referenceId}-primary`}
                   baseScene={
                     primaryExample.baseSceneOn !== undefined ? primaryExample.baseSceneOn : true

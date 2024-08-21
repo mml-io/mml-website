@@ -1,0 +1,23 @@
+<m-cube id="lerped-cube" y="5" color="red">
+  <m-attr-lerp
+      attr="x,y"
+      duration="2000"
+      easing="easeInOutCubic"
+  ></m-attr-lerp>
+</m-cube>
+
+<m-sphere id="unlerped-sphere" y="5" radius="0.2" color="blue"></m-sphere>
+
+<script>
+  const lerpedCube = document.getElementById('lerped-cube');
+  const unlerpedSphere = document.getElementById('unlerped-sphere');
+  setInterval(() => {
+    const x = Math.random() * 10 - 5;
+    const y = Math.random() * 5 + 2;
+    lerpedCube.setAttribute("x", x);
+    lerpedCube.setAttribute("y", y);
+    unlerpedSphere.setAttribute("x", x);
+    unlerpedSphere.setAttribute("y", y);
+  }, 2000);
+</script>
+
