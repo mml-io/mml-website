@@ -50,7 +50,7 @@ const Hero = () => {
         ) : (
           <div className="absolute top-0 left-0 w-full h-full bg-grey"></div>
         )}
-        <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-50 text-center">
+        <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-50 text-center backdrop-blur-[2px]">
           <div className="relative">
             <img
               src="/images/hero/animated-mml-logo.svg"

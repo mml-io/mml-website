@@ -1,6 +1,5 @@
 import Head from "next/head";
 import { useSearchParams } from "next/navigation";
-import { useRouter } from "next/router";
 import * as React from "react";
 import { ChangeEvent, useEffect } from "react";
 
@@ -10,10 +9,11 @@ import { getPageTitle } from "@/src/util";
 import { CLIENT_TYPES } from "@/types/docs-reference";
 import { Example, ExamplesByName } from "@/types/example";
 
+import { ExampleLink } from "../components/ExampleLink/ExampleLink";
+
 const ExamplesPage = () => {
   // Check if there is a parameter and if yes, set the selected example
   const params = useSearchParams();
-  const router = useRouter();
 
   const example = params.get("example");
 
@@ -45,12 +45,6 @@ const ExamplesPage = () => {
 
     setExampleList(filteredExampleList);
     setSearchQuery(query);
-  }, []);
-
-  const handleClick = React.useCallback((key: string) => {
-    // set url param to the selected example
-    router.push(`/examples/?example=${key}`);
-    setSelectedExample(examples[key]);
   }, []);
 
   return (
@@ -86,29 +80,20 @@ const ExamplesPage = () => {
               const isSelected = selectedExample?.name === name;
 
               return (
-                <div
+                <ExampleLink
                   key={key}
-                  className={`border-box mt-4 cursor-pointer bg-[#F5F5F5] dark:bg-[#424242] xl:h-[225px] ${
-                    isSelected ? "border-[2px] border-primary" : ""
-                  }}`}
-                  onClick={() => handleClick(key)}
-                >
-                  <div className="relative aspect-[1.60738255] h-[181px] w-full overflow-hidden">
-                    <img
-                      className="absolute top-1/2 w-full -translate-y-1/2"
-                      src={image}
-                      alt={name}
-                    />
-                  </div>
-                  <p className="mt-3 px-4 text-sm">{description}</p>
-                </div>
+                  exampleId={key}
+                  isSelected={isSelected}
+                  image={image}
+                  name={name}
+                  description={description}
+                />
               );
             })}
           </div>
         </div>
         <div className="flex-[0_0_calc(100vh-219px)] overflow-hidden xl:flex-1 xl:rounded-b">
           <ExampleView
-            key={selectedExample?.name || "default"}
             initialClients={selectedExample?.clients ?? [CLIENT_TYPES.FLOATING]}
             code={selectedExample?.code || ""}
             baseScene={

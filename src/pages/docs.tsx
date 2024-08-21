@@ -6,7 +6,6 @@ import EventsTable from "@/src/components/EventsTable";
 import { getPageTitle } from "@/src/util";
 
 import Breadcrumb from "../components/Common/Breadcrumb";
-import LinkList from "../components/Common/LinkList";
 import ReferenceNavigation from "../components/Common/ReferenceNavigation";
 import GuidesList from "../components/GuidesList";
 

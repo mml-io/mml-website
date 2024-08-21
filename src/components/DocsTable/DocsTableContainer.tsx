@@ -3,13 +3,11 @@ import { AnchorLink } from "../Anchors/AnchorLink";
 export function DocsTableContainer({
   children,
   title,
-  type,
   description,
   className,
 }: {
   children: React.ReactNode;
   title: string;
-  type: string;
   description: string;
   className?: string;
 }) {

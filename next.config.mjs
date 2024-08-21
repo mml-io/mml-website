@@ -13,12 +13,17 @@ const nextConfig = {
       },
       {
         source: "/docs/reference",
-        destination: "/docs#events",
+        destination: "/docs",
         permanent: true,
       },
       {
         source: "/docs/reference/elements",
         destination: "/docs#elements",
+        permanent: true,
+      },
+      {
+        source: "/docs/reference/events",
+        destination: "/docs#events",
         permanent: true,
       },
     ];
