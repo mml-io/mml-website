@@ -2,6 +2,7 @@ import { DocsExamplesByTag } from "@/types/docs-reference";
 
 import * as connectionEvent from "./connectionEvent";
 import * as mAttrAnim from "./m-attr-anim";
+import * as mAttrLerp from "./m-attr-lerp";
 import * as mAudio from "./m-audio";
 import * as mCharacter from "./m-character";
 import * as mChatProbe from "./m-chat-probe";
@@ -13,6 +14,7 @@ import * as mImage from "./m-image";
 import * as mInteraction from "./m-interaction";
 import * as mLabel from "./m-label";
 import * as mLight from "./m-light";
+import * as mLink from "./m-link";
 import * as mModel from "./m-model";
 import * as mPlane from "./m-plane";
 import * as mPositionProbe from "./m-position-probe";
@@ -46,6 +48,8 @@ export const examples: DocsExamplesByTag = {
   "m-prompt": mPrompt,
   "m-position-probe": mPositionProbe,
   "m-attr-anim": mAttrAnim,
+  "m-attr-lerp": mAttrLerp,
+  "m-link": mLink,
   "m-image": mImage,
   "m-chat-probe": mChatProbe,
   "m-interaction": mInteraction,

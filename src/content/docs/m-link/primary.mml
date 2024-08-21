@@ -1,0 +1,18 @@
+<m-link x="-2" y="5" z="3"
+        href="https://mml.io"
+>
+  <m-label width="3" content="Click to open:
+mml.io in a new tab (default / target=_blank)">
+  </m-label>
+  <m-cube y="-2"></m-cube>
+</m-link>
+
+<m-link x="2" y="5" z="3"
+        href="https://mml.io"
+        target="_self"
+>
+  <m-label width="3" content="Click to open:
+mml.io in the same tab (target=_self)">
+  </m-label>
+  <m-sphere y="-2"></m-sphere>
+</m-link>

@@ -17,11 +17,12 @@ import { MMLWebRunnerClient } from "mml-web-runner";
 import { AudioListener, Euler, Scene, Vector3 } from "three";
 
 import hdriPath from "./assets/hdr/industrial_sunset_2k.hdr";
-import airAnimationFileUrl from "./assets/models/unreal-air.glb";
-import idleAnimationFileUrl from "./assets/models/unreal-idle.glb";
-import jogAnimationFileUrl from "./assets/models/unreal-jog.glb";
-import meshFileUrl from "./assets/models/unreal-mesh.glb";
-import sprintAnimationFileUrl from "./assets/models/unreal-run.glb";
+import airAnimationFileUrl from "./assets/models/anim_air.glb";
+import doubleJumpAnimationFileUrl from "./assets/models/anim_double_jump.glb";
+import idleAnimationFileUrl from "./assets/models/anim_idle.glb";
+import jogAnimationFileUrl from "./assets/models/anim_jog.glb";
+import sprintAnimationFileUrl from "./assets/models/anim_run.glb";
+import meshFileUrl from "./assets/models/bot.glb";
 import { LocalAvatarServer } from "./LocalAvatarServer";
 import { Room } from "./Room";
 
@@ -30,6 +31,7 @@ const animationConfig: AnimationConfig = {
   jogAnimationFileUrl,
   sprintAnimationFileUrl,
   airAnimationFileUrl,
+  doubleJumpAnimationFileUrl,
 };
 
 const characterDescription: CharacterDescription = {
@@ -44,7 +46,7 @@ export class LocalAvatarClient {
   public readonly composer: Composer;
   private readonly timeManager = new TimeManager();
   private readonly keyInputManager = new KeyInputManager(() => {
-    return this.cameraManager.dragging;
+    return this.cameraManager.hasActiveInput();
   });
   private readonly characterManager: CharacterManager;
   private readonly cameraManager: CameraManager;
@@ -83,7 +85,12 @@ export class LocalAvatarClient {
     );
     this.cameraManager.camera.add(this.audioListener);
 
-    this.composer = new Composer(this.scene, this.cameraManager.camera, true);
+    this.composer = new Composer({
+      scene: this.scene,
+      camera: this.cameraManager.camera,
+      spawnSun: true,
+      environmentConfiguration: {},
+    });
     this.composer.useHDRI(hdriPath);
     this.element.appendChild(this.composer.renderer.domElement);
 
