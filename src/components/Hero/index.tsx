@@ -1,3 +1,5 @@
+import { faPlay } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as React from "react";
 import { useEffect, useState } from "react";
 
@@ -89,6 +91,15 @@ const Hero = () => {
             <br />
             using <b>HTML</b> and <b>JavaScript</b>
           </p>
+          <a
+            href="https://guided-tour-9709e5_world-7599b2.mml.world"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center mt-3 px-6 py-2 rounded-full bg-hero-link-bg text-xl text-grey hover:bg-hero-link-bg-hover hover:text-lightgrey focus:outline-none focus:ring-2 focus:ring-[blue] transition-colors ease-in-out"
+          >
+            <FontAwesomeIcon icon={faPlay} className="mr-3" />
+            Play the MML Guided Tour
+          </a>
         </div>
         <div className="absolute bottom-0 left-0 w-full pb-8">
           <HomepageLinkCollection />
