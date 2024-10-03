@@ -1,5 +1,5 @@
 import { faDiscord, faGithub } from "@fortawesome/free-brands-svg-icons";
-import { faHammer } from "@fortawesome/free-solid-svg-icons";
+import { faCompass, faHammer } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const HomepageLinkCollection = () => {
@@ -18,6 +18,11 @@ const HomepageLinkCollection = () => {
       name: "MML Editor",
       url: "https://mmleditor.com",
       icon: faHammer,
+    },
+    {
+      name: "Explore MML Creations",
+      url: "https://mmleditor.com/explore",
+      icon: faCompass,
     },
   ];
 
