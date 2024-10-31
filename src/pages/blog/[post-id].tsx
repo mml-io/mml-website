@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Head from "next/head";
 import Link from "next/link";
 import * as React from "react";
@@ -47,7 +48,7 @@ const GuidePage = ({ postId }: { postId: string }) => {
               <span>Back</span>
             </Link>
             <img src={image} alt={title} className="w-full" width="1024" height="530" />
-            <div className="mt-4">
+            <div className="mt-4 mdx">
               <Body />
             </div>
           </div>

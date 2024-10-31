@@ -12,6 +12,10 @@
   }
 }
 
+.mdx a {
+  text-decoration: underline;
+}
+
 @layer components {
   input[type="checkbox"]:checked ~ label span svg {
     @apply inline-flex;
