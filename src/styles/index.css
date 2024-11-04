@@ -12,6 +12,10 @@
   }
 }
 
+.mdx a {
+  text-decoration: underline;
+}
+
 @layer components {
   input[type="checkbox"]:checked ~ label span svg {
     @apply inline-flex;
@@ -36,4 +40,8 @@
   input#checkboxLabel:checked ~ .box span {
     @apply opacity-100;
   }
+}
+
+code {
+  line-break: anywhere;
 }

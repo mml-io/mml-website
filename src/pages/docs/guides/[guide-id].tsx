@@ -45,7 +45,7 @@ const GuidePage = ({ guideId }: { guideId: string }) => {
       <div className="flex pt-32">
         <ReferenceNavigation />
         <div className="px-5 sm:px-12 w-full">
-          <main className="mx-auto px-4 center-column">
+          <main className="mx-auto px-4 center-column mdx">
             <Breadcrumb
               pageName={title}
               parents={[
