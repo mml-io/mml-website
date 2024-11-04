@@ -41,3 +41,7 @@
     @apply opacity-100;
   }
 }
+
+code {
+  line-break: anywhere;
+}
