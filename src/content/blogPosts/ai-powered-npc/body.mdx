@@ -1,5 +1,5 @@
 # AI-Powered NPC with MML
-_[Marco Gomez](https://x.com/TheCodeTherapy) - 2024-11-05_
+_[Marco Gomez](https://x.com/TheCodeTherapy) - 2024-11-08_
 
 The possibility of having your MML documents communicate with external APIs single-handedly opens up a whole world of possibilities to create immersive functionalities for your virtual world powered by MML.
 
@@ -112,563 +112,705 @@ Please see below a screenshot as a reference of how your Assistant configuration
 
 ## 3- Creating your NPC MML Document to use your Assistant
 
-Here follows the MML document we prepared to be your NPC:
+Let's start diving in to the bits of the MML document that are paramount for the NPC's core functionality while keeping everything multi-user friendly.
 
-~~~html
-<m-group id="agent-group">
+---
 
-  <m-audio id="agent-audio" y="2" z="-2.7" loop="false"></m-audio>
-  <m-group id="float-wrapper">
+- The queue
 
-    <m-group id="actions-wrapper">
-  
-      <m-model
-        id="agent-model"
-        src="/assets/playground/brainzo_draco.glb"
-        anim="/assets/playground/brainzo_draco.glb"
-        collide="false"
-        y="1.2" ry="0"
-        sx="0.5" sy="0.5" sz="0.5"
-      >
+  Our first concern should be to keep everything multi-user friendly, and for that we must have a queue and all the book keeping necessary so we won't waste any chat messages when the NPC is already busy replying to some previous chat message sent by another user.
 
-        <m-cylinder radius="1.3" height="5" y="1.5" visible="false"></m-cylinder>
-        <m-video collide="false" id="wait-indicator" src="/assets/playground/wait.webm" x="0" y="1.35" z="1.1" sy="0" emissive="5"></m-video>
-        <m-attr-anim attr="ry" start="-5" end="5" duration="12000" loop="true" ping-pong="true" easing="easeInOutQuint"></m-attr-anim>
+  For that, we create some variables to store the necessary states:
 
-      </m-model>
-      
-      <m-audio id="spin-audio" src="/assets/playground/spin.mp3" loop="false" start-time="-10000" volume="0"></m-audio>
-      <m-audio id="horn-audio" src="/assets/playground/horn.mp3" loop="false" start-time="-10000" volume="0"></m-audio>
-      <m-model id="horn-model" src="/assets/playground/viking_horn.glb" sx="0" sy="0" sz="0" x="-0.8" y="2.5" z="1" rx="-20" ry="220" collide="false"></m-model>
-      <m-model id="thumb-model" src="/assets/playground/thumb.glb" sx="0" sy="0" sz="0" y="1.8" x="-1.5" rx="0" collide="false"></m-model>
-    </m-group>
+  ~~~js
+  let latestPromise = null;
+  let queuedMessages = [];
+  let queuedResponses = [];
+  let responseInProgress = false;
+  ~~~
 
-    <m-label id="agent-response" width="5" height="4" x="3.75" y="2"></m-label>
-    <m-attr-anim attr="y" start="0.2" end="0.35" duration="17000" loop="true" ping-pong="true" easing="easeInOutQuad"></m-attr-anim>
+  Here's how it works:
 
-  </m-group>
+  - `queuedMessages`: holds all the incoming messages (messages captured by the `m-chat-probe`) that need to be sent to OpenAI;
 
-  <m-chat-probe id="chat" range="10" debug="false"></m-chat-probe>
-  <m-position-probe id="position-probe" range="10" debug="false"></m-position-probe>
+  - `queuedResponses`: stores responses we already got from OpenAI, that are waiting to be processed by the Text to Speech request (which will create the audio response), and by the functions that will perform the possible NPC actions we planned;
 
-</m-group>
+  - `responseInProgress`: acts as a safeguard to inform if the NPC is currently speaking, to prevent potentially overwriting the current audio the NPC is speaking with a new audio we just got from the OpenAI Text-to-speech service.
 
-<script>
-  // OpenAI API key and Assistant ID
-const apiKey = "OPENAI_API_KEY_GOES_HERE";
-const assistantId = "OPENAI_AGENT_ID_GOES_HERE";
+---
 
-// Element references for various components in the scene
-const actionsWrapper = document.getElementById("actions-wrapper");
-const agentAudio = document.getElementById("agent-audio");
-const agentModel = document.getElementById("agent-model");
-const waitIndicator = document.getElementById("wait-indicator");
+- Submitting Messages to the Queue:
 
-const thumbModel = document.getElementById("thumb-model");
-const hornAudio = document.getElementById("horn-audio");
-const hornModel = document.getElementById("horn-model");
-const spinAudio = document.getElementById("spin-audio");
+  Whenever a user sends a message to the NPC through the text chat, it gets captured by the `m-chat-probe`, and it's added to the queue using the `submitMessage()` function. This function also triggers the processing function (`onQueue()`) if no other message is currently being processed.
 
-const proximityProbe = document.getElementById("position-probe");
-const proximityMap = new Map(); // Tracks nearby user positions
-let latestProximityActivity = document.timeline.currentTime;
-
-// Settings for user connections and audio
-const connectionPrefix = Date.now() - 1710000000000;
-const connectedUsers = new Set();
-const audioVolume = 3;
-const audioMarginDuration = 2000;
-const completionTimeout = 7000;
-
-// Settings for thumb rotation angles
-const thumbsUpRotation = 0;
-const thumbsDownRotation = 180;
-const thumbsNeutralRotation = 90;
-
-let threadId;
-let latestPromise = null;
-let queuedMessages = [];
-let queuedResponses = [];
-let responseInProgress = false;
-let latestMessageTime = document.timeline.currentTime;
-
-// Initial chat message
-const initialText = "Hi, I'm Squig! Chat with me through the text chat box on the UI.";
-const responseLabel = document.getElementById("agent-response");
-responseLabel.setAttribute("content", initialText);
-
-/**
- * Animates a specific attribute of an element from a start to an end value.
- * @param {MMLElement} element - The HTML element to animate.
- * @param {string} attr - The attribute to animate.
- * @param {number} start - Starting value of the attribute.
- * @param {number} end - Ending value of the attribute.
- * @param {number} duration - Duration of the animation in milliseconds.
- * @param {string} easing - The easing function for the animation.
- */
-function animate(element, attr, start, end, duration, easing) {
-  const anim = document.createElement("m-attr-anim");
-  anim.setAttribute("attr", attr);
-  anim.setAttribute("start", start);
-  anim.setAttribute("end", end);
-  anim.setAttribute("start-time", document.timeline.currentTime);
-  anim.setAttribute("end-time", document.timeline.currentTime + duration);
-  anim.setAttribute("duration", duration);
-  anim.setAttribute("easing", easing);
-  anim.setAttribute("loop", false);
-  element.appendChild(anim);
-  setTimeout(() => {
-    element.setAttribute(attr, end);
-    element.removeChild(anim);
-  }, duration);
-}
-
-/**
- * Displays a waiting indicator and sets the response label to "Thinking..."
- */
-function showWaiting() {
-  if (!responseInProgress) {
-    responseLabel.setAttribute("content", "Thinking...");
+  ```js
+  function submitMessage(message, userId) {
+    const time = Date.now() / 1000;
+    queuedMessages.push({ message, userId, time, nearbyUsers: Array.from(connectedUsers) });
+    onQueue();
   }
-  animate(waitIndicator, "sy", 0, 1, 500, "easeInOutQuint");
-}
+  ```
 
-/**
- * Hides the waiting indicator by animating it out of view.
- */
-function hideWaiting() {
-  animate(waitIndicator, "sy", 1, 0, 500, "easeInOutQuint");
-}
+  In this function:
 
-/**
- * Initiates a spinning animation and plays the spin audio.
- */
-function spin() {
-  spinAudio.setAttribute("volume", 1);
-  spinAudio.setAttribute("start-time", document.timeline.currentTime);
-  spinAudio.setAttribute("pause-time", document.timeline.currentTime + 6000);
-  setTimeout(() => {
-    spinAudio.setAttribute("volume", 0);
-  }, 6000);
-  animate(actionsWrapper, "ry", 0, 1800, 3500, "easeInOutQuint");
-}
+  - The message object includes important information like the `message` content, `userID`, the `time` stamp, and a list of `nearbyUsers`;
 
-/**
- * Animates the thumb model for a "thumbs up" effect.
- */
-function thumbsUp() {
-  animate(thumbModel, "sx", 0, 4, 1000, "easeInOutQuint");
-  animate(thumbModel, "sy", 0, 4, 1000, "easeInOutQuint");
-  animate(thumbModel, "sz", 0, 4, 1000, "easeInOutQuint");
-  animate(thumbModel, "rx", thumbsNeutralRotation, thumbsUpRotation, 1000, "easeInOutQuint");
-  setTimeout(() => {
-    animate(thumbModel, "sx", 4, 0, 1000, "easeInOutQuint");
-    animate(thumbModel, "sy", 4, 0, 1000, "easeInOutQuint");
-    animate(thumbModel, "sz", 4, 0, 1000, "easeInOutQuint");
-    animate(thumbModel, "rx", thumbsUpRotation, thumbsNeutralRotation, 1000, "easeInOutQuint");
-  }, 5000);
-}
+  - `queuedMessages.push()` adds the new message to the queue;
 
-/**
- * Animates the thumb model for a "thumbs down" effect.
- */
-function thumbsDown() {
-  animate(thumbModel, "sx", 0, 4, 1000, "easeInOutQuint");
-  animate(thumbModel, "sy", 0, 4, 1000, "easeInOutQuint");
-  animate(thumbModel, "sz", 0, 4, 1000, "easeInOutQuint");
-  animate(thumbModel, "rx", thumbsNeutralRotation, thumbsDownRotation, 1000, "easeInOutQuint");
-  setTimeout(() => {
-    animate(thumbModel, "sx", 4, 0, 1000, "easeInOutQuint");
-    animate(thumbModel, "sy", 4, 0, 1000, "easeInOutQuint");
-    animate(thumbModel, "sz", 4, 0, 1000, "easeInOutQuint");
-    animate(thumbModel, "rx", thumbsDownRotation, thumbsNeutralRotation, 1000, "easeInOutQuint");
-  }, 5000);
-}
+  - `onQueue()` starts the process of sending messages if the NPC isn't already busy.
 
-/**
- * Plays the horn sound effect and animates the horn model.
- */
-function playHorn() {
-  hornAudio.setAttribute("volume", 1);
-  hornAudio.setAttribute("start-time", document.timeline.currentTime);
-  hornAudio.setAttribute("pause-time", document.timeline.currentTime + 6000);
-  animate(hornModel, "sx", 0, 4, 1000, "easeInOutQuint");
-  animate(hornModel, "sy", 0, 4, 1000, "easeInOutQuint");
-  animate(hornModel, "sz", 0, 4, 1000, "easeInOutQuint");
-  setTimeout(() => {
-    hornAudio.setAttribute("volume", 0);
-    animate(hornModel, "sx", 4, 0, 1000, "easeInOutQuint");
-    animate(hornModel, "sy", 4, 0, 1000, "easeInOutQuint");
-    animate(hornModel, "sz", 4, 0, 1000, "easeInOutQuint");
-  }, 6000);
-}
+---
 
-/**
- * Animates the agent model to grow while speaking and return to normal size afterward.
- * @param {number} duration - Duration for which the agent stays enlarged.
- */
-function growWhileSpeaking(duration) {
-  animate(agentModel, "sx", 0.5, 0.6, 2000, "easeOutBack");
-  animate(agentModel, "sy", 0.5, 0.6, 2000, "easeOutBack");
-  animate(agentModel, "sz", 0.5, 0.6, 2000, "easeOutBack");
-  setTimeout(() => {
-    animate(agentModel, "sx", 0.6, 0.5, 2000, "easeInOutQuint");
-    animate(agentModel, "sy", 0.6, 0.5, 2000, "easeInOutQuint");
-    animate(agentModel, "sz", 0.6, 0.5, 2000, "easeInOutQuint");
-  }, duration);
-}
+- Processing the Queue:
 
-/**
- * Processes queued responses by playing audio and displaying text.
- * Continues processing until all queued responses are handled.
- */
-function processResponses() {
-  if (queuedResponses.length === 0 || responseInProgress) {
-    return;
-  }
-  const response = queuedResponses.shift();
-  responseInProgress = true;
-  growWhileSpeaking(response.duration);
-  playAudio(response.dataUrl, response.duration);
-  if (response.userId) {
-    responseLabel.setAttribute("content", `${response.userId}: ${response.text}`);
-  } else {
-    responseLabel.setAttribute("content", response.text);
-  }
-}
+  The heart of the queue system lies in the `onQueue()` function. This function checks if there's an ongoing request and, if not, initiates the message-sending process.
 
-/**
- * Plays audio from a provided source for a specified duration, adjusting volume during playback.
- * @param {string} src - The source URL of the audio.
- * @param {number} duration - Duration of audio playback in milliseconds.
- */
-function playAudio(src, duration) {
-  const now = document.timeline.currentTime;
-  agentAudio.setAttribute("volume", audioVolume);
-  agentAudio.setAttribute("start-time", now);
-  agentAudio.setAttribute("pause-time", now + duration + audioMarginDuration);
-  agentAudio.setAttribute("src", src);
-  setTimeout(() => {
-    agentAudio.setAttribute("volume", 0);
-    setTimeout(() => {
-      responseInProgress = false;
-      processResponses();
-    }, audioMarginDuration / 2);
-  }, duration + audioMarginDuration);
-}
-
-/**
- * Estimates the duration of an MP3 audio file based on its frame structure.
- * @param {ArrayBuffer} arrayBuffer - The binary data of the MP3 file.
- * @param {boolean} debug - Flag for debug logging output.
- * @returns {Promise<number>} The estimated duration in milliseconds.
- */
-async function estimateMP3Duration(arrayBuffer, debug = false) {
-  const uint8Array = new Uint8Array(arrayBuffer);
-  let i = 0;
-  // Look for the first frame sync to determine CBR/VBR
-  while (i < uint8Array.length - 1) {
-    if (uint8Array[i] === 0xFF && (uint8Array[i + 1] & 0xE0) === 0xE0) break;
-    i++;
-  }
-  if (i >= uint8Array.length - 4) {
-    if (debug) {
-      console.log("No valid MP3 frame header found.");
-    }
-    return 0;
-  }
-
-  const headerOffset = i + 4;
-  const isXing = uint8Array.slice(headerOffset, headerOffset + 4).toString() === "88,105,110,103";
-  const isVBRI = uint8Array.slice(headerOffset, headerOffset + 4).toString() === "86,66,82,73";
-
-  if (isXing || isVBRI) {
-    if (debug) {
-      console.log("VBR MP3 detected.");
-    }
-    const headerPosition = isXing ? headerOffset : headerOffset + 32;
-    const frames = (
-      (uint8Array[headerPosition + 8] << 24) |
-      (uint8Array[headerPosition + 9] << 16) |
-      (uint8Array[headerPosition + 10] << 8) |
-      uint8Array[headerPosition + 11]
-    );
-    const sampleRate = 44100; // Set or detect sample rate per frame headers
-    const durationSeconds = (frames * 1152) / sampleRate;
-    if (debug) {
-      console.log(`Frames: ${frames}, Sample rate: ${sampleRate}, Duration: ${durationSeconds}s`);
-    }
-    return Math.ceil(durationSeconds * 1000);
-  }
-
-  const header = (uint8Array[i + 2] << 8) | uint8Array[i + 3];
-  const bitrateIndex = (header >> 4) & 0x0F;
-  const sampleRateIndex = (header >> 2) & 0x03;
-  const bitrates = [0, 32000, 40000, 48000, 56000, 64000, 80000, 96000, 112000, 128000, 160000, 192000, 224000, 256000, 320000];
-  const sampleRates = [44100, 48000, 32000];
-  const bitrate = bitrates[bitrateIndex - 1];
-  const sampleRate = sampleRates[sampleRateIndex];
-
-  if (!bitrate || !sampleRate) {
-    console.warn("Invalid bitrate or sample rate.");
-    return 0;
-  }
-
-  const durationSeconds = Math.ceil((arrayBuffer.byteLength * 8) / bitrate);
-  return durationSeconds * 1000;
-}
-
-/**
- * Checks if a string matches the "number_number" pattern.
- * @param {string} str - The string to test.
- * @returns {boolean} True if the string matches the pattern, otherwise false.
- */
-function isNumberUnderscoreNumber(str) {
-  const pattern = /^\d+_\d+$/;
-  return pattern.test(str);
-}
-
-/**
- * Requests speech synthesis from OpenAI's TTS API and queues the audio response.
- * @param {string} tts - The text-to-speech content.
- */
-async function createSpeech(tts) {
-  const openAIURL = "https://api.openai.com/v1/audio/speech";
-  const headers = {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${apiKey}`,
-  };
-  const body = {
-    model: "tts-1",
-    input: tts,
-    voice: "fable",
-    response_format: "mp3"
-  };
-  const response = await fetch(openAIURL, {
-    method: "POST",
-    headers,
-    body: JSON.stringify(body),
-  });
-
-  const audioBlob = await response.blob();
-  const arrayBuffer = await audioBlob.arrayBuffer();
-  const duration = await estimateMP3Duration(arrayBuffer, false);
-
-  const uint8Array = new Uint8Array(arrayBuffer);
-  let binary = "";
-  for (let i = 0; i < uint8Array.length; i++) {
-    binary += String.fromCharCode(uint8Array[i]);
-  }
-  const base64Audio = btoa(binary);
-  const dataUrl = `data:audio/mp3;base64,${base64Audio}`;
-  queuedResponses.push({
-    dataUrl: dataUrl,
-    duration: duration,
-    text: tts
-  });
-  processResponses();
-}
-
-/**
- * Wraps the createSpeech function with a timeout to handle cases when speech generation takes too long.
- * @param {string} tts - The text-to-speech content.
- */
-async function createSpeechWithTimeout(tts) {
-  const timeoutPromise = new Promise((_, reject) =>
-    setTimeout(() => reject(new Error("Timeout: Speech creation took too long")), completionTimeout)
-  );
-
-  try {
-    await Promise.race([createSpeech(tts), timeoutPromise]);
-  } catch (error) {
-    console.warn(error.message);
-  }
-}
-
-/**
- * Converts a connection ID to a user ID format.
- * @param {string} connectionId - The connection ID to convert.
- * @returns {string} The formatted user ID.
- */
-function connectionIdToUserId(connectionId) {
-  return `${connectionPrefix}_${connectionId}`;
-}
-
-/**
- * Checks for nearby users and manages response state based on their proximity.
- */
-function checkIfHasNearbyUsers() {
-  if (responseInProgress) return;
-  if (proximityMap.size === 0) {
-    const diff = Math.ceil((document.timeline.currentTime - latestProximityActivity) / 1000);
-    if (diff > 10) responseLabel.setAttribute("content", initialText);
-  } else {
-    const diff = Math.ceil((document.timeline.currentTime - latestMessageTime) / 1000);
-    if (diff > 60) {
+  ```js
+  function onQueue() {
+    if (latestPromise) return; // Exit if a request is already in progress
+    latestPromise = sendMessages().finally(() => {
       latestPromise = null;
-      queuedMessages = [];
-      queuedResponses = [];
-      responseInProgress = false;
-      responseLabel.setAttribute("content", initialText);
-    }
-  }
-}
-
-// Event listeners for proximity and connection events
-proximityProbe.addEventListener("positionenter", (event) => {
-  const { connectionId } = event.detail;
-  const { position, rotation } = event.detail.documentRelative;
-  proximityMap.set(connectionId, { position, rotation });
-  latestProximityActivity = document.timeline.currentTime;
-});
-
-proximityProbe.addEventListener("positionmove", (event) => {
-  const { connectionId } = event.detail;
-  const { position, rotation } = event.detail.documentRelative;
-  proximityMap.set(connectionId, { position, rotation });
-  latestProximityActivity = document.timeline.currentTime;
-});
-
-proximityProbe.addEventListener("positionleave", (event) => {
-  const { connectionId } = event.detail;
-  if (proximityMap.has(connectionId)) proximityMap.delete(connectionId);
-});
-
-window.addEventListener("connected", (event) => {
-  connectedUsers.add(connectionIdToUserId(event.detail.connectionId));
-});
-
-window.addEventListener("disconnected", (event) => {
-  connectedUsers.delete(connectionIdToUserId(event.detail.connectionId));
-  if (proximityMap.has(event.detail.connectionId)) proximityMap.delete(event.detail.connectionId);
-});
-
-/**
- * Sends messages to OpenAI's API, handles responses, and initiates relevant animations.
- */
-async function sendMessages() {
-  showWaiting();
-  const messages = queuedMessages;
-  queuedMessages = [];
-  let res;
-  if (threadId) {
-    res = await fetch(`https://api.openai.com/v1/threads/${threadId}/runs`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-        "OpenAI-Beta": "assistants=v2",
-      },
-      body: JSON.stringify({
-        assistant_id: assistantId,
-        stream: true,
-        additional_messages: messages.map((message) => ({
-          role: "user",
-          content: JSON.stringify(message),
-        })),
-      }),
+      if (queuedMessages.length > 0) onQueue(); // Continue processing if there are more messages
     });
-  } else {
-    res = await fetch("https://api.openai.com/v1/threads/runs", {
+  }
+  ```
+
+  Here's what's happening:
+
+  - `latestPromise` is used to track the current request. If it's null, it means no request is being processed, so we can proceed to process a new one;
+
+  - `sendMessages()` is called to handle the current message to be handled by the queue system;
+
+  -  `finally()` ensures that once the request is completed, `latestPromise` is reset, and the function checks if there are more messages to process. If there are, it calls itself recursively to continue processing the queue.
+
+  This setup ensures that messages are processed one at a time, maintaining the order they were received in and preventing any message loss.
+
+---
+
+- Sending Messages to OpenAI:
+
+  The `sendMessages()` function is responsible for sending queued messages to OpenAI through an API request.
+
+  ```js
+  async function sendMessages() {
+    showWaiting();
+    const messages = queuedMessages;
+    queuedMessages = []; // Clear the queue array
+
+    const res = await fetch("https://api.openai.com/v1/threads/runs", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
-        "OpenAI-Beta": "assistants=v2",
       },
       body: JSON.stringify({
         assistant_id: assistantId,
-        stream: true,
         thread: {
-          messages: messages.map((message) => ({
+          messages: messages.map((msg) => ({
             role: "user",
-            content: JSON.stringify(message),
-          }))
+            content: JSON.stringify(msg),
+          })),
         },
       }),
     });
-  }
-  if (!res.ok) {
-    console.log("ERROR", res.status, res.statusText, await res.text());
-    throw new Error(`HTTP error! status: ${res.status}`);
-  }
 
-  const text = await res.text();
-  const lines = text.split("\n").filter(line => line.startsWith("data: ") && line !== "data: [DONE]").map(line => line.substring(6)).map(line => {
-    try {
-      return JSON.parse(line);
-    } catch (e) {
-      console.error("FAIlED TO PARSE LINE", line);
-      return { object: "unknown", data: line };
+    if (!res.ok) {
+      console.error("Error:", res.status, await res.text());
+      throw new Error(`API request failed with status: ${res.status}`);
     }
-  });
 
-  const completionLine = lines.find(line => line.object === "thread.message" && line.status === "completed" && line !== "data: [DONE]");
-  if (completionLine) {
-    if (completionLine.thread_id) {
-      threadId = completionLine.thread_id;
+    const text = await res.text();
+    const lines = text
+      .split("\n")
+      .filter(line => line.startsWith("data: "));
+
+    const completionLine = lines
+      .map(line => JSON.parse(line.substring(6)))
+      .find(line => line.object === "thread.message");
+
+    if (completionLine) {
+      threadId = completionLine.thread_id || threadId;
+
+      const completionText = completionLine.content[0].text.value
+        .replace("```json\n", "").replace("```", "");
+
+      const response = JSON.parse(completionText);
+      handleResponse(response);
     }
-    try {
-      let completionText = completionLine.content[0].text.value;
-      console.log(`\n#completionText: ${completionText}\n`);
-      completionText = completionText.replace(/【[^】]*】/g, "");
-      completionText = completionText.replace("```json\n", "").replace("```", "");
-      const completion = JSON.parse(completionText);
-      if (completion.ignore) {
-        responseLabel.setAttribute("content", "Ignoring");
-      } else if (completion.wait) {
-        responseLabel.setAttribute("content", "Waiting");
-      } else if (completion.action) {
-        if (completion.action === "spin") spin();
-        else if (completion.action === "thumbs_up") thumbsUp();
-        else if (completion.action === "thumbs_down") thumbsDown();
-        else if (completion.action === "blow_horn") playHorn();
+  }
+  ```
+
+  What's happening here:
+
+  - `showWaiting()`: Displays a "Thinking..." indicator while the NPC waits for the response, in case it is not speaking another response yet;
+
+  - `queuedMessages` is cleared after copying its contents to prevent processing the same message again;
+
+  - `fetch()`: Sends the request to OpenAI, using the assistant ID and maintaining the context of the conversation through a thread;
+
+  - **Response Parsing**: The response is split into lines and parsed. It then looks for the `thread.message` object, which contains the actual reply.
+
+---
+
+- Handling the AI Response:
+
+  Once the response is received from OpenAI, it's processed by `handleResponse()`. This function decides what actions to take based on the AI's reply.
+
+  ```js
+  function handleResponse(response) {
+    if (response.action === "spin") spin();
+    else if (response.action === "thumbs_up") thumbsUp();
+    else if (response.action === "blow_horn") playHorn();
+
+    if (response.message) {
+      createSpeechWithTimeout(response.message);
+    }
+    hideWaiting();
+  }
+  ```
+
+  Key Points:
+
+  - Action Handling: If the AI response object includes an `action` property (e.g., "spin", "thumbs_up"), the corresponding animation function is called;
+
+  - Speech Generation: If there's a `message` property in the response object, we want to generate the audio for it, so we invoke the `createSpeechWithTimeout` function. The purpose of such function will be to make a new request to OpenAI, but this time to generate the audio from the message. This function acts as a timeout wrapper to the real function that will make the request, so if some connectivity issue or any error on OpenAI happens, the NPC won't get stuck in a waiting state;
+
+  - `hideWaiting()`: Resets the "Thinking..." indicator after the response is processed.
+
+
+  The queue system is essential for handling multi-user interactions effectively. Without this, any new message that arrives while the NPC is busy would be lost or cause overlapping API requests. By processing messages sequentially and tracking the response state, the NPC can handle multiple users smoothly, providing a responsive and immersive experience in the virtual world.
+
+  This approach ensures that the NPC is never overwhelmed with requests, and users get their responses in a fair and orderly manner. It's a simple yet powerful way to manage interactions in a multi-user environment, so you can keep this model in mind for different functionalities that involves dealing with external APIs.
+
+  Here follows the MML document we prepared to be your NPC:
+
+---
+
+- Text-to-Speech: Giving Voice to your NPC:
+
+  After setting up the message queue and integrating the OpenAI API for text responses, the next step is to bring the NPC to life with voice synthesis. For this, we use OpenAI's Text-to-Speech (TTS) API. The NPC's responses aren't just shown as text; they're also spoken aloud, making the interaction more engaging and immersive.
+
+  In this section, I'll explain how we generate and play the audio, while also handling edge cases like timeouts and multi-user scenarios.
+
+
+  - Generating Speech with OpenAI TTS API:
+
+    To create audio responses, we use the `createSpeech()` function. It sends the response text to the TTS API and retrieves an audio file (MP3) that we can play back in the virtual world.
+
+    ```js
+    async function createSpeech(tts) {
+      const openAIURL = "https://api.openai.com/v1/audio/speech";
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      };
+      const body = {
+        model: "tts-1",
+        input: tts,
+        voice: "fable",
+        response_format: "mp3",
+      };
+
+      const response = await fetch(openAIURL, {
+        method: "POST",
+        headers,
+        body: JSON.stringify(body),
+      });
+
+      const audioBlob = await response.blob();
+      const arrayBuffer = await audioBlob.arrayBuffer();
+      const duration = await estimateMP3Duration(arrayBuffer);
+
+      const uint8Array = new Uint8Array(arrayBuffer);
+      let binary = "";
+      for (let i = 0; i < uint8Array.length; i++) {
+        binary += String.fromCharCode(uint8Array[i]);
       }
-      if (completion.message) createSpeechWithTimeout(completion.message);
-      hideWaiting();
-    } catch (e) {
-      console.error("FAILED TO PARSE COMPLETION", completionLine.content[0].text.value, e);
+      const base64Audio = btoa(binary);
+      const dataUrl = `data:audio/mp3;base64,${base64Audio}`;
+
+      queuedResponses.push({ dataUrl, duration, text: tts });
+      processResponses();
     }
-  }
-}
+    ```
 
-/**
- * Queues messages for sending, initiating the send process if no other message is in progress.
- */
-function onQueue() {
-  if (latestPromise) return;
-  latestPromise = sendMessages().finally(() => {
-    latestPromise = null;
-    if (queuedMessages.length > 0) onQueue();
-  });
-}
+    Explanation:
 
-/**
- * Adds a user message to the queue and triggers the queue process.
- * @param {string} message - The message content.
- * @param {string} userId - The ID of the user sending the message.
- */
-function submitMessage(message, userId) {
-  const time = Date.now() / 1000;
-  queuedMessages.push({ message, userId, time, nearbyUsers: Array.from(connectedUsers) });
-  onQueue();
-}
+    - API Request: The function sends a POST request to OpenAI's TTS API with the input text (tts), requesting an MP3 response
 
-// Event listener for chat events, message queue processing, and proximity checks
-const chat = document.getElementById("chat");
-chat.addEventListener("chat", (event) => {
-  latestMessageTime = document.timeline.currentTime;
-  const { message, connectionId } = event.detail;
-  submitMessage(message, connectionIdToUserId(connectionId));
-});
+    - Audio Blob: The response is retrieved as a binary blob and converted into an ArrayBuffer for further processing;
 
-setInterval(() => {
-  checkIfHasNearbyUsers();
-}, 1000);
+    - Duration Estimation: The duration of the MP3 file is estimated to control the playback timing (more on this in the next section);
 
-</script>
+    - Base64 Encoding: The MP3 file is encoded as a Base64 data URL, making it easy to play in the browser without needing to save a file;
 
-~~~
+    - Queueing the Response: The generated audio is added to queuedResponses and processResponses() is called to handle playback;
+
+  ---
+
+  - Handling Timeout with Speech Generation:
+
+    To avoid the NPC getting stuck if the TTS API takes too long to respond, I wrap the `createSpeech()` function with a timeout using `createSpeechWithTimeout()`:
+
+    ```js
+    async function createSpeechWithTimeout(tts) {
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error("Timeout: Speech creation took too long")), completionTimeout)
+      );
+
+      try {
+        await Promise.race([createSpeech(tts), timeoutPromise]);
+      } catch (error) {
+        console.warn(error.message);
+      }
+    }
+    ```
+
+    Explanation:
+
+    - `Promise.race()`: This method runs both the speech creation and the timeout in parallel. If the TTS API call takes longer than the `completionTimeout`, the timeout promise rejects, and we handle the error gracefully;
+
+    - Error Handling: If the timeout occurs, it logs a warning message, preventing the NPC from getting stuck waiting for a response.
+
+    This mechanism ensures that the NPC remains responsive, even if the TTS API is slow or unresponsive.
+
+  ---
+
+  - Estimating the MP3 Duration
+
+    To synchronize animations and audio playback, I need an estimate of the MP3 file's duration. This is handled by the `estimateMP3Duration()` function, which analyzes the binary structure of the MP3 file.
+
+  ---
+
+  - Playing the Audio
+
+    Once the audio is ready, it's played using the `playAudio()` function. This function also manages the volume and ensures that the NPC can process the next response once playback is complete.
+
+    ```js
+    function playAudio(src, duration) {
+      const now = document.timeline.currentTime;
+      agentAudio.setAttribute("volume", audioVolume);
+      agentAudio.setAttribute("start-time", now);
+      agentAudio.setAttribute("pause-time", now + duration + audioMarginDuration);
+      agentAudio.setAttribute("src", src);
+
+      setTimeout(() => {
+        agentAudio.setAttribute("volume", 0);
+        setTimeout(() => {
+          responseInProgress = false;
+          processResponses();
+        }, audioMarginDuration / 2);
+      }, duration + audioMarginDuration);
+    }
+    ```
+
+    Explanation:
+
+    - Setting Attributes: The audio element (agentAudio) is configured with the source URL and playback timing;
+
+    - Volume Control: The volume is adjusted and it's set back to zero after the audio finishes playing to make sure any timing issues won't be perceptible;
+
+    - Response State Reset: Once the playback is complete, `responseInProgress` is reset, allowing the next response in the queue to be processed.
+
+  ---
+
+  - Processing the Audio Response Queue
+
+    The `processResponses()` function handles queued audio responses, playing them one at a time to prevent overlapping playback.
+
+    ```js
+    function processResponses() {
+      if (queuedResponses.length === 0 || responseInProgress) return;
+
+      const response = queuedResponses.shift();
+      responseInProgress = true;
+      playAudio(response.dataUrl, response.duration);
+    }
+    ```
+
+    Explanation:
+
+    - Queue Check: If there are no queued responses or the NPC is currently playing an audio response, it exits early;
+
+    - `shift()`: Retrieves the next response from the queue;
+
+    - State Management: Sets `responseInProgress` to `true` before starting playback, ensuring no other response can interrupt;
+
+    This method keeps the audio responses in order, playing them one by one for a smooth, coherent experience.
+
+---
+
+- Animating the NPC: Bringing Your Virtual Character to Life:
+
+  In addition to responding with text and voice, the NPC in our MML world can also perform various animations and actions that make it more expressive and engaging. These actions range from simple gestures like a thumbs up to more elaborate animations like spinning around. The code for handling these animations is tightly integrated with the NPC's response logic, allowing the NPC to react in fun and dynamic ways based on user input or AI-driven commands.
+
+  In this section, I'll break down all the functions responsible for handling NPC actions and animations.
+
+  ---
+
+  - Animating Elements with `animate()` Function:
+
+    At the core of the animation system is the `animate()` function, which handles attribute-based animations for any element in the MML document. This utility function is used by most of the specific action functions.
+
+    ```js
+    function animate(element, attr, start, end, duration, easing) {
+      const anim = document.createElement("m-attr-anim");
+      anim.setAttribute("attr", attr);
+      anim.setAttribute("start", start);
+      anim.setAttribute("end", end);
+      anim.setAttribute("start-time", document.timeline.currentTime);
+      anim.setAttribute("end-time", document.timeline.currentTime + duration);
+      anim.setAttribute("duration", duration);
+      anim.setAttribute("easing", easing);
+      anim.setAttribute("loop", false);
+      element.appendChild(anim);
+
+      setTimeout(() => {
+        element.setAttribute(attr, end);
+        element.removeChild(anim);
+      }, duration);
+    }
+    ```
+
+    Explanation:
+
+    - Attribute Animation: Creates an `m-attr-anim` element to animate a specified attribute (e.g., position, scale, rotation);
+
+    - Easing: Supports easing functions for smooth transitions;
+
+    - Cleanup: The animation element is removed after the animation is complete to avoid cluttering the DOM.
+
+    This is a very handy utility function that I use in most of my MML documents, as it allow us to animate any element in the scene by simply specifying the target attribute and desired values.
+
+  ---
+
+  - Spinning the NPC:
+
+    The `spin()` function triggers a full 360-degree rotation animation, making the NPC spin around in a playful way. This action can be used as a response to user commands or AI-generated actions.
+
+    ```js
+    function spin() {
+      spinAudio.setAttribute("volume", 1);
+      spinAudio.setAttribute("start-time", document.timeline.currentTime);
+      spinAudio.setAttribute("pause-time", document.timeline.currentTime + 6000);
+
+      setTimeout(() => {
+        spinAudio.setAttribute("volume", 0);
+      }, 6000);
+
+      animate(actionsWrapper, "ry", 0, 1800, 3500, "easeInOutQuint");
+    }
+    ```
+
+    Explanation:
+
+    - Audio Playback: Plays a spinning sound effect using the spinAudio element that lasts 6 seconds;
+
+    - Rotation Animation: Animates the ry (rotation around the Y-axis) attribute of the `actionsWrapper` element for a 1800 degrees spin during 3.5 seconds, with an `easeInOutQuint` easing function;
+
+    - Volume: As usual, we set the volume back to zero once we estimate the playback is complete, to prevent any possible timing issues from creating audio stuttering or undesirable side-effects;
+
+    This action makes the NPC appear energetic and responsive, adding a sense of liveliness.
+
+  ---
+
+  - Thumbs Up Animation:
+
+    The `thumbsUp()` function animates a thumbs-up gesture, making the thumb model grow and rotate to convey approval or positive feedback.
+
+    ```js
+    function thumbsUp() {
+      animate(thumbModel, "sx", 0, 4, 1000, "easeInOutQuint");
+      animate(thumbModel, "sy", 0, 4, 1000, "easeInOutQuint");
+      animate(thumbModel, "sz", 0, 4, 1000, "easeInOutQuint");
+      animate(thumbModel, "rx", thumbsNeutralRotation, thumbsUpRotation, 1000, "easeInOutQuint");
+
+      setTimeout(() => {
+        animate(thumbModel, "sx", 4, 0, 1000, "easeInOutQuint");
+        animate(thumbModel, "sy", 4, 0, 1000, "easeInOutQuint");
+        animate(thumbModel, "sz", 4, 0, 1000, "easeInOutQuint");
+        animate(thumbModel, "rx", thumbsUpRotation, thumbsNeutralRotation, 1000, "easeInOutQuint");
+      }, 5000);
+    }
+    ```
+
+    Explanation:
+
+    - Scaling Animation: The thumb model scales up in size to give the impression of a thumbs-up gesture;
+
+    - Rotation Animation: Rotates the thumb model to align with a thumbs-up position;
+
+    - Reset Animation: After 5 seconds, the thumb model scales back down and returns to its neutral rotation.
+
+    This gesture provides visual feedback for positive actions or responses, making the NPC feel more interactive.
+
+  ---
+
+  - Thumbs Down Animation:
+
+    Similar to the thumbs-up gesture, the `thumbsDown()` function animates a thumbs-down gesture.
+
+    ```js
+    function thumbsDown() {
+      animate(thumbModel, "sx", 0, 4, 1000, "easeInOutQuint");
+      animate(thumbModel, "sy", 0, 4, 1000, "easeInOutQuint");
+      animate(thumbModel, "sz", 0, 4, 1000, "easeInOutQuint");
+      animate(thumbModel, "rx", thumbsNeutralRotation, thumbsDownRotation, 1000, "easeInOutQuint");
+
+      setTimeout(() => {
+        animate(thumbModel, "sx", 4, 0, 1000, "easeInOutQuint");
+        animate(thumbModel, "sy", 4, 0, 1000, "easeInOutQuint");
+        animate(thumbModel, "sz", 4, 0, 1000, "easeInOutQuint");
+        animate(thumbModel, "rx", thumbsDownRotation, thumbsNeutralRotation, 1000, "easeInOutQuint");
+      }, 5000);
+    }
+    ```
+
+    Explanation:
+
+    - Scaling and Rotation: Scales and rotates the thumb model downward to indicate a thumbs-down gesture;
+
+    - Reset Animation: After 5 seconds, the thumb returns to its neutral state;
+
+    This gesture is used for negative feedback, allowing the NPC to respond visually in a playful way.
+
+  ---
+
+  - Playing the Horn:
+
+    The `playHorn()` function animates the horn model and plays a sound effect, making the NPC blow a horn as a fun or celebratory action.
+
+    ```js
+    function playHorn() {
+      hornAudio.setAttribute("volume", 1);
+      hornAudio.setAttribute("start-time", document.timeline.currentTime);
+      hornAudio.setAttribute("pause-time", document.timeline.currentTime + 6000);
+
+      animate(hornModel, "sx", 0, 4, 1000, "easeInOutQuint");
+      animate(hornModel, "sy", 0, 4, 1000, "easeInOutQuint");
+      animate(hornModel, "sz", 0, 4, 1000, "easeInOutQuint");
+
+      setTimeout(() => {
+        hornAudio.setAttribute("volume", 0);
+        animate(hornModel, "sx", 4, 0, 1000, "easeInOutQuint");
+        animate(hornModel, "sy", 4, 0, 1000, "easeInOutQuint");
+        animate(hornModel, "sz", 4, 0, 1000, "easeInOutQuint");
+      }, 6000);
+    }
+    ```
+
+    Explanation:
+
+    - Audio Playback: Plays a horn sound effect using the hornAudio element;
+
+    - Scaling Animation: The horn model scales up to simulate the NPC blowing a horn;
+
+    - Volume Fade-Out: Lowers the volume after the animation is complete;
+
+    This action is great for celebratory moments or playful interactions with users.
+
+  ---
+
+  - Growing the NPC While Speaking:
+
+    The `growWhileSpeaking()` function animates the NPC model to grow slightly when it speaks, giving a visual indication of speech and making the NPC look more dynamic and alive.
+
+    ```js
+    function growWhileSpeaking(duration) {
+      animate(agentModel, "sx", 0.5, 0.6, 2000, "easeOutBack");
+      animate(agentModel, "sy", 0.5, 0.6, 2000, "easeOutBack");
+      animate(agentModel, "sz", 0.5, 0.6, 2000, "easeOutBack");
+
+      setTimeout(() => {
+        animate(agentModel, "sx", 0.6, 0.5, 2000, "easeInOutQuint");
+        animate(agentModel, "sy", 0.6, 0.5, 2000, "easeInOutQuint");
+        animate(agentModel, "sz", 0.6, 0.5, 2000, "easeInOutQuint");
+      }, duration);
+    }
+    ```
+
+    Explanation:
+
+    - Scaling Up: The NPC model scales up slightly when it starts speaking;
+
+    - Scaling Down: After the speech is complete, it scales back down to its original size.
+
+    This subtle animation provides a visual cue that the NPC is talking, making it feel more natural and alive.
+    
+---
+
+- Proximity Detection and State Reset: Keeping the NPC Context-Aware:
+
+  To make the NPC feel interactive and responsive, it's essential that it reacts dynamically based on the user's proximity and context. This is achieved using two key MML components: the position probe (**`m-position-probe`**) and the chat probe (**`m-chat-probe`**). These allow the NPC to detect when users enter or leave its interaction range, listen for nearby chat messages, and manage its internal state accordingly.
+
+  Additionally, I've implemented mechanisms to reset the NPC's state when no users are nearby or when it hasn't received a message for a certain period. This helps prevent the NPC from getting "stuck" and keeps the experience smooth and seamless.
+
+  Let's break down the code and explain how each part contributes to these functionalities:
+
+  ---
+
+  - Setting Up the Probes:
+
+    The MML document defines two probes that handle proximity detection and chat messages:
+
+    ```html
+    <m-position-probe id="position-probe" range="10" debug="false"></m-position-probe>
+    <m-chat-probe id="chat" range="10" debug="false"></m-chat-probe>
+    ```
+
+    Explanation:
+
+    - `m-position-probe`: Detects users within a 10-meter range of the NPC. It tracks users entering, moving, and leaving this proximity;
+
+    - `m-chat-probe`: Listens for chat messages sent by users within a 10-meter range. This probe captures the content of the chat and the user's connection ID;
+
+    These probes make the NPC aware of its surroundings and allow it to interact with nearby users effectively.
+  
+  ---
+
+  - Tracking Nearby Users with the `proximityMap`:
+
+    To keep track of users in the NPC's vicinity, I use a Map object called `proximityMap`. This stores the connection IDs of nearby users and their positions.
+
+    ```js
+    const proximityMap = new Map();
+    let latestProximityActivity = document.timeline.currentTime;
+    ```
+
+    Explanation:
+
+    - proximityMap: Stores the connection ID and position data of each nearby user;
+
+    - latestProximityActivity: Keeps track of the last time a user entered or moved within the NPC's proximity range. This helps determine when to reset the NPC's state if no users are nearby.
+
+  ---
+
+  - Handling Proximity Events:
+
+    The position probe emits three types of events: **`positionenter`**, **`positionmove`**, and **`positionleave`**. Each event updates the `proximityMap` accordingly.
+
+    ```js
+    proximityProbe.addEventListener("positionenter", (event) => {
+      const { connectionId } = event.detail;
+      const { position, rotation } = event.detail.documentRelative;
+      proximityMap.set(connectionId, { position, rotation });
+      latestProximityActivity = document.timeline.currentTime;
+    });
+
+    proximityProbe.addEventListener("positionmove", (event) => {
+      const { connectionId } = event.detail;
+      const { position, rotation } = event.detail.documentRelative;
+      proximityMap.set(connectionId, { position, rotation });
+      latestProximityActivity = document.timeline.currentTime;
+    });
+
+    proximityProbe.addEventListener("positionleave", (event) => {
+      const { connectionId } = event.detail;
+      if (proximityMap.has(connectionId)) proximityMap.delete(connectionId);
+    });
+
+    window.addEventListener("disconnected", (event) => {
+      connectedUsers.delete(connectionIdToUserId(event.detail.connectionId));
+      if (proximityMap.has(event.detail.connectionId)) proximityMap.delete(event.detail.connectionId);
+    });
+    ```
+
+    Explanation:
+
+    - `positionenter`: Fired when a user comes within range of the NPC. The user's connection ID and position are added to `proximityMap`;
+
+    - `positionmove`: Fired when a nearby user changes position. The user's position data in `proximityMap` is updated;
+
+    - `positionleave`: Fired when a user leaves the proximity range. The user's connection ID is removed from `proximityMap`;
+
+    - `disconnected` window event listenner: detects if a user left the experience (closed the window) and, if so, removes the user from the `proximityMap`.
+
+    These event listeners make the NPC context-aware, allowing it to adjust its behavior based on who is nearby.
+
+  ---
+
+  - Listening for Chat Messages:
+
+    The chat probe captures chat messages from users within range and forwards them to the message queue for processing.
+
+    ```js
+    chat.addEventListener("chat", (event) => {
+      latestMessageTime = document.timeline.currentTime;
+      const { message, connectionId } = event.detail;
+      submitMessage(message, connectionIdToUserId(connectionId));
+    });
+    ```
+
+    Explanation:
+
+    - `latestMessageTime`: Tracks the time of the most recent message received. This helps determine if the NPC should reset its state due to inactivity;
+
+    - `submitMessage()`: Sends the captured message to the queue, where it will be processed by the NPC;
+
+    This setup allows the NPC to respond only to users who are close by, creating a more personal and immersive experience.
+  
+  ---
+
+  - Resetting the NPC State:
+
+    To prevent the NPC from getting stuck in a particular state (e.g., "Thinking..."), I implemented a mechanism to reset its state when there are no nearby users or when it hasn't received a message for a certain duration.
+
+    ```js
+    function checkIfHasNearbyUsers() {
+      if (responseInProgress) return;
+
+      if (proximityMap.size === 0) {
+        const diff = Math.ceil((document.timeline.currentTime - latestProximityActivity) / 1000);
+        if (diff > 10) responseLabel.setAttribute("content", initialText);
+      } else {
+        const diff = Math.ceil((document.timeline.currentTime - latestMessageTime) / 1000);
+        if (diff > 60) {
+          latestPromise = null;
+          queuedMessages = [];
+          queuedResponses = [];
+          responseInProgress = false;
+          responseLabel.setAttribute("content", initialText);
+        }
+      }
+    }
+    ```
+
+    Explanation:
+
+    - `proximityMap.size`: Checks if there are any users currently in range;
+    - State Reset: If there are no users nearby for more than 10 seconds, or if there hasn't been any message activity for over 60 seconds, the NPC resets its state;
+    - `latestPromise`, `queuedMessages`, and `queuedResponses` are cleared;
+    - `responseInProgress` is set to `false` to allow new messages to be processed;
+    - The NPC's label content is reset to the initial greeting (`initialText`).
+    This mechanism ensures that the NPC remains responsive and doesn’t continue to display outdated or irrelevant information.
+
+  ---
+
+  - Periodic State Check:
+
+    To regularly check the proximity and message activity, I use a simple interval-based function.
+
+    ```js
+    setInterval(() => {
+      checkIfHasNearbyUsers();
+    }, 1000);
+    ```
+
+    Explanation:
+
+    The `checkIfHasNearbyUsers()` function is called every second to evaluate the NPC's state.
+
+    This periodic check helps keep the NPC in sync with the environment and ensures it resets when needed.
+
+  ---
+
+  By integrating proximity detection and state-reset mechanisms, the NPC becomes highly context-aware and adaptive. It can detect when users are nearby, respond to their messages, and gracefully reset its state when interactions fade. This design prevents the NPC from getting stuck or becoming unresponsive, creating a fluid and engaging experience for users in the virtual world.
+
+---
+
+😅 Oof... that was a long one.
+
+If you want to ~~copy-and-paste~~ read the complete source-code, you can find it here: [MML-powered-NPC.html](https://gist.github.com/TheCodeTherapy/8c987ff1e2b28ad2c3c5473a91f9f726)
 
 ## You're all set!
 
