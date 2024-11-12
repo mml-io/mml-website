@@ -16,13 +16,13 @@ The same framwork can be replicated to create game NPCs, and it can be executed 
  - _You can ~~copy-and-paste~~ read the source-code from [this Gist](https://gist.github.com/TheCodeTherapy/8c987ff1e2b28ad2c3c5473a91f9f726)_
  - The OpenAI setup section is the first one we'll cover 😉
  
-## 1- Create an Assistant on your OpenAI Account
+# Create an OpenAI Assistant
 
 The first step will be to Sign Up for an Open AI account if you still don't have one and access the [Assistants](https://platform.openai.com/playground/assistants) page to create your new agent.
 
 ![Create an assistant](/images/blog/ai-powered-npc/01-create-assistant.jpg)
 
-## 2- Configure your Assistant
+# Configure your Assistant
 
 In the left column of the Assistants configuration page (which you'll be able to see in the a further screenshot after following the config steps), you'll have the fields to configure your agent.
 
@@ -117,13 +117,13 @@ Please see below a screenshot as a reference of how your Assistant configuration
 
 ![Configure assistant](/images/blog/ai-powered-npc/02-configure-assistant.jpg)
 
-## 3- Creating your NPC MML Document to use your Assistant
+# Creating your NPC MML Document
 
 Let's start diving in to the bits of the MML document that are paramount for the NPC's core functionality while keeping everything multi-user friendly.
 
 ---
 
-- The queue
+# The requests queue
 
   Our first concern should be to keep everything multi-user friendly, and for that we must have a queue and all the book keeping necessary so we won't waste any chat messages when the NPC is already busy replying to some previous chat message sent by another user.
 
@@ -146,7 +146,7 @@ Let's start diving in to the bits of the MML document that are paramount for the
 
 ---
 
-- Submitting Messages to the Queue:
+# Submitting Messages to the Queue
 
   Whenever a user sends a message to the NPC through the text chat, it gets captured by the `m-chat-probe`, and it's added to the queue using the `submitMessage()` function. This function also triggers the processing function (`onQueue()`) if no other message is currently being processed.
 
@@ -168,7 +168,7 @@ Let's start diving in to the bits of the MML document that are paramount for the
 
 ---
 
-- Processing the Queue:
+# Processing the Queue
 
   The heart of the queue system lies in the `onQueue()` function. This function checks if there's an ongoing request and, if not, initiates the message-sending process.
 
@@ -194,7 +194,7 @@ Let's start diving in to the bits of the MML document that are paramount for the
 
 ---
 
-- Sending Messages to OpenAI:
+# Sending Messages to OpenAI
 
   The `sendMessages()` function is responsible for sending queued messages to OpenAI through an API request.
 
@@ -259,7 +259,7 @@ Let's start diving in to the bits of the MML document that are paramount for the
 
 ---
 
-- Handling the AI Response:
+# Handling the AI Response
 
   Once the response is received from OpenAI, it's processed by `handleResponse()`. This function decides what actions to take based on the AI's reply.
 
@@ -293,7 +293,7 @@ Let's start diving in to the bits of the MML document that are paramount for the
 
 ---
 
-- Text-to-Speech: Giving Voice to your NPC:
+# Text-to-Speech: Giving Voice to your NPC
 
   After setting up the message queue and integrating the OpenAI API for text responses, the next step is to bring the NPC to life with voice synthesis. For this, we use OpenAI's Text-to-Speech (TTS) API. The NPC's responses aren't just shown as text; they're also spoken aloud, making the interaction more engaging and immersive.
 
@@ -355,7 +355,7 @@ Let's start diving in to the bits of the MML document that are paramount for the
 
   ---
 
-  - Handling Timeout with Speech Generation:
+  # Handling Timeout with Speech Generation
 
     To avoid the NPC getting stuck if the TTS API takes too long to respond, I wrap the `createSpeech()` function with a timeout using `createSpeechWithTimeout()`:
 
@@ -383,13 +383,13 @@ Let's start diving in to the bits of the MML document that are paramount for the
 
   ---
 
-  - Estimating the MP3 Duration
+  # Estimating the MP3 Duration
 
     To synchronize animations and audio playback, I need an estimate of the MP3 file's duration. This is handled by the `estimateMP3Duration()` function, which analyzes the binary structure of the MP3 file.
 
   ---
 
-  - Playing the Audio
+  # Playing the Audio
 
     Once the audio is ready, it's played using the `playAudio()` function. This function also manages the volume and ensures that the NPC can process the next response once playback is complete.
 
@@ -421,7 +421,7 @@ Let's start diving in to the bits of the MML document that are paramount for the
 
   ---
 
-  - Processing the Audio Response Queue
+  # Processing the Audio Response Queue
 
     The `processResponses()` function handles queued audio responses, playing them one at a time to prevent overlapping playback.
 
@@ -447,7 +447,7 @@ Let's start diving in to the bits of the MML document that are paramount for the
 
 ---
 
-- Animating the NPC: Bringing Your Virtual Character to Life:
+# Animating and Bringing the NPC to Life
 
   In addition to responding with text and voice, the NPC in our MML world can also perform various animations and actions that make it more expressive and engaging. These actions range from simple gestures like a thumbs up to more elaborate animations like spinning around. The code for handling these animations is tightly integrated with the NPC's response logic, allowing the NPC to react in fun and dynamic ways based on user input or AI-driven commands.
 
@@ -455,7 +455,7 @@ Let's start diving in to the bits of the MML document that are paramount for the
 
   ---
 
-  - Animating Elements with `animate()` Function:
+  # Animating Elements with animate() Function
 
     At the core of the animation system is the `animate()` function, which handles attribute-based animations for any element in the MML document. This utility function is used by most of the specific action functions.
 
@@ -491,7 +491,7 @@ Let's start diving in to the bits of the MML document that are paramount for the
 
   ---
 
-  - Spinning the NPC:
+  # Spinning the NPC
 
     The `spin()` function triggers a full 360-degree rotation animation, making the NPC spin around in a playful way. This action can be used as a response to user commands or AI-generated actions.
 
@@ -521,7 +521,7 @@ Let's start diving in to the bits of the MML document that are paramount for the
 
   ---
 
-  - Thumbs Up Animation:
+  # Thumbs Up Animation
 
     The `thumbsUp()` function animates a thumbs-up gesture, making the thumb model grow and rotate to convey approval or positive feedback.
 
@@ -553,7 +553,7 @@ Let's start diving in to the bits of the MML document that are paramount for the
 
   ---
 
-  - Thumbs Down Animation:
+  # Thumbs Down Animation
 
     Similar to the thumbs-up gesture, the `thumbsDown()` function animates a thumbs-down gesture.
 
@@ -583,7 +583,7 @@ Let's start diving in to the bits of the MML document that are paramount for the
 
   ---
 
-  - Playing the Horn:
+  # Playing the Horn
 
     The `playHorn()` function animates the horn model and plays a sound effect, making the NPC blow a horn as a fun or celebratory action.
 
@@ -618,7 +618,7 @@ Let's start diving in to the bits of the MML document that are paramount for the
 
   ---
 
-  - Growing the NPC While Speaking:
+  # Growing the NPC While Speaking
 
     The `growWhileSpeaking()` function animates the NPC model to grow slightly when it speaks, giving a visual indication of speech and making the NPC look more dynamic and alive.
 
@@ -646,7 +646,7 @@ Let's start diving in to the bits of the MML document that are paramount for the
     
 ---
 
-- Proximity Detection and State Reset: Keeping the NPC Context-Aware:
+# Proximity Detection and State Reset
 
   To make the NPC feel interactive and responsive, it's essential that it reacts dynamically based on the user's proximity and context. This is achieved using two key MML components: the position probe (**`m-position-probe`**) and the chat probe (**`m-chat-probe`**). These allow the NPC to detect when users enter or leave its interaction range, listen for nearby chat messages, and manage its internal state accordingly.
 
@@ -736,7 +736,7 @@ Let's start diving in to the bits of the MML document that are paramount for the
 
   ---
 
-  - Listening for Chat Messages:
+  # Listening for Chat Messages
 
     The chat probe captures chat messages from users within range and forwards them to the message queue for processing.
 
@@ -758,7 +758,7 @@ Let's start diving in to the bits of the MML document that are paramount for the
   
   ---
 
-  - Resetting the NPC State:
+  # Resetting the NPC State:
 
     To prevent the NPC from getting stuck in a particular state (e.g., "Thinking..."), I implemented a mechanism to reset its state when there are no nearby users or when it hasn't received a message for a certain duration.
 
@@ -793,7 +793,7 @@ Let's start diving in to the bits of the MML document that are paramount for the
 
   ---
 
-  - Periodic State Check:
+  # Periodic State Check:
 
     To regularly check the proximity and message activity, I use a simple interval-based function.
 
