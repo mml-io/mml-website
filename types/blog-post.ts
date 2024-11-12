@@ -6,6 +6,7 @@ export type BlogPost = {
   date: string;
   body: (props: MDXProps) => JSX.Element;
   image: string;
+  linkList?: string[];
 };
 
 export type BlogPostsByName = {
