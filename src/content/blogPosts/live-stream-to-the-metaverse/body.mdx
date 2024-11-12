@@ -5,19 +5,19 @@ One of the great features of MML is how seamless and easy it is to create multi-
 
 This guide will illustrate how you can easily leverage the flexibility of the `m-video` MML tag, and the Stream service offered by CloudFlare, to set up a low-cost live-stream event in your Metaverse powered by MML, in less than 10 minutes.
 
-## 1- Sign up for a Cloudflare Stream account
+# Sign up for a Cloudflare Stream account
 
 Click [[here]](https://www.cloudflare.com/developer-platform/products/cloudflare-stream/) to access the [Cloudflare Stream](https://www.cloudflare.com/developer-platform/products/cloudflare-stream/) service page, and click on `Get Started` to create your account if you don't have one. You will be asked to provide your login information, and once you confirm your Email address, your account will be good to go.
 
 ![Cloudflare Stream Sign Up](/images/blog/live-stream-to-the-metaverse/01-sign-up.png)
 
-## 2- Pick a Cloudflare Stream plan
+# Pick a Cloudflare Stream plan
 
 The Cloudflare Stream service pricing system works based on the number of minutes of video delivered to your live event (minutes streamed * number of participants). That means the plan you pick here won't matter too much if you're only interested in the real-time live-streaming capabilities. The plans vary according to your interest in storing videos to play them back later, but the `$5 / month` plan will serve well for the live events.
 
 ![Cloudflare Stream plans](/images/blog/live-stream-to-the-metaverse/02-pick-a-plan.png)
 
-## 3- Create your first Live Input
+# Create your first Live Input
 
 Once you pick a plan, you'll be free to access your Cloudflare Stream dashboard, and there you can create your first **`Live Input`**. A Live Input is an ingestion point that will receive your `WHIP` `WebRTC` stream (which can be easily streamed with **`OBS`** - explained later on in this post).
 
@@ -33,7 +33,7 @@ That will lead you to the `Create Live Input` form, where you can give your `Liv
 
 ![Cloudflare Stream Create Live Input Form](/images/blog/live-stream-to-the-metaverse/05-create-live-input-form.png)
 
-## 4- Configure your Live Input
+# Configure your Live Input
 
 Once your `Live Input` is created, you'll have access to its `settings page`, and once there, you can click on **`View as JSON`** to view the `JSON` object with all the information you'll need to configure your streaming software (OBS in the case of this particular tutorial), and also to use with the `m-video` MML tag inside your experience.
 
@@ -45,7 +45,7 @@ The `JSON` object of your Live Input will look like the one below. ***Please be 
 
 The properties you're interested in such `JSON` data are the **`webRTC`** `url` and the **`webRTCPlayback`** `url`. The **`webRTC`** url is the URL you'll configure in your broadcast software as the endpoint that will ingest your stream, while the **`webRTCPlayback`** url is the one you'll use as the **`src`** attribute on the **`m-video`** tag you'll add to your MML document, to serve as your live-stream screen inside the experience.
 
-## 5- Configure your Streaming Software (OBS)
+# Configure your Streaming Software (OBS)
 
 On **OBS**, you will go to `File` -> `Settings` -> `Stream`, and you'll select **`WHIP`** as the **`Service`** to be used. That will configure your OBS to stream WebRTC to your Cloudflare Stream account.
 
@@ -85,7 +85,7 @@ Please keep in mind that you can reduce the bitrate to `2000 Kbps` (that's what 
 
 You may also pick a slower `CPU Usage Preset` to obtain a better stream quality. The slower the preset is, the higher the quality you'll obtain at the cost of more CPU usage and more stream latency. The `veryfast` preset is a very good default, granting a low latency (less than 2 seconds for the viewer to see what you just did) while not using too much CPU.
 
-## 6- Composing your MML document
+# Composing your MML document
 
 Once you configured your streaming software, you'll be ready to start streaming, and people inside you're experience will be able to watch you live once you add an MML document with an **`m-video`** tag with the **`src`** attribute pointing to the URL you copied from the **`webRTCPlayback`** URL field on your Cloudflare Stream Live Input `JSON` object. Please see the example below:
 

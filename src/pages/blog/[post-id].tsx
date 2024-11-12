@@ -3,6 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 import * as React from "react";
 
+import LinkList from "@/src/components/Common/LinkList";
 import { posts } from "@/src/content/blogPosts";
 import { getPageTitle } from "@/src/util";
 
@@ -32,12 +33,15 @@ const GuidePage = ({ postId }: { postId: string }) => {
   const title = posts[postId].title;
   const Body = posts[postId].body;
   const image = posts[postId].image;
+  const linkList = posts[postId].linkList;
+  const hasLinks = linkList && linkList?.length;
 
   return (
     <>
       <Head>{getPageTitle(title)}</Head>
       <div className="mt-32">
         <div className="flex justify-center">
+          {hasLinks && <div className="top-32"></div>}
           <div className="mx-4 w-full center-column flex-1">
             <Link href="/blog/" className="mb-6 flex items-center">
               <img
@@ -52,6 +56,11 @@ const GuidePage = ({ postId }: { postId: string }) => {
               <Body />
             </div>
           </div>
+          {hasLinks && (
+            <div className="top-32">
+              <LinkList elementList={linkList} />
+            </div>
+          )}
         </div>
       </div>
     </>
