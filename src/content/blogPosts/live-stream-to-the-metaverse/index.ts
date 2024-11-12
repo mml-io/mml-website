@@ -8,6 +8,14 @@ const introducingMml: BlogPost = {
   date: "2024-11-04",
   body,
   image: "/images/blog/live-stream-to-the-metaverse.jpg",
+  linkList: [
+    "Sign up for a Cloudflare Stream account",
+    "Pick a Cloudflare Stream plan",
+    "Create your first Live Input",
+    "Configure your Live Input",
+    "Configure your Streaming Software (OBS)",
+    "Composing your MML document",
+  ],
 };
 
 export default introducingMml;
