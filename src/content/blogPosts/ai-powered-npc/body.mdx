@@ -7,7 +7,7 @@ The one we will showcase in this Blog Post is the creation of an AI-powered NPC 
 
 That will allow you to use your preferred ChatGPT model to interact with your users, with the extra benefit of giving the agent information about your project so your NPC can not only entertain but also teach your users about your project.
 
-The same framwork can be replicated to create game NPCs, and it can be executed in just a few steps.
+The same framework can be replicated to create game NPCs, and it can be executed in just a few steps.
 
 
  _TL;DR:_
@@ -111,7 +111,7 @@ YOU MUST ONLY REPLY WITH JSON. THE JSON MUST BEEN JUST AN OBJECT. DO NOT INCLUDE
 
 - **Response format**: The **`Response format`** is paramount for this particular guide to work, and it **must** be set to `json_object`. That is not mandatory for you to create an MML NPC using OpenAI Assistants, but only the way the example created for this particular guide was structured.
 
-  As you may have noticed, in the `Tools` section of the Assistants configuration page, there is a `File search` functionality that you may use to add files (like .pdf documents, markdown files, text documents, etc) so your NPC can consult to answer about specific topics described in such documents. However, we decided not to use this functionality for this particular example, as the agent tends to reply with citation marks informing where in such documents it found any given information, which would not be so useful for the particular type of NPC we decided to create for this guide. You may feel free to explore such functionality, however, keep in mind that for now **you can't use this functionality while having the `Response format` set to `json_object`, which is necessary for this particular guide to work.
+  As you may have noticed, in the `Tools` section of the Assistants configuration page, there is a `File search` functionality that you may use to add files (like .pdf documents, markdown files, text documents, etc) so your NPC can consult to answer about specific topics described in such documents. However, we decided not to use this functionality for this particular example, as the agent tends to reply with citation marks informing where in such documents it found any given information, which would not be so useful for the particular type of NPC we decided to create for this guide. You may feel free to explore such functionality, however, keep in mind that for now **you can't use this functionality while having the `Response format` set to `json_object`**, which is necessary for this particular guide to work.
 
 Please see below a screenshot as a reference of how your Assistant configuration should look like:
 
@@ -289,7 +289,6 @@ Let's start diving in to the bits of the MML document that are paramount for the
 
   This approach ensures that the NPC is never overwhelmed with requests, and users get their responses in a fair and orderly manner. It's a simple yet powerful way to manage interactions in a multi-user environment, so you can keep this model in mind for different functionalities that involves dealing with external APIs.
 
-  Here follows the MML document we prepared to be your NPC:
 
 ---
 
