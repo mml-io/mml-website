@@ -336,7 +336,7 @@ Let's start diving in to the bits of the MML document that are paramount for the
 
   # Handling Timeout with Speech Generation
 
-    To avoid the NPC getting stuck if the TTS API takes too long to respond, I wrap the `createSpeech()` function with a timeout using `createSpeechWithTimeout()`:
+    To avoid the NPC getting stuck if the TTS API takes too long to respond, we wrap the `createSpeech()` function with a timeout using `createSpeechWithTimeout()`:
 
     ```js
     async function createSpeechWithTimeout(tts) {
