@@ -373,20 +373,18 @@ Let's start diving in to the bits of the MML document that are paramount for the
     Once the audio is ready, it's played using the `playAudio()` function. This function also manages the volume and ensures that the NPC can process the next response once playback is complete.
 
     ```js
-    function playAudio(src, duration) {
-      const now = document.timeline.currentTime;
-      agentAudio.setAttribute("volume", audioVolume);
-      agentAudio.setAttribute("start-time", now);
-      agentAudio.setAttribute("pause-time", now + duration + audioMarginDuration);
-      agentAudio.setAttribute("src", src);
+    async function playAudio(src, duration) {
+      return new Promise((resolve) => {
+        agentAudio.setAttribute("volume", audioVolume);
+        agentAudio.setAttribute("src", src);
+        agentAudio.setAttribute("start-time", document.timeline.currentTime);
 
-      setTimeout(() => {
-        agentAudio.setAttribute("volume", 0);
+        // Wait for the duration to ensure playback completion
         setTimeout(() => {
-          responseInProgress = false;
-          processResponses();
-        }, audioMarginDuration / 2);
-      }, duration + audioMarginDuration);
+          agentAudio.setAttribute("volume", 0); // Reset volume
+          resolve();
+        }, duration + audioMarginDuration); // Add margin to ensure a small pause
+      });
     }
     ```
 
@@ -395,8 +393,6 @@ Let's start diving in to the bits of the MML document that are paramount for the
     - Setting Attributes: The audio element (agentAudio) is configured with the source URL and playback timing;
 
     - Volume Control: The volume is adjusted and it's set back to zero after the audio finishes playing to make sure any timing issues won't be perceptible;
-
-    - Response State Reset: Once the playback is complete, `responseInProgress` is reset, allowing the next response in the queue to be processed.
 
   ---
 
