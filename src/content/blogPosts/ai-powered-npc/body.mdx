@@ -179,106 +179,152 @@ Let's start diving in to the bits of the MML document that are paramount for the
 
   The `sendMessages()` function is responsible for sending queued messages to OpenAI through an API request.
 
-  ```js
-  async function sendMessages() {
-    showWaiting();
-    const messages = queuedMessages;
-    queuedMessages = []; // Clear the queue array
+```js
+async function sendMessages() {
+  if (queuedMessages.length === 0) return; // Exit if no messages are in the queue
+  const message = queuedMessages.shift(); // Process one message at a time
+  showWaiting();
 
-    const res = await fetch("https://api.openai.com/v1/threads/runs", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        assistant_id: assistantId,
-        thread: {
-          messages: messages.map((msg) => ({
-            role: "user",
-            content: JSON.stringify(msg),
-          })),
+  try {
+    let res;
+    if (threadId) {
+      res = await fetch(`https://api.openai.com/v1/threads/${threadId}/runs`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
+          "OpenAI-Beta": "assistants=v2",
         },
-      }),
-    });
+        body: JSON.stringify({
+          assistant_id: assistantId,
+          stream: true,
+          additional_messages: [
+            {
+              role: "user",
+              content: JSON.stringify(message),
+            },
+          ],
+        }),
+      });
+    } else {
+      res = await fetch("https://api.openai.com/v1/threads/runs", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
+          "OpenAI-Beta": "assistants=v2",
+        },
+        body: JSON.stringify({
+          assistant_id: assistantId,
+          stream: true,
+          thread: {
+            messages: [
+              {
+                role: "user",
+                content: JSON.stringify(message),
+              },
+            ],
+          },
+        }),
+      });
+    }
 
     if (!res.ok) {
-      console.error("Error:", res.status, await res.text());
-      throw new Error(`API request failed with status: ${res.status}`);
+      console.error("API error:", res.status, res.statusText, await res.text());
+      throw new Error(`HTTP error! status: ${res.status}`);
     }
 
     const text = await res.text();
     const lines = text
       .split("\n")
-      .filter(line => line.startsWith("data: "));
+      .filter((line) => line.startsWith("data: ") && line !== "data: [DONE]")
+      .map((line) => line.substring(6))
+      .map((line) => {
+        try {
+          return JSON.parse(line);
+        } catch (e) {
+          console.error("Failed to parse line", line);
+          return { object: "unknown", data: line };
+        }
+      });
 
-    const completionLine = lines
-      .map(line => JSON.parse(line.substring(6)))
-      .find(line => line.object === "thread.message");
+    const completionLine = lines.find(
+      (line) =>
+        line.object === "thread.message" &&
+        line.status === "completed" &&
+        line !== "data: [DONE]"
+    );
 
     if (completionLine) {
-      threadId = completionLine.thread_id || threadId;
+      try {
+        let completionText = completionLine.content[0].text.value;
+        completionText = completionText
+          .replace(/【[^】]*】/g, "")
+          .replace("```json\n", "")
+          .replace("```", "");
+        const completion = JSON.parse(completionText);
 
-      const completionText = completionLine.content[0].text.value
-        .replace("```json\n", "").replace("```", "");
+        if (completion.ignore) {
+          responseLabel.setAttribute("content", "Ignoring");
+        } else if (completion.wait) {
+          responseLabel.setAttribute("content", "Waiting");
+        } else if (completion.action) {
+          if (completion.action === "spin") spin();
+          else if (completion.action === "thumbs_up") thumbsUp();
+          else if (completion.action === "thumbs_down") thumbsDown();
+          else if (completion.action === "blow_horn") playHorn();
+        }
 
-      const response = JSON.parse(completionText);
-      handleResponse(response);
+        if (completion.message) {
+          const { dataUrl, duration } = await createSpeechWithTimeout(completion.message);
+          responseLabel.setAttribute("content", completion.message);
+
+          if (dataUrl) {
+            growWhileSpeaking(duration); // Animation during playback
+            await playAudio(dataUrl, duration); // Wait for the audio playback to finish
+          }
+        }
+      } catch (e) {
+        console.error(
+          "Failed to process completion:",
+          completionLine.content[0].text.value,
+          e
+        );
+      }
+    }
+  } finally {
+    hideWaiting();
+    if (queuedMessages.length > 0) {
+      await sendMessages();
     }
   }
-  ```
+}
+```
 
   What's happening here:
 
   - `showWaiting()`: Displays a "Thinking..." indicator while the NPC waits for the response, in case it is not speaking another response yet;
 
-  - `queuedMessages` is cleared after copying its contents to prevent processing the same message again;
+  - `const message = queuedMessages.shift();` gets the next message to be processed and removes it from the queue;
 
   - `fetch()`: Sends the request to OpenAI, using the assistant ID and maintaining the context of the conversation through a thread;
 
-  - **Response Parsing**: The response is split into lines and parsed. It then looks for the `thread.message` object, which contains the actual reply.
+  - **Response Parsing**: The response is split into lines and parsed. It then looks for the `thread.message` object, which contains the actual reply;
+
+  - `completionLine` and `completion`: Once we finish parsing the response, we remove unwanted markdown instructions and unwanted characters using `.replace`, and we'll finally be able to parse the JSON object that the agent sent back and assign it to the `completion` variable, and it will contain the message to be spoken (`.message`) and eventually actions (`.action`) that the NPC should perform (like `spin`, `thumbs_up`, `thumbs_down`, and `blow_horn`);
+
+  - `completion.message`: When we have a `completion.message`, we invoke the `createSpeechWithTimeout` function passing it as an argument, and that function will return the `dataUrl` containing the audio to be played, and the `duration` of the same audio;
+
+  - `dataUrl` and `duration`: If we check that we obtained both the audio and its duration, we then invoke the `growWhileSpeaking` function with the `duration` argument to scale up our NPC during such time interval, and the `playAudio` function, that will also use the duration argument so it can hold up the logic execution until the audio finished playing;
+
+  - `finally`: Once we reach the `finally` statement of the `try` block, we call `hideWaiting` function to remove the visual indicator that shows our NPC is working, and we check if there are other messages to be processed, and if so, we recursively invoke the `sendMessages` function again, and `await` for its execution to finish, and repeat the process until there are no more queued messages to be processed, which will bring our NPC to an idle state again until another user interaction happens.
 
 ---
 
-# Handling the AI Response
-
-  Once the response is received from OpenAI, it's processed by `handleResponse()`. This function decides what actions to take based on the AI's reply.
-
-  ```js
-  function handleResponse(response) {
-    if (response.action === "spin") spin();
-    else if (response.action === "thumbs_up") thumbsUp();
-    else if (response.action === "blow_horn") playHorn();
-
-    if (response.message) {
-      createSpeechWithTimeout(response.message);
-    }
-    hideWaiting();
-  }
-  ```
-
-  Key Points:
-
-  - Action Handling: If the AI response object includes an `action` property (e.g., "spin", "thumbs_up"), the corresponding animation function is called;
-
-  - Speech Generation: If there's a `message` property in the response object, we want to generate the audio for it, so we invoke the `createSpeechWithTimeout` function. The purpose of such function will be to make a new request to OpenAI, but this time to generate the audio from the message. This function acts as a timeout wrapper to the real function that will make the request, so if some connectivity issue or any error on OpenAI happens, the NPC won't get stuck in a waiting state;
-
-  - `hideWaiting()`: Resets the "Thinking..." indicator after the response is processed.
-
-
-  The queue system is essential for handling multi-user interactions effectively. Without this, any new message that arrives while the NPC is busy would be lost or cause overlapping API requests. By processing messages sequentially and tracking the response state, the NPC can handle multiple users smoothly, providing a responsive and immersive experience in the virtual world.
-
-  This approach ensures that the NPC is never overwhelmed with requests, and users get their responses in a fair and orderly manner. It's a simple yet powerful way to manage interactions in a multi-user environment, so you can keep this model in mind for different functionalities that involves dealing with external APIs.
-
-
----
 
 # Text-to-Speech: Giving Voice to your NPC
 
   After setting up the message queue and integrating the OpenAI API for text responses, the next step is to bring the NPC to life with voice synthesis. For this, we use OpenAI's Text-to-Speech (TTS) API. The NPC's responses aren't just shown as text; they're also spoken aloud, making the interaction more engaging and immersive.
-
-  In this section, I'll explain how we generate and play the audio, while also handling edge cases like timeouts and multi-user scenarios.
-
 
   - Generating Speech with OpenAI TTS API:
 
@@ -400,7 +446,7 @@ Let's start diving in to the bits of the MML document that are paramount for the
 
   In addition to responding with text and voice, the NPC in our MML world can also perform various animations and actions that make it more expressive and engaging. These actions range from simple gestures like a thumbs up to more elaborate animations like spinning around. The code for handling these animations is tightly integrated with the NPC's response logic, allowing the NPC to react in fun and dynamic ways based on user input or AI-driven commands.
 
-  In this section, I'll break down all the functions responsible for handling NPC actions and animations.
+  In this section, we'll break down all the functions responsible for handling NPC actions and animations.
 
   ---
 
@@ -626,7 +672,7 @@ Let's start diving in to the bits of the MML document that are paramount for the
 
   - Tracking Nearby Users with the `proximityMap`:
 
-    To keep track of users in the NPC's vicinity, I use a Map object called `proximityMap`. This stores the connection IDs of nearby users and their positions.
+    To keep track of users in the NPC's vicinity, we will use a Map object called `proximityMap`. This stores the connection IDs of nearby users and their positions.
 
     ```js
     const proximityMap = new Map();
