@@ -3,12 +3,9 @@ _[Marco Gomez](https://x.com/TheCodeTherapy) - 2024-11-08_
 
 The possibility of having your MML documents communicate with external APIs single-handedly opens up a whole world of possibilities to create immersive functionalities for your virtual world powered by MML.
 
-The one we will showcase in this Blog Post is the creation of an AI-powered NPC with MML using OpenAI Agents.
+One possibility showcase in this Blog Post is the creation of an AI-powered NPC with MML using OpenAI Agents.
 
-That will allow you to use your preferred ChatGPT model to interact with your users, with the extra benefit of giving the agent information about your project so your NPC can not only entertain but also teach your users about your project.
-
-The same framework can be replicated to create game NPCs, and it can be executed in just a few steps.
-
+This allows you to use a ChatGPT model to interact with your users, with an added benefit of being able to give the agent information about your project so your NPC can not only entertain, but also teach your users about your project.
 
  _TL;DR:_
  - _You can see a demo of this project [here](https://squig-npc-73c524_squig-world-d254a9.mml.world)_
@@ -410,7 +407,7 @@ async function sendMessages() {
 
   # Estimating the MP3 Duration
 
-    To synchronize animations and audio playback, I need an estimate of the MP3 file's duration. This is handled by the `estimateMP3Duration()` function, which analyzes the binary structure of the MP3 file.
+    To synchronize animations and audio playback, we need an estimate of the MP3 file's duration. This is handled by the `estimateMP3Duration()` function, which analyzes the contents of the MP3 file.
 
   ---
 
@@ -672,7 +669,7 @@ async function sendMessages() {
 
   - Tracking Nearby Users with the `proximityMap`:
 
-    To keep track of users in the NPC's vicinity, we will use a Map object called `proximityMap`. This stores the connection IDs of nearby users and their positions.
+    To keep track of users in the NPC's vicinity, there is a `Map` object called `proximityMap`. This stores the connection IDs of nearby users and their positions.
 
     ```js
     const proximityMap = new Map();
@@ -755,7 +752,7 @@ async function sendMessages() {
 
   # Resetting the NPC State:
 
-    To prevent the NPC from getting stuck in a particular state (e.g., "Thinking..."), I implemented a mechanism to reset its state when there are no nearby users or when it hasn't received a message for a certain duration.
+    To prevent the NPC from getting stuck in a particular state (e.g., "Thinking..."), there is a a mechanism to reset its state when there are no nearby users or when it hasn't received a message for a certain duration.
 
     ```js
     function checkIfHasNearbyUsers() {
@@ -788,7 +785,7 @@ async function sendMessages() {
 
   # Periodic State Check:
 
-    To regularly check the proximity and message activity, I use a simple interval-based function.
+    To regularly check the proximity and message activity, there is a simple interval-based function.
 
     ```js
     setInterval(() => {
