@@ -1,0 +1,817 @@
+# AI-Powered NPC with MML
+_[Marco Gomez](https://x.com/TheCodeTherapy) - 2024-12-13_
+
+The possibility of having your MML documents communicate with external APIs single-handedly opens up a whole world of possibilities to create immersive functionalities for your virtual world powered by MML.
+
+One possibility we will showcase in this Blog Post is the creation of an AI-powered NPC with MML using OpenAI Agents.
+
+The usage of MML allows the same instance of the NPC to be used by multiple users at the same time whilst having the NPC be aware of the identity of the different users.
+
+This allows you to use a ChatGPT model to interact with your users, with an added benefit of being able to give the agent information about your project so your NPC can not only entertain, but also teach your users about your project.
+
+ _TL;DR:_
+ - _You can see a demo of this project [here](https://squig-npc-73c524_squig-world-d254a9.mml.world)_
+ - _You can see the project in [the MML Editor](https://mmleditor.com/explore/mml-powered-npc-QhEpp6)_
+ - _You can ~~copy-and-paste~~ read the source-code from [this Gist](https://gist.github.com/TheCodeTherapy/8c987ff1e2b28ad2c3c5473a91f9f726)_
+ 
+# Create an OpenAI Assistant
+
+The first step will be to Sign Up for an OpenAI account if you don't have one and access the [Assistants](https://platform.openai.com/playground/assistants) page to create your new agent.
+
+![Create an assistant](/images/blog/ai-powered-npc/01-create-assistant.jpg)
+
+# Configure your Assistant
+
+In the left column of the Assistants configuration page (which you'll be able to see in the a further screenshot after following the config steps), you'll have the fields to configure your agent.
+
+- **Name**: In the **`Name`** field, you may pick any name for your Assistant. That won't be visible to your users, nor will it influence the assistant functionality. It is there just to make this assistant findable in case you have multiple assistants.
+
+  Right under the `Name` field, you'll be able to see your `Assistant ID`, which you can click to copy. This ID will be important later so we can configure your MML document to use it for your NPC requests.
+
+- **System instructions**: The **`System instructions`** form is the most important part of this configuration. It is in this field you must describe what your assistant's behavior should be and how it should respond to your users.
+
+  In this form, you can describe your assistant's personality and also give it further instructions for how to play its role.
+  
+  Once you click the little diagonal arrows in the bottom-right corner of this form, it will expand so you can edit the text for the System Instructions, and there you'll also find a `Generate` button in case you want to try, which is an assisted/guided way to compose your system instructions. For the sake of this tutorial, please find below an example you can use as the `System instructions` for your assistant:
+
+~~~markdown
+You are an NPC in a virtual world. You receive information in the form
+of messages in JSON format that describe things happening around you.
+
+An example of a message that you could receive is:
+```json
+[{"userId":123,"type":"chat","message":"Hello!","nearbyUsers":[123],"time": 20}]
+```
+
+The `nearbyUsers` array indicates which users are within 10m of you.
+If someone was nearby and now isn't then they may have walked away.
+You can use the fact that multiple users are nearby to introduce them to each other if they haven't met.
+Sometimes they might talk nearby to you and you could chime in and try to help them.
+Try to associate names with userIds if people provide their names.
+Don't refer to users by their numeric id.
+
+The `time` field is a number of seconds that have elapsed since the start of the scene. You can therefore reference how long ago something happened.
+
+You can send messages to users by replying with a JSON format message like the following:
+
+```json
+{"message":"This is from the NPC"}
+```
+
+You should eventually encourage users to tell you their names.
+
+Your replies are spoken aloud by generated speech. You have a male voice.
+Your replies are also presented in a text format on a screen in the virtual world.
+The screen that shows your replies only supports ASCII characters, so you should refrain from using non-ASCII characters in your response.
+
+You must refuse to write code on your replies.
+
+If asked to write code you must say that as a brain floating in an alien jar, you're too focused on just floating and talking to do that.
+
+You have a funny, comedic personality, and you love sarcasm.
+
+You should keep your messages brief. Try to limit sentences to 25 words or less. Don't be too strict about that, though.
+
+You can also perform actions (list to follow) by replying with a JSON format message like the following:
+
+```json
+{"action": "blow_horn"}
+```
+
+The exhaustive list of actions is:
+["spin","thumbs_up","thumbs_down","blow_horn"]
+
+If someone asks you to do something similar to your list of possible actions, which are ["spin","thumbs_up","thumbs_down","blow_horn"], then you must reply just with the action.
+
+This is a description of your character:
+
+You are Squig, a guide in a 3D virtual world that is designed to entertain visitors/users.
+You are a floating brain in an alien jar, and you have a very good sense of humour. You're very sarcastic and funny.
+You can talk about all sorts of topics, and make jokes.
+
+YOU MUST ONLY REPLY WITH JSON. THE JSON MUST BEEN JUST AN OBJECT. DO NOT INCLUDE MARKDOWN SYNTAX. DO NOT INCLUDE ATTRIBUTIONS OR REFERENCES TO FILES.
+~~~
+
+  Please keep in mind that you may include much more information to your assistant in this form. You may add any knowledge you'd like your NPC to have and also allow it to have many more actions, as you may easily create the functions in your MML document for your NPC to perform the actions it was instructed to be capable of doing.
+
+- **Model**: The **`Model`** drop-down selector will allow you to pick which ChatGPT model you want to use for your assistant. Please keep in mind this choice will influence not only the cost of each request but also the time necessary for the Assistant to reply and the number of tokens (text) it is capable of handling or "remembering" in the context of its chat with your users.
+
+- **Response format**: The **`Response format`** is paramount for this particular guide to work, and it **must** be set to `json_object`. That is not mandatory for you to create an MML NPC using OpenAI Assistants, but only the way the example created for this particular guide was structured.
+
+  As you may have noticed, in the `Tools` section of the Assistants configuration page, there is a `File search` functionality that you may use to add files (like .pdf documents, markdown files, text documents, etc) so your NPC can consult to answer about specific topics described in such documents. However, we decided not to use this functionality for this particular example, as the agent tends to reply with citation marks informing where in such documents it found any given information, which would not be so useful for the particular type of NPC we decided to create for this guide. You may feel free to explore such functionality, however, keep in mind that for now **you can't use this functionality while having the `Response format` set to `json_object`**, which is necessary for this particular guide to work.
+
+Please see the screenshot below for a reference of how your Assistant configuration should look:
+
+![Configure assistant](/images/blog/ai-powered-npc/02-configure-assistant.jpg)
+
+# Creating your NPC MML Document
+
+Let's start diving in to the bits of the MML document that are paramount for the NPC's core functionality while keeping everything multi-user friendly.
+
+---
+
+# The requests queue
+
+  Our first concern should be to keep everything multi-user friendly, and for that we must have a queue and all the book keeping necessary so we won't waste any chat messages when the NPC is already busy replying to some previous chat message sent by another user.
+
+  For that, we create some variables to store the necessary states:
+
+  ~~~js
+  let latestPromise = null;
+  let queuedMessages = [];
+  ~~~
+
+  Here's how it works:
+
+  - `queuedMessages`: holds all the incoming messages (messages captured by the `m-chat-probe`) that need to be sent to OpenAI;
+---
+
+# Submitting Messages to the Queue
+
+  Whenever a user sends a message to the NPC through the text chat, it gets captured by the `m-chat-probe`, and it's added to the queue using the `submitMessage()` function. This function also triggers the processing function (`onQueue()`) if no other message is currently being processed.
+
+  ```js
+  function submitMessage(message, userId) {
+    const time = Date.now() / 1000;
+    queuedMessages.push({ message, userId, time, nearbyUsers: Array.from(connectedUsers) });
+    onQueue();
+  }
+  ```
+
+  In this function:
+
+  - The message object includes important information like the `message` content, `userID`, the `time` stamp, and a list of `nearbyUsers`;
+
+  - `queuedMessages.push()` adds the new message to the queue;
+
+  - `onQueue()` starts the process of sending messages if the NPC isn't already busy.
+
+---
+
+# Processing the Queue
+
+  The heart of the queue system lies in the `onQueue()` function. This function checks if there's an ongoing request and, if not, initiates the message-sending process.
+
+  ```js
+  function onQueue() {
+    if (latestPromise) return; // Exit if a request is already in progress
+    latestPromise = sendMessages().finally(() => {
+      latestPromise = null;
+      if (queuedMessages.length > 0) onQueue(); // Continue processing if there are more messages
+    });
+  }
+  ```
+
+  Here's what's happening:
+
+  - `latestPromise` is used to track the current request. If it's null, it means no request is being processed, so we can proceed to process a new one;
+
+  - `sendMessages()` is called to handle the current message to be handled by the queue system;
+
+  -  `finally()` ensures that once the request is completed, `latestPromise` is reset, and the function checks if there are more messages to process. If there are, it calls itself recursively to continue processing the queue.
+
+  This setup ensures that messages are processed one at a time, maintaining the order they were received in and preventing any message loss.
+
+---
+
+# Sending Messages to OpenAI
+
+  The `sendMessages()` function is responsible for sending queued messages to OpenAI through an API request.
+
+```js
+async function sendMessages() {
+  if (queuedMessages.length === 0) return; // Exit if no messages are in the queue
+  const message = queuedMessages.shift(); // Process one message at a time
+  showWaiting();
+
+  try {
+    let res;
+    if (threadId) {
+      res = await fetch(`https://api.openai.com/v1/threads/${threadId}/runs`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
+          "OpenAI-Beta": "assistants=v2",
+        },
+        body: JSON.stringify({
+          assistant_id: assistantId,
+          stream: true,
+          additional_messages: [
+            {
+              role: "user",
+              content: JSON.stringify(message),
+            },
+          ],
+        }),
+      });
+    } else {
+      res = await fetch("https://api.openai.com/v1/threads/runs", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
+          "OpenAI-Beta": "assistants=v2",
+        },
+        body: JSON.stringify({
+          assistant_id: assistantId,
+          stream: true,
+          thread: {
+            messages: [
+              {
+                role: "user",
+                content: JSON.stringify(message),
+              },
+            ],
+          },
+        }),
+      });
+    }
+
+    if (!res.ok) {
+      console.error("API error:", res.status, res.statusText, await res.text());
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+
+    const text = await res.text();
+    const lines = text
+      .split("\n")
+      .filter((line) => line.startsWith("data: ") && line !== "data: [DONE]")
+      .map((line) => line.substring(6))
+      .map((line) => {
+        try {
+          return JSON.parse(line);
+        } catch (e) {
+          console.error("Failed to parse line", line);
+          return { object: "unknown", data: line };
+        }
+      });
+
+    const completionLine = lines.find(
+      (line) =>
+        line.object === "thread.message" &&
+        line.status === "completed" &&
+        line !== "data: [DONE]"
+    );
+
+    if (completionLine) {
+      try {
+        let completionText = completionLine.content[0].text.value;
+        completionText = completionText
+          .replace(/【[^】]*】/g, "")
+          .replace("```json\n", "")
+          .replace("```", "");
+        const completion = JSON.parse(completionText);
+
+        if (completion.ignore) {
+          responseLabel.setAttribute("content", "Ignoring");
+        } else if (completion.wait) {
+          responseLabel.setAttribute("content", "Waiting");
+        } else if (completion.action) {
+          if (completion.action === "spin") spin();
+          else if (completion.action === "thumbs_up") thumbsUp();
+          else if (completion.action === "thumbs_down") thumbsDown();
+          else if (completion.action === "blow_horn") playHorn();
+        }
+
+        if (completion.message) {
+          const { dataUrl, duration } = await createSpeechWithTimeout(completion.message);
+          responseLabel.setAttribute("content", completion.message);
+
+          if (dataUrl) {
+            growWhileSpeaking(duration); // Animation during playback
+            await playAudio(dataUrl, duration); // Wait for the audio playback to finish
+          }
+        }
+      } catch (e) {
+        console.error(
+          "Failed to process completion:",
+          completionLine.content[0].text.value,
+          e
+        );
+      }
+    }
+  } finally {
+    hideWaiting();
+    if (queuedMessages.length > 0) {
+      await sendMessages();
+    }
+  }
+}
+```
+
+  What's happening here:
+
+  - `showWaiting()`: Displays a "Thinking..." indicator while the NPC waits for the response, in case it is not speaking another response yet;
+
+  - `const message = queuedMessages.shift();` gets the next message to be processed and removes it from the queue;
+
+  - `fetch()`: Sends the request to OpenAI, using the assistant ID and maintaining the context of the conversation through a thread;
+
+  - **Response Parsing**: The response is split into lines and parsed. It then looks for the `thread.message` object, which contains the actual reply;
+
+  - `completionLine` and `completion`: Once we finish parsing the response, we remove unwanted markdown instructions and unwanted characters using `.replace`, and we'll finally be able to parse the JSON object that the agent sent back and assign it to the `completion` variable, and it will contain the message to be spoken (`.message`) and eventually actions (`.action`) that the NPC should perform (like `spin`, `thumbs_up`, `thumbs_down`, and `blow_horn`);
+
+  - `completion.message`: When we have a `completion.message`, we invoke the `createSpeechWithTimeout` function passing it as an argument, and that function will return the `dataUrl` containing the audio to be played, and the `duration` of the same audio;
+
+  - `dataUrl` and `duration`: If we check that we obtained both the audio and its duration, we then invoke the `growWhileSpeaking` function with the `duration` argument to scale up our NPC during such time interval, and the `playAudio` function, that will also use the duration argument so it can hold up the logic execution until the audio finished playing;
+
+  - `finally`: Once we reach the `finally` statement of the `try` block, we call `hideWaiting` function to remove the visual indicator that shows our NPC is working, and we check if there are other messages to be processed, and if so, we recursively invoke the `sendMessages` function again, and `await` for its execution to finish, and repeat the process until there are no more queued messages to be processed, which will bring our NPC to an idle state again until another user interaction happens.
+
+---
+
+
+# Text-to-Speech: Giving Voice to your NPC
+
+  After setting up the message queue and integrating the OpenAI API for text responses, the next step is to bring the NPC to life with voice synthesis. For this, we use OpenAI's Text-to-Speech (TTS) API. The NPC's responses aren't just shown as text; they're also spoken aloud, making the interaction more engaging and immersive.
+
+  - Generating Speech with OpenAI TTS API:
+
+    To create audio responses, we use the `createSpeech()` function. It sends the response text to the TTS API and retrieves an audio file (MP3) that we can play back in the virtual world.
+
+    ```js
+    async function createSpeech(tts) {
+      const openAIURL = "https://api.openai.com/v1/audio/speech";
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      };
+      const body = {
+        model: "tts-1",
+        input: tts,
+        voice: "fable",
+        response_format: "mp3"
+      };
+      const response = await fetch(openAIURL, {
+        method: "POST",
+        headers,
+        body: JSON.stringify(body),
+      });
+
+      const audioBlob = await response.blob();
+      const arrayBuffer = await audioBlob.arrayBuffer();
+      const duration = await estimateMP3Duration(arrayBuffer, false);
+      const uint8Array = new Uint8Array(arrayBuffer);
+      let binary = "";
+      for (let i = 0; i < uint8Array.length; i++) {
+        binary += String.fromCharCode(uint8Array[i]);
+      }
+      const base64Audio = btoa(binary);
+      const dataUrl = `data:audio/mp3;base64,${base64Audio}`;
+      return {
+        dataUrl: dataUrl,
+        duration: duration,
+      };
+    }
+    ```
+
+    Explanation:
+
+    - API Request: The function sends a POST request to OpenAI's TTS API with the input text (tts), requesting an MP3 response
+
+    - Audio Blob: The response is retrieved as a binary blob and converted into an ArrayBuffer for further processing;
+
+    - Duration Estimation: The duration of the MP3 file is estimated to control the playback timing (more on this in the next section);
+
+    - Base64 Encoding: The MP3 file is encoded as a Base64 data URL, making it easy to play in the browser without needing to save a file;
+
+    - The return: this function returns the generated audio and also its duration, so we can await for the end of the audio playback before we start processing the next message.
+
+  ---
+
+  # Handling Timeout with Speech Generation
+
+    To avoid the NPC getting stuck if the TTS API takes too long to respond, we wrap the `createSpeech()` function with a timeout using `createSpeechWithTimeout()`:
+
+    ```js
+    async function createSpeechWithTimeout(tts) {
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error("Timeout: Speech creation took too long")), completionTimeout)
+      );
+
+      try {
+        await Promise.race([createSpeech(tts), timeoutPromise]);
+      } catch (error) {
+        console.warn(error.message);
+      }
+    }
+    ```
+
+    Explanation:
+
+    - `Promise.race()`: This method runs both the speech creation and the timeout in parallel. If the TTS API call takes longer than the `completionTimeout`, the timeout promise rejects, and we handle the error gracefully;
+
+    - Error Handling: If the timeout occurs, it logs a warning message, preventing the NPC from getting stuck waiting for a response.
+
+    This mechanism ensures that the NPC remains responsive, even if the TTS API is slow or unresponsive.
+
+  ---
+
+  # Estimating the MP3 Duration
+
+    To synchronize animations and audio playback, we need an estimate of the MP3 file's duration. This is handled by the `estimateMP3Duration()` function, which analyzes the contents of the MP3 file.
+
+  ---
+
+  # Playing the Audio
+
+    Once the audio is ready, it's played using the `playAudio()` function. This function also manages the volume and ensures that the NPC can process the next response once playback is complete.
+
+    ```js
+    async function playAudio(src, duration) {
+      return new Promise((resolve) => {
+        agentAudio.setAttribute("volume", audioVolume);
+        agentAudio.setAttribute("src", src);
+        agentAudio.setAttribute("start-time", document.timeline.currentTime);
+
+        // Wait for the duration to ensure playback completion
+        setTimeout(() => {
+          agentAudio.setAttribute("volume", 0); // Reset volume
+          resolve();
+        }, duration + audioMarginDuration); // Add margin to ensure a small pause
+      });
+    }
+    ```
+
+    Explanation:
+
+    - Setting Attributes: The audio element (agentAudio) is configured with the source URL and playback timing;
+
+    - Volume Control: The volume is adjusted and it's set back to zero after the audio finishes playing to make sure any timing issues won't be perceptible;
+
+  ---
+
+# Animating and Bringing the NPC to Life
+
+  In addition to responding with text and voice, the NPC in our MML world can also perform various animations and actions that make it more expressive and engaging. These actions range from simple gestures like a thumbs up to more elaborate animations like spinning around. The code for handling these animations is tightly integrated with the NPC's response logic, allowing the NPC to react in fun and dynamic ways based on user input or AI-driven commands.
+
+  In this section, we'll break down all the functions responsible for handling NPC actions and animations.
+
+  ---
+
+  # Animating Elements with animate() Function
+
+    At the core of the animation system is the `animate()` function, which handles attribute-based animations for any element in the MML document. This utility function is used by most of the specific action functions.
+
+    ```js
+    function animate(element, attr, start, end, duration, easing) {
+      const anim = document.createElement("m-attr-anim");
+      anim.setAttribute("attr", attr);
+      anim.setAttribute("start", start);
+      anim.setAttribute("end", end);
+      anim.setAttribute("start-time", document.timeline.currentTime);
+      anim.setAttribute("end-time", document.timeline.currentTime + duration);
+      anim.setAttribute("duration", duration);
+      anim.setAttribute("easing", easing);
+      anim.setAttribute("loop", false);
+      element.appendChild(anim);
+
+      setTimeout(() => {
+        element.setAttribute(attr, end);
+        element.removeChild(anim);
+      }, duration);
+    }
+    ```
+
+    Explanation:
+
+    - Attribute Animation: Creates an `m-attr-anim` element to animate a specified attribute (e.g., position, scale, rotation);
+
+    - Easing: Supports easing functions for smooth transitions;
+
+    - Cleanup: The animation element is removed after the animation is complete to avoid cluttering the DOM.
+
+    This is a very handy utility function that can be used in other MML documents, as it allow us to animate any element in the scene by simply specifying the target attribute and desired values.
+
+  ---
+
+  # Spinning the NPC
+
+    The `spin()` function triggers a full 360-degree rotation animation, making the NPC spin around in a playful way. This action can be used as a response to user commands or AI-generated actions.
+
+    ```js
+    function spin() {
+      spinAudio.setAttribute("volume", 1);
+      spinAudio.setAttribute("start-time", document.timeline.currentTime);
+      spinAudio.setAttribute("pause-time", document.timeline.currentTime + 6000);
+
+      setTimeout(() => {
+        spinAudio.setAttribute("volume", 0);
+      }, 6000);
+
+      animate(actionsWrapper, "ry", 0, 1800, 3500, "easeInOutQuint");
+    }
+    ```
+
+    Explanation:
+
+    - Audio Playback: Plays a spinning sound effect using the `spinAudio` element that lasts 6 seconds;
+
+    - Rotation Animation: Animates the `ry` (rotation around the Y-axis) attribute of the `actionsWrapper` element for a 1800 degrees spin during 3.5 seconds, with an `easeInOutQuint` easing function;
+
+    - Volume: As usual, we set the volume back to zero once we estimate the playback is complete, to prevent any possible timing issues from creating audio stuttering or undesirable side-effects;
+
+    This action makes the NPC appear energetic and responsive, adding a sense of liveliness.
+
+  ---
+
+  # Thumbs Up Animation
+
+    The `thumbsUp()` function animates a thumbs-up gesture, making the thumb model grow and rotate to convey approval or positive feedback.
+
+    ```js
+    function thumbsUp() {
+      animate(thumbModel, "sx", 0, 4, 1000, "easeInOutQuint");
+      animate(thumbModel, "sy", 0, 4, 1000, "easeInOutQuint");
+      animate(thumbModel, "sz", 0, 4, 1000, "easeInOutQuint");
+      animate(thumbModel, "rx", thumbsNeutralRotation, thumbsUpRotation, 1000, "easeInOutQuint");
+
+      setTimeout(() => {
+        animate(thumbModel, "sx", 4, 0, 1000, "easeInOutQuint");
+        animate(thumbModel, "sy", 4, 0, 1000, "easeInOutQuint");
+        animate(thumbModel, "sz", 4, 0, 1000, "easeInOutQuint");
+        animate(thumbModel, "rx", thumbsUpRotation, thumbsNeutralRotation, 1000, "easeInOutQuint");
+      }, 5000);
+    }
+    ```
+
+    Explanation:
+
+    - Scaling Animation: The thumb model scales up in size to give the impression of a thumbs-up gesture;
+
+    - Rotation Animation: Rotates the thumb model to align with a thumbs-up position;
+
+    - Reset Animation: After 5 seconds, the thumb model scales back down and returns to its neutral rotation.
+
+    This gesture provides visual feedback for positive actions or responses, making the NPC feel more interactive.
+
+  ---
+
+  # Thumbs Down Animation
+
+    Similar to the thumbs-up gesture, the `thumbsDown()` function animates a thumbs-down gesture.
+
+    ```js
+    function thumbsDown() {
+      animate(thumbModel, "sx", 0, 4, 1000, "easeInOutQuint");
+      animate(thumbModel, "sy", 0, 4, 1000, "easeInOutQuint");
+      animate(thumbModel, "sz", 0, 4, 1000, "easeInOutQuint");
+      animate(thumbModel, "rx", thumbsNeutralRotation, thumbsDownRotation, 1000, "easeInOutQuint");
+
+      setTimeout(() => {
+        animate(thumbModel, "sx", 4, 0, 1000, "easeInOutQuint");
+        animate(thumbModel, "sy", 4, 0, 1000, "easeInOutQuint");
+        animate(thumbModel, "sz", 4, 0, 1000, "easeInOutQuint");
+        animate(thumbModel, "rx", thumbsDownRotation, thumbsNeutralRotation, 1000, "easeInOutQuint");
+      }, 5000);
+    }
+    ```
+
+    Explanation:
+
+    - Scaling and Rotation: Scales and rotates the thumb model downward to indicate a thumbs-down gesture;
+
+    - Reset Animation: After 5 seconds, the thumb returns to its neutral state;
+
+    This gesture is used for negative feedback, allowing the NPC to respond visually in a playful way.
+
+  ---
+
+  # Playing the Horn
+
+    The `playHorn()` function animates the horn model and plays a sound effect, making the NPC blow a horn as a fun or celebratory action.
+
+    ```js
+    function playHorn() {
+      hornAudio.setAttribute("volume", 1);
+      hornAudio.setAttribute("start-time", document.timeline.currentTime);
+      hornAudio.setAttribute("pause-time", document.timeline.currentTime + 6000);
+
+      animate(hornModel, "sx", 0, 4, 1000, "easeInOutQuint");
+      animate(hornModel, "sy", 0, 4, 1000, "easeInOutQuint");
+      animate(hornModel, "sz", 0, 4, 1000, "easeInOutQuint");
+
+      setTimeout(() => {
+        hornAudio.setAttribute("volume", 0);
+        animate(hornModel, "sx", 4, 0, 1000, "easeInOutQuint");
+        animate(hornModel, "sy", 4, 0, 1000, "easeInOutQuint");
+        animate(hornModel, "sz", 4, 0, 1000, "easeInOutQuint");
+      }, 6000);
+    }
+    ```
+
+    Explanation:
+
+    - Audio Playback: Plays a horn sound effect using the hornAudio element;
+
+    - Scaling Animation: The horn model scales up to simulate the NPC blowing a horn;
+
+    - Volume Fade-Out: Lowers the volume after the animation is complete;
+
+    This action is great for celebratory moments or playful interactions with users.
+
+  ---
+
+  # Growing the NPC While Speaking
+
+    The `growWhileSpeaking()` function animates the NPC model to grow slightly when it speaks, giving a visual indication of speech and making the NPC look more dynamic and alive.
+
+    ```js
+    function growWhileSpeaking(duration) {
+      animate(agentModel, "sx", 0.5, 0.6, 2000, "easeOutBack");
+      animate(agentModel, "sy", 0.5, 0.6, 2000, "easeOutBack");
+      animate(agentModel, "sz", 0.5, 0.6, 2000, "easeOutBack");
+
+      setTimeout(() => {
+        animate(agentModel, "sx", 0.6, 0.5, 2000, "easeInOutQuint");
+        animate(agentModel, "sy", 0.6, 0.5, 2000, "easeInOutQuint");
+        animate(agentModel, "sz", 0.6, 0.5, 2000, "easeInOutQuint");
+      }, duration);
+    }
+    ```
+
+    Explanation:
+
+    - Scaling Up: The NPC model scales up slightly when it starts speaking;
+
+    - Scaling Down: After the speech is complete, it scales back down to its original size.
+
+    This subtle animation provides a visual cue that the NPC is talking, making it feel more natural and alive.
+    
+---
+
+# Proximity Detection and State Reset
+
+  To make the NPC feel interactive and responsive, it's essential that it reacts dynamically based on the users' proximity and context. This is achieved using two key MML components: the position probe (**`m-position-probe`**) and the chat probe (**`m-chat-probe`**). These allow the NPC to detect when users enter or leave its interaction range, listen for nearby chat messages, and manage its internal state accordingly.
+
+  Additionally, there is a mechanism to reset the NPC's state when no users are nearby or when it hasn't received a message for a certain period. This helps prevent the NPC from getting "stuck" and keeps the experience smooth and seamless.
+
+  Let's break down the code and explain how each part contributes to these functionalities:
+
+  ---
+
+  - Setting Up the Probes:
+
+    The MML document defines two probes that handle proximity detection and chat messages:
+
+    ```html
+    <m-position-probe id="position-probe" range="10" debug="false"></m-position-probe>
+    <m-chat-probe id="chat" range="10" debug="false"></m-chat-probe>
+    ```
+
+    Explanation:
+
+    - `m-position-probe`: Detects users within a 10-meter range of the NPC. It tracks users entering, moving, and leaving this proximity;
+
+    - `m-chat-probe`: Listens for chat messages sent by users within a 10-meter range. This probe captures the content of the chat and the user's connection ID;
+
+    These probes make the NPC aware of its surroundings and allow it to interact with nearby users effectively.
+  
+  ---
+
+  - Tracking Nearby Users with the `proximityMap`:
+
+    To keep track of users in the NPC's vicinity, there is a `Map` object called `proximityMap`. This stores the connection IDs of nearby users and their positions.
+
+    ```js
+    const proximityMap = new Map();
+    let latestProximityActivity = document.timeline.currentTime;
+    ```
+
+    Explanation:
+
+    - proximityMap: Stores the connection ID and position data of each nearby user;
+
+    - latestProximityActivity: Keeps track of the last time a user entered or moved within the NPC's proximity range. This helps determine when to reset the NPC's state if no users are nearby.
+
+  ---
+
+  - Handling Proximity Events:
+
+    The position probe emits three types of events: **`positionenter`**, **`positionmove`**, and **`positionleave`**. Each event updates the `proximityMap` accordingly.
+
+    ```js
+    proximityProbe.addEventListener("positionenter", (event) => {
+      const { connectionId } = event.detail;
+      const { position, rotation } = event.detail.documentRelative;
+      proximityMap.set(connectionId, { position, rotation });
+      latestProximityActivity = document.timeline.currentTime;
+    });
+
+    proximityProbe.addEventListener("positionmove", (event) => {
+      const { connectionId } = event.detail;
+      const { position, rotation } = event.detail.documentRelative;
+      proximityMap.set(connectionId, { position, rotation });
+      latestProximityActivity = document.timeline.currentTime;
+    });
+
+    proximityProbe.addEventListener("positionleave", (event) => {
+      const { connectionId } = event.detail;
+      if (proximityMap.has(connectionId)) proximityMap.delete(connectionId);
+    });
+
+    window.addEventListener("disconnected", (event) => {
+      connectedUsers.delete(connectionIdToUserId(event.detail.connectionId));
+      if (proximityMap.has(event.detail.connectionId)) proximityMap.delete(event.detail.connectionId);
+    });
+    ```
+
+    Explanation:
+
+    - `positionenter`: Fired when a user comes within range of the NPC. The user's connection ID and position are added to `proximityMap`;
+
+    - `positionmove`: Fired when a nearby user changes position. The user's position data in `proximityMap` is updated;
+
+    - `positionleave`: Fired when a user leaves the proximity range. The user's connection ID is removed from `proximityMap`;
+
+    - `disconnected` window event listener: detects if a user left the experience (closed the window) and, if so, removes the user from the `proximityMap`.
+
+    These event listeners make the NPC context-aware, allowing it to adjust its behavior based on who is nearby.
+
+  ---
+
+  # Listening for Chat Messages
+
+    The chat probe captures chat messages from users within range and forwards them to the message queue for processing.
+
+    ```js
+    chat.addEventListener("chat", (event) => {
+      latestMessageTime = document.timeline.currentTime;
+      const { message, connectionId } = event.detail;
+      submitMessage(message, connectionIdToUserId(connectionId));
+    });
+    ```
+
+    Explanation:
+
+    - `latestMessageTime`: Tracks the time of the most recent message received. This helps determine if the NPC should reset its state due to inactivity;
+
+    - `submitMessage()`: Sends the captured message to the queue, where it will be processed by the NPC;
+
+    This setup allows the NPC to respond only to users who are close by, creating a more personal and immersive experience.
+  
+  ---
+
+  # Resetting the NPC State:
+
+    To prevent the NPC from getting stuck in a particular state (e.g., "Thinking..."), there is a a mechanism to reset its state when there are no nearby users or when it hasn't received a message for a certain duration.
+
+    ```js
+    function checkIfHasNearbyUsers() {
+      if (responseInProgress) return;
+
+      if (proximityMap.size === 0) {
+        const diff = Math.ceil((document.timeline.currentTime - latestProximityActivity) / 1000);
+        if (diff > 10) responseLabel.setAttribute("content", initialText);
+      } else {
+        const diff = Math.ceil((document.timeline.currentTime - latestMessageTime) / 1000);
+        if (diff > 60) {
+          latestPromise = null;
+          queuedMessages = [];
+          responseInProgress = false;
+          responseLabel.setAttribute("content", initialText);
+        }
+      }
+    }
+    ```
+
+    Explanation:
+
+    - `proximityMap.size`: Checks if there are any users currently in range;
+    - State Reset: If there are no users nearby for more than 10 seconds, or if there hasn't been any message activity for over 60 seconds, the NPC resets its state;
+    - `latestPromise` and `queuedMessages`, are cleared;
+    - The NPC's label content is reset to the initial greeting (`initialText`).
+    This mechanism ensures that the NPC remains responsive and doesn’t continue to display outdated or irrelevant information.
+
+  ---
+
+  # Periodic State Check:
+
+    To regularly check the proximity and message activity, there is a simple interval-based function.
+
+    ```js
+    setInterval(() => {
+      checkIfHasNearbyUsers();
+    }, 1000);
+    ```
+
+    Explanation:
+
+    The `checkIfHasNearbyUsers()` function is called every second to evaluate the NPC's state.
+
+    This periodic check helps keep the NPC in sync with the environment and ensures it resets when needed.
+
+  ---
+
+  By integrating proximity detection and state-reset mechanisms, the NPC becomes highly context-aware and adaptive. It can detect when users are nearby, respond to their messages, and gracefully reset its state when interactions fade. This design prevents the NPC from getting stuck or becoming unresponsive, creating a fluid and engaging experience for users in the virtual world.
+
+---
+
+
+If you want to ~~copy-and-paste~~ read the complete source-code, you can find it here: [MML-powered-NPC.html](https://gist.github.com/TheCodeTherapy/8c987ff1e2b28ad2c3c5473a91f9f726)
+
+## You're all set!
+
+Have fun with your AI-powered MML NPC! 🎉
+
+![Spin](/images/blog/ai-powered-npc/03-spin.gif)
