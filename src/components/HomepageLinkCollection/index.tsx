@@ -12,7 +12,7 @@ const HomepageLinkCollection = () => {
     },
     {
       name: "Discord",
-      url: "https://discord.gg/msquaredio",
+      url: "https://discord.gg/hPdWYhfVem",
       icon: faDiscord,
     },
     {
