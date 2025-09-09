@@ -590,7 +590,7 @@
     },
     "src": {
       "supported": true,
-      "description": ""
+      "description": "Only accepts .glb and .gltf file types."
     },
     "anim": {
       "supported": true,
@@ -704,7 +704,7 @@
     },
     "src": {
       "supported": false,
-      "description": ""
+      "description": "Only accepts .glb and .gltf file types."
     },
     "anim": {
       "supported": false,
