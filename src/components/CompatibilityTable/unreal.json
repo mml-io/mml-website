@@ -1805,19 +1805,19 @@
     "class": {
       "supported": false,
       "description": ""
-    }
+    },
     ".glb": {
       "supported": true,
       "description": "src assets with .glb file extensions"
-    }
+    },
     ".gltf": {
       "supported": true,
       "description": "src assets with .gltf file extensions"
-    }
+    },
     ".obj": {
       "supported": false,
       "description": "src assets with .obj file extensions"
-    }
+    },
     ".fbx": {
       "supported": false,
       "description": "src assets with .fbx file extensions"
