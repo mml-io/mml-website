@@ -704,7 +704,7 @@
     },
     "src": {
       "supported": false,
-      "description": "Accepts .glb and .gltf file types. .obj or .fbx. are not suported in Unreal."
+      "description": "Accepts .glb and .gltf file types. .obj or .fbx are not supported in Unreal."
     },
     "anim": {
       "supported": false,
