@@ -1,6 +1,7 @@
 import { faArrowRotateRight } from "@fortawesome/free-solid-svg-icons/faArrowRotateRight";
 import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import type { LoadingScreenConfig } from "@mml-io/3d-web-client-core";
 import { EditableNetworkedDOM } from "@mml-io/networked-dom-document";
 import { IframeObservableDOMFactory } from "@mml-io/networked-dom-web-runner";
 import * as React from "react";
@@ -20,6 +21,8 @@ export type DocsExampleViewProps = {
   baseScene?: boolean;
   description: string;
   noBorders?: boolean;
+  usernames?: string[];
+  loadingScreenConfig?: LoadingScreenConfig;
 };
 
 /**
@@ -95,6 +98,13 @@ export function DocsExampleView(props: DocsExampleViewProps) {
 
   return (
     <div className="relative h-full overflow-hidden shadow-lg">
+      <pre
+        className="sr-only"
+        aria-label={`Source code: ${props.description}`}
+        data-language="html"
+      >
+        <code>{props.code}</code>
+      </pre>
       <div
         className={twMerge(
           "relative flex h-[50px] justify-between overflow-hidden rounded-t border-b-0 border-editor-border bg-white px-[17px] pt-[14px] leading-[19px] text-black dark:border-editor-border-dark dark:bg-editor-bg dark:text-white",
@@ -138,6 +148,8 @@ export function DocsExampleView(props: DocsExampleViewProps) {
           networkedDOMDocument={networkedDOMDocument}
           clients={clients}
           removeClient={removeClient}
+          usernames={props.usernames}
+          loadingScreenConfig={props.loadingScreenConfig}
         />
       </div>
       {showAddButtons && (

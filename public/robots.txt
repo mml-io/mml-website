@@ -1,3 +1,6 @@
 # Allow all crawlers
 User-agent: *
 Allow: /
+
+Sitemap: https://mml.io/sitemap.xml
+Llms-Txt: https://mml.io/llms.txt

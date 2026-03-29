@@ -47,6 +47,15 @@ export default function ExampleView(
         height: containerHeight,
       }}
     >
+      {!isVisible && (
+        <pre
+          className="sr-only"
+          aria-label={`Source code: ${props.description}`}
+          data-language="html"
+        >
+          <code>{props.code}</code>
+        </pre>
+      )}
       {isVisible && <ExampleViewStatic {...props} />}
     </div>
   );

@@ -1,7 +1,7 @@
 import { Example } from "@/types/example";
 
 export const clockExample: Example = {
-  name: "clock",
+  name: "Clock",
   description: "A simple clock",
   code: `<m-group y="4">
   <m-cylinder color="lightgrey" radius="4" height="0.1" rx="90"></m-cylinder>

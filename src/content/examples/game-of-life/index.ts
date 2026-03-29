@@ -1,7 +1,7 @@
 import { Example } from "@/types/example";
 
 export const gameOfLifeExample: Example = {
-  name: "game-of-life",
+  name: "Game of Life",
   description: "Conway's Game of Life",
   code: `<m-group></m-group>
 <script>

@@ -1,0 +1,141 @@
+MML documents are HTML files that describe 3D content using MML elements. There are two ways to serve an MML document depending on what it needs to do.
+
+## Static vs Interactive Documents
+
+**Static documents** are plain HTML files with no `<script>` tags. They describe a fixed 3D scene and can be hosted on any web server or CDN, served over `https://` just like a regular web page. Any client that loads the document gets the same content.
+
+**Interactive documents** contain `<script>` tags that run logic on the server and respond to user events. Because the document needs to execute and maintain state, it runs on a server and clients connect over `wss://` (WebSocket). The server keeps a single authoritative copy of the document and streams updates to all connected clients in real-time. This is what makes MML multiplayer by default.
+
+Here's a simple example of each:
+
+```html
+<!-- Static: no scripts, served over https:// -->
+<m-cube color="red" y="1"></m-cube>
+<m-sphere color="blue" y="1" x="2"></m-sphere>
+<m-light type="spotlight" y="4"></m-light>
+```
+
+```html
+<!-- Interactive: has a script, served over wss:// -->
+<m-cube id="my-cube" color="red" y="1"></m-cube>
+
+<script>
+  const cube = document.getElementById("my-cube");
+  cube.addEventListener("click", () => {
+    const colors = ["red", "green", "blue", "yellow"];
+    const next = colors[Math.floor(Math.random() * colors.length)];
+    cube.setAttribute("color", next);
+  });
+</script>
+```
+
+In the interactive example, clicking the cube changes its color, and because the script runs on the server, every connected user sees the same color change at the same time.
+
+## MML Editor
+
+The fastest way to start building MML is with [mmleditor.com](https://mmleditor.com). The editor runs entirely in your browser and gives you a live preview of your document as you write it.
+
+### Publishing static documents
+
+If your document has no `<script>` tags, you can publish it as a static file. The editor will give you an `https://` URL that you can use to load the document in any MML-compatible viewer.
+
+### Live interactive preview
+
+If your document includes scripts, the editor runs it directly in your browser and exposes a publicly accessible `wss://` WebSocket address. Anyone with the address can connect to your running document in real-time, as long as you have the editor page open. This is a great way to quickly test interactive content and share it with others without setting up any infrastructure.
+
+You can also browse and remix documents created by the community at [mmleditor.com/explore](https://mmleditor.com/explore).
+
+## MML CLI
+
+For local development, the **MML CLI** (`@mml-io/mml-cli`) lets you serve and validate MML documents from your machine.
+
+### Installation
+
+```bash
+npm install -g @mml-io/mml-cli
+```
+
+### Serving a single document
+
+Use `mml serve` to run an MML document with live-reloading. The CLI starts a local server, watches the file for changes, and opens a built-in web client so you can preview the document immediately.
+
+```bash
+mml serve my-document.html
+```
+
+This starts a server at `http://localhost:7079` with a web client that connects to your document. Edit the HTML file and the document reloads automatically.
+
+Common options:
+- `--port <number>` - change the port (default: 7079)
+- `--assets <path>` - serve a directory of static assets alongside the document
+- `--no-watch` - disable automatic reloading on file changes
+- `--no-client` - don't serve the built-in web client
+
+### Serving a directory of documents
+
+Use `mml serve-dir` to serve all HTML files in a directory. Each file gets its own WebSocket endpoint and documents are loaded on-demand when a client connects.
+
+```bash
+mml serve-dir ./my-documents
+```
+
+The CLI provides a dashboard at `http://localhost:7079` that lists all available documents with their status, connection count, and WebSocket URLs. Documents that have no connected clients are automatically stopped after a configurable idle timeout (default: 60 seconds).
+
+### Validating documents
+
+Use `mml validate` to check that your MML documents are valid against the MML schema.
+
+```bash
+mml validate my-document.html
+```
+
+You can validate multiple files at once and optionally output errors as JSON for integration with other tools:
+
+```bash
+mml validate src/*.html --json
+```
+
+## MML Viewer
+
+The **MML Viewer** ([viewer.mml.io](https://viewer.mml.io)) is a standalone web-based viewer for rendering MML documents. Point it at any MML document URL to see it rendered in 3D, or embed the viewer in your own pages using an iframe.
+
+### Viewing a document
+
+Pass a document URL as the `url` query parameter:
+
+```
+https://viewer.mml.io/main/v1/?url=https://public.mml.io/rgb-cubes.html
+```
+
+This works with both static (`https://`) and interactive (`wss://`) documents.
+
+### Embedding in a page
+
+Use an iframe to embed the viewer directly in any web page. Add `noUI=true` to hide the viewer's configuration panel for a clean embed:
+
+```html
+<iframe
+  src="https://viewer.mml.io/main/v1/?url=https://public.mml.io/rgb-cubes.html&noUI=true"
+  width="600"
+  height="400"
+  style="border: 0"
+  allowtransparency="true"
+></iframe>
+```
+
+### Configuration
+
+The viewer accepts URL parameters to control rendering. Here are some commonly used ones:
+
+- `renderer` — rendering engine: `threejs` (default), `playcanvas`, or `tags`
+- `backgroundColor` — background color as a color name, hex, or rgba value (transparent by default)
+- `cameraMode` — camera control mode: `drag-fly` (default), `orbit`, or `none`
+- `cameraPosition` — initial camera position as `x,y,z` (default: `0,5,10`)
+- `cameraFitContents` — set to `true` to automatically frame the content
+- `noUI` — set to `true` to hide the configuration UI
+
+All parameters can be combined. For example, to embed a document with the PlayCanvas renderer, a dark background, and an orbiting camera:
+
+```
+https://viewer.mml.io/main/v1/?url=wss://example.com/my-doc&renderer=playcanvas&backgroundColor=%23111827&cameraMode=orbit
+```

@@ -12,7 +12,7 @@ const ElementsTable = () => {
     <DocsTableContainer
       title="Elements"
       description="All of the MML Elements with available attributes and examples."
-      className="mt-8"
+      className=""
     >
       {elementSchema
         .filter((element) => element.name.startsWith("m-"))

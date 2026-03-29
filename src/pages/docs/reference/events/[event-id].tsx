@@ -1,5 +1,4 @@
-import { EventsClassSchemaType, EventType } from "@mml-io/mml-schema";
-import Head from "next/head";
+import { EventType } from "@mml-io/mml-schema";
 import Link from "next/link";
 import * as React from "react";
 import { Fragment } from "react";
@@ -9,11 +8,11 @@ import Breadcrumb from "@/src/components/Common/Breadcrumb";
 import LinkList from "@/src/components/Common/LinkList";
 import ReferenceNavigation from "@/src/components/Common/ReferenceNavigation";
 import ExampleView from "@/src/components/ExampleView/DocsExampleViewDynamic";
+import PageMeta from "@/src/components/PageMeta";
 import TypeDocComment from "@/src/components/TypeDocComment";
 import { MarkDownDocs } from "@/src/config/mdx";
 import * as docsExamples from "@/src/content/docs";
-import { getPageTitle } from "@/src/util";
-import { eventClasses } from "@/src/util/event-classes";
+import { eventClasses, EventClassSchema } from "@/src/util/event-classes";
 import { CLIENT_TYPES } from "@/types/docs-reference";
 
 type ReferenceType = {
@@ -54,7 +53,7 @@ function getEventClass(name: string) {
 }
 
 const DocsPage = ({ eventId }: { eventId: string }) => {
-  const eventClassDefinition: EventsClassSchemaType = getEventClass(eventId)!;
+  const eventClassDefinition: EventClassSchema = getEventClass(eventId)!;
 
   const showInheritedProperties = true;
   const showExternalProperties = false;
@@ -95,13 +94,31 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
     linkList.push("Examples");
   }
 
+  const commentText = eventClassDefinition.comment?.summary?.map((s) => s.text).join("") || "";
+
   return (
     <>
-      <Head>{getPageTitle(eventClassDefinition.name)}</Head>
+      <PageMeta
+        title={eventClassDefinition.name}
+        description={
+          commentText.slice(0, 160) || `MML ${eventClassDefinition.name} event reference.`
+        }
+        path={`/docs/reference/events/${eventId}`}
+        type="article"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "TechArticle",
+          headline: eventClassDefinition.name,
+          description: commentText || `MML ${eventClassDefinition.name} event reference.`,
+          url: `https://mml.io/docs/reference/events/${eventId}`,
+          ...(primaryExample ? { text: primaryExample.code } : {}),
+          publisher: { "@type": "Organization", name: "MML", url: "https://mml.io" },
+        }}
+      />
       <div className="flex w-full pt-32">
         <ReferenceNavigation />
         <div className="px-5 sm:px-12 w-full">
-          <main className="mx-auto px-4 center-column mdx">
+          <article className="mx-auto px-4 center-column mdx">
             <Breadcrumb
               pageName={`${eventClassDefinition.name}`}
               parents={[
@@ -216,7 +233,7 @@ const DocsPage = ({ eventId }: { eventId: string }) => {
                 })}
               </>
             )}
-          </main>
+          </article>
         </div>
         <LinkList elementList={linkList} />
       </div>

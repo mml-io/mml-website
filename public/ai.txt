@@ -1,0 +1,11 @@
+# ai.txt - https://site.ai.txt.dev/
+# This file describes how AI agents may interact with this site.
+
+User-Agent: *
+Allow: /
+Full-Content: /llms-full.txt
+Summary: /llms.txt
+Sitemap: https://mml.io/sitemap.xml
+
+# MML is an open source project (MIT license).
+# AI agents are welcome to read and reference all content on this site.

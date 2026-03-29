@@ -1,3 +1,4 @@
+import { LoadingScreenConfig } from "@mml-io/3d-web-client-core";
 import { EditableNetworkedDOM } from "@mml-io/networked-dom-document";
 import * as React from "react";
 import { useRef } from "react";
@@ -14,6 +15,8 @@ type ExampleClientsSectionProps = {
   sectionWidth?: string;
   baseScene?: boolean;
   hideButtons?: boolean;
+  usernames?: string[];
+  loadingScreenConfig?: LoadingScreenConfig;
 };
 
 export default function ExampleClientsSection({
@@ -23,6 +26,8 @@ export default function ExampleClientsSection({
   sectionWidth = "50%",
   baseScene,
   hideButtons,
+  usernames,
+  loadingScreenConfig,
 }: ExampleClientsSectionProps) {
   const server = useRef(new LocalAvatarServer());
 
@@ -40,7 +45,8 @@ export default function ExampleClientsSection({
 
   return (
     <div
-      className={`relative flex h-[50%] md:h-full w-[${sectionWidth}] flex-[0_0_${sectionWidth}] flex-col`}
+      className="relative flex h-[50%] md:h-full flex-col"
+      style={{ width: sectionWidth, flex: `0 0 ${sectionWidth}` }}
     >
       {networkedDOMDocument && (
         <div style={gridStyle}>
@@ -54,10 +60,23 @@ export default function ExampleClientsSection({
               </button>
             );
 
-            const avatarPositionForIndex = {
-              x: [0, 2].includes(index) ? -1 : 1,
-              y: 0.5,
-              z: [0, 1].includes(index) ? 5 : 7,
+            const spawnConfiguration = {
+              spawnPosition: {
+                x: [0, 2].includes(index) ? -0.5 : 0.5,
+                y: 0.5,
+                z: [0, 1].includes(index) ? 5 : 7,
+              },
+              spawnPositionVariance: { x: 0, y: 0, z: 0 },
+              spawnYRotation: 180,
+              respawnTrigger: {
+                minX: -Infinity,
+                maxX: Infinity,
+                minY: -100,
+                maxY: Infinity,
+                minZ: -Infinity,
+                maxZ: Infinity,
+              },
+              enableRespawnButton: false,
             };
 
             return type === CLIENT_TYPES.FLOATING ? (
@@ -74,8 +93,9 @@ export default function ExampleClientsSection({
                 key={id}
                 server={server.current}
                 document={networkedDOMDocument}
-                position={avatarPositionForIndex}
-                rotation={{ x: 0, y: Math.PI, z: 0 }}
+                spawnConfiguration={spawnConfiguration}
+                username={usernames?.[index]}
+                loadingScreenConfig={loadingScreenConfig}
                 children={children}
               />
             );

@@ -1,6 +1,7 @@
 import { DocsExamplesByTag } from "@/types/docs-reference";
 
 import * as connectionEvent from "./connectionEvent";
+import * as mAnimation from "./m-animation";
 import * as mAttrAnim from "./m-attr-anim";
 import * as mAttrLerp from "./m-attr-lerp";
 import * as mAudio from "./m-audio";
@@ -42,6 +43,7 @@ export const examples: DocsExamplesByTag = {
   "m-light": mLight,
   "m-model": mModel,
   "m-character": mCharacter,
+  "m-animation": mAnimation,
   "m-group": mGroup,
   "m-label": mLabel,
   "m-frame": mFrame,

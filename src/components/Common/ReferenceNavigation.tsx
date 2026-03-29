@@ -15,12 +15,14 @@ export default function ReferenceNavigation() {
   const guideId = route.query["guide-id"] as string;
   const eventId = route.query["event-id"] as string;
 
-  const selectedStyle =
-    "bg-body-color bg-opacity-15 text-black dark:text-white pl-4 rounded-br rounded-tr";
+  const selectedStyle = "bg-body-color bg-opacity-15 text-black dark:text-white pl-4 rounded-lg";
 
   return (
     <div className="basis-80 flex-grow-0 flex-shrink-0 w-full hidden 2xl:block 2xl:relative">
-      <nav className="lg:overflow-y-scroll w-80 fixed bottom-0 top-32 pb-10">
+      <nav
+        aria-label="Documentation navigation"
+        className="prose-links overflow-y-auto w-72 fixed bottom-0 top-[4.5rem] left-6 z-30 pt-6 pb-16 p-4"
+      >
         <p className="font-semibold pl-5 mb-2">Guides</p>
         <ul>
           {Object.entries(guides).map(([key, guide]) => {

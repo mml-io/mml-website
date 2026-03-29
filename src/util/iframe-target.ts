@@ -1,4 +1,8 @@
-import { IframeWrapper, IframeWrapperResult, registerCustomElementsToWindow } from "mml-web";
+import {
+  IframeWrapper,
+  IframeWrapperResult,
+  registerCustomElementsToWindow,
+} from "@mml-io/mml-web";
 
 let iframeRemoteSceneWrapperPromise: Promise<IframeWrapperResult> | null = null;
 

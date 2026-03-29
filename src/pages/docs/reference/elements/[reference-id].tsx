@@ -1,5 +1,4 @@
 import { createSchemaDefinition, schemaJSON } from "@mml-io/mml-schema";
-import Head from "next/head";
 import * as React from "react";
 
 import Breadcrumb from "@/src/components/Common/Breadcrumb";
@@ -9,9 +8,9 @@ import CompatibilityTable from "@/src/components/CompatibilityTable";
 import { Attribute } from "@/src/components/Docs/Attribute";
 import { AttributeGroup } from "@/src/components/Docs/AttributeGroup";
 import ExampleView from "@/src/components/ExampleView/DocsExampleViewDynamic";
+import PageMeta from "@/src/components/PageMeta";
 import { MarkDownDocs } from "@/src/config/mdx";
 import * as docsExamples from "@/src/content/docs";
-import { getPageTitle } from "@/src/util";
 import { CLIENT_TYPES } from "@/types/docs-reference";
 
 import { AnchorLink } from "../../../../components/Anchors/AnchorLink";
@@ -62,13 +61,30 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
     ? Object.keys(examplesForElement.examples).filter((key) => key !== "primary")
     : [];
 
+  const descriptionText =
+    elementDefinition.description?.[0]?.replaceAll("\n", " ").slice(0, 160) || "";
+
   return (
     <>
-      <Head>{getPageTitle(elementDefinition.name)}</Head>
+      <PageMeta
+        title={`<${elementDefinition.name}>`}
+        description={descriptionText || `MML ${elementDefinition.name} element reference.`}
+        path={`/docs/reference/elements/${referenceId}`}
+        type="article"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "TechArticle",
+          headline: elementDefinition.name,
+          description: descriptionText,
+          url: `https://mml.io/docs/reference/elements/${referenceId}`,
+          ...(primaryExample ? { text: primaryExample.code } : {}),
+          publisher: { "@type": "Organization", name: "MML", url: "https://mml.io" },
+        }}
+      />
       <div className="flex pt-32">
         <ReferenceNavigation />
         <div className="px-5 sm:px-12 w-full">
-          <main className="mx-auto px-4 center-column mdx">
+          <article className="mx-auto px-4 center-column mdx">
             <Breadcrumb
               pageName={`${elementDefinition.name}`}
               parents={[
@@ -116,7 +132,7 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
                     Attributes
                   </h2>
                 </AnchorLink>
-                <code className="bg-gray-200 text-red-800 font-mono">
+                <code className="bg-gray-200 dark:bg-slate-800/50 text-red-800 dark:text-red-300 font-mono">
                   <ul>
                     {attributes.map((attribute) => (
                       <li key={attribute.name}>
@@ -134,7 +150,7 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
                     Attribute Groups
                   </h2>
                 </AnchorLink>
-                <ul className="bg-gray-200 text-red-800 rounded p-1 font-mono">
+                <ul className="bg-gray-200 dark:bg-slate-800/50 text-red-800 dark:text-red-300 rounded p-1 font-mono">
                   {attributeGroups.map((attributeGroup) => (
                     <li key={attributeGroup}>
                       <AttributeGroup attributeGroupName={attributeGroup} />
@@ -181,7 +197,7 @@ const DocsPage = ({ referenceId }: { referenceId: string }) => {
               </h2>
             </AnchorLink>
             <CompatibilityTable element={elementDefinition.name} />
-          </main>
+          </article>
         </div>
         <LinkList
           elementList={[

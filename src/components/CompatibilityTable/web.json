@@ -59,10 +59,6 @@
     "class": {
       "supported": true,
       "description": ""
-    },
-    "onclick": {
-      "supported": true,
-      "description": ""
     }
   },
   "m-cube": {
@@ -170,6 +166,10 @@
       "supported": true,
       "description": ""
     },
+    "clickable": {
+      "supported": true,
+      "description": ""
+    },
     "cast-shadows": {
       "supported": true,
       "description": ""
@@ -269,6 +269,10 @@
       "description": ""
     },
     "onclick": {
+      "supported": true,
+      "description": ""
+    },
+    "clickable": {
       "supported": true,
       "description": ""
     },
@@ -378,6 +382,10 @@
       "supported": true,
       "description": ""
     },
+    "clickable": {
+      "supported": true,
+      "description": ""
+    },
     "cast-shadows": {
       "supported": true,
       "description": ""
@@ -408,7 +416,7 @@
       "supported": true,
       "description": ""
     },
-    "cast-shadow": {
+    "cast-shadows": {
       "supported": true,
       "description": ""
     },
@@ -469,10 +477,6 @@
       "description": ""
     },
     "class": {
-      "supported": true,
-      "description": ""
-    },
-    "onclick": {
       "supported": true,
       "description": ""
     }
@@ -575,6 +579,10 @@
       "description": ""
     },
     "onclick": {
+      "supported": true,
+      "description": ""
+    },
+    "clickable": {
       "supported": true,
       "description": ""
     },
@@ -692,6 +700,10 @@
       "supported": true,
       "description": ""
     },
+    "clickable": {
+      "supported": true,
+      "description": ""
+    },
     "cast-shadows": {
       "supported": true,
       "description": ""
@@ -803,6 +815,10 @@
       "description": ""
     },
     "onclick": {
+      "supported": true,
+      "description": ""
+    },
+    "clickable": {
       "supported": true,
       "description": ""
     },
@@ -1111,6 +1127,14 @@
     "cast-shadows": {
       "supported": true,
       "description": ""
+    },
+    "onclick": {
+      "supported": true,
+      "description": ""
+    },
+    "clickable": {
+      "supported": true,
+      "description": ""
     }
   },
   "m-video": {
@@ -1233,6 +1257,14 @@
     "cast-shadows": {
       "supported": true,
       "description": ""
+    },
+    "onclick": {
+      "supported": true,
+      "description": ""
+    },
+    "clickable": {
+      "supported": true,
+      "description": ""
     }
   },
   "m-label": {
@@ -1320,6 +1352,26 @@
       "supported": true,
       "description": ""
     },
+    "collide": {
+      "supported": true,
+      "description": ""
+    },
+    "collision-interval": {
+      "supported": true,
+      "description": ""
+    },
+    "oncollisionstart": {
+      "supported": true,
+      "description": ""
+    },
+    "oncollisionmove": {
+      "supported": true,
+      "description": ""
+    },
+    "oncollisionend": {
+      "supported": true,
+      "description": ""
+    },
     "color": {
       "supported": true,
       "description": ""
@@ -1333,6 +1385,10 @@
       "description": ""
     },
     "onclick": {
+      "supported": true,
+      "description": ""
+    },
+    "clickable": {
       "supported": true,
       "description": ""
     },
@@ -1795,6 +1851,74 @@
       "description": ""
     },
     "socket": {
+      "supported": true,
+      "description": ""
+    },
+    "id": {
+      "supported": true,
+      "description": ""
+    },
+    "class": {
+      "supported": true,
+      "description": ""
+    }
+  },
+  "m-animation": {
+    "m-animation": {
+      "supported": true,
+      "description": ""
+    },
+    "src": {
+      "supported": true,
+      "description": ""
+    },
+    "weight": {
+      "supported": true,
+      "description": ""
+    },
+    "loop": {
+      "supported": true,
+      "description": ""
+    },
+    "start-time": {
+      "supported": true,
+      "description": ""
+    },
+    "pause-time": {
+      "supported": true,
+      "description": ""
+    },
+    "speed": {
+      "supported": true,
+      "description": ""
+    },
+    "ratio": {
+      "supported": true,
+      "description": ""
+    },
+    "id": {
+      "supported": true,
+      "description": ""
+    },
+    "class": {
+      "supported": true,
+      "description": ""
+    }
+  },
+  "m-overlay": {
+    "m-overlay": {
+      "supported": true,
+      "description": "Not widely enabled for all documents. May be limited to specific documents in some contexts."
+    },
+    "anchor": {
+      "supported": true,
+      "description": ""
+    },
+    "offset-x": {
+      "supported": true,
+      "description": ""
+    },
+    "offset-y": {
       "supported": true,
       "description": ""
     },

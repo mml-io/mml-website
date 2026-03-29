@@ -1,0 +1,15 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "MML - Metaverse Markup Language",
+  "name_for_model": "mml",
+  "description_for_human": "Documentation and reference for MML, an open source system for building multi-user interactive 3D experiences on the web.",
+  "description_for_model": "MML (Metaverse Markup Language) is an open source system for building multi-user interactive 3D experiences using HTML-like elements (e.g. m-cube, m-model, m-label). Documents run on a server via Networked DOM and synchronize to clients over WebSocket. Use /llms.txt or /llms-full.txt for complete documentation.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "none"
+  },
+  "logo_url": "https://mml.io/images/logo/mml-logomark-white-square-padding-512x512.png",
+  "legal_info_url": "https://github.com/mml-io/mml/blob/main/LICENSE"
+}

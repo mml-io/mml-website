@@ -10,3 +10,5 @@ coverage/
 .netlify/state.json
 .next/
 tsconfig.tsbuildinfo
+.playwright-mcp/
+CLAUDE.md

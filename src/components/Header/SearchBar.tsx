@@ -2,7 +2,6 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons/faSearch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { ChangeEvent, FocusEvent, useState } from "react";
-import { twMerge } from "tailwind-merge";
 
 import { posts } from "@/src/content/blogPosts";
 import { examples } from "@/src/content/docs";
@@ -43,7 +42,7 @@ const allItems: Item[] = [
 
 const MAX_RESULTS = 10;
 
-export function SearchBar() {
+export function SearchBar({ className = "hidden lg:block mx-6 flex-1" }: { className?: string }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState<Item[]>([]);
 
@@ -73,33 +72,28 @@ export function SearchBar() {
   };
 
   return (
-    <label className="hidden lg:block mx-10 flex-1 relative" onBlur={handleFocusOut}>
-      <span className="absolute top-2 left-4">
-        <FontAwesomeIcon icon={faSearch} opacity="30%" />
+    <label className={`${className} relative`} onBlur={handleFocusOut}>
+      <span className="absolute top-2.5 left-3.5 text-secondary dark:text-slate-500">
+        <FontAwesomeIcon icon={faSearch} className="w-3.5 h-3.5" />
       </span>
       <input
-        className="w-full rounded-3xl h-10 outline-none pl-10 pr-4 bg-lightgrey dark:bg-grey text-black dark:text-white"
+        className="w-full rounded-lg h-10 outline-none pl-9 pr-4 text-sm bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 text-dark dark:text-white placeholder:text-secondary dark:placeholder:text-slate-500 focus:border-mml-500/50 focus:ring-1 focus:ring-mml-500/30 transition-all"
         placeholder="Search"
         type="search"
         onChange={handleChange}
         value={searchTerm}
       />
-      <ul className="w-[calc(100%-30px)] absolute top-[calc(100%+2px)] flex flex-col bg-lightgrey dark:bg-grey left-1/2 -translate-x-1/2">
-        {results.slice(0, MAX_RESULTS).map((item, index) => (
-          <Link href={item.link} key={index} onClick={emptySearch}>
-            <li className="bloc h-14 px-4">
-              <span
-                className={twMerge(
-                  "w-full border-b-[1px] h-full flex items-center",
-                  (index === MAX_RESULTS - 1 || results.length - 1 === index) && "border-none",
-                )}
-              >
+      {results.length > 0 && (
+        <ul className="w-full absolute top-[calc(100%+4px)] flex flex-col bg-white dark:bg-slate-900 border border-black/10 dark:border-slate-800 rounded-xl shadow-xl overflow-hidden left-0">
+          {results.slice(0, MAX_RESULTS).map((item, index) => (
+            <li key={index} className="mx-1 my-0.5">
+              <Link href={item.link} onClick={emptySearch} className="h-11 px-3 rounded-lg flex items-center text-sm text-secondary dark:text-slate-300 hover:bg-lightgrey dark:hover:bg-slate-800 hover:text-dark dark:hover:text-white transition-colors">
                 {item.name}
-              </span>
+              </Link>
             </li>
-          </Link>
-        ))}
-      </ul>
+          ))}
+        </ul>
+      )}
     </label>
   );
 }

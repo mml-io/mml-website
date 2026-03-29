@@ -3,6 +3,10 @@ import createMDX from "@next/mdx";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Disable built-in gzip so that Content-Length is preserved on responses.
+  // This enables download progress tracking in Three.js's FileLoader.
+  // In production, compression is handled by the CDN/reverse proxy.
+  compress: false,
   productionBrowserSourceMaps: true,
   redirects: async () => {
     return [
@@ -24,6 +28,21 @@ const nextConfig = {
       {
         source: "/docs/reference/events",
         destination: "/docs#events",
+        permanent: true,
+      },
+      {
+        source: "/.well-known/llms.txt",
+        destination: "/llms.txt",
+        permanent: true,
+      },
+      {
+        source: "/llms-full.md",
+        destination: "/llms-full.txt",
+        permanent: true,
+      },
+      {
+        source: "/llms.md",
+        destination: "/llms.txt",
         permanent: true,
       },
     ];

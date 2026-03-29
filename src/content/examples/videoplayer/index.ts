@@ -1,7 +1,7 @@
 import { Example } from "@/types/example";
 
 export const videoPlayerExample: Example = {
-  name: "Video player",
+  name: "Video Player",
   description: "A 3d video player",
   code: `<m-group sx="0.4" sy="0.4" y="2">
   <m-video

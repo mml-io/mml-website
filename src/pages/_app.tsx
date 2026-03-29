@@ -1,30 +1,33 @@
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
 import { MDXProvider } from "@mdx-js/react";
 import type { AppProps } from "next/app";
-import { Roboto, Roboto_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 
 import "@/src/styles/index.css";
+
+config.autoAddCss = false;
 
 import { Providers } from "@/src/components/_providers";
 import Header from "@/src/components/Header";
 import { componentsBlog } from "@/src/config/mdx";
 
-const robotoSans = Roboto({
+const interSans = Inter({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
-  variable: "--font-roboto",
+  variable: "--font-sans",
+  display: "swap",
 });
 
-const robotoMono = Roboto_Mono({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-roboto-mono",
-  adjustFontFallback: false,
+  variable: "--font-mono",
+  display: "swap",
 });
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <div
-      className={`${robotoSans.variable} ${robotoMono.variable} font-sans text-black dark:text-white`}
+      className={`${interSans.variable} ${jetbrainsMono.variable} font-sans text-black dark:text-white`}
     >
       <Providers>
         <MDXProvider components={componentsBlog}>

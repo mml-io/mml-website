@@ -8,7 +8,7 @@ const EventsTable = () => {
     <DocsTableContainer
       title="Events"
       description="All of the MML Event types and their properties."
-      className="mt-8"
+      className=""
     >
       {eventClasses.map((eventClass) => (
         <DocsRow

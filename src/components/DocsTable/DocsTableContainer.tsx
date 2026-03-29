@@ -17,9 +17,7 @@ export function DocsTableContainer({
         <h2 className="text-3xl font-medium inline-block">{title}</h2>
       </AnchorLink>
       <p className="mt-4">{description}</p>
-      <section className={`mt-6 w-full table-fixed border-collapse`}>
-        <ul>{children}</ul>
-      </section>
+      <ul className="mt-4 list-none p-0">{children}</ul>
     </div>
   );
 }
