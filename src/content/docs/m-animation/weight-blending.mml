@@ -1,0 +1,126 @@
+<m-plane color="white" width="30" height="30" rx="-90" y="-1"></m-plane>
+
+<m-character
+    y="0"
+    sx="5"
+    sy="5"
+    sz="5"
+    src="https://public.mml.io/character-body.glb"
+>
+  <m-model
+    src="https://public.mml.io/character-head.glb"
+  ></m-model>
+  <m-animation
+    id="idle-anim"
+    src="https://public.mml.io/character-idle-animation.glb"
+    weight="1"
+  >
+    <m-attr-lerp
+      attr="weight"
+      duration="500"
+      easing="easeInOutCubic"
+    ></m-attr-lerp>
+  </m-animation>
+  <m-animation
+    id="walk-anim"
+    src="https://public.mml.io/character-run-animation.glb"
+    weight="0"
+  >
+    <m-attr-lerp
+      attr="weight"
+      duration="500"
+      easing="easeInOutCubic"
+    ></m-attr-lerp>
+  </m-animation>
+</m-character>
+
+<!-- Interactive button labels -->
+<m-label 
+  id="idle-button" 
+  x="-4" 
+  y="9"
+  emissive="1" 
+  z="2"
+  width="1.5" 
+  height="0.5" 
+  content="100% Idle" 
+  font-size="25" 
+  alignment="center" 
+  color="#4CAF50" 
+  onclick="setWeights(1, 0, 'Current: 100% Idle')"
+></m-label>
+
+<m-label 
+  id="blend-75-button" 
+  x="-2" 
+  y="9"
+  emissive="1" 
+  z="2"
+  width="1.5" 
+  height="0.5" 
+  content="75% / 25%" 
+  font-size="25" 
+  alignment="center" 
+  color="#2196F3" 
+  onclick="setWeights(0.75, 0.25, 'Current: 75% Idle / 25% Run')"
+></m-label>
+
+<m-label 
+  id="blend-50-button" 
+  x="0" 
+  y="9"
+  emissive="1" 
+  z="2"
+  width="1.5" 
+  height="0.5" 
+  content="50% / 50%" 
+  font-size="25" 
+  alignment="center" 
+  color="#FF9800" 
+  onclick="setWeights(0.5, 0.5, 'Current: 50% Idle / 50% Run')"
+></m-label>
+
+<m-label 
+  id="blend-25-button" 
+  x="2" 
+  y="9"
+  emissive="1" 
+  z="2"
+  width="1.5" 
+  height="0.5" 
+  content="25% / 75%" 
+  font-size="25" 
+  alignment="center" 
+  color="#9C27B0" 
+  onclick="setWeights(0.25, 0.75, 'Current: 25% Idle / 75% Run')"
+></m-label>
+
+<m-label 
+  id="run-button" 
+  x="4" 
+  y="9"
+  emissive="1" 
+  z="2"
+  width="1.5" 
+  height="0.5" 
+  content="100% Run" 
+  font-size="25" 
+  alignment="center" 
+  color="#F44336" 
+  onclick="setWeights(0, 1, 'Current: 100% Run')"
+></m-label>
+
+<m-label id="state-label" y="10" z="2" width="10" height="0.6" content="Current: 100% Idle" font-size="40" alignment="center" color="#BBB" font-color="#000"></m-label>
+
+<script>
+  const idleAnim = document.getElementById("idle-anim");
+  const runAnim = document.getElementById("walk-anim");
+  const stateLabel = document.getElementById("state-label");
+
+  function setWeights(idleWeight, runWeight, label) {
+    idleAnim.setAttribute("weight", idleWeight);
+    runAnim.setAttribute("weight", runWeight);
+    stateLabel.setAttribute("content", label);
+  }
+</script>
+

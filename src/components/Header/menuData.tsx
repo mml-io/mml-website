@@ -14,6 +14,26 @@ const menuData: Menu[] = [
     newTab: false,
   },
   {
+    id: 3,
+    title: "Projects",
+    path: "",
+    newTab: false,
+    submenu: [
+      {
+        id: 31,
+        title: "MML Language",
+        path: "/docs",
+        newTab: false,
+      },
+      {
+        id: 32,
+        title: "3D Web Experience",
+        path: "/3d-web-experience",
+        newTab: false,
+      },
+    ],
+  },
+  {
     id: 4,
     title: "Docs",
     path: "/docs",

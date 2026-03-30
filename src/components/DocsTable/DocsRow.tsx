@@ -4,22 +4,6 @@ import * as React from "react";
 import TypeDocComment from "@/src/components/TypeDocComment";
 import { MarkDownDocs } from "@/src/config/mdx";
 
-const StyledElement = ({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => {
-  return (
-    <p
-      className={`inline-block ${className ? className : ""} text-[1.0625rem] whitespace-break-spaces`}
-    >
-      {children}
-    </p>
-  );
-};
-
 function isComment(
   arg: string | string[] | { summary: { text: string }[] },
 ): arg is { summary: { text: string }[] } {
@@ -36,30 +20,28 @@ export function DocsRow({
   link: string;
 }) {
   return (
-    <li className="relative before:absolute dark:before:bg-white before:bg-black before:-left-5 before:h-2 before:w-2 before:top-[0.6rem] before:rounded">
-      <StyledElement>
-        <Link href={link}>
-          <code className="bg-code-bg text-code-text dark:text-code-text-dark text-lg dark:bg-code-bg-dark">
-            {name}
-          </code>
-        </Link>
-        <span className="pl-4 block">
-          {description && isComment(description) ? (
-            <TypeDocComment comment={description} />
-          ) : (
-            <MarkDownDocs className="text-base mt-2 [&>p]:mt-0">{`${(Array.isArray(description)
-              ? description
-              : [description]
-            ).map((text) =>
-              (text || "")
-                .split("\n")
-                .map((line) => line.trim())
-                .join(" ")
-                .replaceAll("  ", " "),
-            )}`}</MarkDownDocs>
-          )}
-        </span>
-      </StyledElement>
+    <li className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 py-3 border-b border-black/5 dark:border-white/5 last:border-0">
+      <Link href={link} className="shrink-0">
+        <code className="bg-code-bg text-code-text dark:text-code-text-dark dark:bg-code-bg-dark text-sm font-medium px-2 py-0.5 rounded">
+          {name}
+        </code>
+      </Link>
+      <span className="text-sm opacity-70 leading-relaxed">
+        {description && isComment(description) ? (
+          <TypeDocComment comment={description} />
+        ) : (
+          <MarkDownDocs className="text-sm [&>p]:mt-0 [&>p]:text-sm">{`${(Array.isArray(description)
+            ? description
+            : [description]
+          ).map((text) =>
+            (text || "")
+              .split("\n")
+              .map((line) => line.trim())
+              .join(" ")
+              .replaceAll("  ", " "),
+          )}`}</MarkDownDocs>
+        )}
+      </span>
     </li>
   );
 }

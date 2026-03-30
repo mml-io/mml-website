@@ -2,9 +2,11 @@ import collisionEvents from "@/src/content/guides/mml-collide-events-guide";
 import mmlWithReactGuide from "@/src/content/guides/mml-with-react-guide";
 import { DocsGuide, DocsGuidesByName } from "@/types/docs-guides";
 
+import getStarted from "src/content/guides/get-started";
 import hosting from "src/content/guides/mml-starter-project-hosting";
 
 export const orderedGuidesList: Array<{ id: string; guide: DocsGuide }> = [
+  { id: "get-started", guide: getStarted },
   { id: "mml-starter-project-hosting", guide: hosting },
   { id: "mml-collide-events-guide", guide: collisionEvents },
   { id: "mml-with-react", guide: mmlWithReactGuide },

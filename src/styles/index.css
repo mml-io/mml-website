@@ -12,8 +12,13 @@
   }
 }
 
-.mdx a {
+.mdx a:not(.anchor-heading) {
+  @apply text-link-text dark:text-link-text-dark;
   text-decoration: underline;
+}
+
+.prose-links a {
+  @apply text-link-text dark:text-link-text-dark;
 }
 
 @layer components {
@@ -42,6 +47,55 @@
   }
 }
 
-code {
+:not(pre) > code {
   line-break: anywhere;
+}
+
+/* Modern global theming */
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  body {
+    @apply bg-light-theme text-dark dark:bg-slate-950 dark:text-white;
+    background-image: theme("backgroundImage.mesh-light");
+  }
+  .dark body {
+    background-image: theme("backgroundImage.mesh-dark");
+  }
+
+  ::selection {
+    background: rgba(14, 165, 233, 0.25);
+    color: inherit;
+  }
+  .dark ::selection {
+    background: rgba(14, 165, 233, 0.3);
+    color: #bae6fd;
+  }
+
+  .mdx a:not(.anchor-heading),
+  .prose-links a {
+    @apply underline-offset-4 decoration-transparent hover:decoration-current transition-[text-decoration-color] duration-200;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/70 dark:bg-slate-950/60 backdrop-blur-md shadow-lg border border-black/5 dark:border-white/5;
+  }
+  .btn-primary {
+    @apply inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm md:text-base text-white bg-mml-600 hover:bg-mml-500 transition-colors;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm md:text-base text-dark/80 dark:text-white/80 hover:text-dark dark:hover:text-white border border-black/10 dark:border-white/10 bg-white/40 dark:bg-white/5 backdrop-blur-sm;
+  }
+  .card {
+    @apply relative overflow-hidden rounded-2xl border border-black/10 dark:border-white/10 bg-white/55 dark:bg-white/5 backdrop-blur-sm shadow-lg;
+  }
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/30 dark:hover:shadow-black/40;
+  }
+  .pill {
+    @apply inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm bg-black/5 dark:bg-white/10 border border-black/10 dark:border-white/10;
+  }
 }

@@ -1,11 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-import Head from "next/head";
 import Link from "next/link";
 import * as React from "react";
 
 import LinkList from "@/src/components/Common/LinkList";
+import PageMeta from "@/src/components/PageMeta";
 import { posts } from "@/src/content/blogPosts";
-import { getPageTitle } from "@/src/util";
 
 export function getStaticPaths() {
   const elements = Object.keys(posts).map((element) => element);
@@ -29,20 +28,36 @@ export function getStaticProps({ params }: { params: { "post-id": string } }) {
   return { props: { postId } };
 }
 
-const GuidePage = ({ postId }: { postId: string }) => {
-  const title = posts[postId].title;
-  const Body = posts[postId].body;
-  const image = posts[postId].image;
-  const linkList = posts[postId].linkList;
+const BlogPostPage = ({ postId }: { postId: string }) => {
+  const { title, description, body: Body, image, date, linkList } = posts[postId];
   const hasLinks = linkList && linkList?.length;
 
   return (
     <>
-      <Head>{getPageTitle(title)}</Head>
+      <PageMeta
+        title={title}
+        description={description}
+        path={`/blog/${postId}`}
+        type="article"
+        image={image}
+        publishedDate={date}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: title,
+          description,
+          datePublished: date,
+          dateModified: date,
+          image: `https://mml.io${image}`,
+          url: `https://mml.io/blog/${postId}`,
+          author: { "@type": "Organization", name: "MML" },
+          publisher: { "@type": "Organization", name: "MML", url: "https://mml.io" },
+        }}
+      />
       <div className="mt-32">
         <div className="flex justify-center">
           {hasLinks && <div className="top-32"></div>}
-          <div className="mx-4 w-full center-column flex-1">
+          <article className="mx-4 w-full center-column flex-1">
             <Link href="/blog/" className="mb-6 flex items-center">
               <img
                 src="/images/blog/backArrow.svg"
@@ -55,7 +70,7 @@ const GuidePage = ({ postId }: { postId: string }) => {
             <div className="mt-4 mdx">
               <Body />
             </div>
-          </div>
+          </article>
           {hasLinks && (
             <div className="top-32">
               <LinkList elementList={linkList} />
@@ -67,4 +82,4 @@ const GuidePage = ({ postId }: { postId: string }) => {
   );
 };
 
-export default GuidePage;
+export default BlogPostPage;

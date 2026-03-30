@@ -1,7 +1,7 @@
+import { LoadingScreen, LoadingScreenConfig, SpawnConfigurationState } from "@mml-io/3d-web-client-core";
 import { EditableNetworkedDOM, NetworkedDOM } from "@mml-io/networked-dom-document";
 import * as React from "react";
-import { useEffect, useState } from "react";
-import { Euler, Vector3 } from "three";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import ExampleClientView from "@/src/components/ExampleView/ExampleClientView";
 import { getIframeTargetWindow } from "@/src/util/iframe-target";
@@ -13,13 +13,14 @@ export const ExampleAvatarClient = React.memo(function ExampleAvatarClient(props
   server: LocalAvatarServer;
   document: NetworkedDOM | EditableNetworkedDOM;
   clientId: number;
-  position: { x: number; y: number; z: number };
-  rotation: { x: number; y: number; z: number };
+  spawnConfiguration: SpawnConfigurationState;
+  username?: string;
+  loadingScreenConfig?: LoadingScreenConfig;
   children?: React.ReactNode;
 }) {
   const [client, setClient] = useState<LocalAvatarClient | null>(null);
-  const elementRef = React.useRef<HTMLDivElement>(null);
-  const [loaded, setLoaded] = React.useState(false);
+  const loadingScreenRef = useRef<LoadingScreen | null>(null);
+  const loadingContainerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     let disposed = false;
@@ -31,35 +32,57 @@ export const ExampleAvatarClient = React.memo(function ExampleAvatarClient(props
       runnerClient = new LocalAvatarClient(
         props.server,
         props.clientId,
-        new Vector3(props.position.x, props.position.y, props.position.z),
-        new Euler(props.rotation.x, props.rotation.y, props.rotation.z),
+        props.spawnConfiguration,
+        wrapper.iframeWindow,
+        wrapper.iframeBody,
+        props.username,
       );
       runnerClient.update();
+
+      // Create the LoadingScreen BEFORE addDocument/setInitialLoadComplete
+      // so its callback is registered before any progress events fire.
+      if (loadingContainerRef.current) {
+        const loadingScreen = new LoadingScreen(
+          runnerClient.loadingProgressManager as any,
+          props.loadingScreenConfig,
+        );
+        loadingContainerRef.current.appendChild(loadingScreen.element);
+        loadingScreenRef.current = loadingScreen;
+      }
+
       runnerClient.addDocument(props.document, wrapper.iframeWindow, wrapper.iframeBody);
+      runnerClient.setInitialLoadComplete();
       setClient(runnerClient);
     });
 
     return () => {
       disposed = true;
+      if (loadingScreenRef.current) {
+        loadingScreenRef.current.dispose();
+        loadingScreenRef.current = null;
+      }
       if (runnerClient) {
         runnerClient.dispose();
       }
     };
   }, []);
 
-  useEffect(() => {
-    if (elementRef.current && client && loaded) {
-      client.element.setAttribute("style", "height: 100%");
-      elementRef.current.appendChild(client.element);
-    }
-  }, [elementRef, client, loaded]);
-
-  if (!client) {
-    return null;
-  }
+  const attachRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      if (node && client) {
+        client.element.setAttribute("style", "height: 100%");
+        node.appendChild(client.element);
+      }
+    },
+    [client],
+  );
 
   return (
-    <ExampleClientView onLoad={() => setLoaded(true)} elementRef={elementRef}>
+    <ExampleClientView onLoad={() => {}} elementRef={attachRef}>
+      <div
+        ref={loadingContainerRef}
+        className="absolute inset-0 z-50 pointer-events-none"
+      />
       {props.children}
     </ExampleClientView>
   );

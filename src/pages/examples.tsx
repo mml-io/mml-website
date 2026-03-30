@@ -1,11 +1,10 @@
-import Head from "next/head";
 import { useSearchParams } from "next/navigation";
 import * as React from "react";
 import { ChangeEvent, useEffect } from "react";
 
 import ExampleView from "@/src/components/ExampleView/DocsExampleViewDynamic";
+import PageMeta from "@/src/components/PageMeta";
 import { examples } from "@/src/content/examples";
-import { getPageTitle } from "@/src/util";
 import { CLIENT_TYPES } from "@/types/docs-reference";
 import { Example, ExamplesByName } from "@/types/example";
 
@@ -49,31 +48,33 @@ const ExamplesPage = () => {
 
   return (
     <>
-      <Head>{getPageTitle("Examples")}</Head>
+      <PageMeta
+        title="Examples"
+        description="Interactive examples of MML elements and features."
+        path="/examples"
+      />
       <main
         id="about"
-        className="mx-4 mt-28 flex flex-col rounded border-[1px] border-editor-border bg-white dark:border-editor-border-dark dark:bg-editor-bg xl:h-[calc(100vh-132px)] xl:flex-row"
+        className="container mt-28 grid grid-cols-1 gap-4 xl:grid-cols-[280px_1fr] xl:h-[calc(100vh-144px)]"
       >
-        <div className="order-1 flex-1 overflow-hidden rounded-t xl:order-first xl:flex-[0_1_350px]">
-          <div className="h-[50px] bg-white px-[17px] pt-[14px] leading-[19px] text-black dark:bg-editor-bg dark:text-white">
-            Examples
-          </div>
-          <div className="order-first flex h-[35px] border-y-[1px] border-editor-border bg-white dark:border-editor-border-dark dark:bg-editor-bg xl:order-1">
+        <div className="order-1 xl:order-first card overflow-hidden flex flex-col">
+          <div className="p-4 text-sm font-semibold shrink-0">Examples</div>
+          <div className="flex items-center border-t border-black/10 dark:border-white/10 px-3 shrink-0">
             <img
-              className="relative left-[15px] filter-none dark:invert"
+              className="relative left-0 filter-none dark:invert"
               src="/images/examples/search.svg"
-              alt="reset"
+              alt="search"
               width={14}
               height={14}
             />
             <input
-              className="h-full w-full bg-transparent px-6 text-[13px] outline-0"
-              placeholder="Search examples..."
+              className="ml-2 h-9 w-full bg-transparent text-sm outline-0 placeholder:opacity-50"
+              placeholder="Search..."
               value={searchQuery}
               onChange={handleSearch}
             />
           </div>
-          <div className=" overflow-y-scroll rounded-b border-editor-border bg-white p-6 pt-2 dark:border-editor-border-dark dark:bg-editor-bg xl:h-[calc(100vh-219px)] xl:border-r-[1px]">
+          <div className="overflow-y-auto p-2 flex-1">
             {Object.keys(exampleList).map((key) => {
               const currentExample = exampleList[key];
               const { name, description, image } = currentExample;
@@ -92,7 +93,7 @@ const ExamplesPage = () => {
             })}
           </div>
         </div>
-        <div className="flex-[0_0_calc(100vh-219px)] overflow-hidden xl:flex-1 xl:rounded-b">
+        <div className="overflow-hidden card h-[70vh] xl:h-auto">
           <ExampleView
             key={selectedExample?.name}
             initialClients={selectedExample?.clients ?? [CLIENT_TYPES.FLOATING]}

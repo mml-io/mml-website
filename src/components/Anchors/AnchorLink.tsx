@@ -17,7 +17,11 @@ export function AnchorLink(props: AnchorLinkProps) {
       ) : (
         <div id={props.anchorId}></div>
       )}
-      <a href={`#${props.anchorId}`} title={props.title} className="group">
+      <a
+        href={`#${props.anchorId}`}
+        title={props.title}
+        className="anchor-heading group !text-inherit !no-underline !decoration-transparent hover:!decoration-transparent"
+      >
         {props.children}
         <div className="opacity-0 group-hover:opacity-100 inline-block ms-2 h-5 w-5">
           <FontAwesomeIcon icon={faLink} opacity="30%" />

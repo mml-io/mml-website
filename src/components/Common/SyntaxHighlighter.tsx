@@ -1,8 +1,7 @@
 import dynamic from "next/dynamic";
-import { HTMLProps } from "react";
-import { solarizedlight } from "react-syntax-highlighter/dist/cjs/styles/prism";
-
-import { sharedBodyStyle } from "@/src/config/mdx";
+import { useTheme } from "next-themes";
+import { HTMLProps, useEffect, useState } from "react";
+import { oneDark, oneLight } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 type SyntaxHighlighterProps = {
   style?: any;
@@ -26,16 +25,25 @@ const SyntaxHighlighter = ({
   children: string | string[];
 }) => {
   const languageInternal = className?.replace(/language-/, "");
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
+
+  const isDark = mounted && resolvedTheme === "dark";
+  const codeTheme = isDark ? oneDark : oneLight;
 
   return (
-    <SyntaxHighlighterComponent
-      lineProps={{ style: { wordBreak: "break-word", whiteSpace: "pre-wrap" } }}
-      wrapLines={true}
-      style={solarizedlight}
-      language={languageInternal}
-      children={children}
-      className={`rounded bg-[#F5F5F5] p-4 text-sm text-[#1B1B1B] ${sharedBodyStyle} ${className}`}
-    />
+    <div data-language={languageInternal || undefined}>
+      <SyntaxHighlighterComponent
+        lineProps={{ style: { wordBreak: "break-word", whiteSpace: "pre-wrap" } }}
+        wrapLines={true}
+        style={codeTheme}
+        language={languageInternal}
+        children={children}
+        className={`!rounded-lg !text-sm !leading-relaxed ${className}`}
+      />
+    </div>
   );
 };
 

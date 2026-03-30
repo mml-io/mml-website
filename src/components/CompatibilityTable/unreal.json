@@ -59,10 +59,6 @@
     "class": {
       "supported": true,
       "description": ""
-    },
-    "onclick": {
-      "supported": true,
-      "description": ""
     }
   },
   "m-cube": {
@@ -152,7 +148,7 @@
     },
     "oncollisionend": {
       "supported": false,
-      "description": "WIP, should be supported in the near future`"
+      "description": "WIP, should be supported in the near future"
     },
     "color": {
       "supported": true,
@@ -168,6 +164,10 @@
     },
     "onclick": {
       "supported": true,
+      "description": ""
+    },
+    "clickable": {
+      "supported": false,
       "description": ""
     },
     "cast-shadows": {
@@ -254,7 +254,7 @@
     },
     "oncollisionend": {
       "supported": false,
-      "description": "WIP, should be supported in the near future`"
+      "description": "WIP, should be supported in the near future"
     },
     "color": {
       "supported": true,
@@ -270,6 +270,10 @@
     },
     "onclick": {
       "supported": true,
+      "description": ""
+    },
+    "clickable": {
+      "supported": false,
       "description": ""
     },
     "cast-shadows": {
@@ -360,7 +364,7 @@
     },
     "oncollisionend": {
       "supported": false,
-      "description": "WIP, should be supported in the near future`"
+      "description": "WIP, should be supported in the near future"
     },
     "color": {
       "supported": true,
@@ -376,6 +380,10 @@
     },
     "onclick": {
       "supported": true,
+      "description": ""
+    },
+    "clickable": {
+      "supported": false,
       "description": ""
     },
     "cast-shadows": {
@@ -408,7 +416,7 @@
       "supported": true,
       "description": ""
     },
-    "cast-shadow": {
+    "cast-shadows": {
       "supported": false,
       "description": ""
     },
@@ -469,10 +477,6 @@
       "description": ""
     },
     "class": {
-      "supported": true,
-      "description": ""
-    },
-    "onclick": {
       "supported": true,
       "description": ""
     }
@@ -560,7 +564,7 @@
     },
     "oncollisionend": {
       "supported": false,
-      "description": "WIP, should be supported in the near future`"
+      "description": "WIP, should be supported in the near future"
     },
     "color": {
       "supported": true,
@@ -576,6 +580,10 @@
     },
     "onclick": {
       "supported": true,
+      "description": ""
+    },
+    "clickable": {
+      "supported": false,
       "description": ""
     },
     "cast-shadows": {
@@ -678,7 +686,7 @@
     },
     "oncollisionend": {
       "supported": false,
-      "description": "WIP, should be supported in the near future`"
+      "description": "WIP, should be supported in the near future"
     },
     "id": {
       "supported": true,
@@ -690,6 +698,10 @@
     },
     "onclick": {
       "supported": true,
+      "description": ""
+    },
+    "clickable": {
+      "supported": false,
       "description": ""
     },
     "cast-shadows": {
@@ -792,7 +804,7 @@
     },
     "oncollisionend": {
       "supported": false,
-      "description": "WIP, should be supported in the near future`"
+      "description": "WIP, should be supported in the near future"
     },
     "id": {
       "supported": false,
@@ -803,6 +815,10 @@
       "description": ""
     },
     "onclick": {
+      "supported": false,
+      "description": ""
+    },
+    "clickable": {
       "supported": false,
       "description": ""
     },
@@ -1098,7 +1114,7 @@
     },
     "oncollisionend": {
       "supported": false,
-      "description": "WIP, should be supported in the near future`"
+      "description": "WIP, should be supported in the near future"
     },
     "id": {
       "supported": true,
@@ -1109,6 +1125,14 @@
       "description": ""
     },
     "cast-shadows": {
+      "supported": false,
+      "description": ""
+    },
+    "onclick": {
+      "supported": true,
+      "description": ""
+    },
+    "clickable": {
       "supported": false,
       "description": ""
     }
@@ -1220,7 +1244,7 @@
     },
     "oncollisionend": {
       "supported": false,
-      "description": "WIP, should be supported in the near future`"
+      "description": "WIP, should be supported in the near future"
     },
     "id": {
       "supported": true,
@@ -1231,6 +1255,14 @@
       "description": ""
     },
     "cast-shadows": {
+      "supported": false,
+      "description": ""
+    },
+    "onclick": {
+      "supported": true,
+      "description": ""
+    },
+    "clickable": {
       "supported": false,
       "description": ""
     }
@@ -1320,6 +1352,26 @@
       "supported": false,
       "description": ""
     },
+    "collide": {
+      "supported": true,
+      "description": ""
+    },
+    "collision-interval": {
+      "supported": false,
+      "description": "WIP, should be supported in the near future"
+    },
+    "oncollisionstart": {
+      "supported": false,
+      "description": "WIP, should be supported in the near future"
+    },
+    "oncollisionmove": {
+      "supported": false,
+      "description": "WIP, should be supported in the near future"
+    },
+    "oncollisionend": {
+      "supported": false,
+      "description": "WIP, should be supported in the near future"
+    },
     "color": {
       "supported": true,
       "description": ""
@@ -1334,6 +1386,10 @@
     },
     "onclick": {
       "supported": true,
+      "description": ""
+    },
+    "clickable": {
+      "supported": false,
       "description": ""
     },
     "cast-shadows": {
@@ -1795,6 +1851,74 @@
       "description": ""
     },
     "socket": {
+      "supported": false,
+      "description": ""
+    },
+    "id": {
+      "supported": false,
+      "description": ""
+    },
+    "class": {
+      "supported": false,
+      "description": ""
+    }
+  },
+  "m-animation": {
+    "m-animation": {
+      "supported": false,
+      "description": ""
+    },
+    "src": {
+      "supported": false,
+      "description": ""
+    },
+    "weight": {
+      "supported": false,
+      "description": ""
+    },
+    "loop": {
+      "supported": false,
+      "description": ""
+    },
+    "start-time": {
+      "supported": false,
+      "description": ""
+    },
+    "pause-time": {
+      "supported": false,
+      "description": ""
+    },
+    "speed": {
+      "supported": false,
+      "description": ""
+    },
+    "ratio": {
+      "supported": false,
+      "description": ""
+    },
+    "id": {
+      "supported": false,
+      "description": ""
+    },
+    "class": {
+      "supported": false,
+      "description": ""
+    }
+  },
+  "m-overlay": {
+    "m-overlay": {
+      "supported": false,
+      "description": ""
+    },
+    "anchor": {
+      "supported": false,
+      "description": ""
+    },
+    "offset-x": {
+      "supported": false,
+      "description": ""
+    },
+    "offset-y": {
       "supported": false,
       "description": ""
     },

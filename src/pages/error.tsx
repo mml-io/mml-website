@@ -1,13 +1,16 @@
-import Head from "next/head";
 import Link from "next/link";
 import * as React from "react";
 
-import { getPageTitle } from "@/src/util";
+import PageMeta from "@/src/components/PageMeta";
 
 const ErrorPage = () => {
   return (
     <>
-      <Head>{getPageTitle("Error")}</Head>
+      <PageMeta
+        title="Page Not Found"
+        description="The page you're looking for doesn't exist."
+        path="/error"
+      />
       <section className="relative z-10 pb-16 pt-36 md:pb-20 lg:pb-28 lg:pt-[180px]">
         <div className="container">
           <div className="-mx-4 flex flex-wrap">

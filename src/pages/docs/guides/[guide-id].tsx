@@ -1,10 +1,11 @@
-import Head from "next/head";
+import { MDXProvider } from "@mdx-js/react";
 import * as React from "react";
 
 import Breadcrumb from "@/src/components/Common/Breadcrumb";
 import LinkList from "@/src/components/Common/LinkList";
+import PageMeta from "@/src/components/PageMeta";
+import { componentsDocs } from "@/src/config/mdx";
 import { guides } from "@/src/content/guides";
-import { getPageTitle } from "@/src/util";
 
 import ReferenceNavigation from "../../../components/Common/ReferenceNavigation";
 
@@ -36,12 +37,25 @@ export function getStaticProps({ params }: { params: { "guide-id": string } }) {
 const GuidePage = ({ guideId }: { guideId: string }) => {
   const currentGuide = guides[guideId];
 
-  const { linkList, title } = currentGuide;
+  const { linkList, title, description } = currentGuide;
   const Body = currentGuide.body;
 
   return (
     <>
-      <Head>{getPageTitle(title)}</Head>
+      <PageMeta
+        title={title}
+        description={description}
+        path={`/docs/guides/${guideId}`}
+        type="article"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "TechArticle",
+          headline: title,
+          description,
+          url: `https://mml.io/docs/guides/${guideId}`,
+          publisher: { "@type": "Organization", name: "MML", url: "https://mml.io" },
+        }}
+      />
       <div className="flex pt-32">
         <ReferenceNavigation />
         <div className="px-5 sm:px-12 w-full">
@@ -53,10 +67,12 @@ const GuidePage = ({ guideId }: { guideId: string }) => {
                 { name: "Guides", path: "guides" },
               ]}
             />
-            <h1 className="text-4xl font-semibold mb-4">{title}</h1>
-            <div className="mt-4">
-              <Body />
-            </div>
+            <article>
+              <h1 className="text-3xl font-bold tracking-tight mb-6">{title}</h1>
+              <MDXProvider components={componentsDocs}>
+                <Body />
+              </MDXProvider>
+            </article>
           </main>
         </div>
         <LinkList elementList={linkList} />

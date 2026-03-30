@@ -81,34 +81,60 @@ export const MarkDownBlog = (props: ReactMarkdownOptions) => (
   </ReactMarkdown>
 );
 
-export const sharedBodyStyleDocs = `text-base text-justify leading-[32px] ${sharedTextStyle}`;
+const docsTextStyle = "text-[#1B1B1B] dark:text-slate-200";
+const docsBodyStyle = `text-[1.0625rem] leading-7 ${docsTextStyle}`;
+
 export const componentsDocs = {
-  ...componentsBlog,
   p: (props: HTMLProps<HTMLParagraphElement>) => (
-    <p className={`${sharedBodyStyleDocs} my-2 text-[1.0625rem] font-sans`} {...props} />
+    <p className={`${docsBodyStyle} my-4`} {...props} />
   ),
-  li: (props: HTMLProps<HTMLLIElement>) => (
-    <li className={`${sharedBodyStyleDocs} !mt-0`} {...props} />
+  h1: (props: HTMLProps<HTMLHeadingElement> & { children: string }) => (
+    <h1
+      id={props.children?.toLowerCase?.()}
+      className={`scroll-m-8 text-3xl font-bold tracking-tight ${docsTextStyle} mt-2 mb-4`}
+      {...props}
+    />
   ),
+  h2: (props: HTMLProps<HTMLHeadingElement> & { children: string }) => (
+    <h2
+      id={props.children?.toLowerCase?.()}
+      className={`scroll-m-20 text-2xl font-semibold tracking-tight ${docsTextStyle} mt-12 mb-4 pb-2 border-b border-black/10 dark:border-white/10`}
+      {...props}
+    />
+  ),
+  h3: (props: HTMLProps<HTMLHeadingElement>) => (
+    <h3 className={`text-lg font-semibold ${docsTextStyle} mt-8 mb-3`} {...props} />
+  ),
+  h4: (props: HTMLProps<HTMLHeadingElement>) => (
+    <h4 className={`text-base font-semibold ${docsTextStyle} mt-6 mb-2`} {...props} />
+  ),
+  hr: (props: HTMLProps<HTMLHRElement>) => (
+    <hr className="my-8 border-b border-t-0 border-black/10 dark:border-white/10" {...props} />
+  ),
+  li: (props: HTMLProps<HTMLLIElement>) => <li className={`${docsBodyStyle} !mt-0`} {...props} />,
   ul: (props: HTMLProps<HTMLUListElement>) => (
-    <ul className={`${sharedBodyStyleDocs} !mt-1 ml-6 list-disc`} {...props} />
+    <ul className={`${docsBodyStyle} !mt-1 ml-6 list-disc`} {...props} />
   ),
   ol: (props: DetailedHTMLProps<OlHTMLAttributes<HTMLOListElement>, HTMLOListElement>) => (
-    <ol className={`!mt-2 ${sharedBodyStyle}`} {...props} />
+    <ol className={`${docsBodyStyle} !mt-2 ml-6 list-decimal`} {...props} />
   ),
   code: (props: HTMLProps<HTMLElement>) => (
     <code
-      className={`!m-0 my-[1.12em] bg-code-bg px-1 py-0.5 text-base !text-mdx-code-text dark:bg-code-bg-dark ${sharedTextStyle}`}
+      className="rounded-md bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 text-[0.9375rem] text-slate-800 dark:text-slate-200 font-mono"
       {...props}
     />
   ),
   pre: ({ props, children }: { props: HTMLProps<HTMLPreElement>; children: any }) => (
-    <pre
-      className={twMerge(`font-sans ${sharedBodyStyleDocs}`, "mb-4 break-after-all text-base")}
-      {...props}
-    >
+    <pre className="my-5 overflow-hidden rounded-lg" {...props}>
       <SyntaxHighlighter {...children.props} />
     </pre>
+  ),
+  strong: (props: HTMLProps<HTMLElement>) => <strong className="font-semibold" {...props} />,
+  a: (props: HTMLProps<HTMLAnchorElement>) => (
+    <a className="text-link-text dark:text-link-text-dark underline" {...props} />
+  ),
+  img: (props: HTMLProps<HTMLImageElement>) => (
+    <img className="mx-auto my-6 w-full rounded-lg" {...props} />
   ),
 };
 

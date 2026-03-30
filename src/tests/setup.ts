@@ -15,7 +15,7 @@ Range.prototype.getBoundingClientRect = () => ({
 Range.prototype.getClientRects = () => ({
   item: () => null,
   length: 0,
-  [Symbol.iterator]: jest.fn() as () => IterableIterator<DOMRect>,
+  [Symbol.iterator]: jest.fn() as unknown as () => ArrayIterator<DOMRect>,
 });
 
 class IntersectionObserver {

@@ -1,6 +1,10 @@
+import { MMLScene } from "@mml-io/mml-web";
+import { MMLWebRunnerClient } from "@mml-io/mml-web-runner";
+import {
+  StandaloneThreeJSAdapter,
+  StandaloneThreeJSAdapterControlsType,
+} from "@mml-io/mml-web-threejs-standalone";
 import { EditableNetworkedDOM, NetworkedDOM } from "@mml-io/networked-dom-document";
-import { MMLScene } from "mml-web";
-import { MMLWebRunnerClient } from "mml-web-runner";
 import * as React from "react";
 import { useEffect, useState } from "react";
 import * as THREE from "three";
@@ -16,7 +20,7 @@ export const ExampleFloatingClient = React.memo(function ExampleClient(props: {
 }) {
   const [clientState, setClientState] = useState<{
     client: MMLWebRunnerClient;
-    scene: MMLScene;
+    scene: MMLScene<StandaloneThreeJSAdapter>;
     children?: React.ReactNode;
   } | null>(null);
   const elementRef = React.useRef<HTMLDivElement>(null);
@@ -25,13 +29,33 @@ export const ExampleFloatingClient = React.memo(function ExampleClient(props: {
   useEffect(() => {
     let disposed = false;
     let runnerClient: MMLWebRunnerClient | null = null;
-    let mmlScene: MMLScene | null = null;
-    getIframeTargetWindow().then((wrapper) => {
+    let mmlScene: MMLScene<StandaloneThreeJSAdapter> | null = null;
+    let graphicsAdapter: StandaloneThreeJSAdapter | null = null;
+
+    getIframeTargetWindow().then(async (wrapper) => {
       if (disposed) {
         return;
       }
-      mmlScene = new MMLScene();
+
+      const sceneElement = document.createElement("div");
+      sceneElement.style.width = "100%";
+      sceneElement.style.height = "100%";
+      sceneElement.style.position = "relative";
+      sceneElement.style.backgroundColor = "white";
+
+      mmlScene = new MMLScene(sceneElement);
+
+      graphicsAdapter = await StandaloneThreeJSAdapter.create(sceneElement, {
+        controlsType: StandaloneThreeJSAdapterControlsType.DragFly,
+      });
+
+      if (disposed) {
+        graphicsAdapter.dispose();
+        return;
+      }
+
       if (props.baseScene) {
+        const threeScene = graphicsAdapter.getThreeScene();
         const pointLight = new THREE.PointLight(0xffffff, 600, 100);
         pointLight.position.set(10, 10, 10);
         pointLight.castShadow = true;
@@ -43,9 +67,12 @@ export const ExampleFloatingClient = React.memo(function ExampleClient(props: {
         );
         plane.receiveShadow = true;
         plane.rotation.x = -Math.PI / 2;
-        mmlScene.getThreeScene().add(plane);
-        mmlScene.getThreeScene().add(pointLight);
+        threeScene.add(plane);
+        threeScene.add(pointLight);
       }
+
+      mmlScene.init(graphicsAdapter);
+
       runnerClient = new MMLWebRunnerClient(wrapper.iframeWindow, wrapper.iframeBody, mmlScene);
       runnerClient.connect(props.document);
       setClientState({ client: runnerClient, scene: mmlScene });
@@ -55,6 +82,9 @@ export const ExampleFloatingClient = React.memo(function ExampleClient(props: {
       disposed = true;
       if (runnerClient) {
         runnerClient.dispose();
+      }
+      if (graphicsAdapter) {
+        graphicsAdapter.dispose();
       }
       if (mmlScene) {
         mmlScene.dispose();
